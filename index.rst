@@ -14,8 +14,27 @@ EPICS Documentation
 
 .. toctree::
    :maxdepth: 1
+   :caption: Guides
 
+   guides/gettingstarted
    How-To Pages <https://docs.epics-controls.org/projects/how-tos>
+   guides/faq
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Software
+
+   software/base
+   software/modules
+   Extensions <https://epics-controls.org/resources-and-support/extensions/>
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Training
+
+   Training Material <https://epics-controls.org/resources-and-support/documents/training/>
 
 
 Indices and tables
