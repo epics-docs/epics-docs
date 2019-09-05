@@ -16,6 +16,6 @@ that comprise EPICS Base.
    :maxdepth: 1
    :caption: PVA Modules (C++)
 
-   pvData <https://docs.epics-controls.org/projects/pvdatacpp>
-   Normative Types <https://docs.epics-controls.org/projects/normativetypescpp>
-   pvAccess <https://docs.epics-controls.org/projects/pvaccesscpp>
+   pvData <https://docs.epics-controls.org/projects/pvdata-cpp>
+   Normative Types <https://docs.epics-controls.org/projects/normativetypes-cpp>
+   pvAccess <https://docs.epics-controls.org/projects/pvaccess-cpp>
