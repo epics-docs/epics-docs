@@ -11,7 +11,7 @@ interfaces to other programming languages and applications.
    :caption: Soft Support Modules
 
    ASYN <https://epics.anl.gov/modules/soft/asyn/>
-   StreamDevice <http://epics.web.psi.ch/software/streamdevice/>
+   StreamDevice <https://paulscherrerinstitute.github.io/StreamDevice/>
    Autosave <https://epics.anl.gov/bcda/synApps/autosave/autosave.html>
    Soft Support Database <https://epics-controls.org/resources-and-support/modules/soft-support/>
 
