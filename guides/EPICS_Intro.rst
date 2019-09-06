@@ -224,7 +224,7 @@ subnet and to access its value and other fields.
 
 ::
 
-  record("ai, Cavity1:T") #type = ai, name = “Cavity1:T”
+  record(ai, "Cavity1:T") #type = ai, name = “Cavity1:T”
   {
     field(DESC, “Cavity Temperature”) #description
     field(SCAN, “1 second”) #record update rate
