@@ -7,6 +7,12 @@ that comprise EPICS Base.
 
 .. toctree::
    :maxdepth: 1
+   :caption: Specifications
+
+   Channel Access Protocol Specification <../specs/ca_protocol>
+
+.. toctree::
+   :maxdepth: 1
    :caption: Base and IOC Libraries
 
    Application Developer's Guide (3.16.2) <https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide.pdf>
