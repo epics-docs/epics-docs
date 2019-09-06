@@ -9,7 +9,7 @@ that comprise EPICS Base.
    :maxdepth: 1
    :caption: Specifications
 
-   Channel Access Protocol Specification <../specs/ca_protocol>
+   ../specs/ca_protocol
 
 .. toctree::
    :maxdepth: 1
