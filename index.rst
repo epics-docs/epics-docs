@@ -35,11 +35,3 @@ EPICS Documentation
    :caption: Training
 
    Training Material <https://epics-controls.org/resources-and-support/documents/training/>
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
