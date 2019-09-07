@@ -1,10 +1,37 @@
-.. EPICS Documentation documentation master file, created by
-   sphinx-quickstart on Wed Jul 24 13:27:58 2019.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 EPICS Documentation
 ===================
+
+This is the parent project for all EPICS related documentation on read-the-docs.
+
+A good part of the EPICS documentation is dynamically created and hosted by
+`read-the-docs <readthedocs.org>`_, which acts as a CI system, building
+and hosting documentation from source or dedicated documentation repositories.
+
+Read-the-docs offers valuable features that we use:
+
+- Keeps complete frozen documentation trees of all released versions under a
+  permalink with the release number.
+- Keeps the documentation of the development tree (usually 'master') up-to-date
+  and accessible using 'latest' as release number.
+- Switching versions is available through the web browser.
+
+This parent project page is not directly linked from the EPICS web site.
+It creates the link to the canonical URL https://docs.epics-controls.org -
+links from the EPICS web site to the documentation should point to the
+subprojects using the canonical URL, e.g.,
+'https://docs.epics-controls.org/projects/<project-slug>'
+
+There are two kinds of subprojects:
+
+1. Code repositories:
+   The documentation is created from comments in the source code (Javadoc or
+   Doxygen) and separate documents (PDF, Markdown, restructuredText).
+   Documentation trees of released versions are kept for reference.
+
+2. Documentation repositories:
+   The repositories contain only documentation (like FAQs and How-To-Pages).
+   Usually only one version exists ('latest').
+
 
 .. toctree::
    :hidden:
