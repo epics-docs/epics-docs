@@ -43,7 +43,7 @@ There are two kinds of subprojects:
    :maxdepth: 1
    :caption: Guides
 
-   Introduction to EPICS <EPICS_Intro>
+   Introduction to EPICS <guides/EPICS_Intro>
    guides/gettingstarted
    How-To Pages <https://docs.epics-controls.org/projects/how-tos>
    guides/faq
