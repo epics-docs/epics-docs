@@ -378,7 +378,7 @@ available on both CWSs and IOCs. A client can communicate with an
 arbitrary number of servers.
 
 Client Services
-~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 
 The basic Channel Access client services are:
 
