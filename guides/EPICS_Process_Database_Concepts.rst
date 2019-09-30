@@ -4,7 +4,7 @@ EPICS Process Database Concepts
 *From EPICSWIKI*
 
 .. contents:: Table of Contents
- :depth: 2
+ :depth: 3
 
 The EPICS Process Database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1000,7 +1000,7 @@ monitor would be entered as follows:
 |  **One Value (ONVL):** 1
 |  **Two Value (TWVL):** 2
 |  **Three Value (THVL):** 3
-|  **Zero String (ZRST):** Traveling 
+|  **Zero String (ZRST):** Traveling
 |  **One String (ONST):** Open
 |  **Two String (TWST):** Closed
 |  **Three String (THST):** Disconnected
@@ -1301,9 +1301,9 @@ table.
 
 In this example the transducer is a thermocouple which transmits 0-20
 milliAmps. An amplifier is present which amplifies milliAmps to volts.
-The
+The I/O card uses a 0-10 Volt interface.
 
-I/O card uses a 0-10 Volt interface. |image9|
+ |image9|
 
 The transducer is transmitting temperature. The database entries in the
 analog input record that are needed to convert this temperature will be
