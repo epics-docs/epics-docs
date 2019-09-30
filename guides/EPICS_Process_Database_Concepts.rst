@@ -1000,7 +1000,8 @@ monitor would be entered as follows:
 |  **One Value (ONVL):** 1
 |  **Two Value (TWVL):** 2
 |  **Three Value (THVL):** 3
-|  **Zero String (ZRST): Traveling One String (ONST):** Open
+|  **Zero String (ZRST):** Traveling 
+|  **One String (ONST):** Open
 |  **Two String (TWST):** Closed
 |  **Three String (THST):** Disconnected
 
@@ -1201,7 +1202,7 @@ is input as 2048. Let's plug in the numbers to see the result:
 
 .. math::
 
-  -175 + (2048 / 4095) \* (175 - -175) = 0
+  -175 + (2048 / 4095) * (175 - (-175)) = 0
 
 In this example we had to adjust the engineering units low scale to
 compensate for the difference between the unipolar transmitter and the
@@ -1248,7 +1249,7 @@ is input as 2048. Let's plug in the numbers to see the result:
 
 .. math::
 
-  -437.5 + (2048 / 4095) \* (437.5 - -437.5) = 0
+  -437.5 + (2048 / 4095) * (437.5 - (-437.5)) = 0
 
 Notice that at full scale the transducer will generate 2 volts which
 represents 175 PSI. The amplifier will change the 2 Volts to 4 Volts. 4
@@ -1258,7 +1259,7 @@ numbers to see the result:
 
 .. math::
 
-  -437.5 + (2866 / 4095) \* (437.5 - -437.5) = 175 PSI
+  -437.5 + (2866 / 4095) * (437.5 - (-437.5)) = 175 PSI
 
 We had to adjust the engineering units full scale to adjust for the
 difference between the transducer with the amplifier affects and the
@@ -1691,6 +1692,7 @@ needed in some cases such as a data archiver that would only want this
 channel at 1 Hz (all channels on the same 1 msec in this case).
 
 Value Change
+^^^^^^^^^^^^
 
 Different clients may have a need to set different deadbands among them.
 No specific case is cited.
