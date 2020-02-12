@@ -17,7 +17,7 @@ that comprise EPICS Base.
 
    pvData <https://docs.epics-controls.org/projects/pvdata-cpp>
    pvAccess <https://docs.epics-controls.org/projects/pvaccess-cpp>
-   pva2pva (QSRV / pvAccess Gateway) <https://docs.epics-controls.org/projects/pva2pva>
+   pva2pva (QSRV / pvAccess Gateway) <https://epics-base.github.io/pva2pva/index.html>
    Normative Types <https://docs.epics-controls.org/projects/normativetypes-cpp>
    pvaClient <https://docs.epics-controls.org/projects/pvaclient-cpp>
    pvDatabase <https://docs.epics-controls.org/projects/pvdatabase-cpp>
