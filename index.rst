@@ -49,6 +49,13 @@ There are two kinds of subprojects:
    How-To Pages <https://docs.epics-controls.org/projects/how-tos/en/latest>
    guides/faq
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Specifications
+
+   specs/ca_protocol
+   pvAccess Protocol Specification <https://github.com/epics-base/pvAccessCPP/wiki/protocol>
+   Normative Types Specification <https://github.com/epics-base/normativeTypesCPP/wiki/Normative+Types+Specification>
 
 .. toctree::
    :maxdepth: 1
