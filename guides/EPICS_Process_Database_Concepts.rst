@@ -1,8 +1,6 @@
 EPICS Process Database Concepts
 ===============================
 
-*From EPICSWIKI*
-
 .. contents:: Table of Contents
  :depth: 3
 
@@ -15,15 +13,11 @@ is a collection of records of various types.
 
 A Record is an object with:
 
-–  A unique name
-
-–  A behavior defined by its type
-
-–  Controllable properties (fields)
-
-–  Optional associated hardware I/O (device support)
-
-–  Links to other records
+- A unique name
+- A behavior defined by its type
+- Controllable properties (fields)
+- Optional associated hardware I/O (device support)
+- Links to other records
 
 There are several different types of records available. In addition to the
 record types that are included in the EPICS base software package, it is
@@ -530,15 +524,12 @@ When built against Base >= 3.16.1, support is enabled for PVAccess
 links, which are analogous to Channel Access (CA) links. However, the
 syntax for PVA links is quite different.
 
+The authoritative documentation is available in the git repository, `pva2pva. <https://epics-base.github.io/pva2pva/qsrv_page.html#qsrv_link>`_
+
 Note
 
    The "dbjlr" and "dbpvar" IOC shell command provide information about
    PVA links in a running IOC.
-
-*Warning*
-
-   *The PVA Link syntax shown below is provisional and subject to
-   change.*
 
 A simple configuration using defaults is
 
@@ -601,11 +592,6 @@ value and meta-data.
 
 If the sub-field is an PVScalar or PVScalarArray, then a value will be
 taken from it, but not meta-data will be available.
-
-`Todo: <http://mdavidsaver.github.io/pva2pva/todo.html#_todo000001>`__
-
-   Ability to traverse through unions and into structure arrays (as with
-   group mappings).
 
 local: Require local PV
 ^^^^^^^^^^^^^^^^^^^^^^^
