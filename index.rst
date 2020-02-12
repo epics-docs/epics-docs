@@ -45,6 +45,7 @@ There are two kinds of subprojects:
 
    Introduction to EPICS <guides/EPICS_Intro>
    guides/gettingstarted
+   guides/EPICS_Process_Database_Concepts.rst
    How-To Pages <https://docs.epics-controls.org/projects/how-tos>
    guides/faq
 
