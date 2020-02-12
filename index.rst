@@ -4,7 +4,7 @@ EPICS Documentation
 This is the parent project for all EPICS related documentation on read-the-docs.
 
 A good part of the EPICS documentation is dynamically created and hosted by
-`read-the-docs <readthedocs.org>`_, which acts as a CI system, building
+`read-the-docs <https://readthedocs.org>`_, which acts as a CI system, building
 and hosting documentation from source or dedicated documentation repositories.
 
 Read-the-docs offers valuable features that we use:
