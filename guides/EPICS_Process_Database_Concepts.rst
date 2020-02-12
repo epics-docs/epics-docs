@@ -453,10 +453,14 @@ specify the PROC field of another record.
 Maximize Severity Attribute
 ---------------------------
 
-The Maximize Severity attribute is one of NMS (Non-Maximize Severity),
-MS (Maximize Severity), MSS (Maximize Status and Severity) or MSI
+The Maximize Severity attribute is one of the following : 
 
-(Maximize Severity if Invalid). It determines whether alarm severity is
+  - NMS (Non-Maximize Severity)
+  - MS (Maximize Severity)
+  - MSS (Maximize Status and Severity)
+  - MSI (Maximize Severity if Invalid)
+
+It determines whether alarm severity is
 propagated across links. If the attribute is MSI only a severity of
 INVALID_ALARM is propagated; settings of MS or MSS propagate all alarms
 that are more severe than the record's current severity. For input links

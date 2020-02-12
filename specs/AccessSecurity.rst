@@ -46,9 +46,9 @@ Deﬁnitions
 This document uses the following terms:
 
 ASL
-   Access Security Level (Called access level in Req Doc)
+   Access Security Level
 ASG
-   Access Security Group (Called PV Group in Req Doc)
+   Access Security Group
 UAG
    User Access Group
 HAG
@@ -70,13 +70,11 @@ must be done:
       associated subroutines. Writing the value 1 to this record will
       cause a reload.
 
-   -  The startup script must contain the following command before iocInit.
-::
+   -  The startup script must contain the following command before iocInit. ::
 
          asSetFilename("/full/path/to/accessSecurityFile")
 
-  -  The following is an optional command.
-::
+  -  The following is an optional command. ::
 
          asSetSubstitutions("var1=sub1,var2=sub2,...")
 
