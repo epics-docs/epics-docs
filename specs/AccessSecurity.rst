@@ -1,95 +1,21 @@
-===============
-Access Security
-===============
+===================
+IOC Access Security
+===================
 
-
-Overview
---------
-
-This chapter describes access security, i.e. the system that limits
-access to IOC databases. It consists of the following sections:
-
-Overview
-   This section
-Quick start
-   A summary of the steps necessary to start access security.
-User’s Guide
-   This explains what access security is and how to use it.
-Design Summary
-   Functional Requirements and Design Overview.
-Application Programmer’s Interface
-Database Access Security
-   Access Security features for EPICS IOC databases.
-Channel Access Security
-   Access Security features in Channel Access
-Trapping Channel Access Writes
-   This allows trapping of all writes from external channel access
-   clients.
-Implementation Overview
-
-The requirements for access security were generated at ANL/APS in 1992.
-The requirements document is:
-
-EPICS: Channel Access Security - Functional Requirements, Ned D. Arnold,
-03/-9/92.
-
-This document is available through the EPICS website.
-
-Quick Start
------------
-
-In order to “turn on” access security for a particular IOC the following
-must be done:
-
--  Create the access security ﬁle.
--  IOC databases may have to be modiﬁed
-
-   -  Record instances may have to have values assigned to ﬁeld ASG. If
-      ASG is null the record is in group DEFAULT.
-   -  Access security ﬁles can be reloaded after iocInit via a
-      subroutine record with asSubInit and asSubProcess as the
-      associated subroutines. Writing the value 1 to this record will
-      cause a reload.
-
--  The startup script must contain the following command before iocInit.
-::
-
-         asSetFilename("/full/path/to/accessSecurityFile")
-
--  The following is an optional command.
-::
-
-         asSetSubstitutions("var1=sub1,var2=sub2,...")
-
-The following rules decide if access security is turned on for an IOC:
-
--  If asSetFilename is not executed before iocInit, access security will
-   never be started.
--  If asSetFile is given and any error occurs while ﬁrst initializing
-   access security, then all access to that ioc is denied.
--  If after successfully starting access security, an attempt is made to
-   restart and an error occurs then the previous access security
-   conﬁguration is maintained.
-
-After an IOC has been booted with access security enabled, the access
-security rules can be changed by issuing the asSetFilename,
-asSetSubstitutions, and asInit. The functions asInitialize, asInitFile,
-and asInitFP, which are described below, can also be used.
-
-User’s Guide
-------------
+.. contents:: Table of Contents
+ :depth: 3
 
 Features
-^^^^^^^^
+--------
 
 Access security protects IOC databases from unauthorized Channel Access
 or pvAccess Clients. Access security is based on the following:
 
 Who
-   Userid of the channel access client.
+   User id of the client(Channel Access/pvAccess).
 Where
-   Hostid where the user is logged on. This is the host on which the
-   channel access client exists. Thus no attempt is made to see if a
+   Host id where the user is logged on. This is the host on which the
+   client exists. Thus no attempt is made to see if a
    user is local or is remotely logged on to the host.
 What
    Individual ﬁelds of records are protected. Each record has a ﬁeld
@@ -112,7 +38,7 @@ via normal networking and physical security methods.
 
 No attempt has been made to protect against the sophisticated saboteur.
 Network and physical security methods must be used to limit access to
-the subnet on which the iocs reside.
+the subnet on which the IOCs reside.
 
 Deﬁnitions
 ^^^^^^^^^^
@@ -127,6 +53,48 @@ UAG
    User Access Group
 HAG
    Host Access Group
+
+Quick Start
+-----------
+
+In order to “turn on” access security for a particular IOC the following
+must be done:
+
+-  Create the access security ﬁle.
+-  IOC databases may have to be modiﬁed
+
+   -  Record instances may have to have values assigned to ﬁeld ASG. If
+      ASG is null the record is in group DEFAULT.
+   -  Access security ﬁles can be reloaded after iocInit via a
+      subroutine record with asSubInit and asSubProcess as the
+      associated subroutines. Writing the value 1 to this record will
+      cause a reload.
+
+   -  The startup script must contain the following command before iocInit.
+::
+
+         asSetFilename("/full/path/to/accessSecurityFile")
+
+  -  The following is an optional command.
+::
+
+         asSetSubstitutions("var1=sub1,var2=sub2,...")
+
+The following rules decide if access security is turned on for an IOC:
+
+-  If asSetFilename is not executed before iocInit, access security will
+   never be started.
+-  If asSetFile is given and any error occurs while ﬁrst initializing
+   access security, then all access to that ioc is denied.
+-  If after successfully starting access security, an attempt is made to
+   restart and an error occurs then the previous access security
+   conﬁguration is maintained.
+
+After an IOC has been booted with access security enabled, the access
+security rules can be changed by issuing the asSetFilename,
+asSetSubstitutions, and asInit. The functions asInitialize, asInitFile,
+and asInitFP, which are described below, can also be used.
+
 
 Access Security Conﬁguration File
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -279,12 +247,7 @@ IOC Access Security Initialization
 In order to have access security turned on during IOC initialization the
 following command must appear in the startup ﬁle before iocInit is
 called:
-
-.. container:: verbatim
-   :name: verbatim-140
-
-   .. container:: fancyvrb
-      :name: fancyvrb140
+::
 
       asSetFilename("/full/path/to/access/security/file.acf")
 
@@ -313,12 +276,7 @@ After an IOC is initialized the access security database can be changed.
 The preferred way is via the subroutine record described in the next
 section. It can also be changed by issuing the following command to the
 vxWorks shell:
-
-.. container:: verbatim
-   :name: verbatim-142
-
-   .. container:: fancyvrb
-      :name: fancyvrb142
+::
 
       asInit
 
