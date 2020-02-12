@@ -4,13 +4,6 @@ Base
 User Manuals and API documentation for the different software modules
 that comprise EPICS Base.
 
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Specifications
-
-   ../specs/ca_protocol
-
 .. toctree::
    :maxdepth: 1
    :caption: Base and IOC Libraries
