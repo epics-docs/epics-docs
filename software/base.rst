@@ -16,7 +16,7 @@ that comprise EPICS Base.
    :caption: PVA Modules (C++)
 
    pvData <https://docs.epics-controls.org/projects/pvdata-cpp>
-   pvAccess-CPP
+   pvAccess <https://docs.epics-controls.org/projects/pvaccess-cpp/en/latest>
    pva2pva (QSRV / pvAccess Gateway) <https://epics-base.github.io/pva2pva/index.html>
    Normative Types <https://docs.epics-controls.org/projects/normativetypes-cpp>
    pvaClient <https://docs.epics-controls.org/projects/pvaclient-cpp>
