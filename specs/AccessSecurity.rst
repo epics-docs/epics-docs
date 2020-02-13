@@ -46,7 +46,7 @@ Deﬁnitions
 This document uses the following terms:
 
 ASL
-   Access Security Level
+   Access Security Level.
 ASG
    Access Security Group
 UAG
@@ -332,7 +332,10 @@ Record Type Description
 '''''''''''''''''''''''
 
 Each ﬁeld of each record type has an associated access security level of
-ASL0 or ASL1. See the chapter “Database Deﬁnition” for details.
+ASL0 or ASL1 (default value).
+Fields which operators normally change are assigned ASL0, other fields are assigned ASL1. 
+For example, the VAL field of an analog output record is assigned ASL0 and all other fields ASL1.
+This is because only the VAL field should be modified during normal operations.
 
 Example:
 ^^^^^^^^
