@@ -1,23 +1,24 @@
 EPICS 7, pvAccess and pvData
 ============================
 
-pvData and the related modules have been introduced into EPICS
-to improve support for structured data. Let us look into the
+pvAccess, pvData and other related modules have been introduced into EPICS
+to add support for structured data. Let us look into the
 reasons, and also at some use cases for the capabilities to handle
 structured data.
 
 EPICS has its roots in process control. In typical process control
 applications, process variables are scalar data items. Transporting the
-process variables efficiently and reliably is of prime importance, over
+process variables efficiently has priority over
 handling sophisticated constructs. Only a limited set of data is
 sufficient to describe the process data: timestamp, alarm status,
 display information and engineering units. This kind of simple
-interfaces makes it possible to build general-purpose tools for
+interfaces make it possible to build general-purpose tools for
 manipulating the data, and also enables the low-level units to
 interoperate without big overhead or having to customize the
 applications whenever a new structure is introduced.
 
-However, in more complex applications having only the scalar values and limited
+However, in more complex applications like data acquisition in
+scientific experiments, having only scalar values and limited
 metadata becomes a limiting factor. For instance, when (camera) images
 are transported over the network, more complex metadata is required to
 interpret and display the image;
@@ -317,8 +318,9 @@ Having defined the following base structure:
   structure  timeStamp_t
     long secondsPastEpoch
     int nanoSeconds
+    int userTag
 
-The following **introspection** object can be defined:
+it can be used to define further structures:
 
 .. code::
 
@@ -330,11 +332,12 @@ which would correspond to:
 
 .. code::
 
-  structure scalarDoubleExample // introspection object
+  structure scalarDoubleExample
     double value
     structure timeStamp
       long secondsPastEpoch
       int nanoSeconds
+      int userTag
 
 The following corresponding **data** object can then be defined:
 
@@ -346,7 +349,7 @@ The following corresponding **data** object can then be defined:
       long secondsPastEpoch 1531389047
       int nanoSeconds 247000000
 
-If the following interface is defined:
+Also, if the following interface is defined:
 
 .. code::
 
@@ -354,7 +357,7 @@ If the following interface is defined:
     double x
     double y
 
-Then the following **introspection** objects can be defined:
+the following uses become possible (among others):
 
 .. code::
 
@@ -365,7 +368,7 @@ Then the following **introspection** objects can be defined:
   structure pointArrayExample
     point_t[] points
 
-which are equivalent to
+filling in the details, they look like:
 
 .. code::
 
@@ -387,7 +390,7 @@ and
         double x
         double y
 
-And the following **data** objects can be defined:
+And the corresponding **data** objects could look like this:
 
 .. code::
 
