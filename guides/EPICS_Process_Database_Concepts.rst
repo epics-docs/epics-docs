@@ -453,7 +453,7 @@ specify the PROC field of another record.
 Maximize Severity Attribute
 ---------------------------
 
-The Maximize Severity attribute is one of the following : 
+The Maximize Severity attribute is one of the following :
 
   - NMS (Non-Maximize Severity)
   - MS (Maximize Severity)
@@ -1262,36 +1262,55 @@ Breakpoint Conversions
 
 Now let us consider a non-linear conversion. These are conversions that
 could be entered as polynomials. As these are more time consuming to
-execute, a break point table is created that breaks the non-linear
+execute, a breakpoint table is created that breaks the non-linear
 conversion into linear segments that are accurate enough.
 
 Breakpoint Table
 ^^^^^^^^^^^^^^^^
 
-The breakpoint table is then used to do a piece-wise linear conversion.
+The breakpoint table is then used to do a piecewise linear conversion.
 Each piecewise segment of the breakpoint table contains:
 
-Raw Value Start for this segment, Engineering Units at the start, Slope
-of this segment. For a 12 bit ADC a table may look like this: 0x000,
-14.0, .2 0x7ff, 3500.0, .1 -1. Any raw value between 000 and 7ff would
-be set to 14.0 + .2 \* raw value. Any raw value between 7ff and fff
-would be set to 3500 + .1 \* (raw value - 7ff)
+Raw Value Start for this segment, Engineering Units at the start.
+
+.. code::
+
+     breaktable(typeJdegC) {
+        0.000000 0.000000
+        365.023224 67.000000
+        1000.046448 178.000000
+        3007.255859 524.000000
+        3543.383789 613.000000
+        4042.988281 692.000000
+        4101.488281 701.000000
+     }
+
 
 Breakpoint Conversion Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When a new raw value is read, the conversion routine starts from the
-previous line segment, comparing the raw value start, and either going
-forward or backward in the table to find the proper segment for this new
+previously used line segment, compares the raw value start, and either going
+forward or backward in the table searches the proper segment for this new
 raw value. Once the proper segment is found, the new engineering units
 value is the engineering units value at the start of this segment plus
-the slope of this segment times the position on this segment. A table
-that has an entry for each possible raw count is effectively a look up
+the slope of this segment times the position on this segment.
+
+  value = eng.units at segment start + (raw value - raw at segment start) X slope
+
+
+A table that has an entry for each possible raw count is effectively a look up
 table.
+
+Breakpoint tables are loaded to the IOC using the *dbLoadDatabase* shell function.
+The slope corresponding to each segment is calculated when the table is loaded.
+For raw values that exceed the last point in the breakpoint table, the slope of
+the last segment is used.
 
 In this example the transducer is a thermocouple which transmits 0-20
 milliAmps. An amplifier is present which amplifies milliAmps to volts.
-The I/O card uses a 0-10 Volt interface.
+The I/O card uses a 0-10 Volt interface and a 12-bit ADC.
+Raw value range would thus be 0 to 4095.
 
  |image9|
 
@@ -1307,23 +1326,22 @@ as follows:
 For analog records that use breakpoint tables, the EGUF and EGUL fields
 are not used in the conversion, so they do not have to be given values.
 
-There are currently lookup tables for J and K thermocouples in degrees F
+EPICS Base distribution currently includes lookup tables for J and K thermocouples in degrees F
 and degrees C.
 
-Other applications for a lookup table are the remainder of the
+Other potential applications for a lookup table are e.g. other types of
 thermocouples, logarithmic output controllers, and exponential
-transducers. We have chosen the piece-wise linearization of the signals
-to perform the conversion, as they provide a mechanism for conversion
+transducers. The piece-wise linearization of the signals provides a mechanism for conversion
 that minimizes the amount of floating point arithmetic required to
 convert non-linear signals. Additional breakpoint tables can be added to
-the existing breakpoints.
+the predefined ones.
 
 Creating Breakpoint Tables
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 There are two ways to create a new breakpoint table:
 
-Simply type in the data for each segment, giving the raw and
+1) Simply type in the data for each segment, giving the raw and
 corresponding engineering unit value for each point in the following
 format.
 
@@ -1341,19 +1359,19 @@ segment, and <first eng units> is the corresponding engineering unit
 value. The slope is calculated by the software and should not be
 specified.
 
-Create a file consisting of a table of an arbitrary number of values in
+2) Create a file consisting of a table of an arbitrary number of values in
 engineering units and use the utility called **makeBpt** to convert the
 table into a breakpoint table. As an example, the contents data file to
 create the typeJdegC breakpoint table look like this:
 
-.. code ::
+.. code::
 
   !header
   "typeJdegC" 0 0 700 4095 .5 -210 760 1
   !data
-  -8.096 -8.076 -8.057 *many more numbers*
+  -8.096 -8.076 -8.057 <many more numbers>
 
-The file must have the extension .data. The file must first have a
+The file name must have the extension .data. The file must first have a
 header specifying these nine things:
 
 1. Name of breakpoint table in quotes: **"typeJdegC"**
@@ -1369,11 +1387,11 @@ header specifying these nine things:
 The rest of the file contains lines of equally spaced engineering
 values, with each line no more than 160 characters before the new-line
 character. The header and the actual table should be specified by
-!header and !data, respectively. The file for this data table is called
+**!header** and **!data**, respectively. The file for this data table is called
 typeJdegC.data, and can be converted to a breakpoint table with the
 **makeBpt** utility as follows:
 
-unix% makeBpt TypeJdegC.data
+unix% makeBpt typeJdegC.data
 
 Alarm Specification
 ~~~~~~~~~~~~~~~~~~~
