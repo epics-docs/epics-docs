@@ -1296,7 +1296,7 @@ raw value. Once the proper segment is found, the new engineering units
 value is the engineering units value at the start of this segment plus
 the slope of this segment times the position on this segment.
 
-  value = eng.units at segment start + (raw value - raw at segment start) X slope
+  value = eng.units at segment start + (raw value - raw at segment start) * slope
 
 
 A table that has an entry for each possible raw count is effectively a look up
@@ -1325,6 +1325,10 @@ as follows:
 
 For analog records that use breakpoint tables, the EGUF and EGUL fields
 are not used in the conversion, so they do not have to be given values.
+
+With this example setup and assuming we get an ADC raw reading of 3500, the formula above would give:
+
+Value = 524.0 + (3500 - 3007) * 0.166 = 605.838 DGC
 
 EPICS Base distribution currently includes lookup tables for J and K thermocouples in degrees F
 and degrees C.
