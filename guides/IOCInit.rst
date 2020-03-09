@@ -99,16 +99,16 @@ application’s configure/RELEASE ﬁle:
         putenv "EPICS_BASE=/path/to/base"
         epics_basebin = "/path/to/base/bin/vxWorks-68040"
 
-The ld command in the startup script loads EPICS core, the record,
+The **ld** command in the startup script loads EPICS core, the record,
 device and driver support the IOC needs, and any application speciﬁc
 modules that have been linked into it.
 
-dbLoadDatabase loads database deﬁnition ﬁles describing the
+**dbLoadDatabase** loads database deﬁnition ﬁles describing the
 record/device/driver support used by the application..
 
-dbLoadRecords loads record instance deﬁnitions.
+**dbLoadRecord**s loads record instance deﬁnitions.
 
-iocInit initializes the various epics components and starts the IOC
+**iocInit** initializes the various epics components and starts the IOC
 running.
 
 Overview - RTEMS
@@ -144,7 +144,7 @@ epicsRtemsInitHooks.h
 IOC Initialization
 ~~~~~~~~~~~~~~~~~~
 
-An IOC is normally started with the iocInit command as shown in the
+An IOC is normally started with the **iocInit** command as shown in the
 startup scripts above, which is actually implemented in two distinct
 parts. The ﬁrst part can be run separately as the iocBuild command,
 which puts the IOC into a quiescent state without allowing the various
@@ -164,7 +164,7 @@ of the following steps:
 Conﬁgure Main Thread
 ^^^^^^^^^^^^^^^^^^^^
 
-Providing the IOC has not already been initialized, initHookAtIocBuild
+Provided the IOC has not already been initialized, initHookAtIocBuild
 is announced ﬁrst.
 
 The main thread’s epicsThreadIsOkToBlock ﬂag is set, the message
@@ -177,7 +177,7 @@ At this point, initHookAtBeginning is announced.
 General Purpose Modules
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Calls coreRelese which prints a message showing which version of iocCore
+Calls coreRelease which prints a message showing which version of iocCore
 is being run.
 
 Calls taskwdInit to start the task watchdog. This accepts requests to
@@ -185,8 +185,7 @@ watch other tasks. It runs periodically and checks to see if any of the
 tasks is suspended. If so it issues an error message, and can also
 invoke callback routines registered by the task itself or by other
 software that is interested in the state of the IOC. See ”Task Watchdog”
-on page `560 <EPICSGeneralPurposeTasks.html#x17-69900016.3>`__ for
-details.
+for details.
 
 Starts the general purpose callback tasks by calling callbackInit. Three
 tasks are started at diﬀerent scheduling priorities.
@@ -274,8 +273,8 @@ dbProcessNotifyInit initializes support for process notiﬁcation.
 After a short delay to allow settling, initHookAfterScanInit is
 announced.
 
-7.4.10 Initial Processing
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Initial Processing
+^^^^^^^^^^^^^^^^^^
 
 initialProcess processes all records that have PINI set to YES.
 
@@ -468,8 +467,8 @@ to use this facility:
 
 An arbitrary number of functions can be registered.
 
-7.8 Environment Variables
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Environment Variables
+~~~~~~~~~~~~~~~~~~~~~
 
 Various environment variables are used by iocCore:
 
@@ -487,7 +486,7 @@ Various environment variables are used by iocCore:
         EPICS_IOC_LOG_INET
 
 For an explanation of the EPICS_CA\_... and EPICS_CAS\_... variables see
-the EPICS Channel Access Reference Manual. For an explaination of the
+the EPICS Channel Access Reference Manual. For an explanation of the
 EPICS_IOC_LOG\_... variables see ”iocLogClient” on page
 `445 <IOCErrorLogging.html#x11-48000010.7.2>`__ of this manual.
 EPICS_TS_NTP_INET is used only on vxWorks and RTEMS, where it sets the
@@ -511,7 +510,7 @@ iocCore.
 
 **epicsEnvShow** – This shows all environment variables on your system.
 
-7.9 Initialize Logging
+Initialize Logging
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Initialize the logging system. See the chapter on “IOC Error Logging”
