@@ -238,8 +238,8 @@ Site conﬁguration
 To conﬁgure EPICS base for your site, you may want to modify the default
 deﬁnitions in the following ﬁles:
 
-   configure/CONFIG_SITE Build choices. Specify target archs.
-   configure/CONFIG_SITE_ENV Environment variable defaults
+   - configure/CONFIG_SITE Build choices. Specify target archs.
+   - configure/CONFIG_SITE_ENV Environment variable defaults
 
 Host conﬁguration
 '''''''''''''''''
@@ -250,9 +250,8 @@ override deﬁnitions. The new ﬁle should have the same name as the
 distribution ﬁle to be overridden except CONFIG in the name is changed
 to CONFIG_SITE.
 
-   configure/os/CONFIG_SITE.<host>.<host> - Host build settings
-   configure/os/CONFIG_SITE.<host>.Common - Host build settings for all
-   target systems
+   - configure/os/CONFIG_SITE.<host>.<host> - Host build settings
+   - configure/os/CONFIG_SITE.<host>.Common - Host build settings for all target systems
 
 Target conﬁguration
 '''''''''''''''''''
@@ -263,9 +262,9 @@ deﬁnitions. The new ﬁle should have the same name as the distribution
 ﬁle to be overridden except CONFIG in the name is replaced by
 CONFIG_SITE.
 
-   configure/os/CONFIG_SITE.Common.<target> - Target cross settings
-   configure/os/CONFIG_SITE.<host>.<target> - Host-target settings
-   configure/os/CONFIG_SITE.Common.vxWorksCommon - vxWorks full paths
+   - configure/os/CONFIG_SITE.Common.<target> - Target cross settings
+   - configure/os/CONFIG_SITE.<host>.<target> - Host-target settings
+   - configure/os/CONFIG_SITE.Common.vxWorksCommon - vxWorks full paths
 
 R3.13 compatibility conﬁguration
 ''''''''''''''''''''''''''''''''
@@ -276,10 +275,8 @@ base/conﬁg/CONFIG_SITE\* ﬁles to agree with site deﬁnitions you made in
 base/conﬁgure and base/conﬁgure/os ﬁles.You must also modify the
 following tow macros in the base/conﬁgure/CONFIG_SITE ﬁle:
 
-   COMPAT_TOOLS_313 - Set to YES to build R3.13 extensions with this
-   base.
-   COMPAT_313 - Set to YES to build R3.13 ioc applications and
-   extensions with this base.
+   - COMPAT_TOOLS_313 - Set to YES to build R3.13 extensions with this base.
+   - COMPAT_313 - Set to YES to build R3.13 ioc applications and extensions with this base.
 
 Directory deﬁnitions
 ^^^^^^^^^^^^^^^^^^^^
@@ -447,17 +444,19 @@ Makeﬁle deﬁnition.
 Each system has an OS_CLASS deﬁnition in its
 configure/os/CONFIG.Common.<arch> ﬁle. A few examples are:
 
-   For vxWorks-\* targets <osclass> is vxWorks.
-   For RTEMS-\* targets <osclass> is RTEMS.
-   For solaris-\* targets <osclass> is solaris.
-   For win32-\* targets <osclass> is WIN32.
-   For linux-\* targets <osclass> is Linux.
-   For darwin-\* targets <osclass> is Darwin.
-   For aix-\* targets <osclass> is AIX.
+   - For vxWorks-\* targets <osclass> is vxWorks.
+   - For RTEMS-\* targets <osclass> is RTEMS.
+   - For solaris-\* targets <osclass> is solaris.
+   - For win32-\* targets <osclass> is WIN32.
+   - For linux-\* targets <osclass> is Linux.
+   - For darwin-\* targets <osclass> is Darwin.
+   - For aix-\* targets <osclass> is AIX.
 
 For example the following Makeﬁle lines specify that product aaa should
 be created for all systems. Product bbb should be created for systems
 that do not have OS_CLASS deﬁned as solaris.
+
+.. code ::
 
    PROD = aaa
    PROD_solaris = -nil-
@@ -475,6 +474,8 @@ product bbb should be created only for the vxWorks-68040 and
 vxWorks-ppc603 targets. Remember T_A is the build’s current target
 architecture. so PROD_IOC has the bbb value only when the current built
 target architecture is vwWorks-68040 or vxWorks-ppc603
+
+.. code ::
 
    PROD_IOC = aaa
    VX_PROD_vxWorks-68040 = bbb
@@ -494,10 +495,10 @@ the type of makeﬁle targets it can support. This deﬁnition appears in
 configure/os/CONFIG.Common.<arch> or configure/os/CONFIG.<arch>.<arch>
 ﬁles.
 
-   For vxWorks systems VALID_BUILDS is set to “Ioc”.
-   For Unix type systems, VALID_BUILDS is set to “Host Ioc”.
-   For RTEMS systems, VALID_BUILDS is set to “Ioc”.
-   For WIN32 systems, VALID_BUILDS is set to “Host Ioc”.
+   - For vxWorks systems VALID_BUILDS is set to “Ioc”.
+   - For Unix type systems, VALID_BUILDS is set to “Host Ioc”.
+   - For RTEMS systems, VALID_BUILDS is set to “Ioc”.
+   - For WIN32 systems, VALID_BUILDS is set to “Host Ioc”.
 
 In a Makeﬁle it is possible to limit the systems for which a particular
 PROD, TESTPROD, LIBRARY, SCRIPTS, and OBJS is built. For example the
@@ -505,6 +506,8 @@ following Makeﬁle lines specify that product aaa should be created for
 systems that support Host type builds. Product bbb should be created for
 systems that support Ioc type builds. Product ccc should be created for
 all target systems.
+
+.. code ::
 
    PROD_HOST = aaa
    PROD_IOC = bbb
@@ -705,22 +708,22 @@ The following is a summary of targets that can be speciﬁed for gnumake:
 
 where:
 
-   <arch> is an architecture such as solaris-sparc, vxWorks-68040,
-   win32-x86, etc.
-   <action> is help, clean, realclean, distclean, inc, install, build,
-   rebuild, buildInstall, realuninstall, or uninstall
-   NOTE: help, uninstall, distclean, cvsclean, and realuninstall can
-   only be speciﬁed at <top>.
-   NOTE: realclean cannot be speciﬁed inside an O.<arch> subdirectory.
-   <dir> is subdirectory name
+- <arch> is an architecture such as solaris-sparc, vxWorks-68040, win32-x86, etc.
+- <action> is help, clean, realclean, distclean, inc, install, build, rebuild, buildInstall, realuninstall, or uninstall
 
-Note: You can build using your os vendors’ native compiler and also
+*NOTE: help, uninstall, distclean, cvsclean, and realuninstall can
+only be speciﬁed at <top>.*
+
+*NOTE: realclean cannot be speciﬁed inside an O.<arch> subdirectory.
+<dir> is subdirectory name*
+
+*NOTE: You can build using your os vendors’ native compiler and also
 build using a supported alternate compiler in the same directory
 structure because the executables and libraries will be created and
 installed into separate directories (e.g bin/solaris-sparc and
 bin/solaris-sparc-gnu). You can do this by changing your
 EPICS_HOST_ARCH, environment variable between builds or by setting
-EPICS_HOST_ARCH on the gnumake command line.
+EPICS_HOST_ARCH on the gnumake command line.*
 
 The build system ensures the host architecture is up to date before
 building a cross-compiled target, thus Makeﬁles must be explicit in
@@ -1231,29 +1234,31 @@ WIN32. Also a library suﬃx appropriate for the library type and target
 arch (e.g. .a, .so, .lib, .dll) will be appended to the ﬁlename when the
 ﬁle is created.
 
-vxWorks and RTEMS Note: Only archive libraries are created.
+*vxWorks and RTEMS Note: Only archive libraries are created.*
 
-Shared libraries Note: Shared libraries can be built for any or all HOST
+*Shared libraries Note: Shared libraries can be built for any or all HOST
 type architectures. The deﬁnition of SHARED_LIBRARIES (YES/NO) in
 base/conﬁgure/CONFIG_SITE determines whether shared or archive libraries
 will be built. When SHARED_LIBRARIES is YES, both archive and shared
 libraries are built. This deﬁnition can be overridden for a speciﬁc arch
 in an configure/os/CONFIG_SITE.<arch>.Common ﬁle.,The default deﬁnition
 for SHARED_LIBRARIES in the EPICS base distribution ﬁle is YES for all
-host systems.
+host systems.*
 
-| win32 Note: An object library ﬁle is created when SHARED_LIBRARIES=NO,
-  <name>.lib which is installed into $(INSTALL_LOCATION)/lib/<arch>. Two
-  library ﬁles are created when SHARED_LIBRARIES=YES, <name>.lib, an
-  import library for DLLs, which is installed into
-  $(INSTALL_LOCATION)/lib/<arch>, and <name>.dll which is installed into
-  $(INSTALL_LOCATION)/bin/<arch>. (Warning: The ﬁle <name>.lib will only
-  be created by the build if there are exported symbols from the
-  library.) If SHARED_LIBRARIES=YES, the directory
-| $(INSTALL_LOCATION)/bin/<arch> must be in the user’s path during
-  builds to allow invoking executables which were linked with shared
-  libraries. NOTE: the <name>.lib ﬁles are diﬀerent for shared and
-  nonshared builds.
+*win32 Note: An object library ﬁle is created when SHARED_LIBRARIES=NO,
+<name>.lib which is installed into $(INSTALL_LOCATION)/lib/<arch>. Two
+library ﬁles are created when SHARED_LIBRARIES=YES, <name>.lib, an
+import library for DLLs, which is installed into
+$(INSTALL_LOCATION)/lib/<arch>, and <name>.dll which is installed into
+$(INSTALL_LOCATION)/bin/<arch>. (Warning: The ﬁle <name>.lib will only
+be created by the build if there are exported symbols from the
+library.) If SHARED_LIBRARIES=YES, the directory
+$(INSTALL_LOCATION)/bin/<arch> must be in the user’s path during
+builds to allow invoking executables which were linked with shared
+libraries.*
+
+*NOTE: the <name>.lib ﬁles are diﬀerent for shared and
+nonshared builds.*
 
 Specifying the library name.
 ''''''''''''''''''''''''''''
@@ -1497,8 +1502,8 @@ are deﬁned as follows:
    Combined object ﬁles will be used in builds of the library for archs
    without a <libname>_LDOBJS_<osclass> deﬁnition speciﬁed. (deprecated)
 
-4.6.13.4 LIBOBJS deﬁnitions
-'''''''''''''''''''''''''''
+LIBOBJS deﬁnitions
+''''''''''''''''''
 
 Previous versions of epics (3.13 and before) accepted deﬁnitions like:
 
@@ -1510,9 +1515,9 @@ Previous versions of epics (3.13 and before) accepted deﬁnitions like:
    -include ../baseLIBOBJS
    <libname>_OBJS += $(LIBOBJS)
 
-   Note: vxWorks applications created by makeBaseApp.pl from 3.14 Base
+   *Note: vxWorks applications created by makeBaseApp.pl from 3.14 Base
    releases no longer have a ﬁle named baseLIBOBJS. Base record and
-   device support now exists in archive libraries.
+   device support now exists in archive libraries.*
 
 Specifying dependant libraries to be linked when creating a library
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -1736,6 +1741,8 @@ Object Files
 ^^^^^^^^^^^^
 
 It is possible to generate and install object ﬁles by using deﬁnitions:
+
+.. code ::
 
    OBJS += <name>
    OBJS_<osclass> += <name>
@@ -2452,8 +2459,8 @@ name ending .plt will be copied into the O.<arch> directory with the
 ending changed to .t; such scripts will usually use the perl
 Test::Simple or Test::More libraries.
 
- Miscellaneous Targets
-^^^^^^^^^^^^^^^^^^^^^^
+Miscellaneous Targets
+^^^^^^^^^^^^^^^^^^^^^
 
 A deﬁnition of the form:
 
@@ -2525,9 +2532,7 @@ Deﬁnitions of the form:
 | <name>_RCS_<osclass> += <name>
 | <name>_RCS_DEFAULT += <name>
 |
-| result in resource ﬁles (*.res ﬁles) being created from the speciﬁed
-  \*.rc resource deﬁnition script ﬁles and linked into the prods and/or
-  libraries.
+| result in resource ﬁles (\*.res ﬁles) being created from the speciﬁed \*.rc resource deﬁnition script ﬁles and linked into the prods and/or libraries.
 
 TCL libraries
 ^^^^^^^^^^^^^
@@ -2574,6 +2579,8 @@ In this example, three class ﬁles are created in
 $(INSTALL_LOCATION)/javalib/mytest. The javac depreciation ﬂag is used
 to list the description of each use or override of a deprecated member
 or class.
+
+.. code ::
 
    JAVA = mytest/one.java
    JAVA = mytest/two.java
@@ -2630,6 +2637,8 @@ In this example, all the class ﬁles created by the current Makeﬁle’s
 Note: $(INSTALL_CLASSES) is set to $(addpreﬁx
 $(INSTALL_JAVA)/,$(CLASSES)) in the EPICS base conﬁgure ﬁles.
 
+.. code ::
+
    JAR = mytest1.jar
    JAR_INPUT = $(INSTALL_CLASSES)
 
@@ -2641,6 +2650,8 @@ Example 2
 In this example, three class ﬁles are created and placed into a new jar
 archive ﬁle named mytest2.jar. An existing manifest ﬁle, mytest2.mf is
 put into the new jar ﬁle.
+
+.. code ::
 
    JAR = mytest2.jar
    JAR_INPUT = $(INSTALL_JAVA)/mytest/one.class
@@ -2705,6 +2716,7 @@ Module developers can now deﬁne a new type of ﬁle, e.g. ABC, so that
 INSTALL_ABC. This is done by creating a new CONFIG_<name> ﬁle, e.g.
 CONFIG_ABC, with the following lines:
 
+.. code ::
    FILE_TYPE += ABC
    INSTALL_ABC = $(INSTALL_LOCATION)/abc
 
@@ -2746,21 +2758,25 @@ the command line. Multiple snippets with the same number are
 concatenated. ”Commands” (tags in the snippet name) can be used to
 control the treatment of snippets with the same number:
 
-   D - Default
+-  D - Default.
    Snippet is treated as a default, which is replaced (overwritten) by
    any other snippet with the same number.
-   R - Replace
+-  R - Replace.
    Snippet is replacing (overwriting) already processed snippets with
    the same number.
 
 Speciﬁcation of the target ﬁle is diﬀerent for architecture dependent or
 independent ﬁles.
 
+.. code ::
+
    COMMON_ASSEMBLIES += st.cmd
    ASSEMBLIES += mytool.rc
 
 Snippet ﬁles are conﬁgured speciﬁcally (relative or absolute path) or as
 patterns (searched relative to all source directories).
+
+.. code ::
 
    mytool.rc_SNIPPETS += ../rc.d/10_head ../rc.d/20_init
    st.cmd_PATTERN += st.cmd.d/⋆
@@ -2771,11 +2787,11 @@ Macros
 The following macros can be used in snippets, and will be replaced by
 the current value when assembling is done.
 
-   \_DATETIME\_ Date and time of the build
-   \_USERNAME\_ Name of the user running the build
-   \_HOST\_ Name of the host on which the build is run
-   \_OUTPUTFILE\_ Name of the generated ﬁle
-   \_SNIPPETFILE\_ Name of the current snippet
+-  \_DATETIME\_ Date and time of the build
+-  \_USERNAME\_ Name of the user running the build
+-  \_HOST\_ Name of the host on which the build is run
+-  \_OUTPUTFILE\_ Name of the generated ﬁle
+-  \_SNIPPETFILE\_ Name of the current snippet
 
 .. _example-3:
 
@@ -2823,7 +2839,7 @@ snippets:
 
    ============== ================= ========================================
    Source         Snippet           Comment
-   -------------- --------------    --------------
+   -------------- ----------------- ----------------------------------------
    L              10_init           L default resets the G default
    G              20_environment
    L              30_another-driver implicit addition, alphabetical sorting
@@ -2850,9 +2866,9 @@ Makeﬁle deﬁnition.
 
       ================================================= ========================================================================================================================================================================================
       Build Option                                      Description
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       Products to be built (host type archs only)
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       PROD                                              products (names without execution suﬃx) to build and install. Specify xyz to build executable xyz on Unix and xyz.exe on WIN32
       PROD_<osclass>                                    os class speciﬁc products to build and install for <osclass> archs only
       PROD_DEFAULT                                      products to build and install for archs with no PROD_<osclass> speciﬁed
@@ -2863,7 +2879,7 @@ Makeﬁle deﬁnition.
       PROD_HOST_<osclass>                               os class speciﬁc products to build and install for <osclass> type archs
       PROD_HOST_DEFAULT                                 products to build and install for arch with no PROD_HOST_<osclass> speciﬁed
       Test products to be built
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       TESTPROD                                          test products (names without execution suﬃx) to build but not install
       TESTPROD_<osclass>                                os class speciﬁc test products to build but not install
       TESTPROD_DEFAULT                                  test products to build but not install for archs with no TESTPROD_<osclass> speciﬁed
@@ -2875,7 +2891,7 @@ Makeﬁle deﬁnition.
       \
       TESTPROD_HOST_DEFAULT                             test products to build and install for arch with no TESTPROD_HOST_<osclass> speciﬁed
       Test scripts to be built
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       TESTSCRIPTS                                       test scripts (names with .t suﬃx) to build but not install
       TESTSCRIPTS_<osclass>                             os class speciﬁc test scripts to build but not install
       TESTSCRIPTS_DEFAULT                               test scripts to build but not install for archs with no TESTSCRIPTS_<osclass> speciﬁed
@@ -2886,7 +2902,7 @@ Makeﬁle deﬁnition.
       TESTSCRIPTS_HOST_<osclass>                        os class speciﬁc testscripts to build and install for <osclass> type archs
       TESTSCRIPTS_HOST_DEFAULT                          test scripts to build and install for arch with no TESTSCRIPTS_HOST_<osclass> speciﬁed
       Libraries to be built
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       LIBRARY                                           name of library to build and install. The name should NOT include a preﬁx or extension e.g. specify Ca to build libCa.a on Unix, Ca.lib or Ca.dll on WIN32
       LIBRARY_<osclass>                                 os speciﬁc libraries to build and install
       LIBRARY_DEFAULT                                   libraries to build and install for archs with no LIBRARY_<osclass> speciﬁed
@@ -2900,7 +2916,7 @@ Makeﬁle deﬁnition.
       SHARED_LIBRARIES                                  build shared libraries? Must be YES or NO
       SHRLIB_VERSION                                    shared library version number
       Loadable libraries to be built
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       LOADABLE_LIBRARY                                  name of loadable library to build and install. The name should NOT include a preﬁx or extension e.g. specify Ca to build libCa.so on Unix and Ca.dll on WIN32
       LOADABLE_LIBRARY_<osclass>                        os speciﬁc loadable libraries to build and install
       LOADABLE_LIBRARY_DEFAULT                          loadable libraries to build and install for archs with no LOADABLE_LIBRARY_<osclass> speciﬁed
@@ -2908,13 +2924,13 @@ Makeﬁle deﬁnition.
       LOADABLE_LIBRARY_HOST_<osclass>                   os class speciﬁc loadable libraries to build and install for host type archs
       LOADABLE_LIBRARY_HOST_DEFAULT                     loadable libraries to build and install for host type arch systems with no LOADABLE_LIBRARY_HOST_<osclass> speciﬁed
       Combined object ﬁles (vxWorks only)
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       OBJLIB                                            name of a combined object ﬁle library and corresponding munch ﬁle to build and install. The name will have a Library suﬃx appended
       OBJLIB_vxWorks                                    same as OBJLIB
       OBJLIB_SRCS                                       source ﬁles to build the OBJLIB
       OBJLIB_OBJS                                       object ﬁles to include in OBJLIB
       Product and library source ﬁles
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       SRCS                                              source ﬁles to build all PRODs and LIBRARYs
       SRCS_<osclass>                                    osclass speciﬁc source ﬁles to build all PRODs and LIBRARYs
       SRCS_DEFAULT                                      source ﬁle to build all PRODs and LIBRARYs for archs with no SRCS_<osclass> speciﬁed
@@ -2935,7 +2951,7 @@ Makeﬁle deﬁnition.
       <name>_SRCS_<osclass>                             os speciﬁc source ﬁles to build a speciﬁc PROD or LIBRARY
       <name>_SRCS_DEFAULT                               source ﬁles needed to build a speciﬁc PROD or LIBRARY for archs with no <prod>_SRCS_<osclass> speciﬁed
       Product and library object ﬁles
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       USR_OBJS                                          object ﬁles, speciﬁed without suﬃx, to build all PRODs and LIBRARYs
       USR_OBJS_<osclass>                                osclass speciﬁc object ﬁles, speciﬁed without suﬃx, to build all PRODs and LIBRARYs
       USR_OBJS_DEFAULT                                  object ﬁles, speciﬁed without suﬃx, needed to build PRODs and LIBRARYs for archs with no OBJS_<osclass> speciﬁed
@@ -2950,7 +2966,7 @@ Makeﬁle deﬁnition.
       <name>_OBJS_<osclass>                             os speciﬁc object ﬁles, speciﬁed without suﬃx, to build a speciﬁc PROD or LI\|BRARY
       <name>_OBJS_DEFAULT                               object ﬁles, without suﬃx, needed to build a speciﬁc PROD or LIBRARY for archs with no <prod>_OBJS_<osclass> speciﬁed
       Product and library R3.13 combined object ﬁles
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       USR_OBJLIBS                                       combined object ﬁles with ﬁlenames that do not have a suﬃx, needed for building all PRODs and LIBRARYs (e.g. USR_OBJLIBS+=$(XYZ_BIN)/xyzLib)
       USR_OBJLIBS_<osclass>                             os-speciﬁc combined object ﬁles with ﬁlenames that do not have a suﬃx for building all PRODs and LIBRARYs
       USR_OBJLIBS_DEFAULT                               combined object ﬁles with ﬁlenames that do not have a suﬃx, for archs with no USR_OBJLIBS_<osclass> speciﬁed for building all PRODs and LIBRARYs
@@ -2968,7 +2984,7 @@ Makeﬁle deﬁnition.
       <name>_LDOBJS_<osclass>                           os speciﬁc combined object ﬁles with ﬁlenames that do not have a suﬃx, to build a speciﬁc PROD or LI\|BRARY (deprecated)
       <name>_LDOBJS_DEFAULT                             combined object ﬁles with ﬁlenames that do not have a suﬃx, needed to build a speciﬁc PROD or LIBRARY for archs with no <name>_LDOBJS_<osclass> speciﬁed (deprecated)
       Product and library dependant libraries
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       <name>_DIR                                        directory to search for the speciﬁed lib. (For libs listed in all PROD_LIBS, LIB_LIBS, <name>_LIBS and USR_LIBS listed below)System libraries do not need a <name>_dir deﬁnition.
       USR_LIBS                                          load libraries (e.g. Xt X11) for all products and libraries
       USR_LIBS_<osclass>                                os speciﬁc load libraries for all makeﬁle links
@@ -2999,7 +3015,7 @@ Makeﬁle deﬁnition.
       SYS_PROD_LIBS_<osclass>                           os class speciﬁc system libs needed to link every PROD (deprecated)
       SYS_PROD_LIBS_DEFAULT                             system libs needed to link every PROD for systems with no SYS_PROD_LIBS_<osclass> speciﬁed (deprecated)
       Compiler ﬂags
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       USR_CFLAGS                                        C compiler ﬂags for all systems
       USR_CFLAGS_<T_A>                                  target architecture speciﬁc C compiler ﬂags
       USR_CFLAGS_<osclass>                              os class speciﬁc C compiler ﬂags
@@ -3036,7 +3052,7 @@ Makeﬁle deﬁnition.
       CMPLR                                             C compiler selection, TRAD, ANSI or STRICT (default is STRICT)
       CXXCMPLR                                          C++ compiler selection, NORMAL or STRICT (default is STRICT)
       Linker options
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       USR_LDFLAGS                                       linker options (for all makeﬁle links)
       USR_LDFLAGS_<osclass>                             os speciﬁc linker options (for all makeﬁle links)
       USR_LDFLAGS_DEFAULT                               linker options for systems with no USR_LDFLAGS_<osclass> speciﬁed
@@ -3052,12 +3068,12 @@ Makeﬁle deﬁnition.
       STATIC_BUILD                                      Is static build desired (YES or NO) (default is NO). On win32 if STATIC_BUILD=YES then set SHARED_LIBRARIES=NO)
       \
       Header ﬁles to be installed
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       INC                                               list of include ﬁles to install into $(INSTALL_DIR)/include
       INC_<osclass>                                     os speciﬁc includes to installed under $(INSTALL_DIR)/include/os/<osclass>
       INC_DEFAULT                                       include ﬁles to install where no INC_<osclass> is speciﬁed
       Perl, csh, tcl etc. script installation
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       SCRIPTS                                           scripts to install for all systems
       SCRIPTS_<osclass>                                 os-speciﬁc scripts to install
       SCRIPTS_DEFAULT                                   scripts to install for systems with no SCRIPTS_<osclass> speciﬁed
@@ -3070,7 +3086,7 @@ Makeﬁle deﬁnition.
       TCLLIBNAME                                        list of tcl scripts to install into $(INSTALL_DIR)/lib/<osclass> (Unix hosts only)
       TCLINDEX                                          name of tcl index ﬁle to create from TCLLIBNAME scripts
       Object ﬁles                                       The names in the following OBJS deﬁnitions should NOT include a suﬃx (.o or.obj).
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       OBJS                                              object ﬁles to build and install for all system.
       OBJS_<osclass>                                    os-speciﬁc object ﬁles to build and install.
       OBJS_DEFAULT                                      object ﬁles to build and install for systems with no OBJS_<osclass> speciﬁed.
@@ -3082,26 +3098,26 @@ Makeﬁle deﬁnition.
       OBJS_HOST_<osclass>                               os class speciﬁc object ﬁles to build and install for host type archs
       OBJS_HOST_DEFAULT                                 object ﬁles to build and install for host type arch systems with no OBJS_HOST_<osclass> speciﬁed
       Documentation
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       DOCS                                              text ﬁles to be installed into the $(INSTALL_DIR)/doc directory
       HTMLS_DIR                                         name install Hypertext directory name i.e. $(INSTALL_DIR)/html/$(HTMLS_DIR)
       HTMLS                                             hypertext ﬁles to be installed into the $(INSTALL_DIR)/html/$(HTMLS_DIR) directory
       TEMPLATES_DIR                                     template directory to be created as $(INSTALL_DIR)/templates/$(TEMPLATE_DIR)
       TEMPLATES                                         template ﬁles to be installed into $(TEMPLATE_DIR)
       Database Deﬁnition ﬁles
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       DBD                                               database deﬁnition ﬁles to be installed or created and installed into $(INSTALL_DBD).
       DBDINC                                            names, without suﬃx, of menus or record database deﬁnitions and headers to be installed or created and installed.
       USR_DBDFLAGS                                      optional ﬂags for dbExpand. Currently only include path (-I <path>) and macro substitution (-S <substitution>) are supported.
       DBD_INSTALLS                                      ﬁles from speciﬁed directory to install into $(INSTALL_DBD) (e.g. DBD_INSTALLS = $(APPNAME)/dbd/test.dbd
       Database Files
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       DB                                                database ﬁles to be installed or created and installed into $(INSTALL_DB).
       DB_INSTALLS                                       ﬁles from speciﬁed directory to install into $(INSTALL_DB) (e.g. DB_INSTALLS = $(APPNAME)/db/test.db
       \
       USR_DBFLAGS                                       optional ﬂags for msi (EPICS Macro Substitution Tool)
       Options for other programs
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       YACCOPT                                           yacc options
       LEXOPT                                            lex options
       SNCFLAGS                                          state notation language, snc, options
@@ -3111,7 +3127,7 @@ Makeﬁle deﬁnition.
       RANLIBFLAGS                                       ranlib options
       USR_ARFLAGS                                       ar options
       Facilities for building Java programs
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       JAVA                                              names of Java source ﬁles to be built and installed
       TESTJAVA                                          names of Java source ﬁles to be built
       JAVAINC                                           names of C header ﬁle to be created in O.Common subdirectory
@@ -3122,7 +3138,7 @@ Makeﬁle deﬁnition.
       USR_JAVAHFLAGS                                    javah tool options
       Facilities for Windows 95/NT resource ( .rc) ﬁles
       \
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       RCS                                               resource ﬁles (<name>.rc) needed to build every PROD and LIBRARY
       RCS_<osclass>                                     resource ﬁles (<name>.rc) needed to build every PROD and LIBRARY for ioc type archs
       RCS_DEFAULT                                       resource ﬁles needed to build every PROD and LIBRARY for ioc type arch systems with no RCS_<osclass> speciﬁed
@@ -3130,13 +3146,13 @@ Makeﬁle deﬁnition.
       <name>_RCS_<osclass>                              os speciﬁc resource ﬁles to build a speciﬁc PROD or LIBRARY
       <name>_RCS_DEFAULT                                resource ﬁles needed to build a speciﬁc PROD or LIBRARY for ioc type arch systems with no RCS_<osclass> speciﬁed
       Assemblies
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       ASSEMBLIES                                        names of ﬁles to be assembled from snippets
       COMMON_ASSEMBLIES                                 names of arch-independent ﬁles to be assembled from snippets
       <name>_SNIPPETS                                   snippet ﬁles needed to build a speciﬁc assembly
       <name>_PATTERN                                    patterns for snippet ﬁles (searched from all source directories) needed to build a speciﬁc assembly
       Other deﬁnitions:
-      --------------                                    --------------
+      ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       USR_VPATH                                         list of directories
       BIN_INSTALLS                                      ﬁles from speciﬁed directories to be installed into $(INSTALL_BIN) (e.g. BIN_INSTALLS = $(EPICS_BASE_BIN)/aiRecord$(OBJ))
       BIN_INSTALLS_<osclass>                            os class speciﬁc ﬁles from speciﬁed directories to be installed into $(INSTALL_BIN)
@@ -3150,10 +3166,6 @@ Makeﬁle deﬁnition.
       GENVERSION                                        If set, the name of a generated header ﬁle with the module version string.
       GENVERSIONMACRO                                   The CPP macro name written into the generated version header (default MODULEVERSION).
       GENVERSIONDEFAULT                                 The default version string written into the generated header if no VCS system is in use. Leave unset to use build time.
-      \
-      \
-      \
-      \
       \
       ================================================= ========================================================================================================================================================================================
 
@@ -3536,5 +3548,3 @@ cygwin.bat
 win32.bat
    WIN32 bat ﬁle to set path and environment variables for building with
    MS Visual C++ compilers
-
-.. container:: crosslinks
