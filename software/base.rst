@@ -8,6 +8,7 @@ that comprise EPICS Base.
    :maxdepth: 1
    :caption: Base and IOC Libraries
 
+   How to work with the EPICS Repository <HowToWorkWithTheEpicsRepository>
    Application Developer's Guide (3.16.2) <https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide.pdf>
    EPICS Base API Documentation <>
 
