@@ -333,7 +333,7 @@ Record Type Description
 
 Each ﬁeld of each record type has an associated access security level of
 ASL0 or ASL1 (default value).
-Fields which operators normally change are assigned ASL0, other fields are assigned ASL1. 
+Fields which operators normally change are assigned ASL0, other fields are assigned ASL1.
 For example, the VAL field of an analog output record is assigned ASL0 and all other fields ASL1.
 This is because only the VAL field should be modified during normal operations.
 
@@ -490,11 +490,19 @@ The same policy will be applied regardless of how a record is accessed (individu
 
 Policy application differs from CA (RSRV) in several ways:
 
-Client hostname is always the numeric IP address. HAG() entries must either contained numeric IP addresses, or **asCheckClientIP=1** flag must be set to translate hostnames into IPs on ACF file load (effects CA server as well). This prevents clients from trivially forging "hostname". In additional to client usernames, UAG definitions may contained items beginning with "role/" which are matched against the list of groups of which the client username is a member. Username to group lookup is done internally to QSRV, and depends on IOC host authentication configuration. Note that this is still based on the client provided username string.
+Client hostname is always the numeric IP address. HAG() entries must either contain
+numeric IP addresses, or **asCheckClientIP=1** flag must be set to translate hostnames
+into IPs on ACF file load (effects CA server as well). This prevents clients from trivially
+forging "hostname". In additional to client usernames, UAG definitions may contained items
+beginning with "role/" which are matched against the list of groups of which the client
+username is a member. Username to group lookup is done internally to QSRV, and depends on
+IOC host authentication configuration. Note that this is still based on the client provided username string.
 ::
 
   UAG(special) {
      someone, "role/op"
   }
 
-The "special" UAG will match CA or PVA clients with the username "someone". It will also match a PVA client if the client provided username is a member of the "op" group (supported on POSIX targets and Windows).
+The "special" UAG will match CA or PVA clients with the username "someone". It will
+also match a PVA client if the client provided username is a member of the "op"
+group (supported on POSIX targets and Windows).

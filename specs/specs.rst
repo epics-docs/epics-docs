@@ -12,4 +12,4 @@ Specifications for the different software modules and conventions related to EPI
    Normative Types Specification <https://github.com/epics-base/normativeTypesCPP/wiki/Normative+Types+Specification>
    AccessSecurity
    IOC Initialization <IOCInit>
-   Build Facillity <EPICSBuildFacility>
+   Build Facility <EPICSBuildFacility>
