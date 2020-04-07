@@ -44,6 +44,8 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 intersphinx_mapping = {
     'how-tos': ('https://docs.epics-controls.org/projects/how-tos/en/latest', None),
 }
+# Latex engine to handle better UTF
+latex_engine = 'xelatex'
 
 
 # -- Options for HTML output -------------------------------------------------
