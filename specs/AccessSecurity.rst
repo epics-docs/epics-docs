@@ -18,11 +18,11 @@ Where
    client exists. Thus no attempt is made to see if a
    user is local or is remotely logged on to the host.
 What
-   Individual ﬁelds of records are protected. Each record has a ﬁeld
+   Individual fields of records are protected. Each record has a field
    containing the Access Security Group (ASG) to which the record
-   belongs. Each ﬁeld has an access security level, either ASL0 or ASL1.
-   The security level is deﬁned in the record deﬁnition ﬁle (.dbd). Thus the
-   access security level for a ﬁeld is the same for all record instances
+   belongs. Each field has an access security level, either ASL0 or ASL1.
+   The security level is defined in the record definition file (.dbd). Thus the
+   access security level for a field is the same for all record instances
    of a record type.
 When
    Access rules can contain input links and calculations similar to the
@@ -40,7 +40,7 @@ No attempt has been made to protect against the sophisticated saboteur.
 Network and physical security methods must be used to limit access to
 the subnet on which the IOCs reside.
 
-Deﬁnitions
+Definitions
 ^^^^^^^^^^
 
 This document uses the following terms:
@@ -57,15 +57,15 @@ HAG
 Quick Start
 -----------
 
-In order to “turn on” access security for a particular IOC the following
+In order to "turn on" access security for a particular IOC the following
 must be done:
 
--  Create the access security ﬁle.
--  IOC databases may have to be modiﬁed
+-  Create the access security file.
+-  IOC databases may have to be modified
 
-   -  Record instances may have to have values assigned to ﬁeld ASG. If
+   -  Record instances may have to have values assigned to field ASG. If
       ASG is null the record is in group DEFAULT.
-   -  Access security ﬁles can be reloaded after iocInit via a
+   -  Access security files can be reloaded after iocInit via a
       subroutine record with asSubInit and asSubProcess as the
       associated subroutines. Writing the value 1 to this record will
       cause a reload.
@@ -82,11 +82,11 @@ The following rules decide if access security is turned on for an IOC:
 
 -  If asSetFilename is not executed before iocInit, access security will
    never be started.
--  If asSetFile is given and any error occurs while ﬁrst initializing
+-  If asSetFile is given and any error occurs while first initializing
    access security, then all access to that ioc is denied.
 -  If after successfully starting access security, an attempt is made to
    restart and an error occurs then the previous access security
-   conﬁguration is maintained.
+   configuration is maintained.
 
 After an IOC has been booted with access security enabled, the access
 security rules can be changed by issuing the asSetFilename,
@@ -94,13 +94,13 @@ asSetSubstitutions, and asInit. The functions asInitialize, asInitFile,
 and asInitFP, which are described below, can also be used.
 
 
-Access Security Conﬁguration File
+Access Security Configuration File
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This section describes the format of a ﬁle containing deﬁnitions of the
+This section describes the format of a file containing definitions of the
 user access groups, host access groups, and access security groups. An
-IOC creates an access conﬁguration database by reading an access
-conﬁguration ﬁle (the extension .acf is recommended). Lets ﬁrst give a
+IOC creates an access configuration database by reading an access
+configuration file (the extension .acf is recommended). Lets first give a
 simple example and then a complete description of the syntax.
 
 Simple Example
@@ -108,51 +108,51 @@ Simple Example
 
 ::
 
-      UAG(uag) {user1,user2}
-      HAG(hag) {host1,host2}
-      ASG(DEFAULT) {
-          RULE(1,READ)
-          RULE(1,WRITE) {
-              UAG(uag)
-              HAG(hag)
-          }
+      UAG(uag) {user1,user2}
+      HAG(hag) {host1,host2}
+      ASG(DEFAULT) {
+              RULE(1,READ)
+              RULE(1,WRITE) {
+                      UAG(uag)
+                      HAG(hag)
+             }
       }
 
 These rules provide read access to anyone located anywhere and write
 access to user1 and user2 if they are located at host1 or host2.
 
-Syntax Deﬁnition
+Syntax Definition
 ''''''''''''''''
 
 In the following description:
 
-   [ ] surrounds optional elements
+   [ ] surrounds optional elements
 
    \| separates alternatives
 
-   ... means that an arbitrary number of deﬁnitions may be given.
+   ... means that an arbitrary number of definitions may be given.
 
    # introduces a comment line
 
 The elements <name>, <user>, <host>, <pvname> and <calculation> can be
 given as quoted or unquoted strings. The rules for unquoted strings are
-the same as for database deﬁnitions.
+the same as for database definitions.
 
 ::
 
-      UAG(<name>) [{ <user> [, <user> ...] }]
+      UAG(<name>) [{ <user> [, <user> ...] }]
       ...
-      HAG(<name>) [{ <host> [, <host> ...] }]
+      HAG(<name>) [{ <host> [, <host> ...] }]
       ...
-      ASG(<name>) [{
-          [INP<index>(<pvname>)
-          ...]
-          RULE(<level>,NONE | READ | WRITE [, NOTRAPWRITE | TRAPWRITE]) {
-              [UAG(<name> [,<name> ...])]
-              [HAG(<name> [,<name> ...])]
-              CALC(<calculation>)
-          }
-          ...
+      ASG(<name>) [{
+          [INP<index>(<pvname>)
+          ...]
+          RULE(<level>,NONE | READ | WRITE [, NOTRAPWRITE | TRAPWRITE]) {
+              [UAG(<name> [,<name> ...])]
+              [HAG(<name> [,<name> ...])]
+              CALC(<calculation>)
+          }
+          ...
       }]
       ...
 
@@ -163,7 +163,7 @@ Discussion
    empty. A user name may appear in more than one UAG. To match, a user
    name must be identical to the user name read by the CA client library
    running on the client machine. For vxWorks clients, the user name is
-   usually taken from the user ﬁeld of the boot parameters.
+   usually taken from the user field of the boot parameters.
 -  HAG: Host Access Group. This is a list of host names. It may be
    empty. The same host name can appear in multiple HAGs. To match, a
    host name must match the host name read by the CA client library
@@ -171,34 +171,34 @@ Discussion
    before comparison however. For vxWorks clients, the host name is
    usually taken from the target name of the boot parameters.
 -  ASG: An access security group. The group DEFAULT is a special case.
-   If a member speciﬁes a null group or a group which has no ASG
-   deﬁnition then the member is assigned to the group DEFAULT.
+   If a member specifies a null group or a group which has no ASG
+   definition then the member is assigned to the group DEFAULT.
 -  INP<index>Index must have one of the values A to L. These are just
-   like the INP ﬁelds of a calculation record. It is necessary to deﬁne
-   INP ﬁelds if a CALC ﬁeld is deﬁned in any RULE for the ASG.
--  RULE This deﬁnes access permissions. <level> must be 0 or 1.
-   Permission for a level 1 ﬁeld implies permission for level 0 ﬁelds.
+   like the INP fields of a calculation record. It is necessary to define
+   INP fields if a CALC field is defined in any RULE for the ASG.
+-  RULE This defines access permissions. <level> must be 0 or 1.
+   Permission for a level 1 field implies permission for level 0 fields.
    The permissions are NONE, READ, and WRITE. WRITE permission implies
-   READ permission. The standard EPICS record types have all ﬁelds set
+   READ permission. The standard EPICS record types have all fields set
    to level 1 except for VAL, CMD (command), and RES (reset). An
-   optional argument speciﬁes if writes should be trapped. See the
+   optional argument specifies if writes should be trapped. See the
    section below on trapping Channel Access writes for how this is used.
    If not given the default is NOTRAPWRITE.
 
-   -  UAG speciﬁes a list of user access groups that can have the access
-      privilege. If UAG is not deﬁned then all users are allowed.
-   -  HAG speciﬁes a list of host access groups that have the access
-      privilege. If HAG is not deﬁned then all hosts are allowed.
-   -  CALC is just like the CALC ﬁeld of a calculation record except
+   -  UAG specifies a list of user access groups that can have the access
+      privilege. If UAG is not defined then all users are allowed.
+   -  HAG specifies a list of host access groups that have the access
+      privilege. If HAG is not defined then all hosts are allowed.
+   -  CALC is just like the CALC field of a calculation record except
       that the result must evaluate to TRUE or FALSE. The rule only
       applies if the calculation result is TRUE, where the actual test
-      for TRUE is (0.99 < result < 1.01). Anything else is regarded as
+      for TRUE is (0.99 < result < 1.01). Anything else is regarded as
       FALSE and will cause the rule to be ignored. Assignment statements
       are not permitted in CALC expressions here.
 
-Each IOC record contains a ﬁeld ASG, which speciﬁes the name of the ASG
-to which the record belongs. If this ﬁeld is null or speciﬁes a group
-which is not deﬁned in the access security ﬁle then the record is placed
+Each IOC record contains a field ASG, which specifies the name of the ASG
+to which the record belongs. If this field is null or specifies a group
+which is not defined in the access security file then the record is placed
 in group DEFAULT.
 
 The access privilege for a channel access client is determined as
@@ -207,35 +207,35 @@ follows:
 #. The ASG associated with the record is searched.
 #. Each RULE is checked for the following:
 
-   #. The ﬁeld’s level must be less than or equal to the level for this
+   #. The field's level must be less than or equal to the level for this
       RULE.
-   #. If UAG is deﬁned, the user must belong to one of the speciﬁed
-      UAGs. If UAG is not deﬁned all users are accepted.
-   #. If HAG is deﬁned, the user’s host must belong to one one of the
-      HAGs. If HAG is not deﬁned all hosts are accepted.
-   #. If CALC is speciﬁed, the calculation must yield the value 1, i.e.
-      TRUE. If any of the INP ﬁelds associated with this calculation are
+   #. If UAG is defined, the user must belong to one of the specified
+      UAGs. If UAG is not defined all users are accepted.
+   #. If HAG is defined, the user's host must belong to one one of the
+      HAGs. If HAG is not defined all hosts are accepted.
+   #. If CALC is specified, the calculation must yield the value 1, i.e.
+      TRUE. If any of the INP fields associated with this calculation are
       in INVALID alarm severity the calculation is considered false. The
       actual test for TRUE is .99 <result <1.01.
 
 #. The maximum access allowed by step 2 is the access chosen.
 
-Multiple RULEs can be deﬁned for a given ASG, even RULEs with identical
+Multiple RULEs can be defined for a given ASG, even RULEs with identical
 levels and access permissions. The TRAPWRITE setting used for a client
-is determined by the ﬁrst WRITE rule that passes the rule checks.
+is determined by the first WRITE rule that passes the rule checks.
 
-ascheck - Check Syntax of Access Conﬁguration File
+ascheck - Check Syntax of Access Configuration File
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After creating or modifying an access conﬁguration ﬁle it can be checked
+After creating or modifying an access configuration file it can be checked
 for syntax errors by issuing the command:
 ::
 
-   ascheck -S "xxx=yyy,..." < "filename"
+   ascheck -S "xxx=yyy,..." < "filename"
 
 This is a Unix command. It displays errors on stdout. If no errors are
 detected it prints nothing. Only syntax errors not logic errors are
-detected. Thus it is still possible to get your self in trouble. The ﬂag
+detected. Thus it is still possible to get your self in trouble. The flag
 -S means a set of macro substitutions may appear. This is just like the
 macro substitutions for dbLoadDatabase.
 
@@ -243,7 +243,7 @@ IOC Access Security Initialization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In order to have access security turned on during IOC initialization the
-following command must appear in the startup ﬁle before iocInit is
+following command must appear in the startup file before iocInit is
 called:
 ::
 
@@ -252,17 +252,17 @@ called:
 If this command is not used then access security will not be started by
 iocInit. If an error occurs when iocInit calls asInit than all access to
 the ioc is disabled, i.e. no channel access client will be able to
-access the ioc. Note that this command does not read the ﬁle itself, it
+access the ioc. Note that this command does not read the file itself, it
 just saves the argument string for use later on, nor does it save the
 current working directory, which is why the use of an absolute path-name
-for the ﬁle is recommended (a path name could be speciﬁed relative to
+for the file is recommended (a path name could be specified relative to
 the current directory at the time when iocInit is run, but this is not
 recommended if the IOC also loads the subroutine record support as a
-later reload of the ﬁle might happen after the current directory had
+later reload of the file might happen after the current directory had
 been changed).
 
 Access security also supports macro substitution just like
-dbLoadDatabase. The following command speciﬁes the desired
+dbLoadDatabase. The following command specifies the desired
 substitutions:
 ::
 
@@ -280,22 +280,22 @@ vxWorks shell:
 
 It is also possible to reissue asSetFilename and/or asSetSubstitutions
 before asInit. If any error occurs during asInit the old access security
-conﬁguration is maintained. It is NOT permissible to call asInit before
+configuration is maintained. It is NOT permissible to call asInit before
 iocInit is called.
 
 Restarting access security after ioc initialization is an expensive
 operation and should not be used as a regular procedure.
 
-Database Conﬁguration
+Database Configuration
 ---------------------
 
 Access Security Group
 '''''''''''''''''''''
 
-Each database record has a ﬁeld ASG which holds a character string. Any
-database conﬁguration tool can be used to give a value to this ﬁeld. If
-the ASG of a record is not deﬁned or is not equal to a ASG in the
-conﬁguration ﬁle then the record is placed in DEFAULT.
+Each database record has a field ASG which holds a character string. Any
+database configuration tool can be used to give a value to this field. If
+the ASG of a record is not defined or is not equal to a ASG in the
+configuration file then the record is placed in DEFAULT.
 
 Subroutine Record Support
 '''''''''''''''''''''''''
@@ -308,15 +308,15 @@ available (provided with iocCore):
       asSubProcess
 
 NOTE: These subroutines are automatically registered thus do NOT put a
-registrar deﬁnition in your database deﬁnition ﬁle.
+registrar definition in your database definition file.
 
 If a record is created that attaches to these routines, it can be used
-to force the IOC to load a new access conﬁguration database. To change
-the access conﬁguration:
+to force the IOC to load a new access configuration database. To change
+the access configuration:
 
-#. Modify the ﬁle speciﬁed by the last call to asSetFilename so that it
-   contains the new conﬁguration desired.
-#. Write a 1 to the subroutine record VAL ﬁeld. Note that this can be
+#. Modify the file specified by the last call to asSetFilename so that it
+   contains the new configuration desired.
+#. Write a 1 to the subroutine record VAL field. Note that this can be
    done via channel access.
 
 The following action is taken:
@@ -324,14 +324,14 @@ The following action is taken:
 #. When the value is found to be 1, asInit is called and the value set
    back to 0.
 #. The record is treated as an asynchronous record. Completion occurs
-   when the new access conﬁguration has been initialized or a time-out
+   when the new access configuration has been initialized or a time-out
    occurs. If initialization fails the record is placed into alarm with
    a severity determined by BRSV.
 
 Record Type Description
 '''''''''''''''''''''''
 
-Each ﬁeld of each record type has an associated access security level of
+Each field of each record type has an associated access security level of
 ASL0 or ASL1 (default value).
 Fields which operators normally change are assigned ASL0, other fields are assigned ASL1.
 For example, the VAL field of an analog output record is assigned ASL0 and all other fields ASL1.
@@ -342,83 +342,83 @@ Example:
 
 Lets design a set of rules for a Linac. Assume the following:
 
-#. Anyone can have read access to all ﬁelds at anytime.
+#. Anyone can have read access to all fields at anytime.
 #. Linac engineers, located in the injection control or control room,
-   can have write access to most level 0 ﬁelds only if the Linac is not
+   can have write access to most level 0 fields only if the Linac is not
    in operational mode.
 #. Operators, located in the injection control or control room, can have
-   write access to most level 0 ﬁelds anytime.
+   write access to most level 0 fields anytime.
 #. The operations supervisor, linac supervisor, and the application
-   developers can have write access to all ﬁelds but must have some way
+   developers can have write access to all fields but must have some way
    of not changing something inadvertently.
 #. Most records use the above rules but a few (high voltage power
    supplies, etc.) are placed under tighter control. These will follow
    rules 1 and 4 but not 2 or 3.
 #. IOC channel access clients always have level 1 write privilege.
 
-Most Linac IOC records will not have the ASG ﬁeld deﬁned and will thus
-be placed in ASG DEFAULT. The following records will have an ASG deﬁned:
+Most Linac IOC records will not have the ASG field defined and will thus
+be placed in ASG DEFAULT. The following records will have an ASG defined:
 
 -  LI:OPSTATE and any other records that need tighter control have
-   ASG="critical”. One such record could be a subroutine record used to
-   cause a new access conﬁguration ﬁle to be loaded. LI:OPSTATE has the
+   ASG="critical". One such record could be a subroutine record used to
+   cause a new access configuration file to be loaded. LI:OPSTATE has the
    value (0,1) if the Linac is (not operational, operational).
 -  LI:lev1permit has ASG="permit". In order for the opSup, linacSup, or
    an appDev to have write privilege to everything this record must be
    set to the value 1.
 
-The following access conﬁguration satisﬁes the above rules.
+The following access configuration satisfies the above rules.
 ::
 
-      UAG(op) {op1,op2,superguy}
-      UAG(opSup) {superguy}
-      UAG(linac) {waw,nassiri,grelick,berg,fuja,gsm}
-      UAG(linacSup) {gsm}
-      UAG(appDev) {nda,kko}
-      HAG(icr) {silver,phebos,gaea}
-      HAG(cr) {mars,hera,gold}
-      HAG(ioc) {ioclic1,ioclic2,ioclid1,ioclid2,ioclid3,ioclid4,ioclid5}
-      ASG(DEFAULT) {
-          INPA(LI:OPSTATE)
-          INPB(LI:lev1permit)
-          RULE(0,WRITE) {
-              UAG(op)
-              HAG(icr,cr)
-              CALC("A=1")
-          }
-          RULE(0,WRITE) {
-              UAG(op,linac,appdev)
-              HAG(icr,cr)
-              CALC("A=0")
-          }
-          RULE(1,WRITE) {
-              UAG(opSup,linacSup,appdev)
-              CALC("B=1")
-          }
-          RULE(1,READ)
-          RULE(1,WRITE) {
-              HAG(ioc)
-          }
+      UAG(op) {op1,op2,superguy}
+      UAG(opSup) {superguy}
+      UAG(linac) {waw,nassiri,grelick,berg,fuja,gsm}
+      UAG(linacSup) {gsm}
+      UAG(appDev) {nda,kko}
+      HAG(icr) {silver,phebos,gaea}
+      HAG(cr) {mars,hera,gold}
+      HAG(ioc) {ioclic1,ioclic2,ioclid1,ioclid2,ioclid3,ioclid4,ioclid5}
+      ASG(DEFAULT) {
+          INPA(LI:OPSTATE)
+          INPB(LI:lev1permit)
+          RULE(0,WRITE) {
+              UAG(op)
+              HAG(icr,cr)
+              CALC("A=1")
+          }
+          RULE(0,WRITE) {
+              UAG(op,linac,appdev)
+              HAG(icr,cr)
+              CALC("A=0")
+          }
+          RULE(1,WRITE) {
+              UAG(opSup,linacSup,appdev)
+              CALC("B=1")
+          }
+          RULE(1,READ)
+          RULE(1,WRITE) {
+              HAG(ioc)
+          }
       }
-      ASG(permit) {
-          RULE(0,WRITE) {
-              UAG(opSup,linacSup,appDev)
-          }
-          RULE(1,READ)
-          RULE(1,WRITE) {
-              HAG(ioc)
-          }
+      ASG(permit) {
+          RULE(0,WRITE) {
+              UAG(opSup,linacSup,appDev)
+          }
+          RULE(1,READ)
+          RULE(1,WRITE) {
+              HAG(ioc)
+          }
       }
-      ASG(critical) {
-          INPB(LI:lev1permit)
-          RULE(1,WRITE) {
-              UAG(opSup,linacSup,appdev)
-              CALC("B=1")
-          }
-          RULE(1,READ)
-          RULE(1,WRITE) {
-              HAG(ioc)
-          }
+      ASG(critical) {
+          INPB(LI:lev1permit)
+          RULE(1,WRITE) {
+              UAG(opSup,linacSup,appdev)
+              CALC("B=1")
+          }
+          RULE(1,READ)
+          RULE(1,WRITE) {
+              HAG(ioc)
+          }
       }
 
 
@@ -427,12 +427,12 @@ Summary of Functional Requirements
 
 A brief summary of the Functional Requirements is:
 
-#. Each ﬁeld of each record type is assigned an access security level.
+#. Each field of each record type is assigned an access security level.
 #. Each record instance is assigned to a unique access security group.
 #. Each user is assigned to one or more user access groups.
 #. Each node is assigned to a host access group.
-#. For each access security group a set of access rules can be deﬁned.
-   Each rule speciﬁes:
+#. For each access security group a set of access rules can be defined.
+   Each rule specifies:
 
    #. Access security level
    #. READ or READ/WRITE access.
@@ -473,7 +473,7 @@ control.
 Defaults
 ''''''''
 
-It must be possible to easily deﬁne default access rules.
+It must be possible to easily define default access rules.
 
 Access Security is Optional
 '''''''''''''''''''''''''''
