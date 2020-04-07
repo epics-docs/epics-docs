@@ -11,8 +11,8 @@ Overview
 ~~~~~~~~
 
 This chapter describes the EPICS build facility including directory
-structure, environment and system requirements, conﬁguration ﬁles,
-Makeﬁles, and related build tools.
+structure, environment and system requirements, configuration files,
+Makefiles, and related build tools.
 
 \<top\>Directory structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -20,25 +20,25 @@ Makeﬁles, and related build tools.
 EPICS software can be divided into multiple <top> areas. Examples of
 <top> areas are EPICS base itself, EPICS extensions, and simple or
 complicated IOC applications. Each <top> may be maintained separately.
-Diﬀerent <top> areas can be on diﬀerent releases of external software
+Different <top> areas can be on different releases of external software
 such as EPICS base releases.
 
 A <top> directory has the following directory structure:
 
 .. code ::
 
-                <top>/
-                    Makefile
-                    configure/
-                    dir1/
-                    dir2/
-                    ...
+                <top>/
+                    Makefile
+                    configure/
+                    dir1/
+                    dir2/
+                    ...
 
-where configure is a directory containing build conﬁguration ﬁles and a
+where configure is a directory containing build configuration files and a
 Makefile, where dir1, dir2, ... are user created subdirectory trees with
-Makefiles and source ﬁles to be built. Because the build rules allow
-make commands like “make install.vxWorks-68040”, subdirectory names
-within a <top> directory structure may not contain a period ”.”
+Makefiles and source files to be built. Because the build rules allow
+make commands like "make install.vxWorks-68040", subdirectory names
+within a <top> directory structure may not contain a period "."
 character.
 
 Install Directories
@@ -48,33 +48,33 @@ Files installed during the build are installed into subdirectories of
 an installation directory which defaults to $(TOP), the <top>
 directory. For base, extensions, and IOC applications, the default
 value can be changed in the
-configure/CONFIG_SITE ﬁle. The installation directory for the EPICS
-components is controlled by the deﬁnition of INSTALL_LOCATION
+configure/CONFIG_SITE file. The installation directory for the EPICS
+components is controlled by the definition of INSTALL_LOCATION
 
 The following subdirectories may exist in the installation directory.
 They are created by the build and contain the installed build
 components.
 
--  dbd – Directory into which Database Deﬁnition ﬁles are installed.
--  include – The directory into which C header ﬁles are installed. These
-   header ﬁles may be generated from menu and record type deﬁnitions.
--  bin – This directory contains a subdirectory for each host
+-  dbd - Directory into which Database Definition files are installed.
+-  include - The directory into which C header files are installed. These
+   header files may be generated from menu and record type definitions.
+-  bin - This directory contains a subdirectory for each host
    architecture and for each target architecture. These are the
    directories into which executables, binaries, etc. are installed.
--  lib – This directory contains a subdirectory for each host
+-  lib - This directory contains a subdirectory for each host
    architecture. These are the directories into which libraries are
    installed.
--  db – This is the directory into which database record instance,
-   template, and substitution ﬁles are installed.
--  html – This is the directory into which html documentation is
+-  db - This is the directory into which database record instance,
+   template, and substitution files are installed.
+-  html - This is the directory into which html documentation is
    installed.
--  templates – This is the directory into which template ﬁles are
+-  templates - This is the directory into which template files are
    installed.
--  javalib – This is the directory into which java class ﬁles and jar
-   ﬁles are installed.
--  configure – The directory into which conﬁgure ﬁles are installed (if
+-  javalib - This is the directory into which java class files and jar
+   files are installed.
+-  configure - The directory into which configure files are installed (if
    INSTALL_LOCATION does not equal TOP).
--  cfg – The directory into which user created conﬁgure ﬁles are
+-  cfg - The directory into which user created configure files are
    installed
 
 Elements of build system
@@ -82,16 +82,16 @@ Elements of build system
 
 The main ingredients of the build system are:
 
--  A set of conﬁguration ﬁles and tools provided in the EPICS
+-  A set of configuration files and tools provided in the EPICS
    base/configure directory
--  A corresponding set of conﬁguration ﬁles in the <top>/configure
+-  A corresponding set of configuration files in the <top>/configure
    directory of a non-base <top> directory structure to be built. The
-   makeBaseApp.pl and makeBaseExt.pl scripts create these conﬁguration
-   ﬁles. Many of these ﬁles just include a ﬁle of the same name from the
+   makeBaseApp.pl and makeBaseExt.pl scripts create these configuration
+   files. Many of these files just include a file of the same name from the
    base/configure directory.
--  Makeﬁles in each directory of the <top> directory structure to be
+-  Makefiles in each directory of the <top> directory structure to be
    built
--  User created conﬁguration ﬁles in build created
+-  User created configuration files in build created
    $(INSTALL_LOCATION)/cfg directories.
 
 Features
@@ -101,9 +101,9 @@ The principal features of the build system are:
 
 -  Requires a single Makefile in each directory of a <top> directory
    structure
--  Supports both host os vendor’s native compiler and GNU compiler
+-  Supports both host os vendor�s native compiler and GNU compiler
 -  Supports building multiple types of software (libraries, executables,
-   databases, java class ﬁles, etc.) stored in a single directory tree.
+   databases, java class files, etc.) stored in a single directory tree.
 -  Supports building EPICS base, extensions, and IOC applications.
 -  Supports multiple host and target operating system + architecture
    combinations.
@@ -118,24 +118,24 @@ Multiple host and target systems
 
 You can build on multiple host systems and for multiple cross target
 systems using a single EPICS directory structure. The intermediate and
-binary ﬁles generated by the build will be created in separate O.\*
+binary files generated by the build will be created in separate O.\*
 subdirectories and installed into the appropriate separate host or
 target install directories. EPICS executables and scripts are installed
 into the $(INSTALL_LOCATION)/bin/<arch> directories. Libraries are
-installed into $(INSTALL_LOCATION)/lib/<arch>. The default deﬁnition for
+installed into $(INSTALL_LOCATION)/lib/<arch>. The default definition for
 $(INSTALL_LOCATION) is $(TOP) which is the root directory in the
-directory structure. Architecture dependant created ﬁles (e.g. object
-ﬁles) are stored in O.<arch> source subdirectories, and architecture
-independent created ﬁles are stored in O.Common source subdirectories.
+directory structure. Architecture dependant created files (e.g. object
+files) are stored in O.<arch> source subdirectories, and architecture
+independent created files are stored in O.Common source subdirectories.
 This allows objects for multiple cross target architectures to be
 maintained at the same time.
 
-To build EPICS base for a speciﬁc host/target combination you must have
-the proper host/target c/c++ cross compiler and target header ﬁles,
+To build EPICS base for a specific host/target combination you must have
+the proper host/target c/c++ cross compiler and target header files,
 CROSS_COMPILER_HOST_ARCHS must empty or include the host architecture in
 its list value, the CROSS_COMPILER_TARGET_ARCHS variable must include
-the target to be cross-compiled, and the base/conﬁgure/ os directory
-must have the appropriate conﬁgure ﬁles.
+the target to be cross-compiled, and the base/configure/ os directory
+must have the appropriate configure files.
 
 Build Requirements
 ~~~~~~~~~~~~~~~~~~
@@ -144,12 +144,12 @@ Host Environment Variable
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Only one environment variable, EPICS_HOST_ARCH, is required to build
-EPICS <top> areas. This variable should be set to be your workstation’s
-operating system - architecture combination to use the os vendor’s c/c++
+EPICS <top> areas. This variable should be set to be your workstation�s
+operating system - architecture combination to use the os vendor�s c/c++
 compiler for native builds or set to the operating system - architecture
 - alternate compiler combination to use an alternate compiler for native
 builds if an alternate compiler is supported on your system. The
-ﬁlenames of the CONFIG.⋆.Common ﬁles in base/ conﬁgure/os show the
+filenames of the CONFIG.*.Common files in base/ configure/os show the
 currently supported EPICS_HOST_ARCH values. Examples are solaris-sparc,
 solaris-sparc-gnu, linux-x86, win32-x86, and cygwin-x86.
 
@@ -161,7 +161,7 @@ following software installed:
 
 -  Perl version 5.8 or greater
 -  GNU make, version 3.81 or greater
--  C++ compiler (host operating system vendor’s compiler or GNU
+-  C++ compiler (host operating system vendor�s compiler or GNU
    compiler)
 
 If you will be building EPICS components for vxWorks targets you will
@@ -180,12 +180,12 @@ Path requirements
 ^^^^^^^^^^^^^^^^^
 
 You must have the perl executable in your path and you may need C and
-C++ compilers in your search path. Check deﬁnitions of CC and CCC in
-base/configure/os/CONFIG.<host>.<host> or the deﬁnitions for GCC and G++
-if ANSI=GCC and CPLUSPLUS=GCC are speciﬁed in CONFIG_SITE. For building
+C++ compilers in your search path. Check definitions of CC and CCC in
+base/configure/os/CONFIG.<host>.<host> or the definitions for GCC and G++
+if ANSI=GCC and CPLUSPLUS=GCC are specified in CONFIG_SITE. For building
 base you also must have echo in your search path. You can override the
-default settings by deﬁning PERL, CC and CCC, GCC and G++, GNU_DIR ...
-in the appropriate ﬁle (usually
+default settings by defining PERL, CC and CCC, GCC and G++, GNU_DIR ...
+in the appropriate file (usually
 configure/os/CONFIG_SITE.$EPICS_HOST_ARCH.Common)
 
 Unix path
@@ -210,239 +210,239 @@ Directory names
 ^^^^^^^^^^^^^^^
 
 Because the build rules allow make commands like
-“make <dir>.<action>,<arch>”, subdirectory names within a <top>
-directory structure may not contain a period”.” character.
+"make <dir>.<action>,<arch>", subdirectory names within a <top>
+directory structure may not contain a period"." character.
 
 EPICS_HOST_ARCH environment variable
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The startup directory in EPICS base contains a perl script,
-EpicsHostArch.pl, which can be used to deﬁne EPICS_HOST_ARCH. This
-script can be invoked with a command line parameter deﬁning the
+EpicsHostArch.pl, which can be used to define EPICS_HOST_ARCH. This
+script can be invoked with a command line parameter defining the
 alternate compiler (e.g. if invoking EpicsHostArch.pl yields
-solaris-sparc, then invoking EpicsHostArch.pl gnu will yield
+solaris-sparc, then invoking EpicsHostArch.pl gnu will yield
 solaris-sparc-gnu).
 
 The startup directory also contains scripts to help users set the path
 and other environment variables.
 
-Conﬁguration Deﬁnitions
+Configuration Definitions
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Site-speciﬁc EPICS Base Conﬁguration
+Site-specific EPICS Base Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Site conﬁguration
+Site configuration
 '''''''''''''''''
 
-To conﬁgure EPICS base for your site, you may want to modify the default
-deﬁnitions in the following ﬁles:
+To configure EPICS base for your site, you may want to modify the default
+definitions in the following files:
 
    - configure/CONFIG_SITE Build choices. Specify target archs.
    - configure/CONFIG_SITE_ENV Environment variable defaults
 
-Host conﬁguration
+Host configuration
 '''''''''''''''''
 
-To conﬁgure each host system for your site, you may override the default
-deﬁnitions in the configure/os directory by adding a new ﬁle with
-override deﬁnitions. The new ﬁle should have the same name as the
-distribution ﬁle to be overridden except CONFIG in the name is changed
+To configure each host system for your site, you may override the default
+definitions in the configure/os directory by adding a new file with
+override definitions. The new file should have the same name as the
+distribution file to be overridden except CONFIG in the name is changed
 to CONFIG_SITE.
 
    - configure/os/CONFIG_SITE.<host>.<host> - Host build settings
    - configure/os/CONFIG_SITE.<host>.Common - Host build settings for all target systems
 
-Target conﬁguration
+Target configuration
 '''''''''''''''''''
 
-To conﬁgure each target system, you may override the default deﬁnitions
-in the configure/os directory by adding a new ﬁle with override
-deﬁnitions. The new ﬁle should have the same name as the distribution
-ﬁle to be overridden except CONFIG in the name is replaced by
+To configure each target system, you may override the default definitions
+in the configure/os directory by adding a new file with override
+definitions. The new file should have the same name as the distribution
+file to be overridden except CONFIG in the name is replaced by
 CONFIG_SITE.
 
    - configure/os/CONFIG_SITE.Common.<target> - Target cross settings
    - configure/os/CONFIG_SITE.<host>.<target> - Host-target settings
    - configure/os/CONFIG_SITE.Common.vxWorksCommon - vxWorks full paths
 
-R3.13 compatibility conﬁguration
+R3.13 compatibility configuration
 ''''''''''''''''''''''''''''''''
 
-To conﬁgure EPICS base for building with R3.13 extensions and ioc
-applications, you must modify the default deﬁnitions in the
-base/conﬁg/CONFIG_SITE\* ﬁles to agree with site deﬁnitions you made in
-base/conﬁgure and base/conﬁgure/os ﬁles.You must also modify the
-following tow macros in the base/conﬁgure/CONFIG_SITE ﬁle:
+To configure EPICS base for building with R3.13 extensions and ioc
+applications, you must modify the default definitions in the
+base/config/CONFIG_SITE\* files to agree with site definitions you made in
+base/configure and base/configure/os files.You must also modify the
+following tow macros in the base/configure/CONFIG_SITE file:
 
    - COMPAT_TOOLS_313 - Set to YES to build R3.13 extensions with this base.
    - COMPAT_313 - Set to YES to build R3.13 ioc applications and extensions with this base.
 
-Directory deﬁnitions
+Directory definitions
 ^^^^^^^^^^^^^^^^^^^^
 
-The conﬁgure ﬁles contain deﬁnitions for locations in which to install
+The configure files contain definitions for locations in which to install
 various components. These are all relative to INSTALL_LOCATION. The
 default value for INSTALL_LOCATION is $(TOP), and $(T_A) is the current
-build’s target architecture. The default value for INSTALL_LOCATION can
-be overridden in the configure/CONFIG_SITE ﬁle.
+build�s target architecture. The default value for INSTALL_LOCATION can
+be overridden in the configure/CONFIG_SITE file.
 
 .. code ::
 
-        INSTALL_LOCATION_LIB      = $(INSTALL_LOCATION)/lib
-        INSTALL_LOCATION_BIN      = $(INSTALL_LOCATION)/bin
-        
-        INSTALL_HOST_BIN          = $(INSTALL_LOCATION_BIN)/$(EPICS_HOST_ARCH)
-        INSTALL_HOST_LIB          = $(INSTALL_LOCATION_LIB)/$(EPICS_HOST_ARCH)
-        
-        INSTALL_INCLUDE           = $(INSTALL_LOCATION)/include
-        INSTALL_DOC               = $(INSTALL_LOCATION)/doc
-        INSTALL_HTML              = $(INSTALL_LOCATION)/html
-        INSTALL_TEMPLATES         = $(INSTALL_LOCATION)/templates
-        INSTALL_DBD               = $(INSTALL_LOCATION)/dbd
-        INSTALL_DB                = $(INSTALL_LOCATION)/db
-        INSTALL_CONFIG            = $(INSTALL_LOCATION)/configure
-        INSTALL_JAVA              = $(INSTALL_LOCATION)/javalib
-        
-        INSTALL_LIB               = $(INSTALL_LOCATION_LIB)/$(T_A)
-        INSTALL_SHRLIB            = $(INSTALL_LOCATION_LIB)/$(T_A)
-        INSTALL_TCLLIB            = $(INSTALL_LOCATION_LIB)/$(T_A)
-        INSTALL_BIN               = $(INSTALL_LOCATION_BIN)/$(T_A)
+        INSTALL_LOCATION_LIB      = $(INSTALL_LOCATION)/lib
+        INSTALL_LOCATION_BIN      = $(INSTALL_LOCATION)/bin
+        
+        INSTALL_HOST_BIN          = $(INSTALL_LOCATION_BIN)/$(EPICS_HOST_ARCH)
+        INSTALL_HOST_LIB          = $(INSTALL_LOCATION_LIB)/$(EPICS_HOST_ARCH)
+        
+        INSTALL_INCLUDE           = $(INSTALL_LOCATION)/include
+        INSTALL_DOC               = $(INSTALL_LOCATION)/doc
+        INSTALL_HTML              = $(INSTALL_LOCATION)/html
+        INSTALL_TEMPLATES         = $(INSTALL_LOCATION)/templates
+        INSTALL_DBD               = $(INSTALL_LOCATION)/dbd
+        INSTALL_DB                = $(INSTALL_LOCATION)/db
+        INSTALL_CONFIG            = $(INSTALL_LOCATION)/configure
+        INSTALL_JAVA              = $(INSTALL_LOCATION)/javalib
+        
+        INSTALL_LIB               = $(INSTALL_LOCATION_LIB)/$(T_A)
+        INSTALL_SHRLIB            = $(INSTALL_LOCATION_LIB)/$(T_A)
+        INSTALL_TCLLIB            = $(INSTALL_LOCATION_LIB)/$(T_A)
+        INSTALL_BIN               = $(INSTALL_LOCATION_BIN)/$(T_A)
 
-Extension and Application Speciﬁc Conﬁguration
+Extension and Application Specific Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| The base/configure directory contains ﬁles with the default build
-  deﬁnitions and site speciﬁc build deﬁnitions. The extensions/configure
-  directory contains extension speciﬁc build deﬁnitions (e.g. location
-  of X11 and Motif libraries) and “include <filename>” lines for the
-  base/configure ﬁles. Likewise, the <application>/configure directory
-  contains application speciﬁc build deﬁnitions and includes for the
-  application source ﬁles. Build deﬁnitions such as
+| The base/configure directory contains files with the default build
+  definitions and site specific build definitions. The extensions/configure
+  directory contains extension specific build definitions (e.g. location
+  of X11 and Motif libraries) and "include <filename>" lines for the
+  base/configure files. Likewise, the <application>/configure directory
+  contains application specific build definitions and includes for the
+  application source files. Build definitions such as
 | CROSS_COMPILER_TARGET_ARCHS can be overridden in an extension or
-  application by placing an override deﬁnition in the
-  <top>/configure/CONFIG_SITE ﬁle.
+  application by placing an override definition in the
+  <top>/configure/CONFIG_SITE file.
 
-RELEASE ﬁle
+RELEASE file
 ^^^^^^^^^^^
 
-Every <top>/configure directory contains a RELEASE ﬁle. RELEASE contains
-a user speciﬁed list of other <top> directory structures containing ﬁles
-needed by the current <top>, and may also include other ﬁles to take
-those deﬁnitions from elsewhere. The macros deﬁned in the RELEASE ﬁle
-(or its includes) may reference other deﬁned macros, but cannot rely on
-environment variables to provide deﬁnitions.
+Every <top>/configure directory contains a RELEASE file. RELEASE contains
+a user specified list of other <top> directory structures containing files
+needed by the current <top>, and may also include other files to take
+those definitions from elsewhere. The macros defined in the RELEASE file
+(or its includes) may reference other defined macros, but cannot rely on
+environment variables to provide definitions.
 
-When make is executed, macro deﬁnitions for include, bin, and library
+When make is executed, macro definitions for include, bin, and library
 directories are automatically generated for each external <top>
-deﬁnition given in the RELEASE ﬁle. Also generated are include
-statements for any existing RULES_BUILD ﬁles, cfg/RULES\* ﬁles, and
-cfg/CONFIG\* ﬁles from each external <top> listed in the RELEASE ﬁle.
+definition given in the RELEASE file. Also generated are include
+statements for any existing RULES_BUILD files, cfg/RULES\* files, and
+cfg/CONFIG\* files from each external <top> listed in the RELEASE file.
 
-For example, if configure/RELEASE contains the deﬁnition
+For example, if configure/RELEASE contains the definition
 
 .. code ::
 
-        CAMAC = /home/epics/modules/bus/camac
+        CAMAC = /home/epics/modules/bus/camac
 
 then the generated macros will be:
 
 .. code ::
 
-        CAMAC_HOST_BIN = /home/epics/modules/bus/camac/bin/$(EPICS_HOST_ARCH)
-        CAMAC_HOST_LIB = /home/epics/modules/bus/camac/lib/$(EPICS_HOST_ARCH
-        CAMAC_BIN = /home/epics/modules/bus/camac/bin/$(T_A)
-        CAMAC_LIB = /home/epics/modules/bus/camac/lib/$(T_A)
-        RELEASE_INCLUDES += -I/home/epics/modules/bus/camac/include/os
-        RELEASE_INCLUDES += -I/home/epics/modules/bus/camac/include
-        RELEASE_DBDFLAGS += -I /home/epics/modules/bus/camac/dbd
-        RELEASE_DBFLAGS += -I/home/epics/modules/bus/camac/db
-        RELEASE_PERL_MODULE_DIRS += /home/epics/modules/bus/camac/lib/perl
+        CAMAC_HOST_BIN = /home/epics/modules/bus/camac/bin/$(EPICS_HOST_ARCH)
+        CAMAC_HOST_LIB = /home/epics/modules/bus/camac/lib/$(EPICS_HOST_ARCH
+        CAMAC_BIN = /home/epics/modules/bus/camac/bin/$(T_A)
+        CAMAC_LIB = /home/epics/modules/bus/camac/lib/$(T_A)
+        RELEASE_INCLUDES += -I/home/epics/modules/bus/camac/include/os
+        RELEASE_INCLUDES += -I/home/epics/modules/bus/camac/include
+        RELEASE_DBDFLAGS += -I /home/epics/modules/bus/camac/dbd
+        RELEASE_DBFLAGS += -I/home/epics/modules/bus/camac/db
+        RELEASE_PERL_MODULE_DIRS += /home/epics/modules/bus/camac/lib/perl
 
 RELEASE_DBDFLAGS will appear on the command lines for the
 dbToRecordTypeH, mkmf.pl, and dbExpand tools, and RELEASE_INCLUDES will
 appear on compiler command lines. CAMAC_LIB and CAMAC_BIN can be used in
-a Makeﬁle to deﬁne the location of needed scripts, executables, object
-ﬁles, libraries or other ﬁles.
+a Makefile to define the location of needed scripts, executables, object
+files, libraries or other files.
 
-Deﬁnitions in conﬁgure/RELEASE can be overridden for a speciﬁc host and
-target architectures by providing the appropriate ﬁle or ﬁles containing
-overriding deﬁnitions.
+Definitions in configure/RELEASE can be overridden for a specific host and
+target architectures by providing the appropriate file or files containing
+overriding definitions.
 
 .. code ::
 
-        configure/RELEASE.<epics_host_arch>.Common
-        configure/RELEASE.Common.<targetarch>
-        configure/RELEASE.<epics_host_arch>.<targetarch>
+        configure/RELEASE.<epics_host_arch>.Common
+        configure/RELEASE.Common.<targetarch>
+        configure/RELEASE.<epics_host_arch>.<targetarch>
 
 For <top> directory structures created by makeBaseApp.pl, an EPICS base
 perl script, convertRelease.pl can perform consistency checks for the
-external <top> deﬁnitions in the RELEASE ﬁle and its includes as part of
+external <top> definitions in the RELEASE file and its includes as part of
 the <top> level build. Consistancy checks are controlled by value of
-CHECK_RELEASE which is deﬁned in <top>/conﬁgure/ CONFIG_SITE.
+CHECK_RELEASE which is defined in <top>/configure/ CONFIG_SITE.
 CHECK_RELEASE can be set to YES, NO or WARN, and if YES (the default
 value), consistency checks will be performed. If CHECK_RELEASE is set to
-WARN the build will continue even if conﬂicts are found.
+WARN the build will continue even if conflicts are found.
 
-Modifying conﬁgure/RELEASE\* ﬁles
+Modifying configure/RELEASE\* files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You should always do a gnumake clean uninstall in the <top> directory
-BEFORE adding, changing, or removing any deﬁnitions in the
-conﬁgure/RELEASE\* ﬁles and then a gnumake at the top level AFTER making
+You should always do a gnumake clean uninstall in the <top> directory
+BEFORE adding, changing, or removing any definitions in the
+configure/RELEASE\* files and then a gnumake at the top level AFTER making
 the changes.
 
-The ﬁle <top>/configure/RELEASE contains deﬁnitions for components
+The file <top>/configure/RELEASE contains definitions for components
 obtained from outside <top>. If you want to link to a new release of
-anything deﬁned in the ﬁle do the following:
+anything defined in the file do the following:
 
 .. code ::
 
-        cd <top>
-        gnumake clean uninstall
-        edit configure/RELEASE
+        cd <top>
+        gnumake clean uninstall
+        edit configure/RELEASE
 
 change the relevant line(s) to point to the new release
 
 .. code ::
 
-        gnumake
+        gnumake
 
-All deﬁnitions in <top>/configure/RELEASE must result in complete path
-deﬁnitions, i.e. relative path names are not permitted. If your site
+All definitions in <top>/configure/RELEASE must result in complete path
+definitions, i.e. relative path names are not permitted. If your site
 could have multiple releases of base and other support <top> components
-installed at once, these path deﬁnitions should contain a release number
-as one of the components. However as the RELEASE ﬁle is read by gnumake,
-it is permissible to use macro substitutions to deﬁne these pathnames,
+installed at once, these path definitions should contain a release number
+as one of the components. However as the RELEASE file is read by gnumake,
+it is permissible to use macro substitutions to define these pathnames,
 for example:
 
 .. code ::
 
-        SUPPORT = /usr/local/iocapps/R3.14.9
-        EPICS_BASE = $(SUPPORT)/base/3-14-9-asd1
+        SUPPORT = /usr/local/iocapps/R3.14.9
+        EPICS_BASE = $(SUPPORT)/base/3-14-9-asd1
 
-OS Class speciﬁc deﬁnitions
+OS Class specific definitions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Deﬁnitions in a Makeﬁle will apply to the host system (the platform on
-which make is executed) and each system deﬁned by
+Definitions in a Makefile will apply to the host system (the platform on
+which make is executed) and each system defined by
 CROSS_COMPILER_TARGET_ARCHS.
 
 It is possible to limit the architectures for which a particular
-deﬁnition is used. Most Makeﬁle deﬁnition names can be speciﬁed with an
-appended underscore “\_” followed by an osclass name. If an \_<osclass>
-is not speciﬁed, then the deﬁnition applies to the host and all
-CROSS_COMPILER_TARGET_ARCHS systems. If an \_<osclass> is speciﬁed, then
-the deﬁnition applies only to systems with the speciﬁed os class. A
-Makeﬁle deﬁnition can also have an appended \_DEFAULT speciﬁcation. If
-\_DEFAULT is appended, then the Makeﬁle deﬁnition will apply to all
-systems that do not have an \_<osclass> speciﬁcation for that deﬁnition.
-If a \_DEFAULT deﬁnition exists but should not apply to a particular
-system OS Class, the value “-nil-” should be speciﬁed in the relevant
-Makeﬁle deﬁnition.
+definition is used. Most Makefile definition names can be specified with an
+appended underscore "\_" followed by an osclass name. If an \_<osclass>
+is not specified, then the definition applies to the host and all
+CROSS_COMPILER_TARGET_ARCHS systems. If an \_<osclass> is specified, then
+the definition applies only to systems with the specified os class. A
+Makefile definition can also have an appended \_DEFAULT specification. If
+\_DEFAULT is appended, then the Makefile definition will apply to all
+systems that do not have an \_<osclass> specification for that definition.
+If a \_DEFAULT definition exists but should not apply to a particular
+system OS Class, the value "-nil-" should be specified in the relevant
+Makefile definition.
 
-Each system has an OS_CLASS deﬁnition in its
-configure/os/CONFIG.Common.<arch> ﬁle. A few examples are:
+Each system has an OS_CLASS definition in its
+configure/os/CONFIG.Common.<arch> file. A few examples are:
 
    - For vxWorks-\* targets <osclass> is vxWorks.
    - For RTEMS-\* targets <osclass> is RTEMS.
@@ -452,57 +452,57 @@ configure/os/CONFIG.Common.<arch> ﬁle. A few examples are:
    - For darwin-\* targets <osclass> is Darwin.
    - For aix-\* targets <osclass> is AIX.
 
-For example the following Makeﬁle lines specify that product aaa should
+For example the following Makefile lines specify that product aaa should
 be created for all systems. Product bbb should be created for systems
-that do not have OS_CLASS deﬁned as solaris.
+that do not have OS_CLASS defined as solaris.
 
 .. code ::
 
-   PROD = aaa
-   PROD_solaris = -nil-
-   PROD_DEFAULT = bbb
+   PROD = aaa
+   PROD_solaris = -nil-
+   PROD_DEFAULT = bbb
 
-Specifying T_A speciﬁc deﬁnitions
+Specifying T_A specific definitions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 It is possible for the user to limit the systems for which a particular
-deﬁnition applies to speciﬁc target systems.
+definition applies to specific target systems.
 
-For example the following Makeﬁle lines specify that product aaa should
+For example the following Makefile lines specify that product aaa should
 be created for all target architecture which allow IOC type products and
 product bbb should be created only for the vxWorks-68040 and
-vxWorks-ppc603 targets. Remember T_A is the build’s current target
+vxWorks-ppc603 targets. Remember T_A is the build�s current target
 architecture. so PROD_IOC has the bbb value only when the current built
 target architecture is vwWorks-68040 or vxWorks-ppc603
 
 .. code ::
 
-   PROD_IOC = aaa
-   VX_PROD_vxWorks-68040 = bbb
-   VX_PROD_vxWorks-ppc603 = bbb
-   PROD_IOC += VX_PROD_$(T_A)
+   PROD_IOC = aaa
+   VX_PROD_vxWorks-68040 = bbb
+   VX_PROD_vxWorks-ppc603 = bbb
+   PROD_IOC += VX_PROD_$(T_A)
 
 Host and Ioc targets
 ^^^^^^^^^^^^^^^^^^^^
 
-Build creates two type of makeﬁle targets: Host and Ioc. Host targets
-are executables, object ﬁles, libraries, and scripts which are not part
+Build creates two type of makefile targets: Host and Ioc. Host targets
+are executables, object files, libraries, and scripts which are not part
 of iocCore. Ioc targets are components of ioc libraries, executables,
-object ﬁles, or iocsh scripts which will be run on an ioc.
+object files, or iocsh scripts which will be run on an ioc.
 
-Each supported target system has a VALID_BUILDS deﬁnition which speciﬁes
-the type of makeﬁle targets it can support. This deﬁnition appears in
+Each supported target system has a VALID_BUILDS definition which specifies
+the type of makefile targets it can support. This definition appears in
 configure/os/CONFIG.Common.<arch> or configure/os/CONFIG.<arch>.<arch>
-ﬁles.
+files.
 
-   - For vxWorks systems VALID_BUILDS is set to “Ioc”.
-   - For Unix type systems, VALID_BUILDS is set to “Host Ioc”.
-   - For RTEMS systems, VALID_BUILDS is set to “Ioc”.
-   - For WIN32 systems, VALID_BUILDS is set to “Host Ioc”.
+   - For vxWorks systems VALID_BUILDS is set to "Ioc".
+   - For Unix type systems, VALID_BUILDS is set to "Host Ioc".
+   - For RTEMS systems, VALID_BUILDS is set to "Ioc".
+   - For WIN32 systems, VALID_BUILDS is set to "Host Ioc".
 
-In a Makeﬁle it is possible to limit the systems for which a particular
+In a Makefile it is possible to limit the systems for which a particular
 PROD, TESTPROD, LIBRARY, SCRIPTS, and OBJS is built. For example the
-following Makeﬁle lines specify that product aaa should be created for
+following Makefile lines specify that product aaa should be created for
 systems that support Host type builds. Product bbb should be created for
 systems that support Ioc type builds. Product ccc should be created for
 all target systems.
@@ -513,108 +513,108 @@ all target systems.
    PROD_IOC = bbb
    PROD = ccc
 
-These deﬁnitions can be further limited by specifying an appended
-underscore “_” followed by an osclass or DEFAULT speciﬁcation.
+These definitions can be further limited by specifying an appended
+underscore "_" followed by an osclass or DEFAULT specification.
 
-User speciﬁc override deﬁnitions
+User specific override definitions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-User speciﬁc override deﬁnitions are allowed in user created ﬁles in the
-user’s <home>/configure subdirectory. These override deﬁnitions will be
-used for builds in all <top> directory structures. The ﬁles must have
+User specific override definitions are allowed in user created files in the
+user�s <home>/configure subdirectory. These override definitions will be
+used for builds in all <top> directory structures. The files must have
 the following names.
 
 .. code ::
 
-        <home>/configure/CONFIG_USER
-        <home>/configure/CONFIG_USER.<epics_host_arch>
-        <home>/configure/CONFIG_USER.Common.<targetarch>
-        <home>/configure/CONFIG_USER.<epics_host_arch>.<targetarch>
+        <home>/configure/CONFIG_USER
+        <home>/configure/CONFIG_USER.<epics_host_arch>
+        <home>/configure/CONFIG_USER.Common.<targetarch>
+        <home>/configure/CONFIG_USER.<epics_host_arch>.<targetarch>
 
-Makeﬁles
+Makefiles
 ~~~~~~~~
 
 Name
 ^^^^
 
-The name of the makeﬁle in each directory must be Makeﬁle.
+The name of the makefile in each directory must be Makefile.
 
 Included Files
 ^^^^^^^^^^^^^^
 
-Makeﬁles normally include ﬁles from <top>/configure. Thus the makeﬁle
-“inherits” rules and deﬁnitions from conﬁgure. The ﬁles in
-<top>/configure may in turn include ﬁles from another <top>/configure.
+Makefiles normally include files from <top>/configure. Thus the makefile
+"inherits" rules and definitions from configure. The files in
+<top>/configure may in turn include files from another <top>/configure.
 This technique makes it possible to share make variables and even rules
 across <top> directories.
 
-Contents of Makeﬁles
+Contents of Makefiles
 ^^^^^^^^^^^^^^^^^^^^
 
-Makeﬁles in directories containing subdirectories
+Makefiles in directories containing subdirectories
 '''''''''''''''''''''''''''''''''''''''''''''''''
 
-A Makeﬁle in this type of directory must deﬁne where <top> is relative
-to this directory, include <top>/configure ﬁles, and specify the
+A Makefile in this type of directory must define where <top> is relative
+to this directory, include <top>/configure files, and specify the
 subdirectories in the desired order of make execution. Running gnumake
-in a directory with the following Makeﬁle lines will cause gnumake to be
-executed in <dir1> ﬁrst and then <dir2>. The build rules do not allow a
-Makeﬁle to specify both subdirectories and components to be built.
+in a directory with the following Makefile lines will cause gnumake to be
+executed in <dir1> first and then <dir2>. The build rules do not allow a
+Makefile to specify both subdirectories and components to be built.
 
 .. code ::
 
-        TOP=../..
-        include $(TOP)/configure/CONFIG
-        DIRS += <dir1> <dir2>
-        include $(TOP)/configure/RULES_DIRS
-        
+        TOP=../..
+        include $(TOP)/configure/CONFIG
+        DIRS += <dir1> <dir2>
+        include $(TOP)/configure/RULES_DIRS
+        
 
-Makeﬁles in directories where components are to be built
+Makefiles in directories where components are to be built
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-A Makeﬁle in this type of directory must deﬁne where <top> is relative
-to this directory, include <top> conﬁgure ﬁles, and specify the target
-component deﬁnitions. Optionally it may contain user deﬁned rules.
-Running gnumake in a directory with this type of Makeﬁle will cause
+A Makefile in this type of directory must define where <top> is relative
+to this directory, include <top> configure files, and specify the target
+component definitions. Optionally it may contain user defined rules.
+Running gnumake in a directory with this type of Makefile will cause
 gnumake to create an O.<arch> subdirectory and then execute gnumake to
-build the deﬁned components in this subdirectory. It contains the
+build the defined components in this subdirectory. It contains the
 following lines:
 
 .. code ::
 
-        TOP=../../..
-        include $(TOP)/configure/CONFIG
-        <component definition lines>
-        include $(TOP)/configure/RULES
-        <optional rules definitions>
+        TOP=../../..
+        include $(TOP)/configure/CONFIG
+        <component definition lines>
+        include $(TOP)/configure/RULES
+        <optional rules definitions>
 
-Simple Makeﬁle examples
+Simple Makefile examples
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Create an IOC type library named asIoc from the source ﬁle asDbLib.c and
+Create an IOC type library named asIoc from the source file asDbLib.c and
 install it into the $(INSTALL_LOCATION)/lib/<arch> directory.
 
 .. code ::
 
-        TOP=../../..
-        include $(TOP)/configure/CONFIG
-        LIBRARY_IOC += asIoc
-        asIoc_SRCS += asDbLib.c
-        include $(TOP)/configure/RULES
+        TOP=../../..
+        include $(TOP)/configure/CONFIG
+        LIBRARY_IOC += asIoc
+        asIoc_SRCS += asDbLib.c
+        include $(TOP)/configure/RULES
 
 For each Host type target architecture, create an executable named
-catest from the catest1.c and catest2.c source ﬁles linking with the
+catest from the catest1.c and catest2.c source files linking with the
 existing EPICS base ca and Com libraries, and then install the catest
 executable into the $(INSTALL_LOCATION)/bin/<arch> directory.
 
 .. code ::
 
-        TOP=../../..
-        include $(TOP)/configure/CONFIG
-        PROD_HOST = catest
-        catest_SRCS += catest1.c catest2.c
-        catest_LIBS = ca Com
-        include $(TOP)/configure/RULES
+        TOP=../../..
+        include $(TOP)/configure/CONFIG
+        PROD_HOST = catest
+        catest_SRCS += catest1.c catest2.c
+        catest_LIBS = ca Com
+        include $(TOP)/configure/RULES
 
 Make
 ~~~~
@@ -638,7 +638,7 @@ The most frequently used make commands are:
 
 gnumake
    This rebuilds and installs everything that is not up to date. NOTE:
-   Executing gnumake without arguments is the same as “gnumake install”
+   Executing gnumake without arguments is the same as "gnumake install"
 gnumake help
    This command can be executed from the <top> directory only. This
    command prints a page describing the most frequently used make
@@ -647,25 +647,25 @@ gnumake install
    This rebuilds and installs everything that is not up to date.
 
 gnumake all
-   This is the same as “gnumake install”.
+   This is the same as "gnumake install".
 
 gnumake buildInstall
-   This is the same as “gnumake install”.
+   This is the same as "gnumake install".
 
 gnumake<arch>
-   This rebuilds and installs everything that is not up to date ﬁrst for
-   the host arch and then (if diﬀerent) for the speciﬁed target arch.
+   This rebuilds and installs everything that is not up to date first for
+   the host arch and then (if different) for the specified target arch.
 
-   NOTE: This is the same as “gnumake install.<arch>”
+   NOTE: This is the same as "gnumake install.<arch>"
 
 gnumake clean
    This can be used to save disk space by deleting the O.<arch>
    directories that gnumake will create, but does not remove any
-   installed ﬁles from the bin, db, dbd etc. directories.
-   “gnumake clean.<arch>” can be invoked to clean a single architecture.
+   installed files from the bin, db, dbd etc. directories.
+   "gnumake clean.<arch>" can be invoked to clean a single architecture.
 
 gnumake archclean
-   This command will remove the current build’s O.<arch> directories but
+   This command will remove the current build�s O.<arch> directories but
    not O.Common directory.
 
 gnumake realclean
@@ -673,9 +673,9 @@ gnumake realclean
    created by a gnumake from another EPICS_HOST_ARCH).
 
 gnumake rebuild
-   This is the same as “gnumake clean install”. If you are unsure about
-   the state of the generated ﬁles in an application, just execute
-   “gnumake rebuild”.
+   This is the same as "gnumake clean install". If you are unsure about
+   the state of the generated files in an application, just execute
+   "gnumake rebuild".
 
 gnumake uninstall
    This command can be executed from the <top> directory only. It will
@@ -691,12 +691,12 @@ gnumake distclean
 
 gnumake cvsclean
    This command can be executed from the <top> directory only. It
-   removes cvs .#\* ﬁles in the make directory tree.
+   removes cvs .#\* files in the make directory tree.
 
 Make targets
 ^^^^^^^^^^^^
 
-The following is a summary of targets that can be speciﬁed for gnumake:
+The following is a summary of targets that can be specified for gnumake:
 
 -  <action>
 -  <arch>
@@ -712,12 +712,12 @@ where:
 - <action> is help, clean, realclean, distclean, inc, install, build, rebuild, buildInstall, realuninstall, or uninstall
 
 *NOTE: help, uninstall, distclean, cvsclean, and realuninstall can
-only be speciﬁed at <top>.*
+only be specified at <top>.*
 
-*NOTE: realclean cannot be speciﬁed inside an O.<arch> subdirectory.
+*NOTE: realclean cannot be specified inside an O.<arch> subdirectory.
 <dir> is subdirectory name*
 
-*NOTE: You can build using your os vendors’ native compiler and also
+*NOTE: You can build using your os vendors� native compiler and also
 build using a supported alternate compiler in the same directory
 structure because the executables and libraries will be created and
 installed into separate directories (e.g bin/solaris-sparc and
@@ -726,866 +726,866 @@ EPICS_HOST_ARCH, environment variable between builds or by setting
 EPICS_HOST_ARCH on the gnumake command line.*
 
 The build system ensures the host architecture is up to date before
-building a cross-compiled target, thus Makeﬁles must be explicit in
-deﬁning which architectures a component should be built for.
+building a cross-compiled target, thus Makefiles must be explicit in
+defining which architectures a component should be built for.
 
-Header ﬁle dependencies
+Header file dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-All product, test product, and library source ﬁles which appear in one
-of the source ﬁle deﬁnitions (e.g. SRCS, PROD_SRCS, LIB_SRCS,
-<prodname>_SRCS) will have their header ﬁle dependencies automatically
-generated and included as part of the Makeﬁle.
+All product, test product, and library source files which appear in one
+of the source file definitions (e.g. SRCS, PROD_SRCS, LIB_SRCS,
+<prodname>_SRCS) will have their header file dependencies automatically
+generated and included as part of the Makefile.
 
-Makeﬁle deﬁnitions
+Makefile definitions
 ~~~~~~~~~~~~~~~~~~
 
-The following components can be deﬁned in a Makeﬁle:
+The following components can be defined in a Makefile:
 
-Source ﬁle directories
+Source file directories
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Normally all product, test product, and library source ﬁles reside in
-the same directory as the Makeﬁle. OS speciﬁc source ﬁles are allowed
+Normally all product, test product, and library source files reside in
+the same directory as the Makefile. OS specific source files are allowed
 and should reside in subdirectories os/<os_class> or os/posix or
 os/default.
 
-The build rules also allow source ﬁles to reside in subdirectories of
-the current Makeﬁle directory (src directory). For each subdirectory
-<dir> containing source ﬁles add the SRC_DIRS deﬁnition.
+The build rules also allow source files to reside in subdirectories of
+the current Makefile directory (src directory). For each subdirectory
+<dir> containing source files add the SRC_DIRS definition.
 
 .. code ::
 
-        SRC_DIRS += <dir>
+        SRC_DIRS += <dir>
 
-where <dir> is a relative path deﬁnition. An example of SRC_DIRS is
-
-.. code ::
-
-        SRC_DIRS += ../dir1 ../dir2
-
-The directory search order for the above deﬁnition is
+where <dir> is a relative path definition. An example of SRC_DIRS is
 
 .. code ::
 
-        .
-        ../os/$(OS_CLASS) ../os/posix ../os/default
-        ../dir1/os/$(OS_CLASS) ../dir1/os/posix ../dir1/os/default
-        ../dir2/os/$(OS_CLASS) ../dir2/os/posix ../dir2/os/default
-        ..
-        ../dir1 ../dir2
+        SRC_DIRS += ../dir1 ../dir2
+
+The directory search order for the above definition is
+
+.. code ::
+
+        .
+        ../os/$(OS_CLASS) ../os/posix ../os/default
+        ../dir1/os/$(OS_CLASS) ../dir1/os/posix ../dir1/os/default
+        ../dir2/os/$(OS_CLASS) ../dir2/os/posix ../dir2/os/default
+        ..
+        ../dir1 ../dir2
 
 where the build directory O.<arch> is . and the src directory is ...
 
 Posix C source code
 ^^^^^^^^^^^^^^^^^^^
 
-The epics base conﬁg ﬁles assume posix source code and deﬁne POSIX to be
-YES as the default. Individual Makeﬁles can override this by setting
-POSIX to NO. Source code ﬁles may have the suﬃx .c, .cc, .cpp, or .C.
+The epics base config files assume posix source code and define POSIX to be
+YES as the default. Individual Makefiles can override this by setting
+POSIX to NO. Source code files may have the suffix .c, .cc, .cpp, or .C.
 
 Breakpoint Tables
 ^^^^^^^^^^^^^^^^^
 
-For each breakpoint table dbd ﬁle, bpt<table name>.dbd, to be created
-from an existing bpt<table name>.data ﬁle, add the deﬁnition
+For each breakpoint table dbd file, bpt<table name>.dbd, to be created
+from an existing bpt<table name>.data file, add the definition
 
 .. code ::
 
-        DBD += bpt<table name>.dbd
+        DBD += bpt<table name>.dbd
 
-to the Makeﬁle. The following Makeﬁle will create a bptTypeJdegC.dbd ﬁle
-from an existing bptTypeJdegC.data ﬁle using the EPICS base utility
-program makeBpt and install the new dbd ﬁle into the
+to the Makefile. The following Makefile will create a bptTypeJdegC.dbd file
+from an existing bptTypeJdegC.data file using the EPICS base utility
+program makeBpt and install the new dbd file into the
 $(INSTALL_LOCATION)/dbd directory.
 
 .. code ::
 
-        TOP=../../..
-        include $(TOP)/configure/CONFIG
-        DBD += bptTypeJdegC.dbd
-        include $(TOP)/configure/RULES
+        TOP=../../..
+        include $(TOP)/configure/CONFIG
+        DBD += bptTypeJdegC.dbd
+        include $(TOP)/configure/RULES
 
-Record Type Deﬁnitions
+Record Type Definitions
 ^^^^^^^^^^^^^^^^^^^^^^
 
-For each new record type, the following deﬁnition should be added to the
-makeﬁle:
+For each new record type, the following definition should be added to the
+makefile:
 
 
-        DBDINC += <rectype>Record
+        DBDINC += <rectype>Record
 
-A <rectype>Record.h header ﬁle will be created from an existing
-<rectype>Record.dbd ﬁle using the EPICS base utility program
+A <rectype>Record.h header file will be created from an existing
+<rectype>Record.dbd file using the EPICS base utility program
 dbToRecordTypeH. This header will be installed into the
-$(INSTALL_LOCATION)/include directory and the dbd ﬁle will be installed
+$(INSTALL_LOCATION)/include directory and the dbd file will be installed
 into the $(INSTALL_LOCATION)/dbd directory.
 
-The following Makeﬁle will create xxxRecord.h from an existing
-xxxRecord.dbd ﬁle, install xxxRecord.h into $(INSTALL_LOCATION)/include,
+The following Makefile will create xxxRecord.h from an existing
+xxxRecord.dbd file, install xxxRecord.h into $(INSTALL_LOCATION)/include,
 and install xxxRecord.dbd into $(INSTALL_LOCATION)/dbd.
 
 .. code :
 
-        TOP=../../..
-        include $(TOP)/configure/CONFIG
-        DBDINC += xxxRecord
-        include $(TOP)/configure/RULES
+        TOP=../../..
+        include $(TOP)/configure/CONFIG
+        DBDINC += xxxRecord
+        include $(TOP)/configure/RULES
 
 Menus
 ^^^^^
 
-If a menu menu<name>.dbd ﬁle is present, then add the following
-deﬁnition:
+If a menu menu<name>.dbd file is present, then add the following
+definition:
 
 .. code ::
 
-        DBDINC += menu<name>.h
+        DBDINC += menu<name>.h
 
-The header ﬁle, menu<name>.h will be created from the existing
-menu<name>.dbd ﬁle using the EPICS base utility program dbToMenuH and
+The header file, menu<name>.h will be created from the existing
+menu<name>.dbd file using the EPICS base utility program dbToMenuH and
 installed into the $(INSTALL_LOCATION)/include directory and the menu
-dbd ﬁle will be installed into $(INSTALL_LOCATION)/dbd.
+dbd file will be installed into $(INSTALL_LOCATION)/dbd.
 
-The following Makeﬁle will create a menuConvert.h ﬁle from an existing
-menuConvert.dbd ﬁle and install menuConvert.h into
+The following Makefile will create a menuConvert.h file from an existing
+menuConvert.dbd file and install menuConvert.h into
 $(INSTALL_LOCATION)/include and menuConvert.dbd into
 $(INSTALL_LOCATION)/dbd.
 
 .. code ::
 
-        TOP=../../..
-        include $(TOP)/configure/CONFIG
-        DBDINC = menuConvert.h
-        include $(TOP)/configure/RULES
+        TOP=../../..
+        include $(TOP)/configure/CONFIG
+        DBDINC = menuConvert.h
+        include $(TOP)/configure/RULES
 
-Expanded Database Deﬁnition Files
+Expanded Database Definition Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Database deﬁnition include ﬁles named <name>Include.dbd containing
-includes for other database deﬁnition ﬁles can be expanded by the EPICS
-base utility program dbExpand into a created <name>.dbd ﬁle and the
-<name>.dbd ﬁle installed into $(INSTALL_LOCATION)/dbd. The following
+Database definition include files named <name>Include.dbd containing
+includes for other database definition files can be expanded by the EPICS
+base utility program dbExpand into a created <name>.dbd file and the
+<name>.dbd file installed into $(INSTALL_LOCATION)/dbd. The following
 variables control the process:
 
 .. code ::
 
-        DBD += <name>.dbd
-        USR_DBDFLAGS += -I <include path>
-        USR_DBDFLAGS += -S <macro substitutions>
-        <name>_DBD += <file1>.dbd <file2>.dbd ...
+        DBD += <name>.dbd
+        USR_DBDFLAGS += -I <include path>
+        USR_DBDFLAGS += -S <macro substitutions>
+        <name>_DBD += <file1>.dbd <file2>.dbd ...
 
 where
 
 .. code ::
 
-        DBD += <name>.dbd
+        DBD += <name>.dbd
 
-is the name of the output dbd ﬁle to contain the expanded deﬁnitions. It
+is the name of the output dbd file to contain the expanded definitions. It
 is created by expanding an existing or build created <name>Include.dbd
-ﬁle and then copied into $(INSTALL_LOCATION)/dbd.
+file and then copied into $(INSTALL_LOCATION)/dbd.
 
-An example of a ﬁle to be expanded is exampleInclude.dbd containing the
+An example of a file to be expanded is exampleInclude.dbd containing the
 following lines
 
 .. code ::
 
-        include "base.dbd"
-        include "xxxRecord.dbd"
-        device(xxx,CONSTANT,devXxxSoft,"SoftChannel")
+        include "base.dbd"
+        include "xxxRecord.dbd"
+        device(xxx,CONSTANT,devXxxSoft,"SoftChannel")
 
-USR_DBDFLAGS deﬁnes optional ﬂags for dbExpand. Currently only an
-include path (-I <path>) and macro substitution (-S <substitution>) are
+USR_DBDFLAGS defines optional flags for dbExpand. Currently only an
+include path (-I <path>) and macro substitution (-S <substitution>) are
 supported. The include paths for EPICS base/dbd, and other <top>/dbd
 directories will automatically be added during the build if the <top>
-names are speciﬁed in the conﬁgure/RELEASE ﬁle.
+names are specified in the configure/RELEASE file.
 
-A database deﬁnition include ﬁle named <name>Include.dbd containing
-includes for other database deﬁnition ﬁles can be created from a
-<name>_DBD deﬁnition. The lines
+A database definition include file named <name>Include.dbd containing
+includes for other database definition files can be created from a
+<name>_DBD definition. The lines
 
 .. code ::
 
-        DBD += <name>.dbd
-        <name>_DBD += <file1>.dbd <file2>.dbd ...
+        DBD += <name>.dbd
+        <name>_DBD += <file1>.dbd <file2>.dbd ...
 
-will create an expanded dbd ﬁle <name>.dbd by ﬁrst creating a
-<name>Include.dbd. For each ﬁlename in the <name>_DBD deﬁnition, the
+will create an expanded dbd file <name>.dbd by first creating a
+<name>Include.dbd. For each filename in the <name>_DBD definition, the
 created <name>Include.dbd will contain an include statement for that
-ﬁlename. Then the expanded DBD ﬁle is generated from the created
-<name>Include.dbd ﬁle and installed into $(INSTALL_LOCATION)/ dbd.
+filename. Then the expanded DBD file is generated from the created
+<name>Include.dbd file and installed into $(INSTALL_LOCATION)/ dbd.
 
-The following Makeﬁle will create an expanded dbd ﬁle named example.dbd
-from an existing exampleInclude.dbd ﬁle and then install example.dbd
+The following Makefile will create an expanded dbd file named example.dbd
+from an existing exampleInclude.dbd file and then install example.dbd
 into the $(INSTALL_LOCATION)/dbd directory.
 
 .. code ::
 
-        TOP=../../..
-        include $(TOP)/configure/CONFIG
-        DBD += exampleApp.dbd
-        include $(TOP)/configure/RULES
+        TOP=../../..
+        include $(TOP)/configure/CONFIG
+        DBD += exampleApp.dbd
+        include $(TOP)/configure/RULES
 
-The following Makeﬁle will create an exampleInclude.dbd ﬁle from the
-example_DBD deﬁnition then expand it to create an expanded dbd ﬁle,
+The following Makefile will create an exampleInclude.dbd file from the
+example_DBD definition then expand it to create an expanded dbd file,
 example.dbd, and install example.dbd into the $(INSTALL_LOCATION)/dbd
 directory.
 
 .. code ::
 
-        TOP=../../..
-        include $(TOP)/configure/CONFIG
-        DBD += example.dbd
-        example_DBD += base.dbd xxxRecord.dbd xxxSupport.dbd
-        include $(TOP)/configure/RULES
+        TOP=../../..
+        include $(TOP)/configure/CONFIG
+        DBD += example.dbd
+        example_DBD += base.dbd xxxRecord.dbd xxxSupport.dbd
+        include $(TOP)/configure/RULES
 
-The created exampleInclude.dbd ﬁle will contain the following lines
+The created exampleInclude.dbd file will contain the following lines
 
 .. code ::
 
-        include "base.dbd"
-        include "xxxRecord.dbd"
-        include "xxxSupport.dbd"
+        include "base.dbd"
+        include "xxxRecord.dbd"
+        include "xxxSupport.dbd"
 
-Registering Support Routines for Expanded Database Deﬁnition Files
+Registering Support Routines for Expanded Database Definition Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A source ﬁle which registers simple static variables and
+A source file which registers simple static variables and
 record/device/driver support routines with iocsh can be created. The
 list of variables and routines to register is obtained from lines in an
-existing dbd ﬁle.
+existing dbd file.
 
-The following line in a Makeﬁle will result in
+The following line in a Makefile will result in
 <name>_registerRecordDeviceDriver.cpp being created, compiled, and
-linked into <prodname>. It requires that the ﬁle <name>.dbd exist or can
+linked into <prodname>. It requires that the file <name>.dbd exist or can
 be created using other make rules.
 
 .. code ::
 
-        <prodname>_SRCS += <name>_registerRecordDeviceDriver.cpp
+        <prodname>_SRCS += <name>_registerRecordDeviceDriver.cpp
 
 An example of registering the variable mySubDebug and the routines
 mySubInit and mySubProcess is <name>.dbd containg the following lines
 
 .. code ::
 
-        variable(mySubDebug)
-        function(mySubInit)
-        function(mySubProcess)
+        variable(mySubDebug)
+        function(mySubInit)
+        function(mySubProcess)
 
-Database Deﬁnition Files
+Database Definition Files
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The following line installs the existing named dbd ﬁles into
+The following line installs the existing named dbd files into
 $(INSTALL_LOCATION)/dbd without expansion.
 
 .. code ::
 
-        DBD += <name>.dbd
+        DBD += <name>.dbd
 
-DBD install ﬁles
+DBD install files
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Deﬁnitions of the form:
+Definitions of the form:
 
 .. code ::
 
-        DBD_INSTALLS += <name>
+        DBD_INSTALLS += <name>
 
-result in ﬁles being installed to the $(INSTALL_LOCATION/dbd directory.
-The ﬁle <name> can appear with or without a directory preﬁx. If the ﬁle
-has a directory preﬁx e.g. $(APPNAME)/dbd/, it is copied from the
-speciﬁed location. If a directory preﬁx is not present, make will look
-in the current source directory for the ﬁle.
+result in files being installed to the $(INSTALL_LOCATION/dbd directory.
+The file <name> can appear with or without a directory prefix. If the file
+has a directory prefix e.g. $(APPNAME)/dbd/, it is copied from the
+specified location. If a directory prefix is not present, make will look
+in the current source directory for the file.
 
 Database Files
 ^^^^^^^^^^^^^^
 
-For most databases just the name of the database has to be speciﬁed.
-Make will ﬁgure out how to generate the ﬁle:
+For most databases just the name of the database has to be specified.
+Make will figure out how to generate the file:
 
 .. code ::
 
-        DB += xxx.db
+        DB += xxx.db
 
-generates xxx.db depending on which source ﬁles exist and installs it
+generates xxx.db depending on which source files exist and installs it
 into $(INSTALL_LOCATION)/db.
 
-A <name>.db database ﬁle will be created from an optional
-<name>.template ﬁle and/or an optional <name>.substitutions ﬁle, If the
-substitution ﬁle exists but the template ﬁle is not named
-<name>.template, the template ﬁle name can be speciﬁed as
+A <name>.db database file will be created from an optional
+<name>.template file and/or an optional <name>.substitutions file, If the
+substitution file exists but the template file is not named
+<name>.template, the template file name can be specified as
 
 .. code ::
 
-        <name>_TEMPLATE = <template file name>
+        <name>_TEMPLATE = <template file name>
 
-A ⋆<nn>.db database ﬁle will be created from a \*.template and a
-⋆<nn>.substitutions ﬁle, (where nn is an optional index number).
+A *<nn>.db database file will be created from a \*.template and a
+*<nn>.substitutions file, (where nn is an optional index number).
 
-If a <name> substitutions ﬁle contains “ﬁle” references to other input
-ﬁles, these referenced ﬁles are made dependencies of the created
+If a <name> substitutions file contains "file" references to other input
+files, these referenced files are made dependencies of the created
 <name>.db by the makeDbDepends.pl perl tool.
 
 The Macro Substitutions and Include tool, msi, will be used to generate
-the database, and msi must either be in your path or you must redeﬁne
-MSI as the full path name to the msi binary in a RELEASE ﬁle or Makeﬁle.
-An example MSI deﬁnition is
+the database, and msi must either be in your path or you must redefine
+MSI as the full path name to the msi binary in a RELEASE file or Makefile.
+An example MSI definition is
 
 .. code ::
 
-        MSI = /usr/local/epics/extensions/bin/${EPICS_HOST_ARCH}/msi
+        MSI = /usr/local/epics/extensions/bin/${EPICS_HOST_ARCH}/msi
 
-Template ﬁles <name>.template, and db ﬁles, <name>.db, will be created
-from an edf ﬁle <name>.edf and an <name>.edf ﬁle will be created from a
-<name>.sch ﬁle.
+Template files <name>.template, and db files, <name>.db, will be created
+from an edf file <name>.edf and an <name>.edf file will be created from a
+<name>.sch file.
 
-Template and substitution ﬁles can be installed.
+Template and substitution files can be installed.
 
 .. code ::
 
-        DB += xxx.template xxx.substitutions
+        DB += xxx.template xxx.substitutions
 
-generates and installs these ﬁles. If one or more xxx.substitutions ﬁles
+generates and installs these files. If one or more xxx.substitutions files
 are to be created by script, the script name must be placed in the
 CREATESUBSTITUTIONS variable (e.g. CREATESUBSTITUTIONS=mySubst.pl). This
-script will be executed by gnumake with the preﬁx of the substitution
-ﬁle name to be generated as its argument. If (and only if) there are
-script generated substitutions ﬁles, the preﬁx of any inﬂated database’s
-name may not equal the preﬁx of the name of any template used within the
+script will be executed by gnumake with the prefix of the substitution
+file name to be generated as its argument. If (and only if) there are
+script generated substitutions files, the prefix of any inflated database�s
+name may not equal the prefix of the name of any template used within the
 directory.
 
-DB install ﬁles
+DB install files
 ^^^^^^^^^^^^^^^
 
-Deﬁnitions of the form:
+Definitions of the form:
 
 .. code ::
 
-        DB_INSTALLS += <name>
+        DB_INSTALLS += <name>
 
-result in ﬁles being installed to the $(INSTALL_LOCATION/db directory.
-The ﬁle <name> can appear with or without a directory preﬁx. If the ﬁle
-has a directory preﬁx e.g. $(APPNAME)/db/, it is copied from the
-speciﬁed location. If a directory preﬁx is not present, make will look
-in the current source directory for the ﬁle.
+result in files being installed to the $(INSTALL_LOCATION/db directory.
+The file <name> can appear with or without a directory prefix. If the file
+has a directory prefix e.g. $(APPNAME)/db/, it is copied from the
+specified location. If a directory prefix is not present, make will look
+in the current source directory for the file.
 
 Compile and link command options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Any of the following can be speciﬁed:
+Any of the following can be specified:
 
 Options for all compile/link commands.
 ''''''''''''''''''''''''''''''''''''''
 
-These deﬁnitions will apply to all compiler and linker targets.
+These definitions will apply to all compiler and linker targets.
 
-   USR_INCLUDES += -I<name>
+   USR_INCLUDES += -I<name>
 
-   header ﬁle directories each preﬁxed by a “-I”.
+   header file directories each prefixed by a "-I".
 
-   USR_INCLUDES_<osclass> += -I<name>
+   USR_INCLUDES_<osclass> += -I<name>
 
-   os speciﬁc header ﬁle directories each preﬁxed by a “-I”.
+   os specific header file directories each prefixed by a "-I".
 
-   USR_INCLUDES_DEFAULT += -I<name>
+   USR_INCLUDES_DEFAULT += -I<name>
 
-   header ﬁle directories each preﬁxed by “-I” for any arch that does
-   not have a USR_INCLUDE_<osclass> deﬁnition
+   header file directories each prefixed by "-I" for any arch that does
+   not have a USR_INCLUDE_<osclass> definition
 
-   USR_CFLAGS += <c flags>
+   USR_CFLAGS += <c flags>
 
    C compiler options.
 
-   USR_CFLAGS_<osclass> += <c flags>
+   USR_CFLAGS_<osclass> += <c flags>
 
-   os speciﬁc C compiler options.
+   os specific C compiler options.
 
-   USR_CFLAGS_<arch> += <c flags>
+   USR_CFLAGS_<arch> += <c flags>
 
-   target architecture speciﬁc C compiler options.
+   target architecture specific C compiler options.
 
-   USR_CFLAGS_DEFAULT += <c flags>
+   USR_CFLAGS_DEFAULT += <c flags>
 
    C compiler options for any arch that does not have a
-   USR_CFLAGS_<osclass> deﬁnition
+   USR_CFLAGS_<osclass> definition
 
-   USR_CXXFLAGS += <c++ flags>
+   USR_CXXFLAGS += <c++ flags>
 
    C++ compiler options.
 
-   USR_CXXFLAGS_<osclass> += <c++ flags>
+   USR_CXXFLAGS_<osclass> += <c++ flags>
 
-   C++ compiler options for the speciﬁed osclass.
+   C++ compiler options for the specified osclass.
 
-   USR_CXXFLAGS_<arch> += <c++ flags>
+   USR_CXXFLAGS_<arch> += <c++ flags>
 
-   C++ compiler options for the speciﬁed target architecture.
+   C++ compiler options for the specified target architecture.
 
-   USR_CXXFLAGS_DEFAULT += <c++ flags>
+   USR_CXXFLAGS_DEFAULT += <c++ flags>
 
    C++ compiler options for any arch that does not have a
-   USR_CXXFLAGS_<osclass> deﬁnition
+   USR_CXXFLAGS_<osclass> definition
 
-   USR_CPPFLAGS += <preprocessor flags>
+   USR_CPPFLAGS += <preprocessor flags>
 
    C preprocessor options.
 
-   USR_CPPFLAGS_<osclass> += <preprocessor flags>
+   USR_CPPFLAGS_<osclass> += <preprocessor flags>
 
-   os speciﬁc C preprocessor options.
+   os specific C preprocessor options.
 
-   USR_CPPFLAGS_<arch> += <preprocessor flags>
+   USR_CPPFLAGS_<arch> += <preprocessor flags>
 
-   target architecture speciﬁc C preprocessor options.
+   target architecture specific C preprocessor options.
 
-   USR_CPPFLAGS_DEFAULT += <preprocessor flags>
+   USR_CPPFLAGS_DEFAULT += <preprocessor flags>
 
    C preprocessor options for any arch that does not have a
-   USR_CPPFLAGS_<osclass> deﬁnition
+   USR_CPPFLAGS_<osclass> definition
 
-   USR_LDFLAGS += <linker flags>
+   USR_LDFLAGS += <linker flags>
 
    linker options.
 
-   USR_LDFLAGS_<osclass> += <linker flags>
+   USR_LDFLAGS_<osclass> += <linker flags>
 
-   os speciﬁc linker options.
+   os specific linker options.
 
-   USR_LDFLAGS_DEFAULT += <linker flags>
+   USR_LDFLAGS_DEFAULT += <linker flags>
 
    linker options for any arch that does not have a
-   USR_LDFLAGS_<osclass> deﬁnition
+   USR_LDFLAGS_<osclass> definition
 
-Options for a target speciﬁc compile/link command.
+Options for a target specific compile/link command.
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 
-   <name>_INCLUDES += -I<name>
+   <name>_INCLUDES += -I<name>
 
-   header ﬁle directories each preﬁxed by a “-I”.
+   header file directories each prefixed by a "-I".
 
-   <name>_INCLUDES_<osclass> += -I<name>
+   <name>_INCLUDES_<osclass> += -I<name>
 
-   os speciﬁc header ﬁle directories each preﬁxed by a “-I”.
+   os specific header file directories each prefixed by a "-I".
 
-   <name>_INCLUDES_<T_A> += -I<name>
+   <name>_INCLUDES_<T_A> += -I<name>
 
-   target architecture speciﬁc header ﬁle directories each preﬁxed by a
-   “-I”.
+   target architecture specific header file directories each prefixed by a
+   "-I".
 
-   <name>_CFLAGS += <c flags>
+   <name>_CFLAGS += <c flags>
 
    c compiler options.
 
-   <name>_CFLAGS_<osclass> += <c flags>
+   <name>_CFLAGS_<osclass> += <c flags>
 
-   os speciﬁc c compiler options.
+   os specific c compiler options.
 
-   <name>_CFLAGS_<T_A> += <c flags>
+   <name>_CFLAGS_<T_A> += <c flags>
 
-   target architecture speciﬁc c compiler options.
+   target architecture specific c compiler options.
 
-   <name>_CXXFLAGS += <c++ flags>
+   <name>_CXXFLAGS += <c++ flags>
 
    c++ compiler options.
 
-   <name>_CXXFLAGS_<osclass> += <c++ flags>
+   <name>_CXXFLAGS_<osclass> += <c++ flags>
 
-   c++ compiler options for the speciﬁed osclass.
+   c++ compiler options for the specified osclass.
 
-   <name>_CXXFLAGS_<T_A> += <c++ flags>
+   <name>_CXXFLAGS_<T_A> += <c++ flags>
 
-   c++ compiler options for the speciﬁed target architecture.
+   c++ compiler options for the specified target architecture.
 
-   <name>_CPPFLAGS += <preprocessor flags>
+   <name>_CPPFLAGS += <preprocessor flags>
 
    c preprocessor options.
 
-   <name>_CPPFLAGS_<osclass> += <preprocessor flags>
+   <name>_CPPFLAGS_<osclass> += <preprocessor flags>
 
-   os speciﬁc c preprocessor options.
+   os specific c preprocessor options.
 
-   <name>_CPPFLAGS_<T_A> += <preprocessor flags>
+   <name>_CPPFLAGS_<T_A> += <preprocessor flags>
 
-   target architecture speciﬁc c preprocessor options.
+   target architecture specific c preprocessor options.
 
-   <name>_LDFLAGS += <linker flags>
+   <name>_LDFLAGS += <linker flags>
 
    linker options.
 
-   <name>_LDFLAGS_<osclass> += <linker flags>
+   <name>_LDFLAGS_<osclass> += <linker flags>
 
-   os speciﬁc linker options.
+   os specific linker options.
 
 Libraries
 ^^^^^^^^^
 
 A library is created and installed into $(INSTALL_LOCATION)/lib/<arch>
-by specifying its name and the name of the object and/or source ﬁles
-containing code for the library. An object or source ﬁle name can appear
-with or without a directory preﬁx. If the ﬁle name has a directory preﬁx
-e.g. $(EPICS_BASE_BIN), it is taken from the speciﬁed location. If a
-directory preﬁx is not present, make will ﬁrst look in the source
-directories for a ﬁle with the speciﬁed name and next try to create the
-ﬁle using existing conﬁgure rules. A library ﬁlename preﬁx may be
-prepended to the library name when the ﬁle is created. For Unix type
-systems and vxWorks the library preﬁx is lib and there is no preﬁx for
-WIN32. Also a library suﬃx appropriate for the library type and target
-arch (e.g. .a, .so, .lib, .dll) will be appended to the ﬁlename when the
-ﬁle is created.
+by specifying its name and the name of the object and/or source files
+containing code for the library. An object or source file name can appear
+with or without a directory prefix. If the file name has a directory prefix
+e.g. $(EPICS_BASE_BIN), it is taken from the specified location. If a
+directory prefix is not present, make will first look in the source
+directories for a file with the specified name and next try to create the
+file using existing configure rules. A library filename prefix may be
+prepended to the library name when the file is created. For Unix type
+systems and vxWorks the library prefix is lib and there is no prefix for
+WIN32. Also a library suffix appropriate for the library type and target
+arch (e.g. .a, .so, .lib, .dll) will be appended to the filename when the
+file is created.
 
 *vxWorks and RTEMS Note: Only archive libraries are created.*
 
 *Shared libraries Note: Shared libraries can be built for any or all HOST
-type architectures. The deﬁnition of SHARED_LIBRARIES (YES/NO) in
-base/conﬁgure/CONFIG_SITE determines whether shared or archive libraries
+type architectures. The definition of SHARED_LIBRARIES (YES/NO) in
+base/configure/CONFIG_SITE determines whether shared or archive libraries
 will be built. When SHARED_LIBRARIES is YES, both archive and shared
-libraries are built. This deﬁnition can be overridden for a speciﬁc arch
-in an configure/os/CONFIG_SITE.<arch>.Common ﬁle.,The default deﬁnition
-for SHARED_LIBRARIES in the EPICS base distribution ﬁle is YES for all
+libraries are built. This definition can be overridden for a specific arch
+in an configure/os/CONFIG_SITE.<arch>.Common file.,The default definition
+for SHARED_LIBRARIES in the EPICS base distribution file is YES for all
 host systems.*
 
-*win32 Note: An object library ﬁle is created when SHARED_LIBRARIES=NO,
+*win32 Note: An object library file is created when SHARED_LIBRARIES=NO,
 <name>.lib which is installed into $(INSTALL_LOCATION)/lib/<arch>. Two
-library ﬁles are created when SHARED_LIBRARIES=YES, <name>.lib, an
+library files are created when SHARED_LIBRARIES=YES, <name>.lib, an
 import library for DLLs, which is installed into
 $(INSTALL_LOCATION)/lib/<arch>, and <name>.dll which is installed into
-$(INSTALL_LOCATION)/bin/<arch>. (Warning: The ﬁle <name>.lib will only
+$(INSTALL_LOCATION)/bin/<arch>. (Warning: The file <name>.lib will only
 be created by the build if there are exported symbols from the
 library.) If SHARED_LIBRARIES=YES, the directory
-$(INSTALL_LOCATION)/bin/<arch> must be in the user’s path during
+$(INSTALL_LOCATION)/bin/<arch> must be in the user�s path during
 builds to allow invoking executables which were linked with shared
 libraries.*
 
-*NOTE: the <name>.lib ﬁles are diﬀerent for shared and
+*NOTE: the <name>.lib files are different for shared and
 nonshared builds.*
 
 Specifying the library name.
 ''''''''''''''''''''''''''''
 
-Any of the following can be speciﬁed:
+Any of the following can be specified:
 
-   LIBRARY += <name>
+   LIBRARY += <name>
 
    A library will be created for every target arch.
 
-   LIBRARY_<osclass> += <name>
+   LIBRARY_<osclass> += <name>
 
-   Library <name> will be created for all archs of the speciﬁed osclass.
+   Library <name> will be created for all archs of the specified osclass.
 
-   LIBRARY_DEFAULT += <name>
+   LIBRARY_DEFAULT += <name>
 
    Library <name> will be created for any arch that does not have a
-   LIBRARY_<osclass> deﬁnition
+   LIBRARY_<osclass> definition
 
-   LIBRARY_IOC += <name>
+   LIBRARY_IOC += <name>
 
    Library <name> will be created for IOC type archs.
 
-   LIBRARY_IOC_<osclass> += <name>
+   LIBRARY_IOC_<osclass> += <name>
 
-   Library <name> will be created for all IOC type archs of the speciﬁed
+   Library <name> will be created for all IOC type archs of the specified
    osclass.
 
-   LIBRARY_IOC_DEFAULT += <name>
+   LIBRARY_IOC_DEFAULT += <name>
 
    Library <name> will be created for any IOC type arch that does not
-   have a LIBRARY_IOC_<osclass> deﬁnition
+   have a LIBRARY_IOC_<osclass> definition
 
-   LIBRARY_HOST += <name>
+   LIBRARY_HOST += <name>
 
    Library <name> will be created for HOST type archs.
 
-   LIBRARY_HOST_<osclass> += <name>
+   LIBRARY_HOST_<osclass> += <name>
 
    Library <name> will be created for all HOST type archs of the
-   speciﬁed osclass.
+   specified osclass.
 
-   LIBRARY_HOST_DEFAULT += <name>
+   LIBRARY_HOST_DEFAULT += <name>
 
    Library <name> will be created for any HOST type arch that does not
-   have a LIBRARY_HOST_<osclass> deﬁnition
+   have a LIBRARY_HOST_<osclass> definition
 
-Specifying library source ﬁle names
+Specifying library source file names
 '''''''''''''''''''''''''''''''''''
 
-Source ﬁle names, which must have a suﬃx, are deﬁned as follows:
+Source file names, which must have a suffix, are defined as follows:
 
-   SRCS += <name>
+   SRCS += <name>
 
-   Source ﬁles will be used for all deﬁned libraries and products.
+   Source files will be used for all defined libraries and products.
 
-   SRCS_<osclass> += <name>
+   SRCS_<osclass> += <name>
 
-   Source ﬁles will be used for all deﬁned libraries and products for
-   all archs of the speciﬁed osclass.
+   Source files will be used for all defined libraries and products for
+   all archs of the specified osclass.
 
-   SRCS_DEFAULT += <name>
+   SRCS_DEFAULT += <name>
 
-   Source ﬁles will be used for all deﬁned libraries and products for
-   any arch that does not have a SRCS_<osclass> deﬁnition
+   Source files will be used for all defined libraries and products for
+   any arch that does not have a SRCS_<osclass> definition
 
 LIBSRCS and LIB_SRCS have the same meaning. LIBSRCS is deprecated, but
 retained for R3.13 compatibility.
 
-   LIBSRCS += <name>
+   LIBSRCS += <name>
 
-   Source ﬁles will be used for all deﬁned libraries.
+   Source files will be used for all defined libraries.
 
-   LIBSRCS_<osclass> += <name>
+   LIBSRCS_<osclass> += <name>
 
-   Source ﬁles will be used for all deﬁned libraries for all archs of
-   the speciﬁed osclass.
+   Source files will be used for all defined libraries for all archs of
+   the specified osclass.
 
-   LIBSRCS_DEFAULT += <name>
+   LIBSRCS_DEFAULT += <name>
 
-   Source ﬁles will be used for all deﬁned libraries for any arch that
-   does not have a LIBSRCS_<osclass> deﬁnition
+   Source files will be used for all defined libraries for any arch that
+   does not have a LIBSRCS_<osclass> definition
 
-   USR_SRCS += <name>
+   USR_SRCS += <name>
 
-   Source ﬁles will be used for all deﬁned products and libraries.
+   Source files will be used for all defined products and libraries.
 
-   USR_SRCS_<osclass> += <name>
+   USR_SRCS_<osclass> += <name>
 
-   Source ﬁles will be used for all deﬁned products and libraries for
-   all archs of the speciﬁed osclass.
+   Source files will be used for all defined products and libraries for
+   all archs of the specified osclass.
 
-   USR_SRCS_DEFAULT += <name>
+   USR_SRCS_DEFAULT += <name>
 
-   Source ﬁles will be used for all deﬁned products and libraries for
-   any arch that does not have a USR_SRCS_<osclass> deﬁnition
+   Source files will be used for all defined products and libraries for
+   any arch that does not have a USR_SRCS_<osclass> definition
 
-   LIB_SRCS += <name>
+   LIB_SRCS += <name>
 
-   Source ﬁles will be used for all libraries.
+   Source files will be used for all libraries.
 
-   LIB_SRCS_<osclass> += <name>
+   LIB_SRCS_<osclass> += <name>
 
-   Source ﬁles will be used for all deﬁned libraries for all archs of
-   the speciﬁed osclass.
+   Source files will be used for all defined libraries for all archs of
+   the specified osclass.
 
-   LIB_SRCS_DEFAULT += <name>
+   LIB_SRCS_DEFAULT += <name>
 
-   Source ﬁles will be used for all deﬁned libraries for any arch that
-   does not have a LIB_SRCS_<osclass> deﬁnition
+   Source files will be used for all defined libraries for any arch that
+   does not have a LIB_SRCS_<osclass> definition
 
-   <libname>_SRCS += <name>
+   <libname>_SRCS += <name>
 
-   Source ﬁles will be used for the named library.
+   Source files will be used for the named library.
 
-   <libname>_SRCS_<osclass> += <name>
+   <libname>_SRCS_<osclass> += <name>
 
-   Source ﬁles will be used for named library for all archs of the
-   speciﬁed osclass.
+   Source files will be used for named library for all archs of the
+   specified osclass.
 
-   <libname>_SRCS_DEFAULT += <name>
+   <libname>_SRCS_DEFAULT += <name>
 
-   Source ﬁles will be used for named library for any arch that does not
-   have a <libname>_SRCS_<osclass> deﬁnition
+   Source files will be used for named library for any arch that does not
+   have a <libname>_SRCS_<osclass> definition
 
-Specifying library object ﬁle names
+Specifying library object file names
 '''''''''''''''''''''''''''''''''''
 
-Library object ﬁle names should only be speciﬁed for object ﬁles which
-will not be built in the current directory. For object ﬁles built in the
-current directory, library source ﬁle names should be speciﬁed. See
+Library object file names should only be specified for object files which
+will not be built in the current directory. For object files built in the
+current directory, library source file names should be specified. See
 Specifying Library Source File Names above.
 
-Object ﬁles which have ﬁlename with a “.o” or “.obj” suﬃx are deﬁned as
-follows and can be speciﬁed without the suﬃx but should have the
-directory preﬁx
+Object files which have filename with a ".o" or ".obj" suffix are defined as
+follows and can be specified without the suffix but should have the
+directory prefix
 
-   USR_OBJS += <name>
+   USR_OBJS += <name>
 
-   Object ﬁles will be used in builds of all products and libraries
+   Object files will be used in builds of all products and libraries
 
-   USR_OBJS_<osclass> += <name>
+   USR_OBJS_<osclass> += <name>
 
-   Object ﬁles will be used in builds of all products and libraries for
-   archs with the speciﬁed osclass.
+   Object files will be used in builds of all products and libraries for
+   archs with the specified osclass.
 
-   USR_OBJS_DEFAULT += <name>
+   USR_OBJS_DEFAULT += <name>
 
-   Object ﬁles will be used in builds of all products and libraries for
-   archs without a USR_OBJS_<osclass> deﬁnition speciﬁed.
+   Object files will be used in builds of all products and libraries for
+   archs without a USR_OBJS_<osclass> definition specified.
 
-   LIB_OBJS += <name>
+   LIB_OBJS += <name>
 
-   Object ﬁles will be used in builds of all libraries.
+   Object files will be used in builds of all libraries.
 
-   LIB_OBJS_<osclass> += <name>
+   LIB_OBJS_<osclass> += <name>
 
-   Object ﬁles will be used in builds of all libraries for archs of the
-   speciﬁed osclass.
+   Object files will be used in builds of all libraries for archs of the
+   specified osclass.
 
-   LIB_OBJS_DEFAULT += <name>
+   LIB_OBJS_DEFAULT += <name>
 
-   Object ﬁles will be used in builds of all libraries for archs without
-   a LIB_OBJS_<osclass> deﬁnition speciﬁed.
+   Object files will be used in builds of all libraries for archs without
+   a LIB_OBJS_<osclass> definition specified.
 
-   <libname>_OBJS += <name>
+   <libname>_OBJS += <name>
 
-   Object ﬁles will be used for all builds of the named library)
+   Object files will be used for all builds of the named library)
 
-   <libname>_OBJS_<osclass> += <name>
+   <libname>_OBJS_<osclass> += <name>
 
-   Object ﬁles will be used in builds of the library for archs with the
-   speciﬁed osclass.
+   Object files will be used in builds of the library for archs with the
+   specified osclass.
 
-   <libname>_OBJS_DEFAULT += <name>
+   <libname>_OBJS_DEFAULT += <name>
 
-   Object ﬁles will be used in builds of the library for archs without a
-   <libname>_OBJS_<osclass> deﬁnition speciﬁed.
+   Object files will be used in builds of the library for archs without a
+   <libname>_OBJS_<osclass> definition specified.
 
-Combined object ﬁles, from R3.13 built modules and applications which
-have ﬁle names that do not include a “.o” or ”.obj” suﬃx (e.g. xyzLib)
-are deﬁned as follows:
+Combined object files, from R3.13 built modules and applications which
+have file names that do not include a ".o" or ".obj" suffix (e.g. xyzLib)
+are defined as follows:
 
-   USR_OBJLIBS += <name>
+   USR_OBJLIBS += <name>
 
-   Combined object ﬁles will be used in builds of all libraries and
+   Combined object files will be used in builds of all libraries and
    products.
 
-   USR_OBJLIBS_<osclass> += <name>
+   USR_OBJLIBS_<osclass> += <name>
 
-   Combined object ﬁles will be used in builds of all libraries and
-   products for archs of the speciﬁed osclass.
+   Combined object files will be used in builds of all libraries and
+   products for archs of the specified osclass.
 
-   USR_OBJLIBS_DEFAULT += <name>
+   USR_OBJLIBS_DEFAULT += <name>
 
-   Combined object ﬁles will be used in builds of all libraries and
-   products for archs without a USR_OBJLIBS_<osclass> deﬁnition
-   speciﬁed.
+   Combined object files will be used in builds of all libraries and
+   products for archs without a USR_OBJLIBS_<osclass> definition
+   specified.
 
-   LIB_OBJLIBS += <name>
+   LIB_OBJLIBS += <name>
 
-   Combined object ﬁles will be used in builds of all libraries.
+   Combined object files will be used in builds of all libraries.
 
-   LIB_OBJLIBS_<osclass> += <name>
+   LIB_OBJLIBS_<osclass> += <name>
 
-   Combined object ﬁles will be used in builds of all libraries for
-   archs of the speciﬁed osclass.
+   Combined object files will be used in builds of all libraries for
+   archs of the specified osclass.
 
-   LIB_OBJLIBS_DEFAULT += <name>
+   LIB_OBJLIBS_DEFAULT += <name>
 
-   Combined object ﬁles will be used in builds of all libraries for
-   archs without a LIB_OBJLIBS_<osclass> deﬁnition speciﬁed.
+   Combined object files will be used in builds of all libraries for
+   archs without a LIB_OBJLIBS_<osclass> definition specified.
 
-   <libname>_OBJLIBS += <name>
+   <libname>_OBJLIBS += <name>
 
-   Combined object ﬁles will be used for all builds of the named
+   Combined object files will be used for all builds of the named
    library.
 
-   <libname>_OBJLIBS_<osclass> += <name>
+   <libname>_OBJLIBS_<osclass> += <name>
 
-   Combined object ﬁles will be used in builds of the library for archs
-   with the speciﬁed osclass.
+   Combined object files will be used in builds of the library for archs
+   with the specified osclass.
 
-   <libname>_OBJLIBS_DEFAULT += <name>
+   <libname>_OBJLIBS_DEFAULT += <name>
 
-   Combined object ﬁles will be used in builds of the library for archs
-   without a <libname>_OBJLIBS_<osclass> deﬁnition speciﬁed.
+   Combined object files will be used in builds of the library for archs
+   without a <libname>_OBJLIBS_<osclass> definition specified.
 
-   <libname>_LDOBJS += <name>
+   <libname>_LDOBJS += <name>
 
-   Combined object ﬁles will be used for all builds of the named
+   Combined object files will be used for all builds of the named
    library. (deprecated)
 
-   <libname>_LDOBJS_<osclass> += <name>
+   <libname>_LDOBJS_<osclass> += <name>
 
-   Combined object ﬁles will be used in builds of the library for archs
-   with the speciﬁed osclass. (deprecated)
+   Combined object files will be used in builds of the library for archs
+   with the specified osclass. (deprecated)
 
-   <libname>_LDOBJS_DEFAULT += <name>
+   <libname>_LDOBJS_DEFAULT += <name>
 
-   Combined object ﬁles will be used in builds of the library for archs
-   without a <libname>_LDOBJS_<osclass> deﬁnition speciﬁed. (deprecated)
+   Combined object files will be used in builds of the library for archs
+   without a <libname>_LDOBJS_<osclass> definition specified. (deprecated)
 
-LIBOBJS deﬁnitions
+LIBOBJS definitions
 ''''''''''''''''''
 
-Previous versions of epics (3.13 and before) accepted deﬁnitions like:
+Previous versions of epics (3.13 and before) accepted definitions like:
 
-   LIBOBJS += $<support>_BIN)/xxx.o
+   LIBOBJS += $<support>_BIN)/xxx.o
 
-   These are gathered together in ﬁles such as baseLIBOBJS. To use such
-   deﬁnitions include the lines:
+   These are gathered together in files such as baseLIBOBJS. To use such
+   definitions include the lines:
 
-   -include ../baseLIBOBJS
-   <libname>_OBJS += $(LIBOBJS)
+   -include ../baseLIBOBJS
+   <libname>_OBJS += $(LIBOBJS)
 
    *Note: vxWorks applications created by makeBaseApp.pl from 3.14 Base
-   releases no longer have a ﬁle named baseLIBOBJS. Base record and
+   releases no longer have a file named baseLIBOBJS. Base record and
    device support now exists in archive libraries.*
 
 Specifying dependant libraries to be linked when creating a library
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-For each library name speciﬁed which is not a system library nor a
-library from an EPICS top deﬁned in the conﬁgure/ RELEASE ﬁle, a
-<name>_DIR deﬁnition must be present in the Makeﬁle to specify the
+For each library name specified which is not a system library nor a
+library from an EPICS top defined in the configure/ RELEASE file, a
+<name>_DIR definition must be present in the Makefile to specify the
 location of the library.
 
-Library names, which must not have a directory and “lib” preﬁx nor a
-suﬃx, are deﬁned as follows:
+Library names, which must not have a directory and "lib" prefix nor a
+suffix, are defined as follows:
 
-   LIB_LIBS += <name>
+   LIB_LIBS += <name>
 
-   Libraries to be used when linking all deﬁned libraries.
+   Libraries to be used when linking all defined libraries.
 
-   LIB_LIBS_<osclass> += <name>
+   LIB_LIBS_<osclass> += <name>
 
-   Libraries to be used or all archs of the speciﬁed osclass when
-   linking all deﬁned libraries.
+   Libraries to be used or all archs of the specified osclass when
+   linking all defined libraries.
 
-   LIB_LIBS_DEFAULT += <name>
-
-   Libraries to be used for any arch that does not have a
-   LIB_LIBS_<osclass> deﬁnition when linking all deﬁned libraries.
-
-   USR_LIBS += <name>
-
-   Libraries to be used when linking all deﬁned products and libraries.
-
-   USR_LIBS_<osclass> += <name>
-
-   Libraries to be used or all archs of the speciﬁed osclasswhen linking
-   all deﬁned products and libraries.
-
-   USR_LIBS_DEFAULT += <name>
+   LIB_LIBS_DEFAULT += <name>
 
    Libraries to be used for any arch that does not have a
-   USR_LIBS_<osclass> deﬁnition when linking all deﬁned products and
+   LIB_LIBS_<osclass> definition when linking all defined libraries.
+
+   USR_LIBS += <name>
+
+   Libraries to be used when linking all defined products and libraries.
+
+   USR_LIBS_<osclass> += <name>
+
+   Libraries to be used or all archs of the specified osclasswhen linking
+   all defined products and libraries.
+
+   USR_LIBS_DEFAULT += <name>
+
+   Libraries to be used for any arch that does not have a
+   USR_LIBS_<osclass> definition when linking all defined products and
    libraries.
 
-   <libname>_LIBS += <name>
+   <libname>_LIBS += <name>
 
    Libraries to be used for linking the named library.
 
-   <libname>_LIBS_<osclass> += <name>
+   <libname>_LIBS_<osclass> += <name>
 
-   Libraries will be used for all archs of the speciﬁed osclass for
+   Libraries will be used for all archs of the specified osclass for
    linking named library.
 
-   <libname>_LIBS_DEFAULT += <name>
+   <libname>_LIBS_DEFAULT += <name>
 
    Libraries to be used for any arch that does not have a
-   <libname>_LIBS_<osclass> deﬁnition when linking named library.
+   <libname>_LIBS_<osclass> definition when linking named library.
 
-   <libname>_SYS_LIBS += <name>
+   <libname>_SYS_LIBS += <name>
 
    System libraries to be used for linking the named library.
 
-   <libname>_SYS_LIBS_<osclass> += <name>
+   <libname>_SYS_LIBS_<osclass> += <name>
 
-   System libraries will be used for all archs of the speciﬁed osclass
+   System libraries will be used for all archs of the specified osclass
    for linking named library.
 
-   <libname>_SYS_LIBS_DEFAULT += <name>
+   <libname>_SYS_LIBS_DEFAULT += <name>
 
    System libraries to be used for any arch that does not have a
-   <libname>_LIBS_<osclass> deﬁnition when linking named library.
+   <libname>_LIBS_<osclass> definition when linking named library.
 
 The order of dependant libraries
 ''''''''''''''''''''''''''''''''
@@ -1606,32 +1606,32 @@ line:
 #. USR_SYS_LIBS
 #. USR_SYS_LIBS_<osclass> or USR_SYS_LIBS_DEFAULT
 
-Specifying library DLL ﬁle names (deprecated)
+Specifying library DLL file names (deprecated)
 '''''''''''''''''''''''''''''''''''''''''''''
 
 WIN32 libraries require all external references to be resolved, so if a
 library contains references to items in other DLL libraries, these DLL
-library names must be speciﬁed (without directory preﬁx and without
-“.dll” suﬃx) as follows:
+library names must be specified (without directory prefix and without
+".dll" suffix) as follows:
 
-   DLL_LIBS += <name>
+   DLL_LIBS += <name>
 
    These DLLs will be used for all libraries.
 
-   <libname>_DLL_LIBS += <name>
+   <libname>_DLL_LIBS += <name>
 
    These DLLs will be used for the named library.
 
-   Each <name> must have a corresponding <name>_DIR deﬁnition specifying
+   Each <name> must have a corresponding <name>_DIR definition specifying
    its directory location.
 
 Specifying shared library version number
 ''''''''''''''''''''''''''''''''''''''''
 
-A library version number can be speciﬁed when creating a shared library
+A library version number can be specified when creating a shared library
 as follows:
 
-   SHRLIB_VERSION = <version>
+   SHRLIB_VERSION = <version>
 
 | On WIN32 this results in /version:$(SHRLIB_VERSION) link option. On
   Unix type hosts .$(SHRLIB_VERSION) is appended to the shared library
@@ -1644,20 +1644,20 @@ Library example:
 
 .. code ::
 
-            LIBRARY_vxWorks += vxWorksOnly
-            LIBRARY_IOC += iocOnly
-            LIBRARY_HOST += hostOnly
-            LIBRARY += all
-            vxWorksOnly_OBJS += $(LINAC_BIN)/vxOnly1
-            vxWorksOnly_SRCS += vxOnly2.c
-            iocOnly_OBJS += $(LINAC_BIN)/iocOnly1
-            iocOnly_SRCS += iocOnly2.cpp
-            hostOnly_OBJS +=  $(LINAC_BIN)/host1
-            all_OBJS += $(LINAC_BIN)/all1
-            all_SRCS += all2.cpp
+            LIBRARY_vxWorks += vxWorksOnly
+            LIBRARY_IOC += iocOnly
+            LIBRARY_HOST += hostOnly
+            LIBRARY += all
+            vxWorksOnly_OBJS += $(LINAC_BIN)/vxOnly1
+            vxWorksOnly_SRCS += vxOnly2.c
+            iocOnly_OBJS += $(LINAC_BIN)/iocOnly1
+            iocOnly_SRCS += iocOnly2.cpp
+            hostOnly_OBJS +=  $(LINAC_BIN)/host1
+            all_OBJS += $(LINAC_BIN)/all1
+            all_SRCS += all2.cpp
 
-If the architectures deﬁned in <top>/configure are solaris-sparc and
-vxWorks-68040 and LINAC is deﬁned in the <top>/configure/RELEASE ﬁle,
+If the architectures defined in <top>/configure are solaris-sparc and
+vxWorks-68040 and LINAC is defined in the <top>/configure/RELEASE file,
 then the following libraries will be created:
 
 -  $(INSTALL_LOCATION)/bin/vxWork-68040/libvxWorksOnly.a :
@@ -1678,172 +1678,172 @@ Loadable libraries
 
 Loadable libraries are regular libraries which are not required to have
 all symbols resolved during the build. The intent is to create dynamic
-plugins so no archive library is created. Source ﬁle, object ﬁles, and
-dependant libraries are speciﬁed in exactly the same way as for regular
+plugins so no archive library is created. Source file, object files, and
+dependant libraries are specified in exactly the same way as for regular
 libraries.
 
-Any of the following can be speciﬁed:
+Any of the following can be specified:
 
-   LOADABLE_LIBRARY += <name>
+   LOADABLE_LIBRARY += <name>
 
    The <name> loadable library will be created for every target arch.
 
-   LOADABLE_LIBRARY_<osclass> += <name>
+   LOADABLE_LIBRARY_<osclass> += <name>
 
-   Loadable library <name> will be created for all archs of the speciﬁed
+   Loadable library <name> will be created for all archs of the specified
    osclass.
 
-   item LOADABLE_LIBRARY_DEFAULT += <name>
+   item LOADABLE_LIBRARY_DEFAULT += <name>
 
    Loadable library <name> will be created for any arch that does not
-   have a LOADABLE_LIBRARY_<osclass> deﬁnition
+   have a LOADABLE_LIBRARY_<osclass> definition
 
-   LOADABLE_LIBRARY_HOST += <name>
+   LOADABLE_LIBRARY_HOST += <name>
 
    Loadable library <name> will be created for HOST type archs.
 
-   LOADABLE_LIBRARY_HOST_<osclass> += <name>
+   LOADABLE_LIBRARY_HOST_<osclass> += <name>
 
    Loadable library <name> will be created for all HOST type archs of
-   the speciﬁed osclass.
+   the specified osclass.
 
-   LOADABLE_LIBRARY_HOST_DEFAULT += <name>
+   LOADABLE_LIBRARY_HOST_DEFAULT += <name>
 
    | Loadable library <name> will be created for any HOST type arch that
      does not have a
-   | LOADABLE_LIBRARY_HOST_<osclass> deﬁnition
+   | LOADABLE_LIBRARY_HOST_<osclass> definition
 
 Combined object libraries (VxWorks only)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Combined object libraries are regular combined object ﬁles which have
-been created by linking together multiple object ﬁles. OBJLIB
-speciﬁcations in the Makeﬁle create a combined object ﬁle and a
-corresponding munch ﬁle for vxWorks target architectures only. Combined
-object libraries have a Library.o suﬃx. It is possible to generate and
-install combined object libraries by using deﬁnitions:
+Combined object libraries are regular combined object files which have
+been created by linking together multiple object files. OBJLIB
+specifications in the Makefile create a combined object file and a
+corresponding munch file for vxWorks target architectures only. Combined
+object libraries have a Library.o suffix. It is possible to generate and
+install combined object libraries by using definitions:
 
 .. code ::
 
-        OBJLIB += <name>
-        OBJLIB_vxWorks += <name>
-        OBJLIB_SRCS += <srcname1> <srcname2> ...
-        OBJLIB_OBJS += <objname1> <objname2> ...
+        OBJLIB += <name>
+        OBJLIB_vxWorks += <name>
+        OBJLIB_SRCS += <srcname1> <srcname2> ...
+        OBJLIB_OBJS += <objname1> <objname2> ...
 
-These deﬁnitions result in the combined object ﬁle <name>Library.o and
-its corresponding <name>Library.munch munch ﬁle being built for each
-vxWorks architecture from source/object ﬁles in the
-OBJLIB_SRCS/OBJLIB_OBJS deﬁnitions. The combined object ﬁle and the
-munch ﬁle are installed into the $(INSTALL_LOCATION)/bin/<arch>
+These definitions result in the combined object file <name>Library.o and
+its corresponding <name>Library.munch munch file being built for each
+vxWorks architecture from source/object files in the
+OBJLIB_SRCS/OBJLIB_OBJS definitions. The combined object file and the
+munch file are installed into the $(INSTALL_LOCATION)/bin/<arch>
 directory.
 
 Object Files
 ^^^^^^^^^^^^
 
-It is possible to generate and install object ﬁles by using deﬁnitions:
+It is possible to generate and install object files by using definitions:
 
 .. code ::
 
-   OBJS += <name>
-   OBJS_<osclass> += <name>
-   OBJS_DEFAULT += <name>
-   OBJS_IOC += <name>
-   OBJS_IOC_<osclass> += <name>
-   OBJS_IOC_DEFAULT += <name>
-   OBJS_HOST += <name>
-   OBJS_HOST_<osclass> += <name>
-   OBJS_HOST_DEFAULT += <name>
+   OBJS += <name>
+   OBJS_<osclass> += <name>
+   OBJS_DEFAULT += <name>
+   OBJS_IOC += <name>
+   OBJS_IOC_<osclass> += <name>
+   OBJS_IOC_DEFAULT += <name>
+   OBJS_HOST += <name>
+   OBJS_HOST_<osclass> += <name>
+   OBJS_HOST_DEFAULT += <name>
 
-These will cause the speciﬁed ﬁle to be generated from an existing
-source ﬁle for the appropriate target arch and installed into
+These will cause the specified file to be generated from an existing
+source file for the appropriate target arch and installed into
 $(INSTALL_LOCATION)/bin/<arch>.
 
-The following Makeﬁle will create the abc object ﬁle for all target
-architectures, the def object ﬁle for all target archs except vxWorks,
-and the xyz object ﬁle only for the vxWorks target architecture and
+The following Makefile will create the abc object file for all target
+architectures, the def object file for all target archs except vxWorks,
+and the xyz object file only for the vxWorks target architecture and
 install them into the appropriate $(INSTALL_LOCATION)/bin/<arch>
 directory.
 
 .. code ::
 
-        TOP=../../..
-        include $(TOP)/configure/CONFIG
-        OBJS += abc
-        OBJS_vxWorks += xyz
-        OBJS_DEFAULT += def
-        include $(TOP)/configure/RULES
+        TOP=../../..
+        include $(TOP)/configure/CONFIG
+        OBJS += abc
+        OBJS_vxWorks += xyz
+        OBJS_DEFAULT += def
+        include $(TOP)/configure/RULES
 
 State Notation Programs
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-A state notation program ﬁle can be speciﬁed as a source ﬁle in any SRC
-deﬁnition. For example:
+A state notation program file can be specified as a source file in any SRC
+definition. For example:
 
 .. code ::
 
-        <prodname>_SRCS += <name>.stt
+        <prodname>_SRCS += <name>.stt
 
-The state notation compiler snc will generate the ﬁle <name>.c from the
-state notation program ﬁle <name>.stt. This C ﬁle is compiled and the
-resulting object ﬁle is linked into the <prodname> product.
+The state notation compiler snc will generate the file <name>.c from the
+state notation program file <name>.stt. This C file is compiled and the
+resulting object file is linked into the <prodname> product.
 
-A state notation source ﬁle must have the extension .st or .stt. The .st
-ﬁle is passed through the C preprocessor before it is processed by snc.
+A state notation source file must have the extension .st or .stt. The .st
+file is passed through the C preprocessor before it is processed by snc.
 
-If you have state notation language source ﬁles (.stt and .st ﬁles), the
-module seq must be built and SNCSEQ deﬁned in the RELEASE ﬁle. If the
-state notation language source ﬁles require c preprocessing before
-conversion to c source (.st ﬁles), gcc must be in your path.
+If you have state notation language source files (.stt and .st files), the
+module seq must be built and SNCSEQ defined in the RELEASE file. If the
+state notation language source files require c preprocessing before
+conversion to c source (.st files), gcc must be in your path.
 
 Scripts, etc.
 ^^^^^^^^^^^^^
 
-Any of the following can be speciﬁed:
+Any of the following can be specified:
 
-   SCRIPTS += <name>
+   SCRIPTS += <name>
 
    A script will be installed from the src directory to the
    $(INSTALL_LOCATION)/bin/<arch> directories.
 
-   SCRIPTS_<osclass> += <name>
+   SCRIPTS_<osclass> += <name>
 
-   Script <name> will be installed for all archs of the speciﬁed
+   Script <name> will be installed for all archs of the specified
    osclass.
 
-   SCRIPTS_DEFAULT += <name>
+   SCRIPTS_DEFAULT += <name>
 
    Script <name> will be installed for any arch that does not have a
-   SCRIPTS_<osclass> deﬁnition
+   SCRIPTS_<osclass> definition
 
-   SCRIPTS_IOC += <name>
+   SCRIPTS_IOC += <name>
 
    Script <name> will be installed for IOC type archs.
 
-   SCRIPTS_IOC_<osclass> += <name>
+   SCRIPTS_IOC_<osclass> += <name>
 
    Script <name> will be installed for all IOC type archs of the
-   speciﬁed osclass.
+   specified osclass.
 
-   SCRIPTS_IOC_DEFAULT += <name>
+   SCRIPTS_IOC_DEFAULT += <name>
 
    Script <name> will be installed for any IOC type arch that does not
-   have a SCRIPTS_IOC_<osclass> deﬁnition
+   have a SCRIPTS_IOC_<osclass> definition
 
-   SCRIPTS_HOST += <name>
+   SCRIPTS_HOST += <name>
 
    Script <name> will be installed for HOST type archs.
 
-   SCRIPTS_HOST_<osclass> += <name>
+   SCRIPTS_HOST_<osclass> += <name>
 
    Script <name> will be installed for all HOST type archs of the
-   speciﬁed osclass.
+   specified osclass.
 
-   SCRIPTS_HOST_DEFAULT += <name>
+   SCRIPTS_HOST_DEFAULT += <name>
 
    Script <name> will be installed for any HOST type arch that does not
-   have a SCRIPTS_HOST_<osclass> deﬁnition
+   have a SCRIPTS_HOST_<osclass> definition
 
-Deﬁnitions of the form:
+Definitions of the form:
 
 .. container:: verbatim
    :name: verbatim-59
@@ -1851,83 +1851,83 @@ Deﬁnitions of the form:
    .. container:: fancyvrb
       :name: fancyvrb59
 
-        SCRIPTS_<osclass> += <name1>
-        SCRIPTS_DEFAULT += <name2>
+        SCRIPTS_<osclass> += <name1>
+        SCRIPTS_DEFAULT += <name2>
 
 results in the <name1> script being installed from the src directory to
 the $(INSTALL_LOCATION)/bin/<arch> directories for all target archs of
-the speciﬁed os class <osclass> and the <name2> script installed into
+the specified os class <osclass> and the <name2> script installed into
 the $(INSTALL_LOCATION)/bin/<arch> directories of all other target
 archs.
 
-Include ﬁles
-^^^^^^^^^^^^
+Include files
+^^^^^^^^^^^^^
 
-A deﬁnition of the form:
+A definition of the form:
 
 .. code ::
 
-        INC += <name>.h
+        INC += <name>.h
 
-results in ﬁle <name>.h being installed or created and installed to the
+results in file <name>.h being installed or created and installed to the
 $(INSTALL_LOCATION)/include directory.
 
-Deﬁnitions of the form:
+Definitions of the form:
 
 .. code ::
 
-        INC_DEFAULT += <name>.h
-        INC_<osclass> += <name>.h
+        INC_DEFAULT += <name>.h
+        INC_<osclass> += <name>.h
 
-results in ﬁle <name>.h being installed or created and installed into
+results in file <name>.h being installed or created and installed into
 the appropriate $(INSTALL_LOCATION)/include/os/<osclass> directory.
 
-Html and Doc ﬁles
+Html and Doc files
 ^^^^^^^^^^^^^^^^^
 
-A deﬁnition of the form:
+A definition of the form:
 
 .. code ::
 
-        HTMLS_DIR = <dirname>
-        HTMLS += <name>
+        HTMLS_DIR = <dirname>
+        HTMLS += <name>
 
-results in ﬁle <name> being installed from the src directory to the
+results in file <name> being installed from the src directory to the
 $(INSTALL_LOCATION)/html/<dirname> directory.
 
-A deﬁnition of the form:
+A definition of the form:
 
 .. code ::
 
-        DOCS += <name>
+        DOCS += <name>
 
-results in ﬁle <name> being installed from the src directory to the
+results in file <name> being installed from the src directory to the
 $(INSTALL_LOCATION)/doc directory.
 
 Templates
 ^^^^^^^^^
 
-Adding deﬁnitions of the form
+Adding definitions of the form
 
 .. code ::
 
-        TEMPLATES_DIR = <dirname>
-        TEMPLATES += <name>
+        TEMPLATES_DIR = <dirname>
+        TEMPLATES += <name>
 
-results in the ﬁle <name> being installed from the src directory to the
+results in the file <name> being installed from the src directory to the
 $(INSTALL_LOCATION)/templates/<dirname> directory. If a directory
-structure of template ﬁles is to be installed, the template ﬁle names
-may include a directory preﬁx.
+structure of template files is to be installed, the template file names
+may include a directory prefix.
 
 Lex and yacc
 ^^^^^^^^^^^^
 
-If a <name>.c source ﬁle speciﬁed in a Makeﬁle deﬁnition is not found in
+If a <name>.c source file specified in a Makefile definition is not found in
 the source directory, gnumake will try to build it from <name>.y and
-<name>_lex.l ﬁles in the source directory. Lex converts a <name>.l Lex
-code ﬁle to a lex.yy.c ﬁle which the build rules renames to <name>.c.
-Yacc converts a <name>.y yacc code ﬁle to a y.tab.c ﬁle, which the build
-rules renames to <name>.c. Optionally yacc can create a y.tab.h ﬁle
+<name>_lex.l files in the source directory. Lex converts a <name>.l Lex
+code file to a lex.yy.c file which the build rules renames to <name>.c.
+Yacc converts a <name>.y yacc code file to a y.tab.c file, which the build
+rules renames to <name>.c. Optionally yacc can create a y.tab.h file
 which the build rules renames to <name>.h.
 
 Products
@@ -1935,328 +1935,328 @@ Products
 
 A product executable is created for each <arch> and installed into
 $(INSTALL_LOCATION)/bin/<arch> by specifying its name and the name of
-either the object or source ﬁles containing code for the product. An
-object or source ﬁle name can appear with or without a directory preﬁx.
-Object ﬁles should contain a directory preﬁx. If the ﬁle has a directory
-preﬁx e.g. $(EPICS_BASE_BIN), the ﬁle is taken from the speciﬁed
-location. If a directory preﬁx is not present, make will look in the
-source directories for a ﬁle with the speciﬁed name or try build it
-using existing rules. An executable ﬁlename suﬃx appropriate for the
-target arch (e.g. .exe) may be appended to the ﬁlename when the ﬁle is
+either the object or source files containing code for the product. An
+object or source file name can appear with or without a directory prefix.
+Object files should contain a directory prefix. If the file has a directory
+prefix e.g. $(EPICS_BASE_BIN), the file is taken from the specified
+location. If a directory prefix is not present, make will look in the
+source directories for a file with the specified name or try build it
+using existing rules. An executable filename suffix appropriate for the
+target arch (e.g. .exe) may be appended to the filename when the file is
 created.
 
-PROD speciﬁcations in the Makeﬁle for vxWorks target architectures
-create a combined object ﬁle with library references resolved and a
-corresponding .munch ﬁle.
+PROD specifications in the Makefile for vxWorks target architectures
+create a combined object file with library references resolved and a
+corresponding .munch file.
 
 .. code ::
 
-        PROD_HOST += <name>
-        <name>_SRC += <srcname>.c
+        PROD_HOST += <name>
+        <name>_SRC += <srcname>.c
 
 results in the executable <name> being built for each HOST architecture,
-<arch>, from a <srcname>.c ﬁle. Then <name> is installed into the
+<arch>, from a <srcname>.c file. Then <name> is installed into the
 $(INSTALL_LOCATION)/bin/<arch> directory.
 
 Specifying the product name.
 ''''''''''''''''''''''''''''
 
-Any of the following can be speciﬁed:
+Any of the following can be specified:
 
-   PROD += <name>
+   PROD += <name>
 
    Product <name> will be created for every target arch.
 
-   PROD_<osclass> += <name>
+   PROD_<osclass> += <name>
 
-   Product <name> will be created for all archs of the speciﬁed osclass.
+   Product <name> will be created for all archs of the specified osclass.
 
-   PROD_DEFAULT += <name>
+   PROD_DEFAULT += <name>
 
    Product <name> will be created for any arch that does not have a
-   PROD_<osclass> deﬁnition
+   PROD_<osclass> definition
 
-   PROD_IOC += <name>
+   PROD_IOC += <name>
 
    Product <name> will be created for IOC type archs.
 
-   PROD_IOC_<osclass> += <name>
+   PROD_IOC_<osclass> += <name>
 
-   Product <name> will be created for all IOC type archs of the speciﬁed
+   Product <name> will be created for all IOC type archs of the specified
    osclass.
 
-   PROD_IOC_DEFAULT += <name>
+   PROD_IOC_DEFAULT += <name>
 
    Product <name> will be created for any IOC type arch that does not
-   have a PROD_IOC_<osclass> deﬁnition
+   have a PROD_IOC_<osclass> definition
 
-   PROD_HOST += <name>
+   PROD_HOST += <name>
 
    Product <name> will be created for HOST type archs.
 
-   PROD_HOST_<osclass> += <name>
+   PROD_HOST_<osclass> += <name>
 
    Product <name> will be created for all HOST type archs of the
-   speciﬁed osclass.
+   specified osclass.
 
-   PROD_HOST_DEFAULT += <name>
+   PROD_HOST_DEFAULT += <name>
 
    Product <name> will be created for any HOST type arch that does not
-   have a PROD_HOST_<osclass> deﬁnition
+   have a PROD_HOST_<osclass> definition
 
-Specifying product object ﬁle names
+Specifying product object file names
 '''''''''''''''''''''''''''''''''''
 
-Object ﬁles which have ﬁlenames with a “.o” or “.obj” suﬃx are deﬁned as
-follows and can be speciﬁed without the suﬃx but should have the
-directory preﬁx
+Object files which have filenames with a ".o" or ".obj" suffix are defined as
+follows and can be specified without the suffix but should have the
+directory prefix
 
-   USR_OBJS += <name>
+   USR_OBJS += <name>
 
-   Object ﬁles will be used in builds of all products and libraries
+   Object files will be used in builds of all products and libraries
 
-   USR_OBJS_<osclass> += <name>
+   USR_OBJS_<osclass> += <name>
 
-   Object ﬁles will be used in builds of all products and libraries for
-   archs with the speciﬁed osclass.
+   Object files will be used in builds of all products and libraries for
+   archs with the specified osclass.
 
-   USR_OBJS_DEFAULT += <name>
+   USR_OBJS_DEFAULT += <name>
 
-   Object ﬁles will be used in builds of all products and libraries for
-   archs without a USR_OBJS_<osclass> deﬁnition speciﬁed.
+   Object files will be used in builds of all products and libraries for
+   archs without a USR_OBJS_<osclass> definition specified.
 
-   PROD_OBJS += <name>
+   PROD_OBJS += <name>
 
-   Object ﬁles will be used in builds of all products
+   Object files will be used in builds of all products
 
-   PROD_OBJS_<osclass> += <name>
+   PROD_OBJS_<osclass> += <name>
 
-   Object ﬁles will be used in builds of all products for archs with the
-   speciﬁed osclass.
+   Object files will be used in builds of all products for archs with the
+   specified osclass.
 
-   PROD_OBJS_DEFAULT += <name>
+   PROD_OBJS_DEFAULT += <name>
 
-   Object ﬁles will be used in builds of all products for archs without
-   a PROD_OBJS_<osclass> deﬁnition speciﬁed.
+   Object files will be used in builds of all products for archs without
+   a PROD_OBJS_<osclass> definition specified.
 
-   <prodname>_OBJS += <name>
+   <prodname>_OBJS += <name>
 
-   Object ﬁles will be used for all builds of the named product
+   Object files will be used for all builds of the named product
 
-   <prodname>_OBJS_<osclass> += <name>
+   <prodname>_OBJS_<osclass> += <name>
 
-   Object ﬁles will be used in builds of the named product for archs
-   with the speciﬁed osclass.
+   Object files will be used in builds of the named product for archs
+   with the specified osclass.
 
-   <prodname>_OBJS_DEFAULT += <name>
+   <prodname>_OBJS_DEFAULT += <name>
 
-   Object ﬁles will be used in builds of the named product for archs
-   without a <prodname>_OBJS_<osclass> deﬁnition speciﬁed.
+   Object files will be used in builds of the named product for archs
+   without a <prodname>_OBJS_<osclass> definition specified.
 
-   Combined object ﬁles, from R3.13 built modules and applications which
-   have ﬁle names that do not include a “.o” or ”.obj” suﬃx (e.g.
-   xyzLib) are deﬁned as follows:
+   Combined object files, from R3.13 built modules and applications which
+   have file names that do not include a ".o" or ".obj" suffix (e.g.
+   xyzLib) are defined as follows:
 
-   USR_OBJLIBS += <name>
+   USR_OBJLIBS += <name>
 
-   Combined object ﬁles will be used in builds of all libraries and
+   Combined object files will be used in builds of all libraries and
    products.
 
-   USR_OBJLIBS_<osclass> += <name>
+   USR_OBJLIBS_<osclass> += <name>
 
-   Combined object ﬁles will be used in builds of all libraries and
-   products for archs of the speciﬁed osclass.
+   Combined object files will be used in builds of all libraries and
+   products for archs of the specified osclass.
 
-   USR_OBJLIBS_DEFAULT += <name>
+   USR_OBJLIBS_DEFAULT += <name>
 
-   Combined object ﬁles will be used in builds of all libraries and
-   products for archs without a USR_OBJLIBS_<osclass> deﬁnition
-   speciﬁed.
+   Combined object files will be used in builds of all libraries and
+   products for archs without a USR_OBJLIBS_<osclass> definition
+   specified.
 
-   PROD_OBJLIBS += <name>
+   PROD_OBJLIBS += <name>
 
-   Combined object ﬁles will be used in builds of all products.
+   Combined object files will be used in builds of all products.
 
-   PROD_OBJLIBS_<osclass> += <name>
+   PROD_OBJLIBS_<osclass> += <name>
 
-   Combined object ﬁles will be used in builds of all products for archs
-   of the speciﬁed osclass.
+   Combined object files will be used in builds of all products for archs
+   of the specified osclass.
 
-   PROD_OBJLIBS_DEFAULT += <name>
+   PROD_OBJLIBS_DEFAULT += <name>
 
-   Combined object ﬁles will be used in builds of all products for archs
-   without a PROD_OBJLIBS_<osclass> deﬁnition speciﬁed.
+   Combined object files will be used in builds of all products for archs
+   without a PROD_OBJLIBS_<osclass> definition specified.
 
-   <prodname>_OBJLIBS += <name>
+   <prodname>_OBJLIBS += <name>
 
-   Combined object ﬁles will be used for all builds of the named
+   Combined object files will be used for all builds of the named
    product.
 
-   <prodname>_OBJLIBS_<osclass> += <name>
+   <prodname>_OBJLIBS_<osclass> += <name>
 
-   Combined object ﬁles will be used in builds of the named product for
-   archs with the speciﬁed osclass.
+   Combined object files will be used in builds of the named product for
+   archs with the specified osclass.
 
-   <prodname>_OBJLIBS_DEFAULT += <name>
+   <prodname>_OBJLIBS_DEFAULT += <name>
 
-   Combined object ﬁles will be used in builds of the named product for
-   archs without a <prodname>_OBJLIBS_<osclass> deﬁnition speciﬁed.
+   Combined object files will be used in builds of the named product for
+   archs without a <prodname>_OBJLIBS_<osclass> definition specified.
 
-   <prodname>_LDOBJS += <name>
+   <prodname>_LDOBJS += <name>
 
-   Object ﬁles will be used for all builds of the named product.
+   Object files will be used for all builds of the named product.
    (deprecated)
 
-   <prodname>_LDOBJS_<osclass> += <name>
+   <prodname>_LDOBJS_<osclass> += <name>
 
-   Object ﬁles will be used in builds of the name product for archs with
-   the speciﬁed osclass. (deprecated)
+   Object files will be used in builds of the name product for archs with
+   the specified osclass. (deprecated)
 
-   <prodname>_LDOBJS_DEFAULT += <name>
+   <prodname>_LDOBJS_DEFAULT += <name>
 
-   Object ﬁles will be used in builds of the product for archs without a
-   <prodname>_LDOBJS_<osclass> deﬁnition speciﬁed. (deprecated)
+   Object files will be used in builds of the product for archs without a
+   <prodname>_LDOBJS_<osclass> definition specified. (deprecated)
 
-Specifying product source ﬁle names
+Specifying product source file names
 '''''''''''''''''''''''''''''''''''
 
-Source ﬁle names, which must have a suﬃx, are deﬁned as follows:
+Source file names, which must have a suffix, are defined as follows:
 
-   SRCS += <name>
+   SRCS += <name>
 
-   Source ﬁles will be used for all deﬁned libraries and products.
+   Source files will be used for all defined libraries and products.
 
-   SRCS_<osclass> += <name>
+   SRCS_<osclass> += <name>
 
-   Source ﬁles will be used for all deﬁned libraries and products for
-   all archs of the speciﬁed osclass.
+   Source files will be used for all defined libraries and products for
+   all archs of the specified osclass.
 
-   SRCS_DEFAULT += <name>
+   SRCS_DEFAULT += <name>
 
-   Source ﬁles will be used for all deﬁned libraries and products for
-   any arch that does not have a SRCS_<osclass> deﬁnition
+   Source files will be used for all defined libraries and products for
+   any arch that does not have a SRCS_<osclass> definition
 
-   USR_SRCS += <name>
+   USR_SRCS += <name>
 
-   Source ﬁles will be used for all products and libraries.
+   Source files will be used for all products and libraries.
 
-   USR_SRCS_<osclass> += <name>
+   USR_SRCS_<osclass> += <name>
 
-   Source ﬁles will be used for all deﬁned products and libraries for
-   all archs of the speciﬁed osclass.
+   Source files will be used for all defined products and libraries for
+   all archs of the specified osclass.
 
-   USR_SRCS_DEFAULT += <name>
+   USR_SRCS_DEFAULT += <name>
 
-   Source ﬁles will be used for all deﬁned products and libraries for
-   any arch that does not have a USR_SRCS_<osclass> deﬁnition
+   Source files will be used for all defined products and libraries for
+   any arch that does not have a USR_SRCS_<osclass> definition
 
-   PROD_SRCS += <name>
+   PROD_SRCS += <name>
 
-   Source ﬁles will be used for all products.
+   Source files will be used for all products.
 
-   PROD_SRCS_<osclass> += <name>
+   PROD_SRCS_<osclass> += <name>
 
-   Source ﬁles will be used for all deﬁned products for all archs of the
-   speciﬁed osclass.
+   Source files will be used for all defined products for all archs of the
+   specified osclass.
 
-   PROD_SRCS_DEFAULT += <name>
+   PROD_SRCS_DEFAULT += <name>
 
-   Source ﬁles will be used for all deﬁned products for any arch that
-   does not have a PROD_SRCS_<osclass> deﬁnition
+   Source files will be used for all defined products for any arch that
+   does not have a PROD_SRCS_<osclass> definition
 
-   <prodname>_SRCS += <name>
+   <prodname>_SRCS += <name>
 
-   Source ﬁle will be used for the named product.
+   Source file will be used for the named product.
 
-   <prodname>_SRCS_<osclass> += <name>
+   <prodname>_SRCS_<osclass> += <name>
 
-   Source ﬁles will be used for named product for all archs of the
-   speciﬁed osclass.
+   Source files will be used for named product for all archs of the
+   specified osclass.
 
-   <prodname>_SRCS_DEFAULT += <name>
+   <prodname>_SRCS_DEFAULT += <name>
 
-   Source ﬁles will be used for named product for any arch that does not
-   have a <prodname>_SRCS_<osclass> deﬁnition
+   Source files will be used for named product for any arch that does not
+   have a <prodname>_SRCS_<osclass> definition
 
 Specifying libraries to be linked when creating the product
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-For each library name speciﬁed which is not a system library nor a
-library from EPICS_BASE, a <name>_DIR deﬁnition must be present in the
-Makeﬁle to specify the location of the library.
+For each library name specified which is not a system library nor a
+library from EPICS_BASE, a <name>_DIR definition must be present in the
+Makefile to specify the location of the library.
 
-Library names, which must not have a directory and “lib” preﬁx nor a
-suﬃx, are deﬁned as follows:
+Library names, which must not have a directory and "lib" prefix nor a
+suffix, are defined as follows:
 
-   PROD_LIBS += <name>
+   PROD_LIBS += <name>
 
-   Libraries to be used when linking all deﬁned products.
+   Libraries to be used when linking all defined products.
 
-   PROD_LIBS_<osclass> += <name>
+   PROD_LIBS_<osclass> += <name>
 
-   Libraries to be used or all archs of the speciﬁed osclass when
-   linking all deﬁned products.
+   Libraries to be used or all archs of the specified osclass when
+   linking all defined products.
 
-   PROD_LIBS_DEFAULT += <name>
-
-   Libraries to be used for any arch that does not have a
-   PROD_LIBS_<osclass> deﬁnition when linking all deﬁned products.
-
-   USR_LIBS += <name>
-
-   Libraries to be used when linking all deﬁned products.
-
-   USR_LIBS_<osclass> += <name>
-
-   Libraries to be used or all archs of the speciﬁed osclasswhen linking
-   all deﬁned products.
-
-   USR_LIBS_DEFAULT += <name>
+   PROD_LIBS_DEFAULT += <name>
 
    Libraries to be used for any arch that does not have a
-   USR_LIBS_<osclass> deﬁnition when linking all deﬁned products.
+   PROD_LIBS_<osclass> definition when linking all defined products.
 
-   <prodname>_LIBS += <name>
+   USR_LIBS += <name>
+
+   Libraries to be used when linking all defined products.
+
+   USR_LIBS_<osclass> += <name>
+
+   Libraries to be used or all archs of the specified osclasswhen linking
+   all defined products.
+
+   USR_LIBS_DEFAULT += <name>
+
+   Libraries to be used for any arch that does not have a
+   USR_LIBS_<osclass> definition when linking all defined products.
+
+   <prodname>_LIBS += <name>
 
    Libraries to be used for linking the named product.
 
-   <prodname>_LIBS_<osclass> += <name>
+   <prodname>_LIBS_<osclass> += <name>
 
-   Libraries will be used for all archs of the speciﬁed osclass for
+   Libraries will be used for all archs of the specified osclass for
    linking named product.
 
-   <prodname>_LIBS_DEFAULT += <name>
+   <prodname>_LIBS_DEFAULT += <name>
 
    Libraries to be used for any arch that does not have a
-   <prodname>_LIBS_<osclass> deﬁnition when linking named product.
+   <prodname>_LIBS_<osclass> definition when linking named product.
 
-   SYS_PROD_LIBS += <name>
+   SYS_PROD_LIBS += <name>
 
-   System libraries to be used when linking all deﬁned products.
+   System libraries to be used when linking all defined products.
 
-   SYS_PROD_LIBS_<osclass> += <name>
+   SYS_PROD_LIBS_<osclass> += <name>
 
-   System libraries to be used for all archs of the speciﬁed osclass
-   when linking all deﬁned products.
+   System libraries to be used for all archs of the specified osclass
+   when linking all defined products.
 
-   SYS_PROD_LIBS_DEFAULT += <name>
+   SYS_PROD_LIBS_DEFAULT += <name>
 
    System libraries to be used for any arch that does not have a
-   PROD_LIBS_<osclass> deﬁnition when linking all deﬁned products.
+   PROD_LIBS_<osclass> definition when linking all defined products.
 
-   <prodname>_SYS_LIBS += <name>
+   <prodname>_SYS_LIBS += <name>
 
    System libraries to be used for linking the named product.
 
-   <prodname>_SYS_LIBS_<osclass> += <name>
+   <prodname>_SYS_LIBS_<osclass> += <name>
 
-   System libraries will be used for all archs of the speciﬁed osclass
+   System libraries will be used for all archs of the specified osclass
    for linking named product.
 
-   <prodname>_SYS_LIBS_DEFAULT += <name>
+   <prodname>_SYS_LIBS_DEFAULT += <name>
 
    System libraries to be used for any arch that does not have a
-   <prodname>_LIBS_<osclass> deﬁnition when linking named product.
+   <prodname>_LIBS_<osclass> definition when linking named product.
 
 .. _the-order-of-dependant-libraries-1:
 
@@ -2282,17 +2282,17 @@ line:
 Specifying product version number
 '''''''''''''''''''''''''''''''''
 
-On WIN32 only a product version number can be speciﬁed as follows:
+On WIN32 only a product version number can be specified as follows:
 
-   PROD_VERSION += <version>
+   PROD_VERSION += <version>
 
-This results in “/version:$(PROD_VERSION)” link option.
+This results in "/version:$(PROD_VERSION)" link option.
 
 Generate version header
 '''''''''''''''''''''''
 
-A header can be generated which deﬁnes a single string macro with an
-automatically generated identiﬁer. The default is the ISO 8601 formatted
+A header can be generated which defines a single string macro with an
+automatically generated identifier. The default is the ISO 8601 formatted
 time of the build. A revision id is used if a supported version control
 system is present. This will typically be used to make an automatically
 updated source version number visible at runtime (eg. with a stringin
@@ -2300,30 +2300,30 @@ record).
 
 To enable this the variable GENVERSION must be set with the desired name
 of the generated header. By default this variable is empty and no header
-will be generated. If speciﬁed, this variable must be set before
+will be generated. If specified, this variable must be set before
 configure/RULES is included.
 
-It is also necessary to add an explicit dependency for each source ﬁle
+It is also necessary to add an explicit dependency for each source file
 which includes the generated header.
 
-An Makeﬁle which generates a version header named “myversion.h” included
-by “devVersionString.c” would have the following.
+An Makefile which generates a version header named "myversion.h" included
+by "devVersionString.c" would have the following.
 
 .. code ::
 
-        TOP=../..
-        include $(TOP)/configure/CONFIG
-        # ... define PROD or LIBRARY names sometarget
-        sometarget_SRCS = devVersionString.c
-        GENVERSION = myversion.h
-        include $(TOP)/configure/RULES
-        # for each source file
-        devVersionString$(DEP): $(GENVERSION)
+        TOP=../..
+        include $(TOP)/configure/CONFIG
+        # ... define PROD or LIBRARY names sometarget
+        sometarget_SRCS = devVersionString.c
+        GENVERSION = myversion.h
+        include $(TOP)/configure/RULES
+        # for each source file
+        devVersionString$(DEP): $(GENVERSION)
 
 The optional variables GENVERSIONMACRO and GENVERSIONDEFAULT give the
-name of the C macro which will be deﬁned in the generated header, and
+name of the C macro which will be defined in the generated header, and
 its default value if no version control system is being used. To avoid
-conﬂicts, the macro name must be changed from its default MODULEVERSION
+conflicts, the macro name must be changed from its default MODULEVERSION
 if the version header is to be installed.
 
 Product static builds
@@ -2331,12 +2331,12 @@ Product static builds
 
 Product executables can be linked with either archive versions or shared
 versions of EPICS libraries. Shared versions of system libraries will
-always be used in product linking. The deﬁnition of STATIC_BUILD
-(YES/NO) in base/conﬁgure/ CONFIG_SITE determines which EPICS libraries
+always be used in product linking. The definition of STATIC_BUILD
+(YES/NO) in base/configure/ CONFIG_SITE determines which EPICS libraries
 to use. When STATIC_BUILD is NO, shared libraries will be used.
-(SHARED_LIBRARIES must be set to YES.) The default deﬁnition for
-STATIC_BUILD in the EPICS base CONFIG_SITE distribution ﬁle is NO. A
-STATIC_BUILD deﬁnition in a Makeﬁle will override the deﬁnition in
+(SHARED_LIBRARIES must be set to YES.) The default definition for
+STATIC_BUILD in the EPICS base CONFIG_SITE distribution file is NO. A
+STATIC_BUILD definition in a Makefile will override the definition in
 CONFIG_SITE.Static builds may not be possible on all systems. For static
 builds, all nonsystem libraries must have an archive version, and this
 may not be true form all libraries.
@@ -2346,55 +2346,55 @@ Test Products
 
 Test products are product executables that are created but not installed
 into $(INSTALL_LOCATION)/bin/<arch> directories. Test product libraries,
-source, and object ﬁles are speciﬁed in exactly the same way as regular
+source, and object files are specified in exactly the same way as regular
 products.
 
-Any of the following can be speciﬁed:
+Any of the following can be specified:
 
-   TESTPROD += <name>
+   TESTPROD += <name>
 
    Test product <name> will be created for every target arch.
 
-   TESTPROD_<osclass> += <name>
+   TESTPROD_<osclass> += <name>
 
-   Test product <name> will be created for all archs of the speciﬁed
+   Test product <name> will be created for all archs of the specified
    osclass.
 
-   TESTPROD_DEFAULT += <name>
+   TESTPROD_DEFAULT += <name>
 
    | Test product <name> will be created for any arch that does not have
      a
-   | TESTPROD_<osclass> deﬁnition
+   | TESTPROD_<osclass> definition
 
-   TESTPROD_IOC += <name>
+   TESTPROD_IOC += <name>
 
    Test product <name> will be created for IOC type archs.
 
-   TESTPROD_IOC_<osclass> += <name>
+   TESTPROD_IOC_<osclass> += <name>
 
    Test product <name> will be created for all IOC type archs of the
-   speciﬁed osclass.
+   specified osclass.
 
-   TESTPROD_IOC_DEFAULT += <name>
+   TESTPROD_IOC_DEFAULT += <name>
 
    | Test product <name> will be created for any IOC type arch that does
      not have a
-   | TESTPROD_IOC_<osclass> deﬁnition
+   | TESTPROD_IOC_<osclass> definition
 
-   TESTPROD_HOST += <name>
+   TESTPROD_HOST += <name>
 
    Test product <name> will be created for HOST type archs.
 
-   TESTPROD_HOST_<osclass> += <name>
+   TESTPROD_HOST_<osclass> += <name>
 
    Test product <name> will be created for all HOST type archs of the
-   speciﬁed osclass.
+   specified osclass.
 
-   TESTPROD_HOST_DEFAULT += <name>
+   TESTPROD_HOST_DEFAULT += <name>
 
    | Test product <name> will be created for any HOST type arch that
      does not have a
-   | TESTPROD_HOST_<osclass> deﬁnition
+   | TESTPROD_HOST_<osclass> definition
 
 Test Scripts
 ^^^^^^^^^^^^
@@ -2402,56 +2402,56 @@ Test Scripts
 Test scripts are perl scripts whose names end in .t that get executed to
 satisfy the runtests make target. They are run by the perl Test::Harness
 library, and should send output to stdout following the Test Anything
-Protocol. Any of the following can be speciﬁed, although only
+Protocol. Any of the following can be specified, although only
 TESTSCRIPTS_HOST is currently useful:
 
-   TESTSCRIPTS += <name>
+   TESTSCRIPTS += <name>
 
    Test script <name> will be created for every target arch.
 
-   TESTSCRIPTS_<osclass> += <name>
+   TESTSCRIPTS_<osclass> += <name>
 
-   Test script <name> will be created for all archs of the speciﬁed
+   Test script <name> will be created for all archs of the specified
    osclass.
 
-   TESTSCRIPTS_DEFAULT += <name>
+   TESTSCRIPTS_DEFAULT += <name>
 
    | Test script <name> will be created for any arch that does not have
      a
-   | TESTSCRIPTS_<osclass> deﬁnition
+   | TESTSCRIPTS_<osclass> definition
 
-   TESTSCRIPTS_IOC += <name>
+   TESTSCRIPTS_IOC += <name>
 
    Test script <name> will be created for IOC type archs.
 
-   TESTSCRIPTS_IOC_<osclass> += <name>
+   TESTSCRIPTS_IOC_<osclass> += <name>
 
    Test script <name> will be created for all IOC type archs of the
-   speciﬁed osclass.
+   specified osclass.
 
-   TESTSCRIPTS_IOC_DEFAULT += <name>
+   TESTSCRIPTS_IOC_DEFAULT += <name>
 
    | Test script <name> will be created for any IOC type arch that does
      not have a
-   | TESTSCRIPTS_IOC_<osclass> deﬁnition
+   | TESTSCRIPTS_IOC_<osclass> definition
 
-   TESTSCRIPTS_HOST += <name>
+   TESTSCRIPTS_HOST += <name>
 
    Test script <name> will be created for HOST type archs.
 
-   TESTSCRIPTS_HOST_<osclass> += <name>
+   TESTSCRIPTS_HOST_<osclass> += <name>
 
    Test script <name> will be created for all HOST type archs of the
-   speciﬁed osclass.
+   specified osclass.
 
-   TESTSCRIPTS_HOST_DEFAULT += <name>
+   TESTSCRIPTS_HOST_DEFAULT += <name>
 
    | Test script <name> will be created for any HOST type arch that does
      not have a
-   | TESTSCRIPTS_HOST_<osclass> deﬁnition.
+   | TESTSCRIPTS_HOST_<osclass> definition.
 
 If a name in one of the above variables matches a regular executable
-program name (normally generated as a test product) with “.t” appended,
+program name (normally generated as a test product) with ".t" appended,
 a suitable perl script will be generated that will execute that program
 directly; this makes it simple to run programs that use the
 epicsUnitTest routines in libCom. A test script written in Perl with a
@@ -2462,121 +2462,121 @@ Test::Simple or Test::More libraries.
 Miscellaneous Targets
 ^^^^^^^^^^^^^^^^^^^^^
 
-A deﬁnition of the form:
+A definition of the form:
 
 .. code ::
 
-        TARGETS += <name>
+        TARGETS += <name>
 
-results in the ﬁle <name> being built in the O.<arch> directory from
-existing rules and ﬁles in the source directory. These target ﬁles are
+results in the file <name> being built in the O.<arch> directory from
+existing rules and files in the source directory. These target files are
 not installed.
 
 Installing Other Binaries
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Deﬁnitions of the form:
+Definitions of the form:
 
 .. code ::
 
-        BIN_INSTALLS += <name>
-        BIN_INSTALLS += <dir>/<name>
-        BIN_INSTALLS_DEFAULT += <name>
-        BIN_INSTALLS_<osclass> += <name>
+        BIN_INSTALLS += <name>
+        BIN_INSTALLS += <dir>/<name>
+        BIN_INSTALLS_DEFAULT += <name>
+        BIN_INSTALLS_<osclass> += <name>
 
-will result in the named ﬁles being installed to the appropriate
-$(INSTALL_LOCATION)/bin/<arch> directory. The ﬁle <name> can appear with
-or without a directory preﬁx. If the ﬁle has a directory preﬁx e.g.
-$(EPICS_BASE_BIN), it is copied from the speciﬁed location. If a
-directory preﬁx is not present, make will look in the source directory
-for the ﬁle.
+will result in the named files being installed to the appropriate
+$(INSTALL_LOCATION)/bin/<arch> directory. The file <name> can appear with
+or without a directory prefix. If the file has a directory prefix e.g.
+$(EPICS_BASE_BIN), it is copied from the specified location. If a
+directory prefix is not present, make will look in the source directory
+for the file.
 
 Installing Other Libraries
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Deﬁnitions of the form:
+Definitions of the form:
 
 .. code ::
 
-        LIB_INSTALLS += <name>
-        LIB_INSTALLS += <dir>/<name>
-        LIB_INSTALLS_DEFAULT += <name>
-        LIB_INSTALLS_<osclass> += <name>
+        LIB_INSTALLS += <name>
+        LIB_INSTALLS += <dir>/<name>
+        LIB_INSTALLS_DEFAULT += <name>
+        LIB_INSTALLS_<osclass> += <name>
 
-result in ﬁles being installed to the appropriate
-$(INSTALL_LOCATION)/lib/<arch> directory. The ﬁle <name> can appear with
-or without a directory preﬁx. If the ﬁle has a directory preﬁx e.g.
-$(EPICS_BASE_LIB), it is copied from the speciﬁed location. If a
-directory preﬁx is not present, make will look in the source directory
-for the ﬁle.
+result in files being installed to the appropriate
+$(INSTALL_LOCATION)/lib/<arch> directory. The file <name> can appear with
+or without a directory prefix. If the file has a directory prefix e.g.
+$(EPICS_BASE_LIB), it is copied from the specified location. If a
+directory prefix is not present, make will look in the source directory
+for the file.
 
-Win32 resource ﬁles
+Win32 resource files
 ^^^^^^^^^^^^^^^^^^^
 
-Deﬁnitions of the form:
+Definitions of the form:
 
-| RCS += <name>   Resource deﬁnition script ﬁles for all products and
+| RCS += <name>   Resource definition script files for all products and
   libraries.
-| RCS_<osclass> += <name>
+| RCS_<osclass> += <name>
 |
-| PROD_RCS += <name> Resource deﬁnition script ﬁles for all products.
-| PROD_RCS_<osclass> += <name>
-| PROD_RCS_DEFAULT += <name>
+| PROD_RCS += <name> Resource definition script files for all products.
+| PROD_RCS_<osclass> += <name>
+| PROD_RCS_DEFAULT += <name>
 |
-| LIB_RCS += <name> Resource deﬁnition script ﬁles for all libraries.
-| LIB_RCS_<osclass> += <name>
-| LIB_RCS_DEFAULT += <name>
+| LIB_RCS += <name> Resource definition script files for all libraries.
+| LIB_RCS_<osclass> += <name>
+| LIB_RCS_DEFAULT += <name>
 |
-| <name>_RCS += <name> Resource deﬁnition script ﬁles for speciﬁed
+| <name>_RCS += <name> Resource definition script files for specified
   product or library.
-| <name>_RCS_<osclass> += <name>
-| <name>_RCS_DEFAULT += <name>
+| <name>_RCS_<osclass> += <name>
+| <name>_RCS_DEFAULT += <name>
 |
-| result in resource ﬁles (\*.res ﬁles) being created from the speciﬁed \*.rc resource deﬁnition script ﬁles and linked into the prods and/or libraries.
+| result in resource files (\*.res files) being created from the specified \*.rc resource definition script files and linked into the prods and/or libraries.
 
 TCL libraries
 ^^^^^^^^^^^^^
 
-Deﬁnitions of the form:
+Definitions of the form:
 
 .. code ::
 
-        TCLLIBNAME += <name>
-        TCLINDEX += <name>
+        TCLLIBNAME += <name>
+        TCLINDEX += <name>
 
-result in the speciﬁed tcl ﬁles being installed to the
+result in the specified tcl files being installed to the
 $(INSTALL_LOCATION)/lib/<arch> directory.
 
-Java class ﬁles
+Java class files
 ^^^^^^^^^^^^^^^
 
-Java class ﬁles can be created by the javac tool into $(INSTALL_JAVA) or
+Java class files can be created by the javac tool into $(INSTALL_JAVA) or
 into the O.Common subdirectory, by specifying the name of the java class
-ﬁle in the Makeﬁle. Command line options for the javac tool can be
-speciﬁed. The conﬁguration ﬁles set the java c option
-“-sourcepath .:..:../..”.
+file in the Makefile. Command line options for the javac tool can be
+specified. The configuration files set the java c option
+"-sourcepath .:..:../..".
 
-Any of the following can be speciﬁed:
+Any of the following can be specified:
 
-   JAVA += <name>.java
+   JAVA += <name>.java
 
-   The <name>.java ﬁle will be used to create the <name>.class ﬁle in
+   The <name>.java file will be used to create the <name>.class file in
    the $(INSTALL_JAVA) directory.
 
-   TESTJAVA += <name>.java
+   TESTJAVA += <name>.java
 
-   The <name>.java ﬁles will be used to create the <name>.class ﬁle in
+   The <name>.java files will be used to create the <name>.class file in
    the O.Common subdirectory.
 
-   USR_JAVACFLAGS += <name>
+   USR_JAVACFLAGS += <name>
 
    The javac option <name> will be used on the javac command lines.
 
 Example 1
 '''''''''
 
-In this example, three class ﬁles are created in
-$(INSTALL_LOCATION)/javalib/mytest. The javac depreciation ﬂag is used
+In this example, three class files are created in
+$(INSTALL_LOCATION)/javalib/mytest. The javac depreciation flag is used
 to list the description of each use or override of a deprecated member
 or class.
 
@@ -2590,52 +2590,52 @@ or class.
 Example 2
 '''''''''
 
-In this example, the test.class ﬁle is created in the O.Common
+In this example, the test.class file is created in the O.Common
 subdirectory.
 
    TESTJAVA = test.java
 
-Java jar ﬁle
+Java jar file
 ^^^^^^^^^^^^
 
-| A single java jar ﬁle can be created using the java jar tool and
+| A single java jar file can be created using the java jar tool and
   installed into $(INSTALL_JAVA)
 | (i.e. $(INSTALL_LOCATION)/javalib) by specifying its name, and the
-  names of its input ﬁles to be included in the created jar ﬁle. The jar
-  input ﬁle names must appear with a directory preﬁx.
+  names of its input files to be included in the created jar file. The jar
+  input file names must appear with a directory prefix.
 
-Any of the following can be speciﬁed:
+Any of the following can be specified:
 
-   JAR += <name>
+   JAR += <name>
 
-   The <name> jar ﬁle will be created and installed into the
+   The <name> jar file will be created and installed into the
    $(INSTALL_JAVA) directory.
 
-   JAR_INPUT += <name>
+   JAR_INPUT += <name>
 
-   Names of images, audio ﬁles and classes ﬁles to be included in the
-   jar ﬁle.
+   Names of images, audio files and classes files to be included in the
+   jar file.
 
-   JAR_MANIFEST += <name>
+   JAR_MANIFEST += <name>
 
-   The preexisting manifest ﬁle will be used for the created jar ﬁle.
+   The preexisting manifest file will be used for the created jar file.
 
-   JAR_PACKAGES += <name>
+   JAR_PACKAGES += <name>
 
    Names of java packages to be installed and added to the created jar
-   ﬁle.
+   file.
 
 .. _example-1-1:
 
 Example 1
 '''''''''
 
-In this example, all the class ﬁles created by the current Makeﬁle’s
-“JAVA+=” deﬁnitions, are placed into a ﬁle named mytest1.jar. A manifest
-ﬁle will be automatically generated for the jar.
+In this example, all the class files created by the current Makefile�s
+"JAVA+=" definitions, are placed into a file named mytest1.jar. A manifest
+file will be automatically generated for the jar.
 
-Note: $(INSTALL_CLASSES) is set to $(addpreﬁx
-$(INSTALL_JAVA)/,$(CLASSES)) in the EPICS base conﬁgure ﬁles.
+Note: $(INSTALL_CLASSES) is set to $(addprefix
+$(INSTALL_JAVA)/,$(CLASSES)) in the EPICS base configure files.
 
 .. code ::
 
@@ -2647,9 +2647,9 @@ $(INSTALL_JAVA)/,$(CLASSES)) in the EPICS base conﬁgure ﬁles.
 Example 2
 ''''''''''
 
-In this example, three class ﬁles are created and placed into a new jar
-archive ﬁle named mytest2.jar. An existing manifest ﬁle, mytest2.mf is
-put into the new jar ﬁle.
+In this example, three class files are created and placed into a new jar
+archive file named mytest2.jar. An existing manifest file, mytest2.mf is
+put into the new jar file.
 
 .. code ::
 
@@ -2659,23 +2659,23 @@ put into the new jar ﬁle.
    JAR_INPUT = $(INSTALL_JAVA)/mytest/three.class
    JAR_MANIFEST = mytest2.mf
 
-Java native method C header ﬁles
+Java native method C header files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A C header ﬁles for use with java native methods will be created by the
+A C header files for use with java native methods will be created by the
 javah tool in the O.Common subdirectory by specifying the name of the
-header ﬁle to be created. The name of the java class ﬁle used to
-generate the header is derived from the name of the header ﬁle.
-Underscores (_) are used as a header ﬁle name delimiter. Command line
-options for the javah tool can be speciﬁed.
+header file to be created. The name of the java class file used to
+generate the header is derived from the name of the header file.
+Underscores (_) are used as a header file name delimiter. Command line
+options for the javah tool can be specified.
 
-Any of the following can be speciﬁed:
+Any of the following can be specified:
 
-   JAVAINC += <name>.h
+   JAVAINC += <name>.h
 
-   The <name>.h header ﬁle will be created in the O.Common subdirectory.
+   The <name>.h header file will be created in the O.Common subdirectory.
 
-   USR_JAVAHFLAGS += <name>
+   USR_JAVAHFLAGS += <name>
 
    The javah option <name> will be used on the javah tool command line.
 
@@ -2684,36 +2684,36 @@ Example
 
 In this example, the C header xx_yy_zz.h will be created in the
 $(COMMON_DIR) subdirectory from the class xx.yy.zz (i.e. the java class
-ﬁle $(INSTALL_JAVA)/xx/yy/zz.class)). The option “-old” will tell javah
-to create old JDK1.0 style header ﬁles.
+file $(INSTALL_JAVA)/xx/yy/zz.class)). The option "-old" will tell javah
+to create old JDK1.0 style header files.
 
-   JAVAINC = xx_yy_zz.h
-   USR_JAVAHFLAGS = -old
+   JAVAINC = xx_yy_zz.h
+   USR_JAVAHFLAGS = -old
 
-User Created CONFIG\* and RULES\* ﬁles
+User Created CONFIG\* and RULES\* files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Module developers can now create new CONFIG and RULES\* ﬁles ia a <top>
-application source directory. These new CONFIG\* or RULES\* ﬁles will be
+Module developers can now create new CONFIG and RULES\* files ia a <top>
+application source directory. These new CONFIG\* or RULES\* files will be
 installed into the directory $(INSTALL_LOCATION)/cfg by including lines
-like the following Makeﬁle line:
+like the following Makefile line:
 
-   CFG += CONFIG_MY1 RULES_MY1
+   CFG += CONFIG_MY1 RULES_MY1
 
-The build will install the new ﬁles CONFIG_MY1 and RULES_MY1 into the
+The build will install the new files CONFIG_MY1 and RULES_MY1 into the
 $(INSTALL_LOCATION)/cfg directory.
 
 Files in a $(INSTALL_LOCATION)/cfg directory are now included during a
-build by so that the deﬁnitions and rules in them are available for use
-by later src directory Makeﬁles in the same module or by other modules
+build by so that the definitions and rules in them are available for use
+by later src directory Makefiles in the same module or by other modules
 with a RELEASE line pointing to the TOP of this module.
 
 User Created File Types
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Module developers can now deﬁne a new type of ﬁle, e.g. ABC, so that
-ﬁles of type ABC will be installed into a directory deﬁned by
-INSTALL_ABC. This is done by creating a new CONFIG_<name> ﬁle, e.g.
+Module developers can now define a new type of file, e.g. ABC, so that
+files of type ABC will be installed into a directory defined by
+INSTALL_ABC. This is done by creating a new CONFIG_<name> file, e.g.
 CONFIG_ABC, with the following lines:
 
 .. code ::
@@ -2721,41 +2721,41 @@ CONFIG_ABC, with the following lines:
    INSTALL_ABC = $(INSTALL_LOCATION)/abc
 
 The INSTALL_ABC directory should be a subdirectory of
-$(INSTALL_LOCATION). The ﬁle type ABC should be target architecture
-independent (alh ﬁles, medm ﬁles, edm ﬁles.
+$(INSTALL_LOCATION). The file type ABC should be target architecture
+independent (alh files, medm files, edm files.
 
-Optional rules necessary for ﬁles of type ABC should be put in a
-RULES_ABC ﬁle.
+Optional rules necessary for files of type ABC should be put in a
+RULES_ABC file.
 
-The module developer installs new CONFIG_ABC and RULES_ABC ﬁles for the
-new ﬁle type into the directory $(INSTALL_LOCATION)/cfg by including the
-following Makeﬁle line:
+The module developer installs new CONFIG_ABC and RULES_ABC files for the
+new file type into the directory $(INSTALL_LOCATION)/cfg by including the
+following Makefile line:
 
    CFG += CONFIG_ABC RULES_ABC
 
 Files of type ABC are installed into INSTALL_ABC directory by adding a
-line like the following to a Makeﬁle.
+line like the following to a Makefile.
 
-   ABC += <filename1> <filename2> <filename3>
+   ABC += <filename1> <filename2> <filename3>
 
-Since the ﬁles in $(INSTALL_LOCATION)/cfg directory are now included by
-the base conﬁg ﬁles, the ABC += deﬁnition lines are available for use by
-later src directory Makeﬁles in the same module or by other modules with
+Since the files in $(INSTALL_LOCATION)/cfg directory are now included by
+the base config files, the ABC += definition lines are available for use by
+later src directory Makefiles in the same module or by other modules with
 a RELEASE line pointing to the TOP of this module.
 
 Assemblies
 ^^^^^^^^^^
 
-A single output ﬁle is generated from assembling speciﬁed snippet ﬁles.
-Snippet ﬁle names start with numbers and are sorted when the snippets
-are concatenated: ﬁrst by the number, then alphabetical by the remaining
+A single output file is generated from assembling specified snippet files.
+Snippet file names start with numbers and are sorted when the snippets
+are concatenated: first by the number, then alphabetical by the remaining
 part of the name. (This mechanism is conceptually similar to the Linux
-convention of collecting conﬁguration ﬁle snippets in \*.d directories.)
+convention of collecting configuration file snippets in \*.d directories.)
 
-Snippets with ﬁle names not starting with a number or ending in ’~’ are
-ignored. The speciﬁed snippets are processed in the order they appear on
+Snippets with file names not starting with a number or ending in �~� are
+ignored. The specified snippets are processed in the order they appear on
 the command line. Multiple snippets with the same number are
-concatenated. ”Commands” (tags in the snippet name) can be used to
+concatenated. "Commands" (tags in the snippet name) can be used to
 control the treatment of snippets with the same number:
 
 -  D - Default.
@@ -2765,21 +2765,21 @@ control the treatment of snippets with the same number:
    Snippet is replacing (overwriting) already processed snippets with
    the same number.
 
-Speciﬁcation of the target ﬁle is diﬀerent for architecture dependent or
-independent ﬁles.
+Specification of the target file is different for architecture dependent or
+independent files.
 
 .. code ::
 
-   COMMON_ASSEMBLIES += st.cmd
-   ASSEMBLIES += mytool.rc
+   COMMON_ASSEMBLIES += st.cmd
+   ASSEMBLIES += mytool.rc
 
-Snippet ﬁles are conﬁgured speciﬁcally (relative or absolute path) or as
+Snippet files are configured specifically (relative or absolute path) or as
 patterns (searched relative to all source directories).
 
 .. code ::
 
-   mytool.rc_SNIPPETS += ../rc.d/10_head ../rc.d/20_init
-   st.cmd_PATTERN += st.cmd.d/⋆
+   mytool.rc_SNIPPETS += ../rc.d/10_head ../rc.d/20_init
+   st.cmd_PATTERN += st.cmd.d/*
 
 Macros
 ''''''
@@ -2790,7 +2790,7 @@ the current value when assembling is done.
 -  \_DATETIME\_ Date and time of the build
 -  \_USERNAME\_ Name of the user running the build
 -  \_HOST\_ Name of the host on which the build is run
--  \_OUTPUTFILE\_ Name of the generated ﬁle
+-  \_OUTPUTFILE\_ Name of the generated file
 -  \_SNIPPETFILE\_ Name of the current snippet
 
 .. _example-3:
@@ -2798,39 +2798,39 @@ the current value when assembling is done.
 Example
 '''''''
 
-This mechanism can be used to create an IOC startup ﬁle from snippets in
-a global and an application speciﬁc directory, allowing applications to
-add commands to diﬀerent phases of the IOC startup by dropping
+This mechanism can be used to create an IOC startup file from snippets in
+a global and an application specific directory, allowing applications to
+add commands to different phases of the IOC startup by dropping
 appropriately numbered snippets into the directory.
 
 Given the following directories and snippets:
 
 .. code ::
 
-        /global/st.cmd.d:   (G=GLOBAL)
-            D10_init
-            20_environment
-            30_drivers
-            D40_settings
-            70_start-ioc
+        /global/st.cmd.d:   (G=GLOBAL)
+            D10_init
+            20_environment
+            30_drivers
+            D40_settings
+            70_start-ioc
 
 .. code ::
 
-        ../st.cmd.d:        (L=LOCAL)
-            D10_init
-            40_settings
-            40_settings~
-            30_another-driver
-            R70_start-my-ioc
+        ../st.cmd.d:        (L=LOCAL)
+            D10_init
+            40_settings
+            40_settings~
+            30_another-driver
+            R70_start-my-ioc
 
-And the following Makeﬁle declaration:
+And the following Makefile declaration:
 
 .. code ::
 
-        SCRIPTS += $(COMMON_DIR)/st.cmd
-        COMMON_ASSEMBLIES += st.cmd
-        st.cmd_SNIPPETS += $(wildcard /global/st.cmd.d/⋆)
-        st.cmd_PATTERN += st.cmd.d/⋆
+        SCRIPTS += $(COMMON_DIR)/st.cmd
+        COMMON_ASSEMBLIES += st.cmd
+        st.cmd_SNIPPETS += $(wildcard /global/st.cmd.d/*)
+        st.cmd_PATTERN += st.cmd.d/*
 
 The build will create and install a st.cmd script using the following
 snippets:
@@ -2844,21 +2844,21 @@ snippets:
    G              20_environment
    L              30_another-driver implicit addition, alphabetical sorting
    G              30_drivers
-   L              40_settings       replacing a default, ignoring backup ﬁle
+   L              40_settings       replacing a default, ignoring backup file
    L              70_start-my-ioc   explicit replace
    \
    ============== ================= ========================================
 
-Table of Makeﬁle deﬁnitions
+Table of Makefile definitions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Deﬁnitions given below containing <osclass> are used when building for
-target archs of a speciﬁc osclass, and the <osclass> part of the name
+Definitions given below containing <osclass> are used when building for
+target archs of a specific osclass, and the <osclass> part of the name
 should be replaced by the desired osclass, e.g. solaris, vxWorks, etc.
 If a \_DEFAULT setting is given but a particular <osclass> requires that
-the default not apply and there are no items in the deﬁnition that apply
-for that <osclass>, the value “-nil-” should be speciﬁed in the relevant
-Makeﬁle deﬁnition.
+the default not apply and there are no items in the definition that apply
+for that <osclass>, the value "-nil-" should be specified in the relevant
+Makefile definition.
 
 .. container:: center
 
@@ -2869,181 +2869,181 @@ Makeﬁle deﬁnition.
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       Products to be built (host type archs only)
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      PROD                                              products (names without execution suﬃx) to build and install. Specify xyz to build executable xyz on Unix and xyz.exe on WIN32
-      PROD_<osclass>                                    os class speciﬁc products to build and install for <osclass> archs only
-      PROD_DEFAULT                                      products to build and install for archs with no PROD_<osclass> speciﬁed
+      PROD                                              products (names without execution suffix) to build and install. Specify xyz to build executable xyz on Unix and xyz.exe on WIN32
+      PROD_<osclass>                                    os class specific products to build and install for <osclass> archs only
+      PROD_DEFAULT                                      products to build and install for archs with no PROD_<osclass> specified
       PROD_IOC                                          products to build and install for ioc type archs
-      PROD_IOC_<osclass>                                os speciﬁc products to build and install for ioc type archs
-      PROD_IOC_DEFAULT                                  products to build and install for ioc type arch systems with no PROD_IOC_<osclass> speciﬁed
+      PROD_IOC_<osclass>                                os specific products to build and install for ioc type archs
+      PROD_IOC_DEFAULT                                  products to build and install for ioc type arch systems with no PROD_IOC_<osclass> specified
       PROD_HOST                                         products to build and install for host type archs.
-      PROD_HOST_<osclass>                               os class speciﬁc products to build and install for <osclass> type archs
-      PROD_HOST_DEFAULT                                 products to build and install for arch with no PROD_HOST_<osclass> speciﬁed
+      PROD_HOST_<osclass>                               os class specific products to build and install for <osclass> type archs
+      PROD_HOST_DEFAULT                                 products to build and install for arch with no PROD_HOST_<osclass> specified
       Test products to be built
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      TESTPROD                                          test products (names without execution suﬃx) to build but not install
-      TESTPROD_<osclass>                                os class speciﬁc test products to build but not install
-      TESTPROD_DEFAULT                                  test products to build but not install for archs with no TESTPROD_<osclass> speciﬁed
+      TESTPROD                                          test products (names without execution suffix) to build but not install
+      TESTPROD_<osclass>                                os class specific test products to build but not install
+      TESTPROD_DEFAULT                                  test products to build but not install for archs with no TESTPROD_<osclass> specified
       TESTPROD_IOC                                      test products to build and install for ioc type archs
-      TESTPROD_IOC_<osclass>                            os speciﬁc test products to build and install for ioc type archs
-      TESTPROD_IOC_DEFAULT                              test products to build and install for ioc type arch systems with no TESTPROD_IOC_<osclass> speciﬁed
+      TESTPROD_IOC_<osclass>                            os specific test products to build and install for ioc type archs
+      TESTPROD_IOC_DEFAULT                              test products to build and install for ioc type arch systems with no TESTPROD_IOC_<osclass> specified
       TESTPROD_HOST                                     testproducts to build and install for host type archs.
-      TESTPROD_HOST_<osclass>                           os class speciﬁc testproducts to build and install for <osclass> type archs
+      TESTPROD_HOST_<osclass>                           os class specific testproducts to build and install for <osclass> type archs
       \
-      TESTPROD_HOST_DEFAULT                             test products to build and install for arch with no TESTPROD_HOST_<osclass> speciﬁed
+      TESTPROD_HOST_DEFAULT                             test products to build and install for arch with no TESTPROD_HOST_<osclass> specified
       Test scripts to be built
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      TESTSCRIPTS                                       test scripts (names with .t suﬃx) to build but not install
-      TESTSCRIPTS_<osclass>                             os class speciﬁc test scripts to build but not install
-      TESTSCRIPTS_DEFAULT                               test scripts to build but not install for archs with no TESTSCRIPTS_<osclass> speciﬁed
+      TESTSCRIPTS                                       test scripts (names with .t suffix) to build but not install
+      TESTSCRIPTS_<osclass>                             os class specific test scripts to build but not install
+      TESTSCRIPTS_DEFAULT                               test scripts to build but not install for archs with no TESTSCRIPTS_<osclass> specified
       TESTSCRIPTS_IOC                                   test scripts to build and install for ioc type archs
-      TESTSCRIPTS_IOC_<osclass>                         os speciﬁc test scripts to build and install for ioc type archs
-      TESTSCRIPTS_IOC_DEFAULT                           test scripts to build and install for ioc type arch systems with no TESTSCRIPTS_IOC_<osclass> speciﬁed
+      TESTSCRIPTS_IOC_<osclass>                         os specific test scripts to build and install for ioc type archs
+      TESTSCRIPTS_IOC_DEFAULT                           test scripts to build and install for ioc type arch systems with no TESTSCRIPTS_IOC_<osclass> specified
       TESTSCRIPTS_HOST                                  test scripts to build and install for host type archs.
-      TESTSCRIPTS_HOST_<osclass>                        os class speciﬁc testscripts to build and install for <osclass> type archs
-      TESTSCRIPTS_HOST_DEFAULT                          test scripts to build and install for arch with no TESTSCRIPTS_HOST_<osclass> speciﬁed
+      TESTSCRIPTS_HOST_<osclass>                        os class specific testscripts to build and install for <osclass> type archs
+      TESTSCRIPTS_HOST_DEFAULT                          test scripts to build and install for arch with no TESTSCRIPTS_HOST_<osclass> specified
       Libraries to be built
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      LIBRARY                                           name of library to build and install. The name should NOT include a preﬁx or extension e.g. specify Ca to build libCa.a on Unix, Ca.lib or Ca.dll on WIN32
-      LIBRARY_<osclass>                                 os speciﬁc libraries to build and install
-      LIBRARY_DEFAULT                                   libraries to build and install for archs with no LIBRARY_<osclass> speciﬁed
-      LIBRARY_IOC                                       name of library to build and install for ioc type archs. The name should NOT include a preﬁx or extension e.g. specify Ca to build libCa.a on Unix, Ca.lib or Ca.dll on WIN32
-      LIBRARY_IOC_<osclass>                             os speciﬁc libraries to build and install for ioc type archs
-      LIBRARY_IOC_DEFAULT                               libraries to build and install for ioc type arch systems with no LIBRARY_IOC_<osclass> speciﬁed
-      LIBRARY_HOST                                      name of library to build and install for host type archs. The name should NOT include a preﬁx or extension, e.g. specify Ca to build libCa.a on Unix, Ca.lib or Ca.dll on WIN32
-      LIBRARY_HOST_<osclass>                            os class speciﬁc libraries to build and install for host type archs
+      LIBRARY                                           name of library to build and install. The name should NOT include a prefix or extension e.g. specify Ca to build libCa.a on Unix, Ca.lib or Ca.dll on WIN32
+      LIBRARY_<osclass>                                 os specific libraries to build and install
+      LIBRARY_DEFAULT                                   libraries to build and install for archs with no LIBRARY_<osclass> specified
+      LIBRARY_IOC                                       name of library to build and install for ioc type archs. The name should NOT include a prefix or extension e.g. specify Ca to build libCa.a on Unix, Ca.lib or Ca.dll on WIN32
+      LIBRARY_IOC_<osclass>                             os specific libraries to build and install for ioc type archs
+      LIBRARY_IOC_DEFAULT                               libraries to build and install for ioc type arch systems with no LIBRARY_IOC_<osclass> specified
+      LIBRARY_HOST                                      name of library to build and install for host type archs. The name should NOT include a prefix or extension, e.g. specify Ca to build libCa.a on Unix, Ca.lib or Ca.dll on WIN32
+      LIBRARY_HOST_<osclass>                            os class specific libraries to build and install for host type archs
       \
-      LIBRARY_HOST_DEFAULT                              libraries to build and install for host type arch systems with no LIBRARY_HOST_<osclass> speciﬁed
+      LIBRARY_HOST_DEFAULT                              libraries to build and install for host type arch systems with no LIBRARY_HOST_<osclass> specified
       SHARED_LIBRARIES                                  build shared libraries? Must be YES or NO
       SHRLIB_VERSION                                    shared library version number
       Loadable libraries to be built
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      LOADABLE_LIBRARY                                  name of loadable library to build and install. The name should NOT include a preﬁx or extension e.g. specify Ca to build libCa.so on Unix and Ca.dll on WIN32
-      LOADABLE_LIBRARY_<osclass>                        os speciﬁc loadable libraries to build and install
-      LOADABLE_LIBRARY_DEFAULT                          loadable libraries to build and install for archs with no LOADABLE_LIBRARY_<osclass> speciﬁed
-      LOADABLE_LIBRARY_HOST                             name of loadable library to build and install for host type archs. The name should NOT include a preﬁx or extension, e.g. specify test to build libtest.so on Unix and test.dll on WIN32
-      LOADABLE_LIBRARY_HOST_<osclass>                   os class speciﬁc loadable libraries to build and install for host type archs
-      LOADABLE_LIBRARY_HOST_DEFAULT                     loadable libraries to build and install for host type arch systems with no LOADABLE_LIBRARY_HOST_<osclass> speciﬁed
-      Combined object ﬁles (vxWorks only)
+      LOADABLE_LIBRARY                                  name of loadable library to build and install. The name should NOT include a prefix or extension e.g. specify Ca to build libCa.so on Unix and Ca.dll on WIN32
+      LOADABLE_LIBRARY_<osclass>                        os specific loadable libraries to build and install
+      LOADABLE_LIBRARY_DEFAULT                          loadable libraries to build and install for archs with no LOADABLE_LIBRARY_<osclass> specified
+      LOADABLE_LIBRARY_HOST                             name of loadable library to build and install for host type archs. The name should NOT include a prefix or extension, e.g. specify test to build libtest.so on Unix and test.dll on WIN32
+      LOADABLE_LIBRARY_HOST_<osclass>                   os class specific loadable libraries to build and install for host type archs
+      LOADABLE_LIBRARY_HOST_DEFAULT                     loadable libraries to build and install for host type arch systems with no LOADABLE_LIBRARY_HOST_<osclass> specified
+      Combined object files (vxWorks only)
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      OBJLIB                                            name of a combined object ﬁle library and corresponding munch ﬁle to build and install. The name will have a Library suﬃx appended
+      OBJLIB                                            name of a combined object file library and corresponding munch file to build and install. The name will have a Library suffix appended
       OBJLIB_vxWorks                                    same as OBJLIB
-      OBJLIB_SRCS                                       source ﬁles to build the OBJLIB
-      OBJLIB_OBJS                                       object ﬁles to include in OBJLIB
-      Product and library source ﬁles
+      OBJLIB_SRCS                                       source files to build the OBJLIB
+      OBJLIB_OBJS                                       object files to include in OBJLIB
+      Product and library source files
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      SRCS                                              source ﬁles to build all PRODs and LIBRARYs
-      SRCS_<osclass>                                    osclass speciﬁc source ﬁles to build all PRODs and LIBRARYs
-      SRCS_DEFAULT                                      source ﬁle to build all PRODs and LIBRARYs for archs with no SRCS_<osclass> speciﬁed
-      USR_SRCS                                          source ﬁles to build all PRODs and LIBRARYs
+      SRCS                                              source files to build all PRODs and LIBRARYs
+      SRCS_<osclass>                                    osclass specific source files to build all PRODs and LIBRARYs
+      SRCS_DEFAULT                                      source file to build all PRODs and LIBRARYs for archs with no SRCS_<osclass> specified
+      USR_SRCS                                          source files to build all PRODs and LIBRARYs
       \
-      USR_SRCS_<osclass>                                osclass speciﬁc source ﬁles to build all PRODs and LIBRARYs
-      USR_SRCS_DEFAULT                                  source ﬁle to build all PRODs and LIBRARYs for archs with no SRCS_<osclass> speciﬁed
-      PROD_SRCS                                         source ﬁles to build all PRODs
-      PROD_SRCS_<osclass>                               osclass speciﬁc source ﬁles to build all PRODs
-      PROD_SRCS_DEFAULT                                 source ﬁles needed to build PRODs for archs with no SRCS_<osclass> speciﬁed
-      LIB_SRCS                                          source ﬁles for building LIBRARY (e.g. LIB_SRCS=la.c lb.c lc.c)
-      LIB_SRCS_<osclass>                                os-speciﬁc library source ﬁles
-      LIB_SRCS_DEFAULT                                  library source ﬁles for archs with no LIB_SRCS_<osclass> speciﬁed
-      LIBSRCS                                           source ﬁles for building LIBRARY (deprecated)
-      LIBSRCS_<osclass>                                 os-speciﬁc library source ﬁles (deprecated)
-      LIBSRCS_DEFAULT                                   library source ﬁles for archs with no LIBSRCS_<osclass> speciﬁed (deprecated)
-      <name>_SRCS                                       source ﬁles to build a speciﬁc PROD or LIBRARY
-      <name>_SRCS_<osclass>                             os speciﬁc source ﬁles to build a speciﬁc PROD or LIBRARY
-      <name>_SRCS_DEFAULT                               source ﬁles needed to build a speciﬁc PROD or LIBRARY for archs with no <prod>_SRCS_<osclass> speciﬁed
-      Product and library object ﬁles
+      USR_SRCS_<osclass>                                osclass specific source files to build all PRODs and LIBRARYs
+      USR_SRCS_DEFAULT                                  source file to build all PRODs and LIBRARYs for archs with no SRCS_<osclass> specified
+      PROD_SRCS                                         source files to build all PRODs
+      PROD_SRCS_<osclass>                               osclass specific source files to build all PRODs
+      PROD_SRCS_DEFAULT                                 source files needed to build PRODs for archs with no SRCS_<osclass> specified
+      LIB_SRCS                                          source files for building LIBRARY (e.g. LIB_SRCS=la.c lb.c lc.c)
+      LIB_SRCS_<osclass>                                os-specific library source files
+      LIB_SRCS_DEFAULT                                  library source files for archs with no LIB_SRCS_<osclass> specified
+      LIBSRCS                                           source files for building LIBRARY (deprecated)
+      LIBSRCS_<osclass>                                 os-specific library source files (deprecated)
+      LIBSRCS_DEFAULT                                   library source files for archs with no LIBSRCS_<osclass> specified (deprecated)
+      <name>_SRCS                                       source files to build a specific PROD or LIBRARY
+      <name>_SRCS_<osclass>                             os specific source files to build a specific PROD or LIBRARY
+      <name>_SRCS_DEFAULT                               source files needed to build a specific PROD or LIBRARY for archs with no <prod>_SRCS_<osclass> specified
+      Product and library object files
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      USR_OBJS                                          object ﬁles, speciﬁed without suﬃx, to build all PRODs and LIBRARYs
-      USR_OBJS_<osclass>                                osclass speciﬁc object ﬁles, speciﬁed without suﬃx, to build all PRODs and LIBRARYs
-      USR_OBJS_DEFAULT                                  object ﬁles, speciﬁed without suﬃx, needed to build PRODs and LIBRARYs for archs with no OBJS_<osclass> speciﬁed
-      PROD_OBJS                                         object ﬁles, speciﬁed without suﬃx, to build all PRODs
-      PROD_OBJS_<osclass>                               osclass speciﬁc object ﬁles, speciﬁed without suﬃx, to build all PRODs
+      USR_OBJS                                          object files, specified without suffix, to build all PRODs and LIBRARYs
+      USR_OBJS_<osclass>                                osclass specific object files, specified without suffix, to build all PRODs and LIBRARYs
+      USR_OBJS_DEFAULT                                  object files, specified without suffix, needed to build PRODs and LIBRARYs for archs with no OBJS_<osclass> specified
+      PROD_OBJS                                         object files, specified without suffix, to build all PRODs
+      PROD_OBJS_<osclass>                               osclass specific object files, specified without suffix, to build all PRODs
       \
-      PROD_OBJS_DEFAULT                                 object ﬁles, speciﬁed without suﬃx, needed to build PRODs for archs with no OBJS_<osclass> speciﬁed
-      LIB_OBJS                                          object ﬁles, speciﬁed without suﬃx, for building all LIBRARYs (e.g. LIB_OBJS+=$(AB_BIN)/la $(AB_BIN)/lb)
-      LIB_OBJS_<osclass>                                os-speciﬁc library object ﬁles, specify without suﬃx,
-      LIB_OBJS_DEFAULT                                  library object ﬁles, speciﬁed without suﬃx, for archs with no LIB_OBJS_<osclass> speciﬁed
-      <name>_OBJS                                       object ﬁles, speciﬁed without suﬃx, to build a speciﬁc PROD or LIBRARY
-      <name>_OBJS_<osclass>                             os speciﬁc object ﬁles, speciﬁed without suﬃx, to build a speciﬁc PROD or LI\|BRARY
-      <name>_OBJS_DEFAULT                               object ﬁles, without suﬃx, needed to build a speciﬁc PROD or LIBRARY for archs with no <prod>_OBJS_<osclass> speciﬁed
-      Product and library R3.13 combined object ﬁles
+      PROD_OBJS_DEFAULT                                 object files, specified without suffix, needed to build PRODs for archs with no OBJS_<osclass> specified
+      LIB_OBJS                                          object files, specified without suffix, for building all LIBRARYs (e.g. LIB_OBJS+=$(AB_BIN)/la $(AB_BIN)/lb)
+      LIB_OBJS_<osclass>                                os-specific library object files, specify without suffix,
+      LIB_OBJS_DEFAULT                                  library object files, specified without suffix, for archs with no LIB_OBJS_<osclass> specified
+      <name>_OBJS                                       object files, specified without suffix, to build a specific PROD or LIBRARY
+      <name>_OBJS_<osclass>                             os specific object files, specified without suffix, to build a specific PROD or LI\|BRARY
+      <name>_OBJS_DEFAULT                               object files, without suffix, needed to build a specific PROD or LIBRARY for archs with no <prod>_OBJS_<osclass> specified
+      Product and library R3.13 combined object files
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      USR_OBJLIBS                                       combined object ﬁles with ﬁlenames that do not have a suﬃx, needed for building all PRODs and LIBRARYs (e.g. USR_OBJLIBS+=$(XYZ_BIN)/xyzLib)
-      USR_OBJLIBS_<osclass>                             os-speciﬁc combined object ﬁles with ﬁlenames that do not have a suﬃx for building all PRODs and LIBRARYs
-      USR_OBJLIBS_DEFAULT                               combined object ﬁles with ﬁlenames that do not have a suﬃx, for archs with no USR_OBJLIBS_<osclass> speciﬁed for building all PRODs and LIBRARYs
-      PROD_OBJLIBS                                      combined object ﬁles with ﬁlenames that do not have a suﬃx, needed for building all PRODs (e.g. PROD_OBJLIBS+=$(XYZ_BIN)/xyzLib)
-      PROD_OBJLIBS_<osclass>                            os-speciﬁc combined object ﬁles with ﬁlenames that do not have a suﬃx for building all PRODs
-      PROD_OBJLIBS_DEFAULT                              combined object ﬁles with ﬁlenames that do not have a suﬃx, for archs with no PROD_OBJLIBS_<osclass> speciﬁed for building all PRODs
-      LIB_OBJLIBS                                       combined object ﬁles with ﬁlenames that do not have a suﬃx, needed for building all LIBRARYs (e.g. LIB_OBJLIBS+=$(XYZ_BIN)/xyzLib)
-      LIB_OBJLIBS_<osclass>                             os-speciﬁc combined object ﬁles with ﬁlenames that do not have a suﬃx for building all LIBRARYs
-      LIB_OBJLIBS_DEFAULT                               combined object ﬁles with ﬁlenames that do not have a suﬃx, for archs with no LIB_OBJLIBS_<osclass> speciﬁed for building all LIBRARYs
-      <name>_OBJLIBS                                    combined object ﬁles with ﬁlenames that do not have a suﬃx, needed to build a speciﬁc PROD or LIBRARY
-      <name>_OBJLIBS_<osclass>                          os speciﬁc combined object ﬁles with ﬁlenames that do not have a suﬃx, to build a speciﬁc PROD or LI\|BRARY
-      <name>_OBJLIBS_DEFAULT                            combined object ﬁles with ﬁlenames that do not have a suﬃx, needed to build a speciﬁc PROD or LIBRARY for archs with no <name>_OBJLIBS_<osclass> speciﬁed
+      USR_OBJLIBS                                       combined object files with filenames that do not have a suffix, needed for building all PRODs and LIBRARYs (e.g. USR_OBJLIBS+=$(XYZ_BIN)/xyzLib)
+      USR_OBJLIBS_<osclass>                             os-specific combined object files with filenames that do not have a suffix for building all PRODs and LIBRARYs
+      USR_OBJLIBS_DEFAULT                               combined object files with filenames that do not have a suffix, for archs with no USR_OBJLIBS_<osclass> specified for building all PRODs and LIBRARYs
+      PROD_OBJLIBS                                      combined object files with filenames that do not have a suffix, needed for building all PRODs (e.g. PROD_OBJLIBS+=$(XYZ_BIN)/xyzLib)
+      PROD_OBJLIBS_<osclass>                            os-specific combined object files with filenames that do not have a suffix for building all PRODs
+      PROD_OBJLIBS_DEFAULT                              combined object files with filenames that do not have a suffix, for archs with no PROD_OBJLIBS_<osclass> specified for building all PRODs
+      LIB_OBJLIBS                                       combined object files with filenames that do not have a suffix, needed for building all LIBRARYs (e.g. LIB_OBJLIBS+=$(XYZ_BIN)/xyzLib)
+      LIB_OBJLIBS_<osclass>                             os-specific combined object files with filenames that do not have a suffix for building all LIBRARYs
+      LIB_OBJLIBS_DEFAULT                               combined object files with filenames that do not have a suffix, for archs with no LIB_OBJLIBS_<osclass> specified for building all LIBRARYs
+      <name>_OBJLIBS                                    combined object files with filenames that do not have a suffix, needed to build a specific PROD or LIBRARY
+      <name>_OBJLIBS_<osclass>                          os specific combined object files with filenames that do not have a suffix, to build a specific PROD or LI\|BRARY
+      <name>_OBJLIBS_DEFAULT                            combined object files with filenames that do not have a suffix, needed to build a specific PROD or LIBRARY for archs with no <name>_OBJLIBS_<osclass> specified
       \
-      <name>_LDOBJS                                     combined object ﬁles with ﬁlenames that do not have a suﬃx, needed to build a speciﬁc PROD or LIBRARY (deprecated)
-      <name>_LDOBJS_<osclass>                           os speciﬁc combined object ﬁles with ﬁlenames that do not have a suﬃx, to build a speciﬁc PROD or LI\|BRARY (deprecated)
-      <name>_LDOBJS_DEFAULT                             combined object ﬁles with ﬁlenames that do not have a suﬃx, needed to build a speciﬁc PROD or LIBRARY for archs with no <name>_LDOBJS_<osclass> speciﬁed (deprecated)
+      <name>_LDOBJS                                     combined object files with filenames that do not have a suffix, needed to build a specific PROD or LIBRARY (deprecated)
+      <name>_LDOBJS_<osclass>                           os specific combined object files with filenames that do not have a suffix, to build a specific PROD or LI\|BRARY (deprecated)
+      <name>_LDOBJS_DEFAULT                             combined object files with filenames that do not have a suffix, needed to build a specific PROD or LIBRARY for archs with no <name>_LDOBJS_<osclass> specified (deprecated)
       Product and library dependant libraries
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      <name>_DIR                                        directory to search for the speciﬁed lib. (For libs listed in all PROD_LIBS, LIB_LIBS, <name>_LIBS and USR_LIBS listed below)System libraries do not need a <name>_dir deﬁnition.
+      <name>_DIR                                        directory to search for the specified lib. (For libs listed in all PROD_LIBS, LIB_LIBS, <name>_LIBS and USR_LIBS listed below)System libraries do not need a <name>_dir definition.
       USR_LIBS                                          load libraries (e.g. Xt X11) for all products and libraries
-      USR_LIBS_<osclass>                                os speciﬁc load libraries for all makeﬁle links
-      USR_LIBS_DEFAULT                                  load libraries for systems with no USR_LIBS_<osclass> speciﬁed libs
-      <name>_LIBS                                       named prod or library speciﬁc ld libraries (e.g. probe_LIBS=X11 Xt)
-      <name>_LIBS_<osclass>                             os-speciﬁc libs needed to link named prod or library
-      <name>_LIBS_DEFAULT                               libs needed to link named prod or library for systems with no <name>_LIBS_<osclass> speciﬁed
+      USR_LIBS_<osclass>                                os specific load libraries for all makefile links
+      USR_LIBS_DEFAULT                                  load libraries for systems with no USR_LIBS_<osclass> specified libs
+      <name>_LIBS                                       named prod or library specific ld libraries (e.g. probe_LIBS=X11 Xt)
+      <name>_LIBS_<osclass>                             os-specific libs needed to link named prod or library
+      <name>_LIBS_DEFAULT                               libs needed to link named prod or library for systems with no <name>_LIBS_<osclass> specified
       PROD_LIBS                                         libs needed to link every PROD
-      PROD_LIBS_<osclass>                               os-speciﬁc libs needed to link every PROD
-      PROD_LIBS_DEFAULT                                 libs needed to link every PROD for archs with no PROD_LIBS_<osclass> speciﬁed
+      PROD_LIBS_<osclass>                               os-specific libs needed to link every PROD
+      PROD_LIBS_DEFAULT                                 libs needed to link every PROD for archs with no PROD_LIBS_<osclass> specified
       LIB_LIBS                                          libraries to be linked with every library being created
-      LIB_LIBS_<osclass>                                os class speciﬁc libraries to be linked with every library being created
-      LIB_LIBS_DEFAULT                                  libraries to be linked with every library being created for archs with no LIB_LIBS_<osclass> speciﬁed
+      LIB_LIBS_<osclass>                                os class specific libraries to be linked with every library being created
+      LIB_LIBS_DEFAULT                                  libraries to be linked with every library being created for archs with no LIB_LIBS_<osclass> specified
       USR_SYS_LIBS                                      system libraries (e.g. Xt X11) for all products and libraries
-      USR_SYS_LIBS_<osclass>                            os class speciﬁc system libraries for all makeﬁle links
-      USR_SYS_LIBS_DEFAULT                              system libraries for archs with no USR_SYS_LIBS_<osclass> speciﬁed
+      USR_SYS_LIBS_<osclass>                            os class specific system libraries for all makefile links
+      USR_SYS_LIBS_DEFAULT                              system libraries for archs with no USR_SYS_LIBS_<osclass> specified
       \
-      <name>_SYS_LIBS                                   named prod or library speciﬁc system ld libraries
-      <name>_SYS_LIBS_<osclass>                         os class speciﬁc system libs needed to link named prod or library
-      <name>_SYS_LIBS_DEFAULT                           system libs needed to link named prod or library for systems with no <name>_SYS_LIBS_<osclass> speciﬁed
+      <name>_SYS_LIBS                                   named prod or library specific system ld libraries
+      <name>_SYS_LIBS_<osclass>                         os class specific system libs needed to link named prod or library
+      <name>_SYS_LIBS_DEFAULT                           system libs needed to link named prod or library for systems with no <name>_SYS_LIBS_<osclass> specified
       PROD_SYS_LIBS                                     system libs needed to link every PROD
-      PROD_SYS_LIBS_<osclass>                           os class speciﬁc system libs needed to link every PROD
-      PROD_SYS_LIBS_DEFAULT                             system libs needed to link every PROD for archs with no PROD_SYS_LIBS_<osclass> speciﬁed
+      PROD_SYS_LIBS_<osclass>                           os class specific system libs needed to link every PROD
+      PROD_SYS_LIBS_DEFAULT                             system libs needed to link every PROD for archs with no PROD_SYS_LIBS_<osclass> specified
       LIB_SYS_LIBS                                      system libraries to be linked with every library being created
-      LIB_SYS_LIBS_<osclass>                            os class speciﬁc system libraries to be linked with every library being created
-      LIB_SYS_LIBS_DEFAULT                              system libraries to be linked with every library being created for archs with no LIB_SYS_LIBS_<osclass> speciﬁed
+      LIB_SYS_LIBS_<osclass>                            os class specific system libraries to be linked with every library being created
+      LIB_SYS_LIBS_DEFAULT                              system libraries to be linked with every library being created for archs with no LIB_SYS_LIBS_<osclass> specified
       SYS_PROD_LIBS                                     system libs needed to link every PROD for all systems (deprecated)
-      SYS_PROD_LIBS_<osclass>                           os class speciﬁc system libs needed to link every PROD (deprecated)
-      SYS_PROD_LIBS_DEFAULT                             system libs needed to link every PROD for systems with no SYS_PROD_LIBS_<osclass> speciﬁed (deprecated)
-      Compiler ﬂags
+      SYS_PROD_LIBS_<osclass>                           os class specific system libs needed to link every PROD (deprecated)
+      SYS_PROD_LIBS_DEFAULT                             system libs needed to link every PROD for systems with no SYS_PROD_LIBS_<osclass> specified (deprecated)
+      Compiler flags
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      USR_CFLAGS                                        C compiler ﬂags for all systems
-      USR_CFLAGS_<T_A>                                  target architecture speciﬁc C compiler ﬂags
-      USR_CFLAGS_<osclass>                              os class speciﬁc C compiler ﬂags
-      USR_CFLAGS_DEFAULT                                C compiler ﬂags for archs with no USR_CFLAGS_<osclass> speciﬁed
-      <name>_CFLAGS                                     ﬁle speciﬁc C compiler ﬂags (e.g. xxxRecord_CFLAGS=-g)
-      <name>_CFLAGS_<T_A>                               ﬁle speciﬁc C compiler ﬂags for a speciﬁc target architecture
-      <name>_CFLAGS_<osclass>                           ﬁle speciﬁc C compiler ﬂags for a speciﬁc os class
+      USR_CFLAGS                                        C compiler flags for all systems
+      USR_CFLAGS_<T_A>                                  target architecture specific C compiler flags
+      USR_CFLAGS_<osclass>                              os class specific C compiler flags
+      USR_CFLAGS_DEFAULT                                C compiler flags for archs with no USR_CFLAGS_<osclass> specified
+      <name>_CFLAGS                                     file specific C compiler flags (e.g. xxxRecord_CFLAGS=-g)
+      <name>_CFLAGS_<T_A>                               file specific C compiler flags for a specific target architecture
+      <name>_CFLAGS_<osclass>                           file specific C compiler flags for a specific os class
       \
-      USR_CXXFLAGS                                      C++ compiler ﬂags for all systems (e.g. xyxMain_CFLAGS=-DSDDS)
-      USR_CXXFLAGS_<T_A>                                target architecture speciﬁc C++ compiler ﬂags
-      USR_CXXFLAGS_<osclass>                            os-speciﬁc C++ compiler ﬂags
-      USR_CXXFLAGS_DEFAULT                              C++ compiler ﬂags for systems with no USR_CXXFLAGS_<osclass> speciﬁed
-      <name>_CXXFLAGS                                   ﬁle speciﬁc C++ compiler ﬂags
-      <name>_CXXFLAGS_<T_A>                             ﬁle speciﬁc C++ compiler ﬂags for a speciﬁc target architecture
-      <name>_CXXFLAGS_<osclass>                         ﬁle speciﬁc C++ compiler ﬂags for a speciﬁc osclass
-      USR_CPPFLAGS                                      C pre-processor ﬂags (for all makeﬁle compiles)
-      USR_CPPFLAGS_<T_A>                                target architecture speciﬁc cpp ﬂags
-      USR_CPPFLAGS_<osclass>                            os speciﬁc cpp ﬂags
-      USR_CPPFLAGS_DEFAULT                              cpp ﬂags for systems with no USR_CPPFLAGS_<osclass> speciﬁed
-      <name>_CPPFLAGS                                   ﬁle speciﬁc C pre-processor ﬂags(e.g. xxxRecord_CPPFLAGS=-DDEBUG)
-      <name>_CPPFLAGS_<T_A>                             ﬁle speciﬁc cpp ﬂags for a speciﬁc target architecture
-      <name>_CPPFLAGS_<osclass>                         ﬁle speciﬁc cpp ﬂags for a speciﬁc os class
-      USR_INCLUDES                                      directories, with -I preﬁx, to search for include ﬁles(e.g. -I$(EPICS_EXTENSIONS_INCLUDE))
-      USR_INCLUDES_<osclass>                            directories, with -I preﬁx, to search for include ﬁles for a speciﬁc os class
-      USR_INCLUDES_DEFAULT                              directories, with -I preﬁx, to search for include ﬁles for systems with no <name>_INCLUDES_<osclass> speciﬁed
-      <name>_INCLUDES                                   directories, with -I preﬁx, to search for include ﬁles when building a speciﬁc object ﬁle (e.g. -I$(MOTIF_INC))
-      <name>_INCLUDES_<T_A>                             ﬁle speciﬁc directories, with -I preﬁx, to search for include ﬁles for a speciﬁc target architecture
-      <name>_INCLUDES_<osclass>                         ﬁle speciﬁc directories, with -I preﬁx, to search for include ﬁles for a speciﬁc os class
+      USR_CXXFLAGS                                      C++ compiler flags for all systems (e.g. xyxMain_CFLAGS=-DSDDS)
+      USR_CXXFLAGS_<T_A>                                target architecture specific C++ compiler flags
+      USR_CXXFLAGS_<osclass>                            os-specific C++ compiler flags
+      USR_CXXFLAGS_DEFAULT                              C++ compiler flags for systems with no USR_CXXFLAGS_<osclass> specified
+      <name>_CXXFLAGS                                   file specific C++ compiler flags
+      <name>_CXXFLAGS_<T_A>                             file specific C++ compiler flags for a specific target architecture
+      <name>_CXXFLAGS_<osclass>                         file specific C++ compiler flags for a specific osclass
+      USR_CPPFLAGS                                      C pre-processor flags (for all makefile compiles)
+      USR_CPPFLAGS_<T_A>                                target architecture specific cpp flags
+      USR_CPPFLAGS_<osclass>                            os specific cpp flags
+      USR_CPPFLAGS_DEFAULT                              cpp flags for systems with no USR_CPPFLAGS_<osclass> specified
+      <name>_CPPFLAGS                                   file specific C pre-processor flags(e.g. xxxRecord_CPPFLAGS=-DDEBUG)
+      <name>_CPPFLAGS_<T_A>                             file specific cpp flags for a specific target architecture
+      <name>_CPPFLAGS_<osclass>                         file specific cpp flags for a specific os class
+      USR_INCLUDES                                      directories, with -I prefix, to search for include files(e.g. -I$(EPICS_EXTENSIONS_INCLUDE))
+      USR_INCLUDES_<osclass>                            directories, with -I prefix, to search for include files for a specific os class
+      USR_INCLUDES_DEFAULT                              directories, with -I prefix, to search for include files for systems with no <name>_INCLUDES_<osclass> specified
+      <name>_INCLUDES                                   directories, with -I prefix, to search for include files when building a specific object file (e.g. -I$(MOTIF_INC))
+      <name>_INCLUDES_<T_A>                             file specific directories, with -I prefix, to search for include files for a specific target architecture
+      <name>_INCLUDES_<osclass>                         file specific directories, with -I prefix, to search for include files for a specific os class
       \
       HOST_WARN                                         Are compiler warning messages desired for host type builds? (YES or NO) (default is YES)
       CROSS_WARN                                        C cross-compiler warning messages desired (YES or NO) (default YES)
@@ -3053,215 +3053,215 @@ Makeﬁle deﬁnition.
       CXXCMPLR                                          C++ compiler selection, NORMAL or STRICT (default is STRICT)
       Linker options
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      USR_LDFLAGS                                       linker options (for all makeﬁle links)
-      USR_LDFLAGS_<osclass>                             os speciﬁc linker options (for all makeﬁle links)
-      USR_LDFLAGS_DEFAULT                               linker options for systems with no USR_LDFLAGS_<osclass> speciﬁed
+      USR_LDFLAGS                                       linker options (for all makefile links)
+      USR_LDFLAGS_<osclass>                             os specific linker options (for all makefile links)
+      USR_LDFLAGS_DEFAULT                               linker options for systems with no USR_LDFLAGS_<osclass> specified
       PROD_LDFLAGS                                      prod linker options
-      PROD_LDFLAGS_<osclass>                            os speciﬁc prod linker options
-      PROD_LDFLAGS_DEFAULT                              prod linker options for systems with no PROD_LDFLAGS_<osclass> speciﬁed
+      PROD_LDFLAGS_<osclass>                            os specific prod linker options
+      PROD_LDFLAGS_DEFAULT                              prod linker options for systems with no PROD_LDFLAGS_<osclass> specified
       LIB_LDFLAGS                                       library linker options
-      LIB_LDFLAGS_<osclass>                             os speciﬁc library linker options
-      LIB_LDFLAGS_DEFAULT                               library linker options for systems with no LIB_LDFLAGS_<osclass> speciﬁed
-      <name>_LDFLAGS                                    prod or library speciﬁc linker options
-      <name>_LDFLAGS_<osclass>                          prod or library speciﬁc linker ﬂags for a speciﬁc os class
-      <name>_LDFLAGS_DEFAULT                            linker options for systems with no <name>_LDFLAGS_<osclass> speciﬁed
+      LIB_LDFLAGS_<osclass>                             os specific library linker options
+      LIB_LDFLAGS_DEFAULT                               library linker options for systems with no LIB_LDFLAGS_<osclass> specified
+      <name>_LDFLAGS                                    prod or library specific linker options
+      <name>_LDFLAGS_<osclass>                          prod or library specific linker flags for a specific os class
+      <name>_LDFLAGS_DEFAULT                            linker options for systems with no <name>_LDFLAGS_<osclass> specified
       STATIC_BUILD                                      Is static build desired (YES or NO) (default is NO). On win32 if STATIC_BUILD=YES then set SHARED_LIBRARIES=NO)
       \
-      Header ﬁles to be installed
+      Header files to be installed
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      INC                                               list of include ﬁles to install into $(INSTALL_DIR)/include
-      INC_<osclass>                                     os speciﬁc includes to installed under $(INSTALL_DIR)/include/os/<osclass>
-      INC_DEFAULT                                       include ﬁles to install where no INC_<osclass> is speciﬁed
+      INC                                               list of include files to install into $(INSTALL_DIR)/include
+      INC_<osclass>                                     os specific includes to installed under $(INSTALL_DIR)/include/os/<osclass>
+      INC_DEFAULT                                       include files to install where no INC_<osclass> is specified
       Perl, csh, tcl etc. script installation
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       SCRIPTS                                           scripts to install for all systems
-      SCRIPTS_<osclass>                                 os-speciﬁc scripts to install
-      SCRIPTS_DEFAULT                                   scripts to install for systems with no SCRIPTS_<osclass> speciﬁed
+      SCRIPTS_<osclass>                                 os-specific scripts to install
+      SCRIPTS_DEFAULT                                   scripts to install for systems with no SCRIPTS_<osclass> specified
       SCRIPTS_IOC                                       scripts to install for ioc type archs.
-      SCRIPTS_IOC_<osclass>                             os speciﬁc scripts to install for ioc type archs
-      SCRIPTS_IOC_DEFAULT                               scripts to install for ioc type arch systems with no SCRIPTS_IOC_<osclass> speciﬁed
+      SCRIPTS_IOC_<osclass>                             os specific scripts to install for ioc type archs
+      SCRIPTS_IOC_DEFAULT                               scripts to install for ioc type arch systems with no SCRIPTS_IOC_<osclass> specified
       SCRIPTS_HOST                                      scripts to install for host type archs. T
-      SCRIPTS_HOST_<osclass>                            os class speciﬁc scripts to install for host type archs
-      SCRIPTS_HOST_DEFAULT                              scripts to install for host type arch systems with no OBJS_HOST_<osclass> speciﬁed
+      SCRIPTS_HOST_<osclass>                            os class specific scripts to install for host type archs
+      SCRIPTS_HOST_DEFAULT                              scripts to install for host type arch systems with no OBJS_HOST_<osclass> specified
       TCLLIBNAME                                        list of tcl scripts to install into $(INSTALL_DIR)/lib/<osclass> (Unix hosts only)
-      TCLINDEX                                          name of tcl index ﬁle to create from TCLLIBNAME scripts
-      Object ﬁles                                       The names in the following OBJS deﬁnitions should NOT include a suﬃx (.o or.obj).
+      TCLINDEX                                          name of tcl index file to create from TCLLIBNAME scripts
+      Object files                                       The names in the following OBJS definitions should NOT include a suffix (.o or.obj).
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      OBJS                                              object ﬁles to build and install for all system.
-      OBJS_<osclass>                                    os-speciﬁc object ﬁles to build and install.
-      OBJS_DEFAULT                                      object ﬁles to build and install for systems with no OBJS_<osclass> speciﬁed.
+      OBJS                                              object files to build and install for all system.
+      OBJS_<osclass>                                    os-specific object files to build and install.
+      OBJS_DEFAULT                                      object files to build and install for systems with no OBJS_<osclass> specified.
       \
-      OBJS_IOC                                          object ﬁles to build and install for ioc type archs.
-      OBJS_IOC_<osclass>                                os speciﬁc object ﬁles to build and install for ioc type archs
-      OBJS_IOC_DEFAULT                                  object ﬁles to build and install for ioc type arch systems with no OBJS_IOC_<osclass> speciﬁed
-      OBJS_HOST                                         object ﬁles to build and install for host type archs. T
-      OBJS_HOST_<osclass>                               os class speciﬁc object ﬁles to build and install for host type archs
-      OBJS_HOST_DEFAULT                                 object ﬁles to build and install for host type arch systems with no OBJS_HOST_<osclass> speciﬁed
+      OBJS_IOC                                          object files to build and install for ioc type archs.
+      OBJS_IOC_<osclass>                                os specific object files to build and install for ioc type archs
+      OBJS_IOC_DEFAULT                                  object files to build and install for ioc type arch systems with no OBJS_IOC_<osclass> specified
+      OBJS_HOST                                         object files to build and install for host type archs. T
+      OBJS_HOST_<osclass>                               os class specific object files to build and install for host type archs
+      OBJS_HOST_DEFAULT                                 object files to build and install for host type arch systems with no OBJS_HOST_<osclass> specified
       Documentation
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      DOCS                                              text ﬁles to be installed into the $(INSTALL_DIR)/doc directory
+      DOCS                                              text files to be installed into the $(INSTALL_DIR)/doc directory
       HTMLS_DIR                                         name install Hypertext directory name i.e. $(INSTALL_DIR)/html/$(HTMLS_DIR)
-      HTMLS                                             hypertext ﬁles to be installed into the $(INSTALL_DIR)/html/$(HTMLS_DIR) directory
+      HTMLS                                             hypertext files to be installed into the $(INSTALL_DIR)/html/$(HTMLS_DIR) directory
       TEMPLATES_DIR                                     template directory to be created as $(INSTALL_DIR)/templates/$(TEMPLATE_DIR)
-      TEMPLATES                                         template ﬁles to be installed into $(TEMPLATE_DIR)
-      Database Deﬁnition ﬁles
+      TEMPLATES                                         template files to be installed into $(TEMPLATE_DIR)
+      Database Definition files
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      DBD                                               database deﬁnition ﬁles to be installed or created and installed into $(INSTALL_DBD).
-      DBDINC                                            names, without suﬃx, of menus or record database deﬁnitions and headers to be installed or created and installed.
-      USR_DBDFLAGS                                      optional ﬂags for dbExpand. Currently only include path (-I <path>) and macro substitution (-S <substitution>) are supported.
-      DBD_INSTALLS                                      ﬁles from speciﬁed directory to install into $(INSTALL_DBD) (e.g. DBD_INSTALLS = $(APPNAME)/dbd/test.dbd
+      DBD                                               database definition files to be installed or created and installed into $(INSTALL_DBD).
+      DBDINC                                            names, without suffix, of menus or record database definitions and headers to be installed or created and installed.
+      USR_DBDFLAGS                                      optional flags for dbExpand. Currently only include path (-I <path>) and macro substitution (-S <substitution>) are supported.
+      DBD_INSTALLS                                      files from specified directory to install into $(INSTALL_DBD) (e.g. DBD_INSTALLS = $(APPNAME)/dbd/test.dbd
       Database Files
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      DB                                                database ﬁles to be installed or created and installed into $(INSTALL_DB).
-      DB_INSTALLS                                       ﬁles from speciﬁed directory to install into $(INSTALL_DB) (e.g. DB_INSTALLS = $(APPNAME)/db/test.db
+      DB                                                database files to be installed or created and installed into $(INSTALL_DB).
+      DB_INSTALLS                                       files from specified directory to install into $(INSTALL_DB) (e.g. DB_INSTALLS = $(APPNAME)/db/test.db
       \
-      USR_DBFLAGS                                       optional ﬂags for msi (EPICS Macro Substitution Tool)
+      USR_DBFLAGS                                       optional flags for msi (EPICS Macro Substitution Tool)
       Options for other programs
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       YACCOPT                                           yacc options
       LEXOPT                                            lex options
       SNCFLAGS                                          state notation language, snc, options
-      <name>_SNCFLAGS                                   product speciﬁc state notation language options
+      <name>_SNCFLAGS                                   product specific state notation language options
       E2DB_FLAGS                                        e2db options
       SCH2EDIF_FLAGS                                    sch2edif options
       RANLIBFLAGS                                       ranlib options
       USR_ARFLAGS                                       ar options
       Facilities for building Java programs
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      JAVA                                              names of Java source ﬁles to be built and installed
-      TESTJAVA                                          names of Java source ﬁles to be built
-      JAVAINC                                           names of C header ﬁle to be created in O.Common subdirectory
-      JAR                                               name of Jar ﬁle to be built
-      JAR_INPUT                                         names of ﬁles to be included in JAR
-      JAR_MANIFEST                                      name of manifest ﬁle for JAR
+      JAVA                                              names of Java source files to be built and installed
+      TESTJAVA                                          names of Java source files to be built
+      JAVAINC                                           names of C header file to be created in O.Common subdirectory
+      JAR                                               name of Jar file to be built
+      JAR_INPUT                                         names of files to be included in JAR
+      JAR_MANIFEST                                      name of manifest file for JAR
       USR_JAVACFLAGS                                    javac tool options
       USR_JAVAHFLAGS                                    javah tool options
-      Facilities for Windows 95/NT resource ( .rc) ﬁles
+      Facilities for Windows 95/NT resource ( .rc) files
       \
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      RCS                                               resource ﬁles (<name>.rc) needed to build every PROD and LIBRARY
-      RCS_<osclass>                                     resource ﬁles (<name>.rc) needed to build every PROD and LIBRARY for ioc type archs
-      RCS_DEFAULT                                       resource ﬁles needed to build every PROD and LIBRARY for ioc type arch systems with no RCS_<osclass> speciﬁed
-      <name>_RCS                                        resource ﬁles needed to build a speciﬁc PROD or LIBRARY
-      <name>_RCS_<osclass>                              os speciﬁc resource ﬁles to build a speciﬁc PROD or LIBRARY
-      <name>_RCS_DEFAULT                                resource ﬁles needed to build a speciﬁc PROD or LIBRARY for ioc type arch systems with no RCS_<osclass> speciﬁed
+      RCS                                               resource files (<name>.rc) needed to build every PROD and LIBRARY
+      RCS_<osclass>                                     resource files (<name>.rc) needed to build every PROD and LIBRARY for ioc type archs
+      RCS_DEFAULT                                       resource files needed to build every PROD and LIBRARY for ioc type arch systems with no RCS_<osclass> specified
+      <name>_RCS                                        resource files needed to build a specific PROD or LIBRARY
+      <name>_RCS_<osclass>                              os specific resource files to build a specific PROD or LIBRARY
+      <name>_RCS_DEFAULT                                resource files needed to build a specific PROD or LIBRARY for ioc type arch systems with no RCS_<osclass> specified
       Assemblies
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      ASSEMBLIES                                        names of ﬁles to be assembled from snippets
-      COMMON_ASSEMBLIES                                 names of arch-independent ﬁles to be assembled from snippets
-      <name>_SNIPPETS                                   snippet ﬁles needed to build a speciﬁc assembly
-      <name>_PATTERN                                    patterns for snippet ﬁles (searched from all source directories) needed to build a speciﬁc assembly
-      Other deﬁnitions:
+      ASSEMBLIES                                        names of files to be assembled from snippets
+      COMMON_ASSEMBLIES                                 names of arch-independent files to be assembled from snippets
+      <name>_SNIPPETS                                   snippet files needed to build a specific assembly
+      <name>_PATTERN                                    patterns for snippet files (searched from all source directories) needed to build a specific assembly
+      Other definitions:
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       USR_VPATH                                         list of directories
-      BIN_INSTALLS                                      ﬁles from speciﬁed directories to be installed into $(INSTALL_BIN) (e.g. BIN_INSTALLS = $(EPICS_BASE_BIN)/aiRecord$(OBJ))
-      BIN_INSTALLS_<osclass>                            os class speciﬁc ﬁles from speciﬁed directories to be installed into $(INSTALL_BIN)
-      BIN_INSTALLS_DEFAULT                              ﬁles from speciﬁed directories to be installed into $(INSTALL_BIN) for target archs with no BIN_INSTALLS_<osclass> speciﬁed
-      LIB_INSTALLS                                      ﬁles from speciﬁed directories to be installed into $(INSTALL_LIB)
-      LIB_INSTALLS_<osclass>                            os class speciﬁc ﬁles from speciﬁed directories to be installed into $(INSTALL_LIB)
-      LIB_INSTALLS_DEFAULT                              ﬁles from speciﬁed directories to be installed into $(INSTALL_LIB) for target archs with no LIB_INSTALLS_<osclass> speciﬁed
-      TARGETS                                           ﬁles to create but not install
+      BIN_INSTALLS                                      files from specified directories to be installed into $(INSTALL_BIN) (e.g. BIN_INSTALLS = $(EPICS_BASE_BIN)/aiRecord$(OBJ))
+      BIN_INSTALLS_<osclass>                            os class specific files from specified directories to be installed into $(INSTALL_BIN)
+      BIN_INSTALLS_DEFAULT                              files from specified directories to be installed into $(INSTALL_BIN) for target archs with no BIN_INSTALLS_<osclass> specified
+      LIB_INSTALLS                                      files from specified directories to be installed into $(INSTALL_LIB)
+      LIB_INSTALLS_<osclass>                            os class specific files from specified directories to be installed into $(INSTALL_LIB)
+      LIB_INSTALLS_DEFAULT                              files from specified directories to be installed into $(INSTALL_LIB) for target archs with no LIB_INSTALLS_<osclass> specified
+      TARGETS                                           files to create but not install
       \
       INSTALL_LOCATION                                  installation directory (defaults to $(TOP))
-      GENVERSION                                        If set, the name of a generated header ﬁle with the module version string.
+      GENVERSION                                        If set, the name of a generated header file with the module version string.
       GENVERSIONMACRO                                   The CPP macro name written into the generated version header (default MODULEVERSION).
       GENVERSIONDEFAULT                                 The default version string written into the generated header if no VCS system is in use. Leave unset to use build time.
       \
       ================================================= ========================================================================================================================================================================================
 
-Conﬁguration Files
+Configuration Files
 ~~~~~~~~~~~~~~~~~~
 
-Base Conﬁgure Directory
+Base Configure Directory
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The base/conﬁgure directory has the following directory structure:
+The base/configure directory has the following directory structure:
 
 .. code ::
 
-        base/
-           configure/
-              os/
-              tools/
+        base/
+           configure/
+              os/
+              tools/
 
-Base Conﬁgure File Descriptions
+Base Configure File Descriptions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The conﬁgure ﬁles contain deﬁnitions and make rules to be included in
-the various makeﬁles.
+The configure files contain definitions and make rules to be included in
+the various makefiles.
 
    CONFIG.CrossCommon
 
-   Deﬁnitions for all hosts and all targets for a cross build (host
-   diﬀerent than target).
+   Definitions for all hosts and all targets for a cross build (host
+   different than target).
 
    CONFIG.gnuCommon
 
-   Deﬁnitions for all hosts and all targets for builds using the gnu
+   Definitions for all hosts and all targets for builds using the gnu
    compiler.
 
    CONFIG_ADDONS
 
-   Deﬁnitions which setup the variables that have <osclass> and DEFAULT
+   Definitions which setup the variables that have <osclass> and DEFAULT
    options.
 
    CONFIG_APP_INCLUDE
 
-   Deﬁnitions to generate include, bin, lib, perl module, db, and dbd
-   directory deﬁnitions for RELEASE <top>s.
+   Definitions to generate include, bin, lib, perl module, db, and dbd
+   directory definitions for RELEASE <top>s.
 
    CONFIG_BASE
 
-   EPICS base speciﬁc deﬁnitions.
+   EPICS base specific definitions.
 
    CONFIG_BASE_VERSION
 
-   Deﬁnitions for the version number of EPICS base. This ﬁle is used for
+   Definitions for the version number of EPICS base. This file is used for
    creating epicsVersion.h which is installed into base/include.
 
    CONFIG_COMMON
 
-   Deﬁnitions common to all builds.
+   Definitions common to all builds.
 
    CONFIG_ENV
 
-   Default deﬁnitions of the EPICS environment variables. This ﬁle is
+   Default definitions of the EPICS environment variables. This file is
    used for creating envData.c which is included in the Com library.
 
    CONFIG_FILE_TYPE
 
-   Deﬁnitions to allow user created ﬁle types.
+   Definitions to allow user created file types.
 
    CONFIG_SITE
 
    File in which you add to or modify make variables in EPICS base. A
-   deﬁnition commonly overridden is CROSS_COMPILER_TARGET_ARCHS
+   definition commonly overridden is CROSS_COMPILER_TARGET_ARCHS
 
    CONFIG_SITE_ENV
 
-   Defaults for site speciﬁc deﬁnitions of EPICS environment variables.
-   This ﬁle is used for creating envData.c which is included in the Com
+   Defaults for site specific definitions of EPICS environment variables.
+   This file is used for creating envData.c which is included in the Com
    library.
 
    CONFIG
 
-   Include statements for all the other conﬁgure ﬁles. You can override
-   any deﬁnitions in other CONFIG\* ﬁles by placing override deﬁnitions
-   at the end of this ﬁle.
+   Include statements for all the other configure files. You can override
+   any definitions in other CONFIG\* files by placing override definitions
+   at the end of this file.
 
    RELEASE
 
-   Speciﬁes the location of external products such as Tornado II and
+   Specifies the location of external products such as Tornado II and
    external <tops> such as EPICS base.
 
    RULES
 
-   This ﬁle just includes the appropriate rules conﬁguration ﬁle.
+   This file just includes the appropriate rules configuration file.
 
    RULES.Db
 
-   Rules for building and installing database and database deﬁnition
-   ﬁles. Databases generated from templates and/or CapFast schematics
+   Rules for building and installing database and database definition
+   files. Databases generated from templates and/or CapFast schematics
    are supported.
 
    RULES.ioc
@@ -3271,103 +3271,103 @@ the various makeﬁles.
 
    RULES_ARCHS
 
-   Deﬁnitions and rules which allow building the make target for each
+   Definitions and rules which allow building the make target for each
    target architecture.
 
    RULES_BUILD
 
-   Build rules for the Makeﬁles
+   Build rules for the Makefiles
 
    RULES_DIRS
 
-   Deﬁnitions and rules which allow building the make targets in each
-   subdirectory. This ﬁle is included by Makeﬁles in directories with
+   Definitions and rules which allow building the make targets in each
+   subdirectory. This file is included by Makefiles in directories with
    subdirectories to be built.
 
    RULES_EXPAND
 
-   Deﬁnitions and rules to use expandVars.pl to expand @VAR@ variables
-   in a ﬁle.
+   Definitions and rules to use expandVars.pl to expand @VAR@ variables
+   in a file.
 
    RULES_FILE_TYPE
 
-   Deﬁnitions and rules to allow user created CONFIG\* and RULES\* ﬁles
-   and rules to allow user created ﬁle types.
+   Definitions and rules to allow user created CONFIG\* and RULES\* files
+   and rules to allow user created file types.
 
-   RULES_JAVA Deﬁnitions and rules which allow building java class ﬁles
-   and java jar ﬁles.
+   RULES_JAVA Definitions and rules which allow building java class files
+   and java jar files.
    RULES_TARGET
 
-   Makeﬁle code to create target speciﬁc dependency lines for libraries
+   Makefile code to create target specific dependency lines for libraries
    and product targets.
 
    RULES_TOP
 
-   Rules speciﬁc to a <top> level directory e.g. uninstall and tar. It
-   also includes the RULES_DIRS ﬁle.
+   Rules specific to a <top> level directory e.g. uninstall and tar. It
+   also includes the RULES_DIRS file.
 
-   Makefile Deﬁnitions to allow creation of CONFIG_APP_INCLUDE and
-   installation of the CONFIG\* ﬁles into the $(INSTALL_LOCATION)
+   Makefile Definitions to allow creation of CONFIG_APP_INCLUDE and
+   installation of the CONFIG\* files into the $(INSTALL_LOCATION)
    directory.
 
-Base conﬁgure/os File Descriptions
+Base configure/os File Descriptions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The conﬁgure/os directory contains os speciﬁc make deﬁnitions. The
-naming convention for the ﬁles in this directory is
-CONFIG.<host>.<target> where <host> is either the arch for a speciﬁc
+The configure/os directory contains os specific make definitions. The
+naming convention for the files in this directory is
+CONFIG.<host>.<target> where <host> is either the arch for a specific
 host system or Common for all supported host systems and <target> is
-either the arch for a speciﬁc target system or Common for all supported
+either the arch for a specific target system or Common for all supported
 target systems.
 
-For example, the ﬁle CONFIG.Common.vxWorks-pentium will contain make
-deﬁnitions to be used for builds on all host systems when building for a
+For example, the file CONFIG.Common.vxWorks-pentium will contain make
+definitions to be used for builds on all host systems when building for a
 vxWorks-pentium target system.
 
-Also, if a group of host or target ﬁles have the same make deﬁnitions
-these common deﬁnitions can be moved to a new ﬁle which is then included
-in each host or target ﬁle. An example of this is all Unix hosts which
-have common deﬁnitions in a CONFIG.UnixCommon.Common ﬁle and all vxWorks
-targets with deﬁnitions in CONFIG.Common.vxWorksCommon.
+Also, if a group of host or target files have the same make definitions
+these common definitions can be moved to a new file which is then included
+in each host or target file. An example of this is all Unix hosts which
+have common definitions in a CONFIG.UnixCommon.Common file and all vxWorks
+targets with definitions in CONFIG.Common.vxWorksCommon.
 
-The base/conﬁgure/os directory contains the following os-arch speciﬁc
-deﬁnitions
+The base/configure/os directory contains the following os-arch specific
+definitions
 
    CONFIG.<host>.<target>
 
-   Speciﬁc host-target build deﬁnitions
+   Specific host-target build definitions
 
    CONFIG.Common.<target>
 
-   Speciﬁc target deﬁnitions for all hosts
+   Specific target definitions for all hosts
 
    CONFIG.<host>.Common
 
-   Speciﬁc host deﬁnitions for all targets
+   Specific host definitions for all targets
 
    CONFIG.UnixCommon.Common
 
-   Deﬁnitions for Unix hosts and all targets
+   Definitions for Unix hosts and all targets
 
    CONFIG.<host>.vxWorksCommon
 
-   Speciﬁc host deﬁnitions for all vx targets
+   Specific host definitions for all vx targets
 
    CONFIG_COMPAT
 
-   R3.13 arch compatibility deﬁnitions
+   R3.13 arch compatibility definitions
 
    CONFIG_SITE.<host>.<target>
 
-   Site speciﬁc host-target deﬁnitions
+   Site specific host-target definitions
 
    CONFIG_SITE.Common.<target>
 
-   Site speciﬁc target deﬁnitions for all hosts
+   Site specific target definitions for all hosts
 
    CONFIG_SITE.<host>.Common
 
-   Site speciﬁc host deﬁnitions for all targets
+   Site specific host definitions for all targets
 
 Base src/tools File Descriptions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -3379,52 +3379,52 @@ Base src/tools File Descriptions
 
 convertRelease.pl
    This Perl script does consistency checks for the external <top>
-   deﬁnitions in the RELEASE ﬁle. This script also creates envPaths,
-   cdCommands, and dllPath.bat ﬁles for vxWorks and other IOCs.
+   definitions in the RELEASE file. This script also creates envPaths,
+   cdCommands, and dllPath.bat files for vxWorks and other IOCs.
 
 cvsclean.pl
-   This perl script ﬁnds and deletes cvs .#\* ﬁles in all directories of
+   This perl script finds and deletes cvs .#\* files in all directories of
    the directory tree.
 
 dos2unix.pl
-   This perl script converts text ﬁle in DOS CR/LF format to unix ISO
+   This perl script converts text file in DOS CR/LF format to unix ISO
    format.
 
 expandVars.pl
-   This perl tool expands @VAR@ variables while copying a ﬁle.
+   This perl tool expands @VAR@ variables while copying a file.
 
-ﬁlterWarnings.pl
-   This is a perl script that ﬁlters compiler warning output (for
+filterWarnings.pl
+   This is a perl script that filters compiler warning output (for
    HP-UX).
 
 fullpathname.pl
-   This perl script returns the fullpathname of a ﬁle.
+   This perl script returns the fullpathname of a file.
 
 installEpics.pl
-   This is a Perl script that installs build created ﬁles into the
+   This is a Perl script that installs build created files into the
    install directories.
 
 makeDbDepends.pl
-   This perl script searches .substitutions and .template ﬁles for
-   entries to create a DEPENDS ﬁle.
+   This perl script searches .substitutions and .template files for
+   entries to create a DEPENDS file.
 
 makeIncludeDbd.pl
-   This perl script creates an include dbd ﬁle from ﬁle names
+   This perl script creates an include dbd file from file names
 
-makeMakeﬁle.pl
-   This is a perl script that creates a Makeﬁle in the created O.<arch>
+makeMakefile.pl
+   This is a perl script that creates a Makefile in the created O.<arch>
    directories.
 
-makeTestﬁle.pl
-   This perl script generates a ﬁle $target.t which executes a real test
+makeTestfile.pl
+   This perl script generates a file $target.t which executes a real test
    program in the same directory.
 
 mkmf.pl
-   This perl script generates include ﬁle dependencies for targets from
-   source ﬁle include statements.
+   This perl script generates include file dependencies for targets from
+   source file include statements.
 
 munch.pl
-   This is a perl script that creates a ctdt.c ﬁle for vxWorks target
+   This is a perl script that creates a ctdt.c file for vxWorks target
    arch builds which lists the c++ static constructors and destructors.
    See munching in the vxWorks documentation for more information.
 
@@ -3442,13 +3442,13 @@ Build Documentation Files
 Base Documentation Directory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The base/documentation directory contains README ﬁles to help users
+The base/documentation directory contains README files to help users
 setup and build epics/base.
 
 Base Documentation File Descriptions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ﬁles currently in the base/documentation directory are:
+The files currently in the base/documentation directory are:
 
 README.1st
    Instructions for setup and building epics base
@@ -3457,20 +3457,20 @@ README.html
    html version of README.1st
 
 README.MS\_WINDOWS
-   Microsoft WIN32 speciﬁc instructions
+   Microsoft WIN32 specific instructions
 
 README.niCpu030
-   NI cpu030 speciﬁc instructions
+   NI cpu030 specific instructions
 
 README.hpux
 
-   HPUX 11 (hpux-parisc) speciﬁc instructions
+   HPUX 11 (hpux-parisc) specific instructions
 
 README.cris
-   Cris architecture speciﬁc instructions
+   Cris architecture specific instructions
 
 README.tru64unix
-   Tru64Unix/Alpha speciﬁc instructions
+   Tru64Unix/Alpha specific instructions
 
 README.darwin.html
    Installation notes for Mac OS X (Darwin)
@@ -3481,7 +3481,7 @@ BuildingR3.13AppsWithR3.14.html
 
 ConvertingR3.13AppsToR3.14.html
    Describes how to convert a R3.13 vxWorks application so that it
-   contains a R3.14 conﬁgure directory and R3.14 Makeﬁles and builds
+   contains a R3.14 configure directory and R3.14 Makefiles and builds
    with R3.14.1.
 
 ConvertingR3.14.0alpha2AppsTobeta1.html
@@ -3521,7 +3521,7 @@ Base Startup Directory
 ^^^^^^^^^^^^^^^^^^^^^^
 
 The base/startup directory contains scripts to help users set the
-required environment variables and path. The appropriate startup ﬁles
+required environment variables and path. The appropriate startup files
 should be executed before any EPICS builds.
 
 Base Startup File Descriptions
@@ -3535,16 +3535,16 @@ EpicsHostArch
 EpicsHostArch.pl
    perl script to set EPICS_HOST_ARCH environment variable
 
-Site.proﬁle
+Site.profile
    Unix bourne shell script to set path and environment variables
 
 Site.cshrc
    Unix c shell script to set path and environment variables
 
 cygwin.bat
-   WIN32 bat ﬁle to set path and environment variables for building with
+   WIN32 bat file to set path and environment variables for building with
    cygwin gcc/g++ compilers
 
 win32.bat
-   WIN32 bat ﬁle to set path and environment variables for building with
+   WIN32 bat file to set path and environment variables for building with
    MS Visual C++ compilers
