@@ -14,48 +14,48 @@ program is:
 
 .. code ::
 
-    int main(int argc,char ⋆argv[])
-    { 
-       if (argc >= 2) { 
-           iocsh(argv[1]); 
-           epicsThreadSleep(.2); 
-       } 
-       iocsh(NULL); 
-       epicsExit(0) 
-       return 0; 
+    int main(int argc,char  *argv[])
+    { 
+       if (argc >= 2) { 
+           iocsh(argv[1]); 
+           epicsThreadSleep(.2); 
+       } 
+       iocsh(NULL); 
+       epicsExit(0) 
+       return 0; 
     }
 
-The ﬁrst call to iocsh executes commands from the startup script ﬁlename
+The  first call to iocsh executes commands from the startup script  filename
 which must be passed as an argument to the program. The second call to
 iocsh with a NULL argument puts iocsh into interactive mode. This allows
-the user to issue the commands described in the chapter on “IOC Test
-Facilities” as well as some additional commands like help.
+the user to issue the commands described in the chapter on  "IOC Test
+Facilities" as well as some additional commands like help.
 
-The command ﬁle passed is usually called the startup script, and
+The command  file passed is usually called the startup script, and
 contains statements like these:
 
 .. code ::
 
-        < envPaths
-        cd ${TOP}
-        dbLoadDatabase "dbd/appname.dbd"
-        appname_registerRecordDeviceDriver pdbbase
-        dbLoadRecords "db/file.db", "macro=value"
-        cd ${TOP}/iocBoot/${IOC}
-        iocInit
+        < envPaths
+        cd ${TOP}
+        dbLoadDatabase "dbd/appname.dbd"
+        appname_registerRecordDeviceDriver pdbbase
+        dbLoadRecords "db/file.db", "macro=value"
+        cd ${TOP}/iocBoot/${IOC}
+        iocInit
 
-The envPaths ﬁle is automatically generated in the IOC’s boot directory
-and deﬁnes several environment variables that are useful later in the
-startup script. The deﬁnitions shown below are always provided;
+The envPaths  file is automatically generated in the IOC�s boot directory
+and defines several environment variables that are useful later in the
+startup script. The definitions shown below are always provided;
 additional entries will be created for each support module referenced in
-the application’s configure/RELEASE ﬁle:
+the application�s configure/RELEASE file:
 
 .. code ::
 
-        epicsEnvSet("ARCH","linux-x86")
-        epicsEnvSet("IOC","iocname")
-        epicsEnvSet("TOP","/path/to/application")
-        epicsEnvSet("EPICS_BASE","/path/to/base")
+        epicsEnvSet("ARCH","linux-x86")
+        epicsEnvSet("IOC","iocname")
+        epicsEnvSet("TOP","/path/to/application")
+        epicsEnvSet("EPICS_BASE","/path/to/base")
 
 Overview - vxWorks
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -66,47 +66,47 @@ initialize the application code:
 
 .. code ::
 
-        # Many vxWorks board support packages need the following:
-        #cd <full path to IOC boot directory>
-        < cdCommands
-        cd topbin
-        ld 0,0, "appname.munch"
-        
-        cd top
-        dbLoadDatabase "dbd/appname.dbd"
-        appname_registerRecordDeviceDriver pdbbase
-        dbLoadRecords "db/file.db", "macro=value"
-        
-        cd startup
-        iocInit
+        # Many vxWorks board support packages need the following:
+        #cd <full path to IOC boot directory>
+        < cdCommands
+        cd topbin
+        ld 0,0, "appname.munch"
+
+        cd top
+        dbLoadDatabase "dbd/appname.dbd"
+        appname_registerRecordDeviceDriver pdbbase
+        dbLoadRecords "db/file.db", "macro=value"
+
+        cd startup
+        iocInit
 
 The cdCommands script is automatically generated in the IOC boot
-directory and deﬁnes several vxWorks global variables that allow cd
+directory and defines several vxWorks global variables that allow cd
 commands to various locations, and also sets several environment
-variables. The deﬁnitions shown below are always provided; additional
+variables. The definitions shown below are always provided; additional
 entries will be created for each support module referenced in the
-application’s configure/RELEASE ﬁle:
+application�s configure/RELEASE file:
 
 .. code ::
 
-        startup = "/path/to/application/iocBoot/iocname"
-        putenv "ARCH=vxWorks-68040"
-        putenv "IOC=iocname"
-        top = "/path/to/application"
-        putenv "TOP=/path/to/application"
-        topbin = "/path/to/application/bin/vxWorks-68040"
-        epics_base = "/path/to/base"
-        putenv "EPICS_BASE=/path/to/base"
-        epics_basebin = "/path/to/base/bin/vxWorks-68040"
+        startup = "/path/to/application/iocBoot/iocname"
+        putenv "ARCH=vxWorks-68040"
+        putenv "IOC=iocname"
+        top = "/path/to/application"
+        putenv "TOP=/path/to/application"
+        topbin = "/path/to/application/bin/vxWorks-68040"
+        epics_base = "/path/to/base"
+        putenv "EPICS_BASE=/path/to/base"
+        epics_basebin = "/path/to/base/bin/vxWorks-68040"
 
 The **ld** command in the startup script loads EPICS core, the record,
-device and driver support the IOC needs, and any application speciﬁc
+device and driver support the IOC needs, and any application specific
 modules that have been linked into it.
 
-**dbLoadDatabase** loads database deﬁnition ﬁles describing the
+**dbLoadDatabase** loads database definition files describing the
 record/device/driver support used by the application..
 
-**dbLoadRecord**s loads record instance deﬁnitions.
+**dbLoadRecord**s loads record instance definitions.
 
 **iocInit** initializes the various epics components and starts the IOC
 running.
@@ -114,31 +114,31 @@ running.
 Overview - RTEMS
 ~~~~~~~~~~~~~~~~
 
-RTEMS applications can start up in many diﬀerent ways depending on the
+RTEMS applications can start up in many different ways depending on the
 board-support package for a particular piece of hardware. Systems which
 use the Cexp package can be treated much like vxWorks. Other systems
-ﬁrst read initialization parameters from non-volatile memory or from a
+first read initialization parameters from non-volatile memory or from a
 BOOTP/DHCP server. The exact mechanism depends upon the BSP. TFTP or NFS
-ﬁlesystems are then mounted and the IOC shell is used to read commands
-from a startup script. The location of this startup script is speciﬁed
+filesystems are then mounted and the IOC shell is used to read commands
+from a startup script. The location of this startup script is specified
 by a initialization parameter. This script is often similar or identical
 to the one used with vxWorks. The RTEMS startup code calls
 
 .. code ::
 
-   epicsRtemsInitPreSetBootConfigFromNVRAM(struct rtems_bsdnet_config ⋆);
+   epicsRtemsInitPreSetBootConfigFromNVRAM(struct rtems_bsdnet_config  *);
 
 just before setting the initialization parameters from non-volatile
 memory, and
 
 .. code ::
 
-   epicsRtemsInitPostSetBootConfigFromNVRAM(struct rtems_bsdnet_config ⋆);
+   epicsRtemsInitPostSetBootConfigFromNVRAM(struct rtems_bsdnet_config  *);
 
 just after setting the initialization parameters. An application may
 provide either or both of these routines to perform any custom
 initialization required. These function prototypes and some useful
-external variable declarations can be found in the header ﬁle
+external variable declarations can be found in the header file
 epicsRtemsInitHooks.h
 
 IOC Initialization
@@ -146,13 +146,13 @@ IOC Initialization
 
 An IOC is normally started with the **iocInit** command as shown in the
 startup scripts above, which is actually implemented in two distinct
-parts. The ﬁrst part can be run separately as the iocBuild command,
+parts. The first part can be run separately as the iocBuild command,
 which puts the IOC into a quiescent state without allowing the various
 internal threads it starts to actually run. From this state the second
 command iocRun can be used to bring it online very quickly. A running
 IOC can be quiesced using the iocPause command, which freezes all
 internal operations; at this point the iocRun command can restart it
-from where it left oﬀ, or the IOC can be shut down (exit the program, or
+from where it left off, or the IOC can be shut down (exit the program, or
 reboot on vxWorks/RTEMS). Most device support and drivers have not yet
 been written with the possibility of pausing an IOC in mind though, so
 this feature may not be safe to use on an IOC which talks to external
@@ -161,14 +161,14 @@ devices or software.
 IOC initialization using the iocBuild and iocRun commands then consists
 of the following steps:
 
-Conﬁgure Main Thread
+Configure Main Thread
 ^^^^^^^^^^^^^^^^^^^^
 
 Provided the IOC has not already been initialized, initHookAtIocBuild
-is announced ﬁrst.
+is announced first.
 
-The main thread’s epicsThreadIsOkToBlock ﬂag is set, the message
-“Starting iocInit” is logged and epicsSignalInstallSigHupIgnore called,
+The main thread�s epicsThreadIsOkToBlock flag is set, the message
+ "Starting iocInit" is logged and epicsSignalInstallSigHupIgnore called,
 which on Unix architectures prevents the process from shutting down if
 it later receives a HUP signal.
 
@@ -184,11 +184,11 @@ Calls taskwdInit to start the task watchdog. This accepts requests to
 watch other tasks. It runs periodically and checks to see if any of the
 tasks is suspended. If so it issues an error message, and can also
 invoke callback routines registered by the task itself or by other
-software that is interested in the state of the IOC. See ”Task Watchdog”
+software that is interested in the state of the IOC. See "Task Watchdog"
 for details.
 
 Starts the general purpose callback tasks by calling callbackInit. Three
-tasks are started at diﬀerent scheduling priorities.
+tasks are started at different scheduling priorities.
 
 initHookAfterCallbackInit is announced.
 
@@ -230,16 +230,16 @@ Database Records
 initDatabase is called which makes three passes over the database
 performing the following functions:
 
-#. Initializes the ﬁelds RSET, RDES, MLOK, MLIS, PACT and DSET for each
+#. Initializes the fields RSET, RDES, MLOK, MLIS, PACT and DSET for each
    record.
 
-   Calls record support’s init_record (ﬁrst pass).
+   Calls record support�s init_record (first pass).
 
 #. Convert each PV_LINK into a DB_LINK or CA_LINK
 
-   Calls any extended device support’s add_record routine.
+   Calls any extended device support�s add_record routine.
 
-#. Calls record support’s init_record (second pass).
+#. Calls record support�s init_record (second pass).
 
 Finally it registers an epicsAtExit routine to shut down the database
 when the IOC application exits.
@@ -254,7 +254,7 @@ Device Support again
 ^^^^^^^^^^^^^^^^^^^^
 
 initDevSup locates each device support entry table and calls its init
-routine specifying that this is the ﬁnal call.
+routine specifying that this is the final call.
 
 initHookAfterFinishDevSup is announced.
 
@@ -268,7 +268,7 @@ records yet.
 A call to asInit initailizes access security. If this reports failure,
 the IOC initialization is aborted.
 
-dbProcessNotifyInit initializes support for process notiﬁcation.
+dbProcessNotifyInit initializes support for process notification.
 
 After a short delay to allow settling, initHookAfterScanInit is
 announced.
@@ -307,7 +307,7 @@ associated tasks and set the global variable interruptAccept to TRUE
 should have been ignored.
 
 initHookAfterDatabaseRunning is announced. If the iocRun command (or
-iocInit) is being executed for the ﬁrst time,
+iocInit) is being executed for the first time,
 initHookAfterInterruptAccept is announced.
 
 Enable CA Server
@@ -316,7 +316,7 @@ Enable CA Server
 The Channel Access server tasks are allowed to run by calling rsrv_run.
 
 initHookAfterCaServerRunning is announced. If the IOC is starting for
-the ﬁrst time, initHookAtEnd is announced.
+the first time, initHookAtEnd is announced.
 
 A command completion message is logged, and initHookAfterIocRunning is
 announced.
@@ -341,29 +341,29 @@ operation are as follows:
 #. initHookAfterDatabasePaused is announced.
 #. After logging a pause message, initHookAfterIocPaused is announced.
 
-Changing iocCore ﬁxed limits
+Changing iocCore fixed limits
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following commands can be issued after iocCore is loaded to change
-iocCore ﬁxed limits. The commands should be given before any
+iocCore fixed limits. The commands should be given before any
 dbLoadDatabase commands.
 
 .. code ::
 
-        callbackSetQueueSize(size)
-        dbPvdTableSize(size)
-        scanOnceSetQueueSize(size)
-        errlogInit(buffersize)
-        errlogInit2(buffersize, maxMessageSize)
+        callbackSetQueueSize(size)
+        dbPvdTableSize(size)
+        scanOnceSetQueueSize(size)
+        errlogInit(buffersize)
+        errlogInit2(buffersize, maxMessageSize)
 
 callbackSetQueueSize
 ^^^^^^^^^^^^^^^^^^^^
 
 Requests for the general purpose callback tasks are placed in a ring
-buﬀer. This command can be used to set the size for the ring buﬀers. The
-default is 2000. A message is issued when a ring buﬀer overﬂows. It
+buffer. This command can be used to set the size for the ring buffers. The
+default is 2000. A message is issued when a ring buffer over�ows. It
 should rarely be necessary to override this default. Normally the ring
-buﬀer overﬂow messages appear when a callback task fails.
+buffer over�ow messages appear when a callback task fails.
 
 dbPvdTableSize
 ^^^^^^^^^^^^^^
@@ -378,63 +378,63 @@ records) then a larger hash table size speeds up searches for records.
 scanOnceSetQueueSize
 ^^^^^^^^^^^^^^^^^^^^
 
-scanOnce requests are placed in a ring buﬀer. This command can be used
-to set the size for the ring buﬀer. The default is 1000. It should
-rarely be necessary to override this default. Normally the ring buﬀer
-overﬂow messages appear when the scanOnce task fails.
+scanOnce requests are placed in a ring buffer. This command can be used
+to set the size for the ring buffer. The default is 1000. It should
+rarely be necessary to override this default. Normally the ring buffer
+overflow messages appear when the scanOnce task fails.
 
 errlogInit or errlogInit2
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-These commands can increase (but not decrease) the default buﬀer and
-maximum message sizes for the errlog message queue. The default buﬀer
+These commands can increase (but not decrease) the default buffer and
+maximum message sizes for the errlog message queue. The default buffer
 size is 1280 bytes, the maximum message size defaults to 256 bytes.
 
 initHooks
 ~~~~~~~~~
 
 The inithooks facility allows application functions to be called at
-various states during ioc initialization. The states are deﬁned in
-initHooks.h, which contains the following deﬁnitions:
+various states during ioc initialization. The states are defined in
+initHooks.h, which contains the following definitions:
 
 .. code ::
 
-   typedef enum { 
-       initHookAtIocBuild = 0,         /⋆ Start of iocBuild/iocInit commands ⋆/ 
-       initHookAtBeginning, 
-       initHookAfterCallbackInit, 
-       initHookAfterCaLinkInit, 
-       initHookAfterInitDrvSup, 
-       initHookAfterInitRecSup, 
-       initHookAfterInitDevSup, 
-       initHookAfterInitDatabase, 
-       initHookAfterFinishDevSup, 
-       initHookAfterScanInit, 
-       initHookAfterInitialProcess, 
-       initHookAfterCaServerInit, 
-       initHookAfterIocBuilt,          /⋆ End of iocBuild command ⋆/ 
-    
-       initHookAtIocRun,               /⋆ Start of iocRun command ⋆/ 
-       initHookAfterDatabaseRunning, 
-       initHookAfterCaServerRunning, 
-       initHookAfterIocRunning,        /⋆ End of iocRun/iocInit commands ⋆/ 
-    
-       initHookAtIocPause,             /⋆ Start of iocPause command ⋆/ 
-       initHookAfterCaServerPaused, 
-       initHookAfterDatabasePaused, 
-       initHookAfterIocPaused,         /⋆ End of iocPause command ⋆/ 
-    
-   /⋆ Deprecated states, provided for backwards compatibility. 
-    ⋆ These states are announced at the same point they were before, 
-    ⋆ but will not be repeated if the IOC gets paused and restarted. 
-    ⋆/ 
-       initHookAfterInterruptAccept,   /⋆ After initHookAfterDatabaseRunning ⋆/ 
-       initHookAtEnd,                  /⋆ Before initHookAfterIocRunning ⋆/ 
-   }initHookState; 
-    
-   typedef void (⋆initHookFunction)(initHookState state); 
-   int initHookRegister(initHookFunction func); 
-   const char ⋆initHookName(int state);
+   typedef enum {
+       initHookAtIocBuild = 0,         / * Start of iocBuild/iocInit commands  */
+       initHookAtBeginning,
+       initHookAfterCallbackInit,
+       initHookAfterCaLinkInit,
+       initHookAfterInitDrvSup,
+       initHookAfterInitRecSup,
+       initHookAfterInitDevSup,
+       initHookAfterInitDatabase,
+       initHookAfterFinishDevSup,
+       initHookAfterScanInit,
+       initHookAfterInitialProcess,
+       initHookAfterCaServerInit,
+       initHookAfterIocBuilt,          / * End of iocBuild command  */
+
+       initHookAtIocRun,               / * Start of iocRun command  */
+       initHookAfterDatabaseRunning,
+       initHookAfterCaServerRunning,
+       initHookAfterIocRunning,        / * End of iocRun/iocInit commands  */
+
+       initHookAtIocPause,             / * Start of iocPause command  */
+       initHookAfterCaServerPaused,
+       initHookAfterDatabasePaused,
+       initHookAfterIocPaused,         / * End of iocPause command  */
+
+   / * Deprecated states, provided for backwards compatibility.
+     * These states are announced at the same point they were before,
+     * but will not be repeated if the IOC gets paused and restarted.
+     */
+       initHookAfterInterruptAccept,   / * After initHookAfterDatabaseRunning  */
+       initHookAtEnd,                  / * Before initHookAfterIocRunning  */
+   }initHookState;
+
+   typedef void ( *initHookFunction)(initHookState state);
+   int initHookRegister(initHookFunction func);
+   const char  *initHookName(int state);
 
 Any functions that are registered before iocInit reaches the desired
 state will be called when it reaches that state. The initHookName
@@ -444,25 +444,25 @@ to use this facility:
 
 .. code ::
 
-   static initHookFunction myHookFunction; 
-    
-   int myHookInit(void) 
-   { 
-     return(initHookRegister(myHookFunction)); 
-   } 
-    
-   static void myHookFunction(initHookState state) 
-   { 
-     switch(state) { 
-       case initHookAfterInitRecSup: 
-         ... 
-         break; 
-       case initHookAfterInterruptAccept: 
-         ... 
-         break; 
-       default: 
-         break; 
-     } 
+   static initHookFunction myHookFunction;
+
+   int myHookInit(void)
+   {
+     return(initHookRegister(myHookFunction));
+   }
+
+   static void myHookFunction(initHookState state)
+   {
+     switch(state) {
+       case initHookAfterInitRecSup:
+         ...
+         break;
+       case initHookAfterInterruptAccept:
+         ...
+         break;
+       default:
+         break;
+     }
    }
 
 An arbitrary number of functions can be registered.
@@ -474,23 +474,22 @@ Various environment variables are used by iocCore:
 
 .. code ::
 
-        EPICS_CA_ADDR_LIST
-        EPICS_CA_AUTO_ADDR_LIST
-        EPICS_CA_CONN_TMO
-        EPICS_CAS_BEACON_PERIOD
-        EPICS_CA_REPEATER_PORT
-        EPICS_CA_SERVER_PORT
-        EPICS_CA_MAX_ARRAY_BYTES
-        EPICS_TS_NTP_INET
-        EPICS_IOC_LOG_PORT
-        EPICS_IOC_LOG_INET
+        EPICS_CA_ADDR_LIST
+        EPICS_CA_AUTO_ADDR_LIST
+        EPICS_CA_CONN_TMO
+        EPICS_CAS_BEACON_PERIOD
+        EPICS_CA_REPEATER_PORT
+        EPICS_CA_SERVER_PORT
+        EPICS_CA_MAX_ARRAY_BYTES
+        EPICS_TS_NTP_INET
+        EPICS_IOC_LOG_PORT
+        EPICS_IOC_LOG_INET
 
 For an explanation of the EPICS_CA\_... and EPICS_CAS\_... variables see
 the EPICS Channel Access Reference Manual. For an explanation of the
-EPICS_IOC_LOG\_... variables see ”iocLogClient” on page
-`445 <IOCErrorLogging.html#x11-48000010.7.2>`__ of this manual.
+EPICS_IOC_LOG\_... variables see "iocLogClient" (To be added).
 EPICS_TS_NTP_INET is used only on vxWorks and RTEMS, where it sets the
-address of the Network Time Protocol server. If it is not deﬁned the IOC
+address of the Network Time Protocol server. If it is not defined the IOC
 uses the boot server as its NTP server.
 
 These variables can be set through iocsh via the epicsEnvSet command, or
@@ -498,29 +497,29 @@ on vxWorks using putenv. For example:
 
 .. code ::
 
-        epicsEnvSet("EPICS_CA_CONN_TMO,"10")
+        epicsEnvSet("EPICS_CA_CONN_TMO,"10")
 
 All epicsEnvSet commands should be issued after iocCore is loaded and
 before any dbLoad commands.
 
 The following commands can be issued to iocsh:
 
-**epicsPrtEnvParams** – This shows just the environment variables used by
+**epicsPrtEnvParams** - This shows just the environment variables used by
 iocCore.
 
-**epicsEnvShow** – This shows all environment variables on your system.
+**epicsEnvShow** - This shows all environment variables on your system.
 
 Initialize Logging
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Initialize the logging system. See the chapter on “IOC Error Logging”
+Initialize the logging system. See the chapter on "IOC Error Logging"
 for details. The following can be used to direct the log client to use a
-speciﬁc host log server.
+specific host log server.
 
 .. code ::
 
-        epicsEnvSet("EPICS_IOC_LOG_PORT", "<port>")
-        epicsEnvSet("EPICS_IOC_LOG_INET", "<inet addr>")
+        epicsEnvSet("EPICS_IOC_LOG_PORT", "<port>")
+        epicsEnvSet("EPICS_IOC_LOG_INET", "<inet addr>")
 
 These command must be given immediately after iocCore is loaded.
 
@@ -528,4 +527,4 @@ To start logging you must issue the command:
 
 .. code ::
 
-        iocLogInit
+        iocLogInit
