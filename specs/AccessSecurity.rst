@@ -298,7 +298,7 @@ the ASG of a record is not defined or is not equal to a ASG in the
 configuration file then the record is placed in DEFAULT.
 
 Subroutine Record Support
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Two subroutines, which can be attached to a subroutine record, are
 available (provided with iocCore):

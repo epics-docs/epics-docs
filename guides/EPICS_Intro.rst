@@ -572,7 +572,7 @@ technologies and the users should select which tools are the best suited to
 their particular setup and infrastructure.
 
 Examples of CA/pvAccess Tools
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A large number of CA/PVA tools have been developed. The
 following are some representative examples.
@@ -606,14 +606,14 @@ following are some representative examples.
    beam in the accelerator as measured by the Beam Position Monitors.
 
 Examples of other Tools
-^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~
 
 • VDCT: A Java based database configuration tool, which can be used to
-design and configure EPICS databases, and is able to visualize the
-records and their connections.
+  design and configure EPICS databases, and is able to visualize the
+  records and their connections.
 
 • SNC: State Notation Compiler. It generates a C program that represents
-the states for the IOC Sequencer tool.
+  the states for the IOC Sequencer tool.
 
 References and further reading
 ------------------------------
