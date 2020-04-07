@@ -15,14 +15,14 @@ program is:
 .. code ::
 
     int main(int argc,char  *argv[])
-    { 
-       if (argc >= 2) { 
-           iocsh(argv[1]); 
-           epicsThreadSleep(.2); 
-       } 
-       iocsh(NULL); 
-       epicsExit(0) 
-       return 0; 
+    {
+       if (argc >= 2) {
+           iocsh(argv[1]);
+           epicsThreadSleep(.2);
+       }
+       iocsh(NULL);
+       epicsExit(0)
+       return 0;
     }
 
 The  first call to iocsh executes commands from the startup script  filename
@@ -44,11 +44,11 @@ contains statements like these:
         cd ${TOP}/iocBoot/${IOC}
         iocInit
 
-The envPaths  file is automatically generated in the IOC©s boot directory
+The envPaths  file is automatically generated in the IOC's boot directory
 and defines several environment variables that are useful later in the
 startup script. The definitions shown below are always provided;
 additional entries will be created for each support module referenced in
-the application©s configure/RELEASE file:
+the application's configure/RELEASE file:
 
 .. code ::
 
@@ -85,7 +85,7 @@ directory and defines several vxWorks global variables that allow cd
 commands to various locations, and also sets several environment
 variables. The definitions shown below are always provided; additional
 entries will be created for each support module referenced in the
-application©s configure/RELEASE file:
+application's configure/RELEASE file:
 
 .. code ::
 
@@ -106,7 +106,7 @@ modules that have been linked into it.
 **dbLoadDatabase** loads database definition files describing the
 record/device/driver support used by the application..
 
-**dbLoadRecord**s loads record instance definitions.
+**dbLoadRecords** loads record instance definitions.
 
 **iocInit** initializes the various epics components and starts the IOC
 running.
@@ -162,13 +162,13 @@ IOC initialization using the iocBuild and iocRun commands then consists
 of the following steps:
 
 Configure Main Thread
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 Provided the IOC has not already been initialized, initHookAtIocBuild
 is announced first.
 
-The main thread©s epicsThreadIsOkToBlock flag is set, the message
- "Starting iocInit" is logged and epicsSignalInstallSigHupIgnore called,
+The main thread's epicsThreadIsOkToBlock flag is set, the message
+"Starting iocInit" is logged and epicsSignalInstallSigHupIgnore called,
 which on Unix architectures prevents the process from shutting down if
 it later receives a HUP signal.
 
@@ -233,13 +233,13 @@ performing the following functions:
 #. Initializes the fields RSET, RDES, MLOK, MLIS, PACT and DSET for each
    record.
 
-   Calls record support©s init_record (first pass).
+   Calls record support's init_record (first pass).
 
 #. Convert each PV_LINK into a DB_LINK or CA_LINK
 
-   Calls any extended device support©s add_record routine.
+   Calls any extended device support's add_record routine.
 
-#. Calls record support©s init_record (second pass).
+#. Calls record support's init_record (second pass).
 
 Finally it registers an epicsAtExit routine to shut down the database
 when the IOC application exits.
@@ -342,7 +342,7 @@ operation are as follows:
 #. After logging a pause message, initHookAfterIocPaused is announced.
 
 Changing iocCore fixed limits
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following commands can be issued after iocCore is loaded to change
 iocCore fixed limits. The commands should be given before any
@@ -361,9 +361,9 @@ callbackSetQueueSize
 
 Requests for the general purpose callback tasks are placed in a ring
 buffer. This command can be used to set the size for the ring buffers. The
-default is 2000. A message is issued when a ring buffer over‚ows. It
+default is 2000. A message is issued when a ring buffer overflows. It
 should rarely be necessary to override this default. Normally the ring
-buffer over‚ow messages appear when a callback task fails.
+buffer overflow messages appear when a callback task fails.
 
 dbPvdTableSize
 ^^^^^^^^^^^^^^

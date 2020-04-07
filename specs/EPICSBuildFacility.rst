@@ -101,7 +101,7 @@ The principal features of the build system are:
 
 -  Requires a single Makefile in each directory of a <top> directory
    structure
--  Supports both host os vendor©s native compiler and GNU compiler
+-  Supports both host os vendor's native compiler and GNU compiler
 -  Supports building multiple types of software (libraries, executables,
    databases, java class files, etc.) stored in a single directory tree.
 -  Supports building EPICS base, extensions, and IOC applications.
@@ -144,8 +144,8 @@ Host Environment Variable
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Only one environment variable, EPICS_HOST_ARCH, is required to build
-EPICS <top> areas. This variable should be set to be your workstation©s
-operating system - architecture combination to use the os vendor©s c/c++
+EPICS <top> areas. This variable should be set to be your workstation's
+operating system - architecture combination to use the os vendor's c/c++
 compiler for native builds or set to the operating system - architecture
 - alternate compiler combination to use an alternate compiler for native
 builds if an alternate compiler is supported on your system. The
@@ -161,7 +161,7 @@ following software installed:
 
 -  Perl version 5.8 or greater
 -  GNU make, version 3.81 or greater
--  C++ compiler (host operating system vendor©s compiler or GNU
+-  C++ compiler (host operating system vendor's compiler or GNU
    compiler)
 
 If you will be building EPICS components for vxWorks targets you will
@@ -227,10 +227,10 @@ The startup directory also contains scripts to help users set the path
 and other environment variables.
 
 Configuration Definitions
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Site-specific EPICS Base Configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Site configuration
 '''''''''''''''''
@@ -242,7 +242,7 @@ definitions in the following files:
    - configure/CONFIG_SITE_ENV Environment variable defaults
 
 Host configuration
-'''''''''''''''''
+''''''''''''''''''
 
 To configure each host system for your site, you may override the default
 definitions in the configure/os directory by adding a new file with
@@ -279,22 +279,22 @@ following tow macros in the base/configure/CONFIG_SITE file:
    - COMPAT_313 - Set to YES to build R3.13 ioc applications and extensions with this base.
 
 Directory definitions
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 The configure files contain definitions for locations in which to install
 various components. These are all relative to INSTALL_LOCATION. The
 default value for INSTALL_LOCATION is $(TOP), and $(T_A) is the current
-build©s target architecture. The default value for INSTALL_LOCATION can
+build's target architecture. The default value for INSTALL_LOCATION can
 be overridden in the configure/CONFIG_SITE file.
 
 .. code ::
 
         INSTALL_LOCATION_LIB      = $(INSTALL_LOCATION)/lib
         INSTALL_LOCATION_BIN      = $(INSTALL_LOCATION)/bin
-        
+
         INSTALL_HOST_BIN          = $(INSTALL_LOCATION_BIN)/$(EPICS_HOST_ARCH)
         INSTALL_HOST_LIB          = $(INSTALL_LOCATION_LIB)/$(EPICS_HOST_ARCH)
-        
+
         INSTALL_INCLUDE           = $(INSTALL_LOCATION)/include
         INSTALL_DOC               = $(INSTALL_LOCATION)/doc
         INSTALL_HTML              = $(INSTALL_LOCATION)/html
@@ -303,14 +303,14 @@ be overridden in the configure/CONFIG_SITE file.
         INSTALL_DB                = $(INSTALL_LOCATION)/db
         INSTALL_CONFIG            = $(INSTALL_LOCATION)/configure
         INSTALL_JAVA              = $(INSTALL_LOCATION)/javalib
-        
+
         INSTALL_LIB               = $(INSTALL_LOCATION_LIB)/$(T_A)
         INSTALL_SHRLIB            = $(INSTALL_LOCATION_LIB)/$(T_A)
         INSTALL_TCLLIB            = $(INSTALL_LOCATION_LIB)/$(T_A)
         INSTALL_BIN               = $(INSTALL_LOCATION_BIN)/$(T_A)
 
 Extension and Application Specific Configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 | The base/configure directory contains files with the default build
   definitions and site specific build definitions. The extensions/configure
@@ -324,7 +324,7 @@ Extension and Application Specific Configuration
   <top>/configure/CONFIG_SITE file.
 
 RELEASE file
-^^^^^^^^^^^
+^^^^^^^^^^^^
 
 Every <top>/configure directory contains a RELEASE file. RELEASE contains
 a user specified list of other <top> directory structures containing files
@@ -385,7 +385,7 @@ value), consistency checks will be performed. If CHECK_RELEASE is set to
 WARN the build will continue even if conflicts are found.
 
 Modifying configure/RELEASE\* files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You should always do a gnumake clean uninstall in the <top> directory
 BEFORE adding, changing, or removing any definitions in the
@@ -422,7 +422,7 @@ for example:
         EPICS_BASE = $(SUPPORT)/base/3-14-9-asd1
 
 OS Class specific definitions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Definitions in a Makefile will apply to the host system (the platform on
 which make is executed) and each system defined by
@@ -463,7 +463,7 @@ that do not have OS_CLASS defined as solaris.
    PROD_DEFAULT = bbb
 
 Specifying T_A specific definitions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 It is possible for the user to limit the systems for which a particular
 definition applies to specific target systems.
@@ -471,7 +471,7 @@ definition applies to specific target systems.
 For example the following Makefile lines specify that product aaa should
 be created for all target architecture which allow IOC type products and
 product bbb should be created only for the vxWorks-68040 and
-vxWorks-ppc603 targets. Remember T_A is the build©s current target
+vxWorks-ppc603 targets. Remember T_A is the build's current target
 architecture. so PROD_IOC has the bbb value only when the current built
 target architecture is vwWorks-68040 or vxWorks-ppc603
 
@@ -517,10 +517,10 @@ These definitions can be further limited by specifying an appended
 underscore "_" followed by an osclass or DEFAULT specification.
 
 User specific override definitions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 User specific override definitions are allowed in user created files in the
-user©s <home>/configure subdirectory. These override definitions will be
+user's <home>/configure subdirectory. These override definitions will be
 used for builds in all <top> directory structures. The files must have
 the following names.
 
@@ -532,7 +532,7 @@ the following names.
         <home>/configure/CONFIG_USER.<epics_host_arch>.<targetarch>
 
 Makefiles
-~~~~~~~~
+~~~~~~~~~
 
 Name
 ^^^^
@@ -549,7 +549,7 @@ This technique makes it possible to share make variables and even rules
 across <top> directories.
 
 Contents of Makefiles
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 Makefiles in directories containing subdirectories
 '''''''''''''''''''''''''''''''''''''''''''''''''
@@ -567,10 +567,10 @@ Makefile to specify both subdirectories and components to be built.
         include $(TOP)/configure/CONFIG
         DIRS += <dir1> <dir2>
         include $(TOP)/configure/RULES_DIRS
-        
+
 
 Makefiles in directories where components are to be built
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 A Makefile in this type of directory must define where <top> is relative
 to this directory, include <top> configure files, and specify the target
@@ -589,7 +589,7 @@ following lines:
         <optional rules definitions>
 
 Simple Makefile examples
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Create an IOC type library named asIoc from the source file asDbLib.c and
 install it into the $(INSTALL_LOCATION)/lib/<arch> directory.
@@ -665,7 +665,7 @@ gnumake clean
    "gnumake clean.<arch>" can be invoked to clean a single architecture.
 
 gnumake archclean
-   This command will remove the current build©s O.<arch> directories but
+   This command will remove the current build's O.<arch> directories but
    not O.Common directory.
 
 gnumake realclean
@@ -717,7 +717,7 @@ only be specified at <top>.*
 *NOTE: realclean cannot be specified inside an O.<arch> subdirectory.
 <dir> is subdirectory name*
 
-*NOTE: You can build using your os vendors© native compiler and also
+*NOTE: You can build using your os vendor's native compiler and also
 build using a supported alternate compiler in the same directory
 structure because the executables and libraries will be created and
 installed into separate directories (e.g bin/solaris-sparc and
@@ -730,7 +730,7 @@ building a cross-compiled target, thus Makefiles must be explicit in
 defining which architectures a component should be built for.
 
 Header file dependencies
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 All product, test product, and library source files which appear in one
 of the source file definitions (e.g. SRCS, PROD_SRCS, LIB_SRCS,
@@ -738,12 +738,12 @@ of the source file definitions (e.g. SRCS, PROD_SRCS, LIB_SRCS,
 generated and included as part of the Makefile.
 
 Makefile definitions
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 The following components can be defined in a Makefile:
 
 Source file directories
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Normally all product, test product, and library source files reside in
 the same directory as the Makefile. OS specific source files are allowed
@@ -807,7 +807,7 @@ $(INSTALL_LOCATION)/dbd directory.
         include $(TOP)/configure/RULES
 
 Record Type Definitions
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 For each new record type, the following definition should be added to the
 makefile:
@@ -860,7 +860,7 @@ $(INSTALL_LOCATION)/dbd.
         include $(TOP)/configure/RULES
 
 Expanded Database Definition Files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Database definition include files named <name>Include.dbd containing
 includes for other database definition files can be expanded by the EPICS
@@ -948,7 +948,7 @@ The created exampleInclude.dbd file will contain the following lines
         include "xxxSupport.dbd"
 
 Registering Support Routines for Expanded Database Definition Files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A source file which registers simple static variables and
 record/device/driver support routines with iocsh can be created. The
@@ -974,7 +974,7 @@ mySubInit and mySubProcess is <name>.dbd containg the following lines
         function(mySubProcess)
 
 Database Definition Files
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The following line installs the existing named dbd files into
 $(INSTALL_LOCATION)/dbd without expansion.
@@ -1051,12 +1051,12 @@ are to be created by script, the script name must be placed in the
 CREATESUBSTITUTIONS variable (e.g. CREATESUBSTITUTIONS=mySubst.pl). This
 script will be executed by gnumake with the prefix of the substitution
 file name to be generated as its argument. If (and only if) there are
-script generated substitutions files, the prefix of any inflated database©s
+script generated substitutions files, the prefix of any inflated database's
 name may not equal the prefix of the name of any template used within the
 directory.
 
 DB install files
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 Definitions of the form:
 
@@ -1158,7 +1158,7 @@ These definitions will apply to all compiler and linker targets.
    USR_LDFLAGS_<osclass> definition
 
 Options for a target specific compile/link command.
-''''''''''''''''''''''''''''''''''''''''''''''''''
+'''''''''''''''''''''''''''''''''''''''''''''''''''
 
    <name>_INCLUDES += -I<name>
 
@@ -1253,7 +1253,7 @@ $(INSTALL_LOCATION)/lib/<arch>, and <name>.dll which is installed into
 $(INSTALL_LOCATION)/bin/<arch>. (Warning: The file <name>.lib will only
 be created by the build if there are exported symbols from the
 library.) If SHARED_LIBRARIES=YES, the directory
-$(INSTALL_LOCATION)/bin/<arch> must be in the user©s path during
+$(INSTALL_LOCATION)/bin/<arch> must be in the user's path during
 builds to allow invoking executables which were linked with shared
 libraries.*
 
@@ -1307,7 +1307,7 @@ Any of the following can be specified:
    have a LIBRARY_HOST_<osclass> definition
 
 Specifying library source file names
-'''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''
 
 Source file names, which must have a suffix, are defined as follows:
 
@@ -1385,7 +1385,7 @@ retained for R3.13 compatibility.
    have a <libname>_SRCS_<osclass> definition
 
 Specifying library object file names
-'''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''
 
 Library object file names should only be specified for object files which
 will not be built in the current directory. For object files built in the
@@ -1503,7 +1503,7 @@ are defined as follows:
    without a <libname>_LDOBJS_<osclass> definition specified. (deprecated)
 
 LIBOBJS definitions
-''''''''''''''''''
+'''''''''''''''''''
 
 Previous versions of epics (3.13 and before) accepted definitions like:
 
@@ -1607,7 +1607,7 @@ line:
 #. USR_SYS_LIBS_<osclass> or USR_SYS_LIBS_DEFAULT
 
 Specifying library DLL file names (deprecated)
-'''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''
 
 WIN32 libraries require all external references to be resolved, so if a
 library contains references to items in other DLL libraries, these DLL
@@ -1883,7 +1883,7 @@ results in file <name>.h being installed or created and installed into
 the appropriate $(INSTALL_LOCATION)/include/os/<osclass> directory.
 
 Html and Doc files
-^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 A definition of the form:
 
@@ -2005,7 +2005,7 @@ Any of the following can be specified:
    have a PROD_HOST_<osclass> definition
 
 Specifying product object file names
-'''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''
 
 Object files which have filenames with a ".o" or ".obj" suffix are defined as
 follows and can be specified without the suffix but should have the
@@ -2118,7 +2118,7 @@ directory prefix
    <prodname>_LDOBJS_<osclass> definition specified. (deprecated)
 
 Specifying product source file names
-'''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''
 
 Source file names, which must have a suffix, are defined as follows:
 
@@ -2511,7 +2511,7 @@ directory prefix is not present, make will look in the source directory
 for the file.
 
 Win32 resource files
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
 
 Definitions of the form:
 
@@ -2548,7 +2548,7 @@ result in the specified tcl files being installed to the
 $(INSTALL_LOCATION)/lib/<arch> directory.
 
 Java class files
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 Java class files can be created by the javac tool into $(INSTALL_JAVA) or
 into the O.Common subdirectory, by specifying the name of the java class
@@ -2596,7 +2596,7 @@ subdirectory.
    TESTJAVA = test.java
 
 Java jar file
-^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 | A single java jar file can be created using the java jar tool and
   installed into $(INSTALL_JAVA)
@@ -2630,7 +2630,7 @@ Any of the following can be specified:
 Example 1
 '''''''''
 
-In this example, all the class files created by the current Makefile©s
+In this example, all the class files created by the current Makefile's
 "JAVA+=" definitions, are placed into a file named mytest1.jar. A manifest
 file will be automatically generated for the jar.
 
@@ -2660,7 +2660,7 @@ put into the new jar file.
    JAR_MANIFEST = mytest2.mf
 
 Java native method C header files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A C header files for use with java native methods will be created by the
 javah tool in the O.Common subdirectory by specifying the name of the
@@ -2691,7 +2691,7 @@ to create old JDK1.0 style header files.
    USR_JAVAHFLAGS = -old
 
 User Created CONFIG\* and RULES\* files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Module developers can now create new CONFIG and RULES\* files ia a <top>
 application source directory. These new CONFIG\* or RULES\* files will be
@@ -2717,6 +2717,7 @@ INSTALL_ABC. This is done by creating a new CONFIG_<name> file, e.g.
 CONFIG_ABC, with the following lines:
 
 .. code ::
+
    FILE_TYPE += ABC
    INSTALL_ABC = $(INSTALL_LOCATION)/abc
 
@@ -2752,7 +2753,7 @@ are concatenated: first by the number, then alphabetical by the remaining
 part of the name. (This mechanism is conceptually similar to the Linux
 convention of collecting configuration file snippets in \*.d directories.)
 
-Snippets with file names not starting with a number or ending in ©~© are
+Snippets with file names not starting with a number or ending in '~' are
 ignored. The specified snippets are processed in the order they appear on
 the command line. Multiple snippets with the same number are
 concatenated. "Commands" (tags in the snippet name) can be used to
@@ -2850,7 +2851,7 @@ snippets:
    ============== ================= ========================================
 
 Table of Makefile definitions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Definitions given below containing <osclass> are used when building for
 target archs of a specific osclass, and the <osclass> part of the name
@@ -3136,7 +3137,7 @@ Makefile definition.
       JAR_MANIFEST                                      name of manifest file for JAR
       USR_JAVACFLAGS                                    javac tool options
       USR_JAVAHFLAGS                                    javah tool options
-      Facilities for Windows 95/NT resource ( .rc) files
+      Facilities for Windows 95/NT resource (.rc) files
       \
       ------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       RCS                                               resource files (<name>.rc) needed to build every PROD and LIBRARY
@@ -3170,10 +3171,10 @@ Makefile definition.
       ================================================= ========================================================================================================================================================================================
 
 Configuration Files
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 Base Configure Directory
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 The base/configure directory has the following directory structure:
 
@@ -3311,7 +3312,7 @@ the various makefiles.
    directory.
 
 Base configure/os File Descriptions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The configure/os directory contains os specific make definitions. The
 naming convention for the files in this directory is
