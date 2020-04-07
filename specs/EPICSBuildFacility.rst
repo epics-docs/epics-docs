@@ -254,7 +254,7 @@ to CONFIG_SITE.
    - configure/os/CONFIG_SITE.<host>.Common - Host build settings for all target systems
 
 Target configuration
-'''''''''''''''''''
+''''''''''''''''''''
 
 To configure each target system, you may override the default definitions
 in the configure/os directory by adding a new file with override
@@ -267,7 +267,7 @@ CONFIG_SITE.
    - configure/os/CONFIG_SITE.Common.vxWorksCommon - vxWorks full paths
 
 R3.13 compatibility configuration
-''''''''''''''''''''''''''''''''
+'''''''''''''''''''''''''''''''''
 
 To configure EPICS base for building with R3.13 extensions and ioc
 applications, you must modify the default definitions in the
@@ -552,7 +552,7 @@ Contents of Makefiles
 ^^^^^^^^^^^^^^^^^^^^^
 
 Makefiles in directories containing subdirectories
-'''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''
 
 A Makefile in this type of directory must define where <top> is relative
 to this directory, include <top>/configure files, and specify the
@@ -3186,7 +3186,7 @@ The base/configure directory has the following directory structure:
               tools/
 
 Base Configure File Descriptions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The configure files contain definitions and make rules to be included in
 the various makefiles.

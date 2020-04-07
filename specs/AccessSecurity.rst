@@ -41,7 +41,7 @@ Network and physical security methods must be used to limit access to
 the subnet on which the IOCs reside.
 
 Definitions
-^^^^^^^^^^
+^^^^^^^^^^^
 
 This document uses the following terms:
 
@@ -95,7 +95,7 @@ and asInitFP, which are described below, can also be used.
 
 
 Access Security Configuration File
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This section describes the format of a file containing definitions of the
 user access groups, host access groups, and access security groups. An
@@ -122,7 +122,7 @@ These rules provide read access to anyone located anywhere and write
 access to user1 and user2 if they are located at host1 or host2.
 
 Syntax Definition
-''''''''''''''''
+'''''''''''''''''
 
 In the following description:
 
