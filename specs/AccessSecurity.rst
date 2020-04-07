@@ -225,7 +225,7 @@ levels and access permissions. The TRAPWRITE setting used for a client
 is determined by the first WRITE rule that passes the rule checks.
 
 ascheck - Check Syntax of Access Configuration File
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 After creating or modifying an access configuration file it can be checked
 for syntax errors by issuing the command:
@@ -287,10 +287,10 @@ Restarting access security after ioc initialization is an expensive
 operation and should not be used as a regular procedure.
 
 Database Configuration
----------------------
+----------------------
 
 Access Security Group
-'''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^
 
 Each database record has a field ASG which holds a character string. Any
 database configuration tool can be used to give a value to this field. If
@@ -298,7 +298,7 @@ the ASG of a record is not defined or is not equal to a ASG in the
 configuration file then the record is placed in DEFAULT.
 
 Subroutine Record Support
-'''''''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Two subroutines, which can be attached to a subroutine record, are
 available (provided with iocCore):
