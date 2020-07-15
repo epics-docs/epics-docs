@@ -825,7 +825,7 @@ The following Makefile will create xxxRecord.h from an existing
 xxxRecord.dbd file, install xxxRecord.h into $(INSTALL_LOCATION)/include,
 and install xxxRecord.dbd into $(INSTALL_LOCATION)/dbd.
 
-.. code :
+.. code ::
 
         TOP=../../..
         include $(TOP)/configure/CONFIG
