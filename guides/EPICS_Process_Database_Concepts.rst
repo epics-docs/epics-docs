@@ -1033,13 +1033,14 @@ field is configured. The possible choices for the LINR field are as
 follows:
 
   - LINEAR
+  - SLOPE
   - NO CONVERSION
   - typeKdegF
   - typeKdegC
   - typeJdegF
   - typeJdegC
 
-If LINEAR is chosen, the record performs a linear conversion on the
+If either LINEAR or SLOPE is chosen, the record performs a linear conversion on the
 data. If NO CONVERSION is chosen, the record performs no conversion on
 its data. The other choices are the names of breakpoint tables. When one
 of these is specified in the LINR field, the record uses the specified
@@ -1047,6 +1048,7 @@ table to convert its data. (Note that additional breakpoint tables are
 often added at specific sites, so more breakpoint tables than are listed
 here may be available at the user's site.) The following sections
 explain linear and breakpoint conversions.
+
 
 Linear Conversions
 ------------------
@@ -1059,6 +1061,17 @@ example, if the transducer has a range of -10 to +10 volts, then the
 EGUF field should be 10 and the EGUL field should be -10. In all cases,
 the EGU field is a string that contains the text to indicate the units
 of the value.
+
+The distinction between the LINEAR and SLOPE settings for the LINR field are
+in how the conversion parameters are calculated:
+
+With LINEAR conversion the user must set EGUL and EGUF to the lowest and highest
+possible engineering units values respectively that can be converted by the
+hardware. The device support knows the range of the raw data and calculates
+ESLO and EOFF from them.
+
+SLOPE conversion requires the user to calculate the appropriate scaling and
+offset factors and put them directly in ESLO and EOFF.
 
 There are three formulas to know when considering the linear conversion
 parameters. The conversion from measured value to engineering units is
