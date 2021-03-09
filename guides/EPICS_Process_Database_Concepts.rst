@@ -198,9 +198,20 @@ periodic scan rates and the period of each rate is determined from the
 menu choice strings. Thus the periodic scan rates can be changed by
 changing menuScan.dbd and loading this version via dbLoadDatabase. The
 only requirement is that each periodic choice string must begin with a
-numeric value specified in units of seconds. For example, to add a
+begin with a number and be followed by any of the following unit strings:
+
+  - second or second\ **s**
+  - minute or minute\ **s**
+  - hour or hour\ **s**
+  - Hz or Hertz
+
+For example, to add a
 choice for 0.015 seconds, add the following line after the 0.1 second
-choice: choice(menuScan_015_second, " .015 second")
+choice:
+
+.. code::
+
+  choice(menuScan_015_second, " .015 second")
 
 The range of values for scan periods can be from one clock tick to the
 maximum number of ticks available on the system (for example, vxWorks
