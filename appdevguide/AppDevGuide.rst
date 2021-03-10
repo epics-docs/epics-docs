@@ -10,7 +10,7 @@ detailed API documentation will be generated from the source code with Doxygen.
    :caption: Contents
 
    Getting Started <gettingStarted>
-   EPICS Overview <../guides/EPICS_Intro>
+   EPICS Overview (Introduction to EPICS) <../guides/EPICS_Intro>
    Build Facility <EPICSBuildFacility>
    Database Locking, Scanning and Processing <../guides/EPICS_Process_Database_Concepts>
    Database Definition <databaseDefinition>
