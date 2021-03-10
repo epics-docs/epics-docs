@@ -902,7 +902,7 @@ Comments
 
 -  Due to a buffering bug, RSRV implementing < ``CA_V411`` did not send
    ``CA_PROTO_VERSION`` immediately on connection, but rather when some
-   other other response triggers a buffer flush.
+   other response triggers a buffer flush.
 
 Response
 ^^^^^^^^
