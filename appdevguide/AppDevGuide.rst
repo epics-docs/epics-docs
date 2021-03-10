@@ -3,7 +3,7 @@ Application Developer's Guide
 
 The classic Application Developer's Guide as an online document.
 At this stage, this contains only the descriptive sections of the document,
-detailed API documentation will be generated from the source code with Doxygen. 
+detailed API documentation will be generated from the source code with Doxygen.
 
 .. toctree::
    :maxdepth: 1
@@ -12,7 +12,8 @@ detailed API documentation will be generated from the source code with Doxygen.
    Getting Started <gettingStarted>
    EPICS Overview <../guides/EPICS_Intro>
    Build Facility <EPICSBuildFacility>
+   Database Locking, Scanning and Processing <../guides/EPICS_Process_Database_Concepts>
    Database Definition <databaseDefinition>
    IOC Initialization <IOCInit>
    AccessSecurity
-   IOC Test facilities <IOCTestFacilities>
+   IOC Test Facilities <IOCTestFacilities>
