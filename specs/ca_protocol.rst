@@ -649,7 +649,7 @@ subsequent sections.
 +-----------------+----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``DOUBLE``      | ``double``           | IEEE 64-bit float.                                                                                                                                              |
 +-----------------+----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``STRING[n]``   | ``char[]``           | Array of ``UBYTE`s. If `[n]`` is specified, it indicates maximum allowed number of characters in this string including (if neccessary) termination character.   |
+| ``STRING[n]``   | ``char[]``           | Array of ``UBYTE`s. If `[n]`` is specified, it indicates maximum allowed number of characters in this string including (if necessary) termination character.    |
 +-----------------+----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``TIMESTAMP``   | None                 | Timestamp represented with two ``UINT32`` values. First is number of seconds since 0000 Jan 1, 1990. Second is number of nanoseconds within second              |
 +-----------------+----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -751,14 +751,13 @@ Message Identifiers
 ~~~~~~~~~~~~~~~~~~~
 
 Some fields in messages serve as identifiers. These fields serve as
-identification tokens in within the context of the a circuit (TCP
+identification tokens in within the context of a circuit (TCP
 connection). The RECOMMENDED scheme for allocating these values is to
 create them sequentially starting at 0. All IDs are represented with
 ``UINT32``.
 
 Overflow of all identifiers MUST be handled! A long running applications
-might use more than 2\*\*32 of some identifier type type (typically
-IOID).
+might use more than 2\*\*32 of some identifier type (typically IOID).
 
 CID - Client ID
 ^^^^^^^^^^^^^^^
@@ -961,9 +960,9 @@ Request
 +----------------+------------------+-------------------------------------------------------------------------------------------------------------+
 | Version        | Version Number   | Client minor protocol version number.                                                                       |
 +----------------+------------------+-------------------------------------------------------------------------------------------------------------+
-| SearchID       |                  | Client allocated Search identifer.                                                                          |
+| SearchID       |                  | Client allocated Search identifier.                                                                         |
 +----------------+------------------+-------------------------------------------------------------------------------------------------------------+
-| SearchID       |                  | Client allocated Search identifer.                                                                          |
+| SearchID       |                  | Client allocated Search identifier.                                                                         |
 +----------------+------------------+-------------------------------------------------------------------------------------------------------------+
 
 Table: Table 7. Header
@@ -1010,7 +1009,7 @@ Response
 +----------------+------------------+-------------------------------------------------------------------------+
 | SID or IP      | ``0xffffffff``   | Temporary `SID <#sid-server-id>`__ (deprecated) or server IP address.   |
 +----------------+------------------+-------------------------------------------------------------------------+
-| SearchID       |                  | Client allocated Search identifer.                                      |
+| SearchID       |                  | Client allocated Search identifier.                                     |
 +----------------+------------------+-------------------------------------------------------------------------+
 
 Table: Table 9. Header
@@ -1074,9 +1073,9 @@ Response
 +--------------+-------------------+-------------------------------------------------------+
 | Version      | Same as request   | Client minor protocol version number.                 |
 +--------------+-------------------+-------------------------------------------------------+
-| SearchID     |                   | Client allocated Search identifer.                    |
+| SearchID     |                   | Client allocated Search identifier.                   |
 +--------------+-------------------+-------------------------------------------------------+
-| SearchID     |                   | Client allocated Search identifer.                    |
+| SearchID     |                   | Client allocated Search identifier.                   |
 +--------------+-------------------+-------------------------------------------------------+
 
 Table: Table 11. Header
@@ -1085,7 +1084,7 @@ Comments
 
 -  Contents of the header are identical to the request.
 
--  SearchID fields are diplicated.
+-  SearchID fields are duplicated.
 
 -  Original request payload is not returned with the response.
 
@@ -1201,7 +1200,7 @@ Comments
    cause.
 
 -  If a server is restarted, it will most likely start sending BeaconID
-   values from beggining (0). Such situation must be anticipated.
+   values from beginning (0). Such situation must be anticipated.
 
 ``CA_REPEATER_CONFIRM``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -2577,10 +2576,10 @@ Port numbers
 
 Although there is no requirement as to which port numbers are used by
 either servers or clients, there are some standard values which must be
-used as defaults, unless overriden by application.
+used as defaults, unless overridden by application.
 
-Port numbers are dependant on protocol versions and are calculated using
-the folowing definitions:
+Port numbers are dependent on protocol versions and are calculated using
+the following definitions:
 
 ``CA_PORT_BASE`` = 5056
 
@@ -2608,7 +2607,7 @@ Some constants can be combined using logical OR operation. Example:
 Monitor mask of ``DBE_VALUE`` and ``DBE_ALARM`` are combined using
 ``(DBE_VALUE or DBE_ALARM)`` resulting in ``(1 or 4 == 5)``.
 
-To query the whether certain value is present in such combined value,
+To query whether a certain value is present in such combined value,
 and operation is used. Example: to query whether ``DBE_ALARM`` of
 monitor mask is set, ``(DBE_VALUE and MASK > 0)`` will return 0 if
 ``DBE_VALUE`` is not present, otherwise ``DBE_ALARM`` is present.
@@ -2626,7 +2625,7 @@ library. Different values can be combined using logical OR operation.
    reported. Value changes take into consideration a dead band within
    which the value changes are not reported.
 
--  ``DBE_LOG`` - value 2 (``0x02``) - Log events are reported. Similiar
+-  ``DBE_LOG`` - value 2 (``0x02``) - Log events are reported. Similar
    to ``DBR_VALUE``, ``DBE_LOG`` defines a different dead band value
    that determines frequency of updates.
 
@@ -2664,8 +2663,8 @@ list will receive request for reply.
 Access Rights
 ~~~~~~~~~~~~~
 
-Defines access rights for a given channel. Accss rights are defined as
-logicaly ORred value of allowed access.
+Defines access rights for a given channel. Access rights are defined as
+logical OR'ed values of allowed access.
 
 **Type:** not defined, depends on the field it is in (usually
 ``UINT16``).
@@ -2707,7 +2706,7 @@ contents.
 
 -  Sequence ID: 56 (each read or write request increases value by one)
 
-The messsage would be represented as follows:
+The message would be represented as follows:
 
 ::
 
@@ -2751,7 +2750,7 @@ the repeater will begin forwarding messages to the client.
 If binding succeeds, then this client process MUST either close the
 bound socket (and report at error) or begin functioning as a repeater.
 
-If an error is encountered with sending ``CA_REPEATER_REGISTER``, the
+If an error is encountered with sending ``CA_REPEATER_REGISTER``, then
 the binding test SHOULD be repeated after a short timeout (1 second is
 RECOMMENDED).
 
@@ -2869,7 +2868,7 @@ Presently defined error conditions
 +--------------------------+--------------------+------+---------+------------------------------------------------------------------------------------------------+
 | ``ECA_TIMEOUT``          | ``CA_K_WARNING``   | 10   | 0x050   | User specified timeout on IO operation expired                                                 |
 +--------------------------+--------------------+------+---------+------------------------------------------------------------------------------------------------+
-| ``ECA_BADTYPE``          | ``CA_K_ERROR``     | 14   | 0x072   | The data type specifed is invalid                                                              |
+| ``ECA_BADTYPE``          | ``CA_K_ERROR``     | 14   | 0x072   | The data type specified is invalid                                                             |
 +--------------------------+--------------------+------+---------+------------------------------------------------------------------------------------------------+
 | ``ECA_INTERNAL``         | ``CA_K_FATAL``     | 17   | 0x08e   | Channel Access Internal Failure                                                                |
 +--------------------------+--------------------+------+---------+------------------------------------------------------------------------------------------------+
@@ -2974,7 +2973,7 @@ codes, but MAY receive them.
 +-----------------------+--------------------+------+----------+---------------------------------------------------------------------------+
 | ``ECA_NEWCONN``       | ``CA_K_INFO``      | 32   | 0x103    | New or resumed network connection                                         |
 +-----------------------+--------------------+------+----------+---------------------------------------------------------------------------+
-| ``ECA_NOCACTX``       | ``CA_K_WARNING``   | 33   | 0x108    | Specified task isnt a member of a CA context                              |
+| ``ECA_NOCACTX``       | ``CA_K_WARNING``   | 33   | 0x108    | Specified task isn't a member of a CA context                             |
 +-----------------------+--------------------+------+----------+---------------------------------------------------------------------------+
 | ``ECA_DEFUNCT``       | ``CA_K_FATAL``     | 34   | 00x116   | Attempt to use defunct CA feature failed                                  |
 +-----------------------+--------------------+------+----------+---------------------------------------------------------------------------+
@@ -2996,7 +2995,7 @@ Example conversation
 
 This is example conversation between client and server. Client first
 establishes TCP connection to the server and immediately requests
-creation of a channel. After server aknowledges channel creation, client
+creation of a channel. After server acknowledges channel creation, client
 reads the value of the channel twice. First as a single string value and
 second as a ``DBR_GR_INT16`` type. After the response to both queries
 has been received, the channel is destroyed.
