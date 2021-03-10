@@ -12,7 +12,7 @@ detailed API documentation will be generated from the source code with Doxygen.
    Getting Started <gettingStarted>
    EPICS Overview (Introduction to EPICS) <../guides/EPICS_Intro>
    Build Facility <EPICSBuildFacility>
-   Database Locking, Scanning and Processing <../guides/EPICS_Process_Database_Concepts>
+   Database Locking, Scanning and Processing (EPICS Process Database Concepts) <../guides/EPICS_Process_Database_Concepts>
    Database Definition <databaseDefinition>
    IOC Initialization <IOCInit>
    AccessSecurity
