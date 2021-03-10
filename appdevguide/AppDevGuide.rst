@@ -1,13 +1,13 @@
 Application Developer's Guide
 =============================
 
-Specifications for the different software modules and conventions related to EPICS.
+The classic Application Developer's Guide as an online document.
 
 .. toctree::
    :maxdepth: 1
-   :caption: Application Developer's Guide
+   :caption: Contents
 
-   Getting Started <gettingstarted>
+   Getting Started <gettingStarted>
    Build Facility <EPICSBuildFacility>
    Database Definition <databaseDefinition>
    IOC Initialization <IOCInit>
