@@ -34,40 +34,40 @@ Table of Contents
 
 -  `Commands (TCP and UDP) <#_commands_tcp_and_udp>`__
 
-   -  ```CA_PROTO_VERSION`` <#ca-proto-version>`__
-   -  ```CA_PROTO_SEARCH`` <#ca-proto-search>`__
-   -  ```CA_PROTO_NOT_FOUND`` <#ca-proto-not-found>`__
-   -  ```CA_PROTO_ECHO`` <#ca-proto-echo>`__
+   -  `CA_PROTO_VERSION <#ca-proto-version>`__
+   -  `CA_PROTO_SEARCH <#ca-proto-search>`__
+   -  `CA_PROTO_NOT_FOUND <#ca-proto-not-found>`__
+   -  `CA_PROTO_ECHO <#ca-proto-echo>`__
 
 -  `Commands (UDP) <#_commands_udp>`__
 
-   -  ```CA_PROTO_RSRV_IS_UP`` <#ca-proto-rsrv-is-up>`__
-   -  ```CA_REPEATER_CONFIRM`` <#ca-repeater-confirm>`__
-   -  ```CA_REPEATER_REGISTER`` <#ca-repeater-register>`__
+   -  `CA_PROTO_RSRV_IS_UP <#ca-proto-rsrv-is-up>`__
+   -  `CA_REPEATER_CONFIRM <#ca-repeater-confirm>`__
+   -  `CA_REPEATER_REGISTER <#ca-repeater-register>`__
 
 -  `Commands (TCP) <#_commands_tcp>`__
 
-   -  ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__
-   -  ```CA_PROTO_EVENT_CANCEL`` <#ca-proto-event-cancel>`__
-   -  ```CA_PROTO_READ`` <#ca-proto-read>`__
-   -  ```CA_PROTO_WRITE`` <#ca-proto-write>`__
-   -  ```CA_PROTO_SNAPSHOT`` <#ca-proto-snapshot>`__
-   -  ```CA_PROTO_BUILD`` <#ca-proto-build>`__
-   -  ```CA_PROTO_EVENTS_OFF`` <#ca-proto-events-off>`__
-   -  ```CA_PROTO_EVENTS_ON`` <#ca-proto-events-on>`__
-   -  ```CA_PROTO_READ_SYNC`` <#ca-proto-read-sync>`__
-   -  ```CA_PROTO_ERROR`` <#ca-proto-error>`__
-   -  ```CA_PROTO_CLEAR_CHANNEL`` <#ca-proto-clear-channel>`__
-   -  ```CA_PROTO_READ_NOTIFY`` <#ca-proto-read-notify>`__
-   -  ```CA_PROTO_READ_BUILD`` <#ca-proto-read-build>`__
-   -  ```CA_PROTO_CREATE_CHAN`` <#ca-proto-create-chan>`__
-   -  ```CA_PROTO_WRITE_NOTIFY`` <#ca-proto-write-notify>`__
-   -  ```CA_PROTO_CLIENT_NAME`` <#ca-proto-client-name>`__
-   -  ```CA_PROTO_HOST_NAME`` <#ca-proto-host-name>`__
-   -  ```CA_PROTO_ACCESS_RIGHTS`` <#ca-proto-access-rights>`__
-   -  ```CA_PROTO_SIGNAL`` <#ca-proto-signal>`__
-   -  ```CA_PROTO_CREATE_CH_FAIL`` <#ca-proto-create-ch-fail>`__
-   -  ```CA_PROTO_SERVER_DISCONN`` <#ca-proto-server-disconn>`__
+   -  `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__
+   -  `CA_PROTO_EVENT_CANCEL <#ca-proto-event-cancel>`__
+   -  `CA_PROTO_READ <#ca-proto-read>`__
+   -  `CA_PROTO_WRITE <#ca-proto-write>`__
+   -  `CA_PROTO_SNAPSHOT <#ca-proto-snapshot>`__
+   -  `CA_PROTO_BUILD <#ca-proto-build>`__
+   -  `CA_PROTO_EVENTS_OFF <#ca-proto-events-off>`__
+   -  `CA_PROTO_EVENTS_ON <#ca-proto-events-on>`__
+   -  `CA_PROTO_READ_SYNC <#ca-proto-read-sync>`__
+   -  `CA_PROTO_ERROR <#ca-proto-error>`__
+   -  `CA_PROTO_CLEAR_CHANNEL <#ca-proto-clear-channel>`__
+   -  `CA_PROTO_READ_NOTIFY <#ca-proto-read-notify>`__
+   -  `CA_PROTO_READ_BUILD <#ca-proto-read-build>`__
+   -  `CA_PROTO_CREATE_CHAN <#ca-proto-create-chan>`__
+   -  `CA_PROTO_WRITE_NOTIFY <#ca-proto-write-notify>`__
+   -  `CA_PROTO_CLIENT_NAME <#ca-proto-client-name>`__
+   -  `CA_PROTO_HOST_NAME <#ca-proto-host-name>`__
+   -  `CA_PROTO_ACCESS_RIGHTS <#ca-proto-access-rights>`__
+   -  `CA_PROTO_SIGNAL <#ca-proto-signal>`__
+   -  `CA_PROTO_CREATE_CH_FAIL <#ca-proto-create-ch-fail>`__
+   -  `CA_PROTO_SERVER_DISCONN <#ca-proto-server-disconn>`__
 
 -  `Payload Data Types <#payload-data-types>`__
 
@@ -896,7 +896,7 @@ Table: Table 3. Header
 +==================+====================================================================================================================================================================================================================================+
 | >= ``CA_V411``   | Server will send response immediately after establishing a virtual circuit.                                                                                                                                                        |
 +------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| < ``CA_V411``    | Message does not include minor version number (it is always 0) and is interpreted as an echo command that carries no data. Version exchange is performed immediately after ```CA_PROTO_CREATE_CHAN`` <#ca-proto-create-chan>`__.   |
+| < ``CA_V411``    | Message does not include minor version number (it is always 0) and is interpreted as an echo command that carries no data. Version exchange is performed immediately after `CA_PROTO_CREATE_CHAN <#ca-proto-create-chan>`__.       |
 +------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Table: Table 4. Compatibility
@@ -998,7 +998,7 @@ Comments
 -  Reply flag will be generally ``DONT_REPLY`` when searching using
    broadcast and ``DO_REPLY`` when searching using unicast. When
    ``DO_REPLY`` is set, server will send a
-   ```CA_PROTO_NOT_FOUND`` <#ca-proto-not-found>`__ message indicating
+   `CA_PROTO_NOT_FOUND <#ca-proto-not-found>`__ message indicating
    it does not have the requested channel.
 
 Response
@@ -1053,19 +1053,18 @@ Comments
 ``CA_PROTO_NOT_FOUND``
 ~~~~~~~~~~~~~~~~~~~~~~
 
-+--------------------------------------+--------------------------------------+
-| Command                              | ``CA_PROTO_NOT_FOUND``               |
-+--------------------------------------+--------------------------------------+
-| ID                                   | 14 (``0x0E``)                        |
-+--------------------------------------+--------------------------------------+
-| Description                          | Indicates that a channel with        |
-|                                      | requested name does not exist. Sent  |
-|                                      | in response to                       |
-|                                      | ```CA_PROTO_SEARCH`` <#ca-proto-sear |
-|                                      | ch>`__,                              |
-|                                      | but only when its ``DO_REPLY`` flag  |
-|                                      | was set. Sent over UDP.              |
-+--------------------------------------+--------------------------------------+
++--------------------------------------+-----------------------------------------+
+| Command                              | ``CA_PROTO_NOT_FOUND``                  |
++--------------------------------------+-----------------------------------------+
+| ID                                   | 14 (``0x0E``)                           |
++--------------------------------------+-----------------------------------------+
+| Description                          | Indicates that a channel with           |
+|                                      | requested name does not exist. Sent     |
+|                                      | in response to                          |
+|                                      | `CA_PROTO_SEARCH <#ca-proto-search>`__, |
+|                                      | but only when its ``DO_REPLY`` flag     |
+|                                      | was set. Sent over UDP.                 |
++--------------------------------------+-----------------------------------------+
 
 Response
 ^^^^^^^^
@@ -1355,7 +1354,7 @@ Comments
 
 -  A subscription should be destroyed when no longer needed to reduce
    load on server. See
-   ```CA_PROTO_EVENT_CANCEL`` <#ca-proto-event-cancel>`__.
+   `CA_PROTO_EVENT_CANCEL <#ca-proto-event-cancel>`__.
 
 Response
 ^^^^^^^^
@@ -1417,13 +1416,13 @@ Request
 +------------------+-------------------+------------------------------------------------------------------------------------+
 | Payload Size     | 0                 | Must be 0.                                                                         |
 +------------------+-------------------+------------------------------------------------------------------------------------+
-| Data Type        |                   | Same value as in corresponding ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__.   |
+| Data Type        |                   | Same value as in corresponding `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__.       |
 +------------------+-------------------+------------------------------------------------------------------------------------+
-| Data Count       | >= 0              | Same value as in corresponding ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__.   |
+| Data Count       | >= 0              | Same value as in corresponding `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__.       |
 +------------------+-------------------+------------------------------------------------------------------------------------+
-| SID              | SID of channel    | Same value as in corresponding ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__.   |
+| SID              | SID of channel    | Same value as in corresponding `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__.       |
 +------------------+-------------------+------------------------------------------------------------------------------------+
-| SubscriptionID   | Subscription ID   | Same value as in corresponding ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__.   |
+| SubscriptionID   | Subscription ID   | Same value as in corresponding `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__.       |
 +------------------+-------------------+------------------------------------------------------------------------------------+
 
 Table: Table 20. Header
@@ -1435,7 +1434,7 @@ Comments
 
 -  Actual data type and count values are not important, but should be
    the same as used with corresponding
-   ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__.
+   `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__.
 
 Response
 ^^^^^^^^
@@ -1461,7 +1460,7 @@ Table: Table 21. Header
 Comments
 
 -  Notice that the response has
-   ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__ command identifier!
+   `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__ command identifier!
 
 -  Regardless of data type and count, this response has no payload.
 
