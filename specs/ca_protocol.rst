@@ -145,8 +145,8 @@ Introduction
 
 This document describes the EPICS Channel Access (CA) protocol as it is,
 and has been, implemented. It is also intended to act as a specification
-to allow the creation of new client and server implements. The focus is
-on versions >= 4.11 of the CA protocol, which used by EPICS Base 3.14.0
+to allow the creation of new client and server implementations. The focus is
+on versions >= 4.11 of the CA protocol, which is used by EPICS Base 3.14.0
 and later. No changes from protocol versions before 4.8 (EPICS Base
 3.13.0) will be included in this document.
 
