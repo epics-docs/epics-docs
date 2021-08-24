@@ -769,7 +769,7 @@ INST
 The INST I/O specification is a string that is parsed by the device
 support. The format of this string is determined by the device support.
 
-#\@parm
+@\ *parm*
 
   For INST I/O
 
