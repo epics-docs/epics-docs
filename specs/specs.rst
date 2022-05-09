@@ -9,7 +9,7 @@ Specifications for the different software modules and conventions related to EPI
 
    ca_protocol
    pvAccess Protocol Specification <https://github.com/epics-base/pvAccessCPP/wiki/protocol>
-   Normative Types Specification <https://github.com/epics-base/normativeTypesCPP/wiki/Normative+Types+Specification>
+   Normative Types Specification <Normative-Types-Specification>
    AccessSecurity
    IOC Initialization <IOCInit>
    Build Facility <EPICSBuildFacility>
