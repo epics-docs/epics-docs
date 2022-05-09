@@ -34,40 +34,40 @@ Table of Contents
 
 -  `Commands (TCP and UDP) <#_commands_tcp_and_udp>`__
 
-   -  ```CA_PROTO_VERSION`` <#ca-proto-version>`__
-   -  ```CA_PROTO_SEARCH`` <#ca-proto-search>`__
-   -  ```CA_PROTO_NOT_FOUND`` <#ca-proto-not-found>`__
-   -  ```CA_PROTO_ECHO`` <#ca-proto-echo>`__
+   -  `CA_PROTO_VERSION <#ca-proto-version>`__
+   -  `CA_PROTO_SEARCH <#ca-proto-search>`__
+   -  `CA_PROTO_NOT_FOUND <#ca-proto-not-found>`__
+   -  `CA_PROTO_ECHO <#ca-proto-echo>`__
 
 -  `Commands (UDP) <#_commands_udp>`__
 
-   -  ```CA_PROTO_RSRV_IS_UP`` <#ca-proto-rsrv-is-up>`__
-   -  ```CA_REPEATER_CONFIRM`` <#ca-repeater-confirm>`__
-   -  ```CA_REPEATER_REGISTER`` <#ca-repeater-register>`__
+   -  `CA_PROTO_RSRV_IS_UP <#ca-proto-rsrv-is-up>`__
+   -  `CA_REPEATER_CONFIRM <#ca-repeater-confirm>`__
+   -  `CA_REPEATER_REGISTER <#ca-repeater-register>`__
 
 -  `Commands (TCP) <#_commands_tcp>`__
 
-   -  ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__
-   -  ```CA_PROTO_EVENT_CANCEL`` <#ca-proto-event-cancel>`__
-   -  ```CA_PROTO_READ`` <#ca-proto-read>`__
-   -  ```CA_PROTO_WRITE`` <#ca-proto-write>`__
-   -  ```CA_PROTO_SNAPSHOT`` <#ca-proto-snapshot>`__
-   -  ```CA_PROTO_BUILD`` <#ca-proto-build>`__
-   -  ```CA_PROTO_EVENTS_OFF`` <#ca-proto-events-off>`__
-   -  ```CA_PROTO_EVENTS_ON`` <#ca-proto-events-on>`__
-   -  ```CA_PROTO_READ_SYNC`` <#ca-proto-read-sync>`__
-   -  ```CA_PROTO_ERROR`` <#ca-proto-error>`__
-   -  ```CA_PROTO_CLEAR_CHANNEL`` <#ca-proto-clear-channel>`__
-   -  ```CA_PROTO_READ_NOTIFY`` <#ca-proto-read-notify>`__
-   -  ```CA_PROTO_READ_BUILD`` <#ca-proto-read-build>`__
-   -  ```CA_PROTO_CREATE_CHAN`` <#ca-proto-create-chan>`__
-   -  ```CA_PROTO_WRITE_NOTIFY`` <#ca-proto-write-notify>`__
-   -  ```CA_PROTO_CLIENT_NAME`` <#ca-proto-client-name>`__
-   -  ```CA_PROTO_HOST_NAME`` <#ca-proto-host-name>`__
-   -  ```CA_PROTO_ACCESS_RIGHTS`` <#ca-proto-access-rights>`__
-   -  ```CA_PROTO_SIGNAL`` <#ca-proto-signal>`__
-   -  ```CA_PROTO_CREATE_CH_FAIL`` <#ca-proto-create-ch-fail>`__
-   -  ```CA_PROTO_SERVER_DISCONN`` <#ca-proto-server-disconn>`__
+   -  `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__
+   -  `CA_PROTO_EVENT_CANCEL <#ca-proto-event-cancel>`__
+   -  `CA_PROTO_READ <#ca-proto-read>`__
+   -  `CA_PROTO_WRITE <#ca-proto-write>`__
+   -  `CA_PROTO_SNAPSHOT <#ca-proto-snapshot>`__
+   -  `CA_PROTO_BUILD <#ca-proto-build>`__
+   -  `CA_PROTO_EVENTS_OFF <#ca-proto-events-off>`__
+   -  `CA_PROTO_EVENTS_ON <#ca-proto-events-on>`__
+   -  `CA_PROTO_READ_SYNC <#ca-proto-read-sync>`__
+   -  `CA_PROTO_ERROR <#ca-proto-error>`__
+   -  `CA_PROTO_CLEAR_CHANNEL <#ca-proto-clear-channel>`__
+   -  `CA_PROTO_READ_NOTIFY <#ca-proto-read-notify>`__
+   -  `CA_PROTO_READ_BUILD <#ca-proto-read-build>`__
+   -  `CA_PROTO_CREATE_CHAN <#ca-proto-create-chan>`__
+   -  `CA_PROTO_WRITE_NOTIFY <#ca-proto-write-notify>`__
+   -  `CA_PROTO_CLIENT_NAME <#ca-proto-client-name>`__
+   -  `CA_PROTO_HOST_NAME <#ca-proto-host-name>`__
+   -  `CA_PROTO_ACCESS_RIGHTS <#ca-proto-access-rights>`__
+   -  `CA_PROTO_SIGNAL <#ca-proto-signal>`__
+   -  `CA_PROTO_CREATE_CH_FAIL <#ca-proto-create-ch-fail>`__
+   -  `CA_PROTO_SERVER_DISCONN <#ca-proto-server-disconn>`__
 
 -  `Payload Data Types <#payload-data-types>`__
 
@@ -145,8 +145,8 @@ Introduction
 
 This document describes the EPICS Channel Access (CA) protocol as it is,
 and has been, implemented. It is also intended to act as a specification
-to allow the creation of new client and server implements. The focus is
-on versions >= 4.11 of the CA protocol, which used by EPICS Base 3.14.0
+to allow the creation of new client and server implementations. The focus is
+on versions >= 4.11 of the CA protocol, which is used by EPICS Base 3.14.0
 and later. No changes from protocol versions before 4.8 (EPICS Base
 3.13.0) will be included in this document.
 
@@ -303,7 +303,7 @@ A partial history of CA minor version changes:
 +--------------+------------+--------+-----------------------------------+
 | EPICS Base   | CA Minor   | Year   | Reason                            |
 +==============+============+========+===================================+
-| 3.14.12      | 13         | 2010   | Dynamic array size in monitors    |
+| 3.14.12-pre1 | 13         | 2010   | Dynamic array size in monitors    |
 +--------------+------------+--------+-----------------------------------+
 | 3.14.12      | 12         | 2010   | PV search over tcp                |
 +--------------+------------+--------+-----------------------------------+
@@ -316,6 +316,14 @@ A partial history of CA minor version changes:
 | 3.13.0-b10   | 8          | 1997   | ??                                |
 +--------------+------------+--------+-----------------------------------+
 | 3.13.0-a5    | 7          | 1996   | Start of CVS history              |
++--------------+------------+--------+-----------------------------------+
+| 3.12.1.3     | 6          | 1995   | ???                               |
++--------------+------------+--------+-----------------------------------+
+| 3.12.1.1     | 5          | 1995   | ???                               |
++--------------+------------+--------+-----------------------------------+
+| 3.12.0-beta1 | 4          | 1994   | ???                               |
++--------------+------------+--------+-----------------------------------+
+| 3.12.0-beta0 | 3          | 1994   | Start of GIT history              |
 +--------------+------------+--------+-----------------------------------+
 
 Exceptions
@@ -649,7 +657,7 @@ subsequent sections.
 +-----------------+----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``DOUBLE``      | ``double``           | IEEE 64-bit float.                                                                                                                                              |
 +-----------------+----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``STRING[n]``   | ``char[]``           | Array of ``UBYTE`s. If `[n]`` is specified, it indicates maximum allowed number of characters in this string including (if neccessary) termination character.   |
+| ``STRING[n]``   | ``char[]``           | Array of ``UBYTE`s. If `[n]`` is specified, it indicates maximum allowed number of characters in this string including (if necessary) termination character.    |
 +-----------------+----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``TIMESTAMP``   | None                 | Timestamp represented with two ``UINT32`` values. First is number of seconds since 0000 Jan 1, 1990. Second is number of nanoseconds within second              |
 +-----------------+----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -751,14 +759,13 @@ Message Identifiers
 ~~~~~~~~~~~~~~~~~~~
 
 Some fields in messages serve as identifiers. These fields serve as
-identification tokens in within the context of the a circuit (TCP
+identification tokens in within the context of a circuit (TCP
 connection). The RECOMMENDED scheme for allocating these values is to
 create them sequentially starting at 0. All IDs are represented with
 ``UINT32``.
 
 Overflow of all identifiers MUST be handled! A long running applications
-might use more than 2\*\*32 of some identifier type type (typically
-IOID).
+might use more than 2\*\*32 of some identifier type (typically IOID).
 
 CID - Client ID
 ^^^^^^^^^^^^^^^
@@ -889,7 +896,7 @@ Table: Table 3. Header
 +==================+====================================================================================================================================================================================================================================+
 | >= ``CA_V411``   | Server will send response immediately after establishing a virtual circuit.                                                                                                                                                        |
 +------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| < ``CA_V411``    | Message does not include minor version number (it is always 0) and is interpreted as an echo command that carries no data. Version exchange is performed immediately after ```CA_PROTO_CREATE_CHAN`` <#ca-proto-create-chan>`__.   |
+| < ``CA_V411``    | Message does not include minor version number (it is always 0) and is interpreted as an echo command that carries no data. Version exchange is performed immediately after `CA_PROTO_CREATE_CHAN <#ca-proto-create-chan>`__.       |
 +------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Table: Table 4. Compatibility
@@ -902,7 +909,7 @@ Comments
 
 -  Due to a buffering bug, RSRV implementing < ``CA_V411`` did not send
    ``CA_PROTO_VERSION`` immediately on connection, but rather when some
-   other other response triggers a buffer flush.
+   other response triggers a buffer flush.
 
 Response
 ^^^^^^^^
@@ -961,9 +968,9 @@ Request
 +----------------+------------------+-------------------------------------------------------------------------------------------------------------+
 | Version        | Version Number   | Client minor protocol version number.                                                                       |
 +----------------+------------------+-------------------------------------------------------------------------------------------------------------+
-| SearchID       |                  | Client allocated Search identifer.                                                                          |
+| SearchID       |                  | Client allocated Search identifier.                                                                         |
 +----------------+------------------+-------------------------------------------------------------------------------------------------------------+
-| SearchID       |                  | Client allocated Search identifer.                                                                          |
+| SearchID       |                  | Client allocated Search identifier.                                                                         |
 +----------------+------------------+-------------------------------------------------------------------------------------------------------------+
 
 Table: Table 7. Header
@@ -991,7 +998,7 @@ Comments
 -  Reply flag will be generally ``DONT_REPLY`` when searching using
    broadcast and ``DO_REPLY`` when searching using unicast. When
    ``DO_REPLY`` is set, server will send a
-   ```CA_PROTO_NOT_FOUND`` <#ca-proto-not-found>`__ message indicating
+   `CA_PROTO_NOT_FOUND <#ca-proto-not-found>`__ message indicating
    it does not have the requested channel.
 
 Response
@@ -1010,7 +1017,7 @@ Response
 +----------------+------------------+-------------------------------------------------------------------------+
 | SID or IP      | ``0xffffffff``   | Temporary `SID <#sid-server-id>`__ (deprecated) or server IP address.   |
 +----------------+------------------+-------------------------------------------------------------------------+
-| SearchID       |                  | Client allocated Search identifer.                                      |
+| SearchID       |                  | Client allocated Search identifier.                                     |
 +----------------+------------------+-------------------------------------------------------------------------+
 
 Table: Table 9. Header
@@ -1046,19 +1053,18 @@ Comments
 ``CA_PROTO_NOT_FOUND``
 ~~~~~~~~~~~~~~~~~~~~~~
 
-+--------------------------------------+--------------------------------------+
-| Command                              | ``CA_PROTO_NOT_FOUND``               |
-+--------------------------------------+--------------------------------------+
-| ID                                   | 14 (``0x0E``)                        |
-+--------------------------------------+--------------------------------------+
-| Description                          | Indicates that a channel with        |
-|                                      | requested name does not exist. Sent  |
-|                                      | in response to                       |
-|                                      | ```CA_PROTO_SEARCH`` <#ca-proto-sear |
-|                                      | ch>`__,                              |
-|                                      | but only when its ``DO_REPLY`` flag  |
-|                                      | was set. Sent over UDP.              |
-+--------------------------------------+--------------------------------------+
++--------------------------------------+-----------------------------------------+
+| Command                              | ``CA_PROTO_NOT_FOUND``                  |
++--------------------------------------+-----------------------------------------+
+| ID                                   | 14 (``0x0E``)                           |
++--------------------------------------+-----------------------------------------+
+| Description                          | Indicates that a channel with           |
+|                                      | requested name does not exist. Sent     |
+|                                      | in response to                          |
+|                                      | `CA_PROTO_SEARCH <#ca-proto-search>`__, |
+|                                      | but only when its ``DO_REPLY`` flag     |
+|                                      | was set. Sent over UDP.                 |
++--------------------------------------+-----------------------------------------+
 
 Response
 ^^^^^^^^
@@ -1074,9 +1080,9 @@ Response
 +--------------+-------------------+-------------------------------------------------------+
 | Version      | Same as request   | Client minor protocol version number.                 |
 +--------------+-------------------+-------------------------------------------------------+
-| SearchID     |                   | Client allocated Search identifer.                    |
+| SearchID     |                   | Client allocated Search identifier.                   |
 +--------------+-------------------+-------------------------------------------------------+
-| SearchID     |                   | Client allocated Search identifer.                    |
+| SearchID     |                   | Client allocated Search identifier.                   |
 +--------------+-------------------+-------------------------------------------------------+
 
 Table: Table 11. Header
@@ -1085,7 +1091,7 @@ Comments
 
 -  Contents of the header are identical to the request.
 
--  SearchID fields are diplicated.
+-  SearchID fields are duplicated.
 
 -  Original request payload is not returned with the response.
 
@@ -1201,7 +1207,7 @@ Comments
    cause.
 
 -  If a server is restarted, it will most likely start sending BeaconID
-   values from beggining (0). Such situation must be anticipated.
+   values from beginning (0). Such situation must be anticipated.
 
 ``CA_REPEATER_CONFIRM``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -1348,7 +1354,7 @@ Comments
 
 -  A subscription should be destroyed when no longer needed to reduce
    load on server. See
-   ```CA_PROTO_EVENT_CANCEL`` <#ca-proto-event-cancel>`__.
+   `CA_PROTO_EVENT_CANCEL <#ca-proto-event-cancel>`__.
 
 Response
 ^^^^^^^^
@@ -1410,13 +1416,13 @@ Request
 +------------------+-------------------+------------------------------------------------------------------------------------+
 | Payload Size     | 0                 | Must be 0.                                                                         |
 +------------------+-------------------+------------------------------------------------------------------------------------+
-| Data Type        |                   | Same value as in corresponding ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__.   |
+| Data Type        |                   | Same value as in corresponding `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__.       |
 +------------------+-------------------+------------------------------------------------------------------------------------+
-| Data Count       | >= 0              | Same value as in corresponding ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__.   |
+| Data Count       | >= 0              | Same value as in corresponding `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__.       |
 +------------------+-------------------+------------------------------------------------------------------------------------+
-| SID              | SID of channel    | Same value as in corresponding ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__.   |
+| SID              | SID of channel    | Same value as in corresponding `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__.       |
 +------------------+-------------------+------------------------------------------------------------------------------------+
-| SubscriptionID   | Subscription ID   | Same value as in corresponding ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__.   |
+| SubscriptionID   | Subscription ID   | Same value as in corresponding `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__.       |
 +------------------+-------------------+------------------------------------------------------------------------------------+
 
 Table: Table 20. Header
@@ -1428,7 +1434,7 @@ Comments
 
 -  Actual data type and count values are not important, but should be
    the same as used with corresponding
-   ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__.
+   `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__.
 
 Response
 ^^^^^^^^
@@ -1454,7 +1460,7 @@ Table: Table 21. Header
 Comments
 
 -  Notice that the response has
-   ```CA_PROTO_EVENT_ADD`` <#ca-proto-event-add>`__ command identifier!
+   `CA_PROTO_EVENT_ADD <#ca-proto-event-add>`__ command identifier!
 
 -  Regardless of data type and count, this response has no payload.
 
@@ -2577,10 +2583,10 @@ Port numbers
 
 Although there is no requirement as to which port numbers are used by
 either servers or clients, there are some standard values which must be
-used as defaults, unless overriden by application.
+used as defaults, unless overridden by application.
 
-Port numbers are dependant on protocol versions and are calculated using
-the folowing definitions:
+Port numbers are dependent on protocol versions and are calculated using
+the following definitions:
 
 ``CA_PORT_BASE`` = 5056
 
@@ -2608,7 +2614,7 @@ Some constants can be combined using logical OR operation. Example:
 Monitor mask of ``DBE_VALUE`` and ``DBE_ALARM`` are combined using
 ``(DBE_VALUE or DBE_ALARM)`` resulting in ``(1 or 4 == 5)``.
 
-To query the whether certain value is present in such combined value,
+To query whether a certain value is present in such combined value,
 and operation is used. Example: to query whether ``DBE_ALARM`` of
 monitor mask is set, ``(DBE_VALUE and MASK > 0)`` will return 0 if
 ``DBE_VALUE`` is not present, otherwise ``DBE_ALARM`` is present.
@@ -2626,7 +2632,7 @@ library. Different values can be combined using logical OR operation.
    reported. Value changes take into consideration a dead band within
    which the value changes are not reported.
 
--  ``DBE_LOG`` - value 2 (``0x02``) - Log events are reported. Similiar
+-  ``DBE_LOG`` - value 2 (``0x02``) - Log events are reported. Similar
    to ``DBR_VALUE``, ``DBE_LOG`` defines a different dead band value
    that determines frequency of updates.
 
@@ -2664,8 +2670,8 @@ list will receive request for reply.
 Access Rights
 ~~~~~~~~~~~~~
 
-Defines access rights for a given channel. Accss rights are defined as
-logicaly ORred value of allowed access.
+Defines access rights for a given channel. Access rights are defined as
+logical OR'ed values of allowed access.
 
 **Type:** not defined, depends on the field it is in (usually
 ``UINT16``).
@@ -2707,7 +2713,7 @@ contents.
 
 -  Sequence ID: 56 (each read or write request increases value by one)
 
-The messsage would be represented as follows:
+The message would be represented as follows:
 
 ::
 
@@ -2751,7 +2757,7 @@ the repeater will begin forwarding messages to the client.
 If binding succeeds, then this client process MUST either close the
 bound socket (and report at error) or begin functioning as a repeater.
 
-If an error is encountered with sending ``CA_REPEATER_REGISTER``, the
+If an error is encountered with sending ``CA_REPEATER_REGISTER``, then
 the binding test SHOULD be repeated after a short timeout (1 second is
 RECOMMENDED).
 
@@ -2869,7 +2875,7 @@ Presently defined error conditions
 +--------------------------+--------------------+------+---------+------------------------------------------------------------------------------------------------+
 | ``ECA_TIMEOUT``          | ``CA_K_WARNING``   | 10   | 0x050   | User specified timeout on IO operation expired                                                 |
 +--------------------------+--------------------+------+---------+------------------------------------------------------------------------------------------------+
-| ``ECA_BADTYPE``          | ``CA_K_ERROR``     | 14   | 0x072   | The data type specifed is invalid                                                              |
+| ``ECA_BADTYPE``          | ``CA_K_ERROR``     | 14   | 0x072   | The data type specified is invalid                                                             |
 +--------------------------+--------------------+------+---------+------------------------------------------------------------------------------------------------+
 | ``ECA_INTERNAL``         | ``CA_K_FATAL``     | 17   | 0x08e   | Channel Access Internal Failure                                                                |
 +--------------------------+--------------------+------+---------+------------------------------------------------------------------------------------------------+
@@ -2974,7 +2980,7 @@ codes, but MAY receive them.
 +-----------------------+--------------------+------+----------+---------------------------------------------------------------------------+
 | ``ECA_NEWCONN``       | ``CA_K_INFO``      | 32   | 0x103    | New or resumed network connection                                         |
 +-----------------------+--------------------+------+----------+---------------------------------------------------------------------------+
-| ``ECA_NOCACTX``       | ``CA_K_WARNING``   | 33   | 0x108    | Specified task isnt a member of a CA context                              |
+| ``ECA_NOCACTX``       | ``CA_K_WARNING``   | 33   | 0x108    | Specified task isn't a member of a CA context                             |
 +-----------------------+--------------------+------+----------+---------------------------------------------------------------------------+
 | ``ECA_DEFUNCT``       | ``CA_K_FATAL``     | 34   | 00x116   | Attempt to use defunct CA feature failed                                  |
 +-----------------------+--------------------+------+----------+---------------------------------------------------------------------------+
@@ -2996,7 +3002,7 @@ Example conversation
 
 This is example conversation between client and server. Client first
 establishes TCP connection to the server and immediately requests
-creation of a channel. After server aknowledges channel creation, client
+creation of a channel. After server acknowledges channel creation, client
 reads the value of the channel twice. First as a single string value and
 second as a ``DBR_GR_INT16`` type. After the response to both queries
 has been received, the channel is destroyed.
