@@ -198,7 +198,7 @@ periodic scan rates and the period of each rate is determined from the
 menu choice strings. Thus the periodic scan rates can be changed by
 changing menuScan.dbd and loading this version via dbLoadDatabase. The
 only requirement is that each periodic choice string must begin with a
-begin with a number and be followed by any of the following unit strings:
+number and be followed by any of the following unit strings:
 
   - second or second\ **s**
   - minute or minute\ **s**
