@@ -5,11 +5,12 @@ EPICS V4 Normative Types, Editors Draft, 16-Mar-2015
 ----------------------------------------------------
 
 Editors:
-   Greg White, SLAC
-   Bob Dalesio, BNL
-   Mark Rivers, APS (Invited Expert)
-   Marty Kraimer, BNL
-   David Hickin, Diamond Light Source
+
+   - Greg White, SLAC
+   - Bob Dalesio, BNL
+   - Mark Rivers, APS (Invited Expert)
+   - Marty Kraimer, BNL
+   - David Hickin, Diamond Light Source
 
 --------------
 
