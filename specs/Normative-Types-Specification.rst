@@ -360,13 +360,13 @@ Suppose a non-terminal term has a definition of the form
 
 where:
 
-<*non-terminal*>
+``<*non-terminal*>``:
    The non-terminal term being defined.
-/
+   .. /
    A choice of terminal or non-terminal terms describing a a list or 0
    or more pvData fields.
 
-Then for a label (a field name), /, the terms
+Then for a label (a field name), ``/``, the terms
 
 ::
 
@@ -416,13 +416,13 @@ A field may be optional, and may be described along with a comment:
 
 where:
 
-<*NormativeType*>
+``<NormativeType>``:
    The name of the Normative Type being defined.
-/
+   ../
    A choice of terms defining a pvData field
-:opt
+   .. :opt
    Indicates that the preceding field is optional in the Normative Type.
-// /
+   .. // /
    A field production element may be followed by a comment.
 
 In most cases a Normative Type definition will be of the form
@@ -436,12 +436,16 @@ In most cases a Normative Type definition will be of the form
 
 where:
 
-/
-   Terminal or non-terminal terms, possibly separated by \|, from the
-   valid `Normative Type Fields <#normative-type-fields>`__ as defined
-   below.
-/
-   The identifier of the field. Usually a terminal label.
+.. /
+
+Terminal or non-terminal terms, possibly 
+separated by ``\|``, from the
+valid `Normative Type Fields <#normative-type-fields>`__ as defined
+below.
+
+.. /
+
+The identifier of the field. Usually a terminal label.
 
 For example, a definition meeting this pattern would be
 
@@ -2399,9 +2403,7 @@ The Normative Type Identifier "Type Name" and version number parts
 corresponding to `this draft <#thisversion>`__ of the Normative Types
 Document (this document), MUST be valued as following:
 
-.. table:: Type Names that may be used in the Type Name part of a
-Normative Type Identifier of an EPICS V4 Normative Type in the namespace
-of this draft of the Normative Types specification
+.. table:: Type Names that may be used in the Type Name part of a Normative Type Identifier of an EPICS V4 Normative Type in the namespace of this draft of the Normative Types specification
 
    ============== ======= =============== ============================================================================================================================
    Type Name      Version Depends on      Short Description
@@ -2458,4 +2460,4 @@ bib:rdbservice
    https://github.com/epics-base/exampleJava/tree/master/src/services/rdbService.
 bib:uri
    Uniform Resource Identifiers (URI): Generic Syntax,
-   http://www.ietf.org/rfc/rfc2396.txt. :::
+   http://www.ietf.org/rfc/rfc2396.txt.
