@@ -11,7 +11,7 @@ that comprise EPICS Base.
    How to work with the EPICS Repository <HowToWorkWithTheEpicsRepository>
    Application Developer's Guide (pdf, 3.16.2) <https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide.pdf>
    Application Developer's Guide (web version, preliminary) <../appdevguide/AppDevGuide>
-   EPICS Base API Documentation <>
+   EPICS Base API Documentation <base-api>
 
 .. toctree::
    :maxdepth: 1
