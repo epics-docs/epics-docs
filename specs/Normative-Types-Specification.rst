@@ -2144,10 +2144,10 @@ And the following invariant must be preserved:
 
 len(units)-1 == Nvals
 
-For points (A:sub:`i`, B\ :sub:`i`, C\ :sub:`i`) for indices i = 1, 2, 3
+For points (A\ :sub:`i`, B\ :sub:`i`, C\ :sub:`i`) for indices i = 1, 2, 3
 the ``value`` array is:
 
-[A:sub:`1`, B\ :sub:`1`, C\ :sub:`1`, A\ :sub:`2`, B\ :sub:`2`,
+[A\ :sub:`1`, B\ :sub:`1`, C\ :sub:`1`, A\ :sub:`2`, B\ :sub:`2`,
 C\ :sub:`2`, A\ :sub:`3`, B\ :sub:`3`, C\ :sub:`3`]
 
 NTHistogram
