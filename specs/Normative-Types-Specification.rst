@@ -1564,6 +1564,8 @@ value
 Each name (or "key") in the array of names, MUST be interpreted as being
 associated with its same indexed element of the ``value`` array.
 
+.. _nt-table:
+
 NTTable
 ~~~~~~~
 
