@@ -45,7 +45,12 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 intersphinx_mapping = {
     'how-tos': ('https://docs.epics-controls.org/projects/how-tos/en/latest', None),
 }
-
+hoverxref_intersphinx = [
+    'how-tos',
+]
+hoverxref_intersphinx_types = {
+    'how-tos': 'modal',
+}
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
