@@ -742,11 +742,13 @@ common link fields are OUT, an output link, INP, an input link, and DOL
 There are three basic types of address specifications, which can appear
 in these fields: hardware addresses, database addresses, and constants.
 
-**Note**: Not all links support all three types, though some do. However,
-this doesn't hold true for algorithmic records, which cannot specify
-hardware addresses. Algorithm records are records like the Calculation,
-PID, and Select records. These records are used to process values
-retrieved from other records. Consult the documentation for each record.
+..note:: 
+
+  Not all links support all three types, though some do. However,
+  this doesn't hold true for algorithmic records, which cannot specify
+  hardware addresses. Algorithm records are records like the Calculation,
+  PID, and Select records. These records are used to process values
+  retrieved from other records. Consult the documentation for each record.
 
 Hardware Addresses
 ------------------
@@ -1055,10 +1057,14 @@ If either LINEAR or SLOPE is chosen, the record performs a linear conversion on 
 data. If NO CONVERSION is chosen, the record performs no conversion on
 its data. The other choices are the names of breakpoint tables. When one
 of these is specified in the LINR field, the record uses the specified
-table to convert its data. (Note that additional breakpoint tables are
-often added at specific sites, so more breakpoint tables than are listed
-here may be available at the user's site.) The following sections
-explain linear and breakpoint conversions.
+table to convert its data. 
+
+..note::
+  Additional breakpoint tables are
+  often added at specific sites, so more breakpoint tables than are listed
+  here may be available at the user's site. 
+  
+The following sections explain linear and breakpoint conversions.
 
 
 Linear Conversions
@@ -1648,12 +1654,15 @@ Value Change Monitors
 The value change monitors are typically sent whenever a field in the
 database changes. The VAL field is the exception. If the MDEL field is
 set, then the VAL field is sent when a monitor is set, and then only
-sent again, when the VAL field has changed by MDEL. Note that a MDEL of
-0 sends a monitor whenever the VAL fields changes and an MDEL of -1
-sends a monitor whenever the record is processed as the MDEL is applied
-to the absolute value of the difference between the previous scan and
-the current scan. An MDEL of -1 is useful for scalars that are triggered
-and a positive indication that the trigger occurred is required.
+sent again, when the VAL field has changed by MDEL.
+
+..note:: 
+
+  A MDEL of 0 sends a monitor whenever the VAL fields changes and an MDEL of -1
+  sends a monitor whenever the record is processed as the MDEL is applied
+  to the absolute value of the difference between the previous scan and
+  the current scan. An MDEL of -1 is useful for scalars that are triggered
+  and a positive indication that the trigger occurred is required.
 
 Archive Change Monitors
 ^^^^^^^^^^^^^^^^^^^^^^^
