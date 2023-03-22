@@ -541,7 +541,7 @@ syntax for PVA links is quite different.
 
 The authoritative documentation is available in the git repository, `pva2pva. <https://epics-base.github.io/pva2pva/qsrv_page.html#qsrv_link>`_
 
-Note
+.. note::
 
    The "dbjlr" and "dbpvar" IOC shell command provide information about
    PVA links in a running IOC.
