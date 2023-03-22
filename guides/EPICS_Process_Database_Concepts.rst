@@ -742,7 +742,7 @@ common link fields are OUT, an output link, INP, an input link, and DOL
 There are three basic types of address specifications, which can appear
 in these fields: hardware addresses, database addresses, and constants.
 
-..note:: 
+.. note:: 
 
   Not all links support all three types, though some do. However,
   this doesn't hold true for algorithmic records, which cannot specify
@@ -1059,7 +1059,7 @@ its data. The other choices are the names of breakpoint tables. When one
 of these is specified in the LINR field, the record uses the specified
 table to convert its data. 
 
-..note::
+.. note::
   Additional breakpoint tables are
   often added at specific sites, so more breakpoint tables than are listed
   here may be available at the user's site. 
