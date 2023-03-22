@@ -741,14 +741,11 @@ common link fields are OUT, an output link, INP, an input link, and DOL
 
 There are three basic types of address specifications, which can appear
 in these fields: hardware addresses, database addresses, and constants.
-
-.. note:: 
-
-  Not all links support all three types, though some do. However,
-  this doesn't hold true for algorithmic records, which cannot specify
-  hardware addresses. Algorithm records are records like the Calculation,
-  PID, and Select records. These records are used to process values
-  retrieved from other records. Consult the documentation for each record.
+Note that not all links support all three types, though some do. However,
+this doesn't hold true for algorithmic records, which cannot specify
+hardware addresses. Algorithm records are records like the Calculation,
+PID, and Select records. These records are used to process values
+retrieved from other records. Consult the documentation for each record.
 
 Hardware Addresses
 ------------------
