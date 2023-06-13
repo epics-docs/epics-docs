@@ -63,7 +63,7 @@ are given.
 The linguistic conventions used in the document have been overhauled.
 
 See `Appendix
-A <#appendix-a:-possible-future-additions-to-this-specification>`__ for
+A <#appendix-a-possible-future-additions-to-this-specification>`__ for
 items that may be added to future revisions of this specification.
 
 This version is an Editors Draft towards the First Public Working Draft.
