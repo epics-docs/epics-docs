@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "epics-docs"
+version = "0.1.0"
+description = "EPICS documentation located on https://docs.epics-controls.org/"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "epics_docs"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+sphinx = "^7.2.4"
+myst-parser = "^2.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
