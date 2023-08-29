@@ -31,20 +31,8 @@ extensions = [
     'hoverxref.extension',
     'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
+    # Markdown parser
     'myst_parser',
-]
-
-myst_enable_extensions = [
-    "amsmath",
-    "colon_fence",
-    "deflist",
-    "dollarmath",
-    "fieldlist",
-    "html_image",
-    "replacements",
-    "smartquotes",
-    "strikethrough",
-    "tasklist",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -65,6 +53,27 @@ hoverxref_intersphinx = [
 hoverxref_intersphinx_types = {
     'how-tos': 'modal',
 }
+
+# Enabled Markdown extensions.
+# See here for what they do:
+# https://myst-parser.readthedocs.io/en/latest/syntax/optional.html
+myst_enable_extensions = [
+    "amsmath",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "fieldlist",
+    "html_image",
+    "replacements",
+    "smartquotes",
+    "strikethrough",
+    "tasklist",
+]
+
+# Allows auto-generated header anchors:
+# https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#auto-generated-header-anchors
+myst_heading_anchors = 4
+
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
