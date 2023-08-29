@@ -1,0 +1,12 @@
+#
+# How to handle line endings
+# Start with a default: text=auto will cover binary files as well
+# However, we can speed up things a little bit by pointing out known
+# known file types as binary
+#
+*      text=auto
+*.bat  text eol=crlf
+*.jpeg -text
+*.png  -text
+*.sh   text eol=lf
+*.svg  -text
