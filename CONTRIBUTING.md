@@ -171,20 +171,11 @@ but isn't the most practical way (at least not for development/contribution purp
 
 ### Edit and view your changes
 
-::: {warning}
-WIP
-:::
+Now that you know how to clone, setup, build, and serve the epics-docs documentation,
+you can edit any `.rst` or `.md` file and check how sphinx will render your contribution.
 
-Now that you know how to setup, build, and serve the epics-docs documentation
-When you have set up you machine,
-you can make the changes you want locally.
-
-After you've made your changes,
-from the main folder of the epics-docs repository,
-you can run `make html` to compile the documentation website.
-
-The results will be under the folder `_build/html`.
-You can open the corresponding `.html` file in your web browser to see the end result.
+After running `$ poetry run sphinx-autobuild . ./_build/html`, like described earlier,
+any modification will update <http://127.0.0.1:8000> automatically.
 
 ### Style guide
 
