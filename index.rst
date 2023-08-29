@@ -47,6 +47,7 @@ There are two kinds of subprojects:
    getting-started/linux-packages.rst
    getting-started/creating-ioc
    getting-started/installation-windows
+   getting-started/epics-macosx-firewall
 
 .. toctree::
    :maxdepth: 1
