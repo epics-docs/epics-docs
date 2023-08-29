@@ -1,3 +1,5 @@
 sphinx_copybutton
 sphinx-hoverxref
 myst-parser
+sphinx-rtd-theme
+sphinx-autobuild
