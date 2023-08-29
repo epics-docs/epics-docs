@@ -13,7 +13,7 @@ Provide the details of the issue
 and another member of the community should be able to fix it for you.
 You can more information about using Tech-talk can be found at <https://epics.anl.gov/tech-talk/>.
 
-### Editing with GitHub
+### Creating an issue on GitHub
 
 #### Finding the GitHub page and signing up
 
@@ -30,57 +30,18 @@ go to the [join GitHub] page and follow the instructions.
   [epics-docs GitHub repository]: https://github.com/epics-docs/epics-docs
   [join GitHub]: https://github.com/join
 
-#### Forking the repository
+#### Creating an issue
 
-Once logged in and viewing the page on GitHub you wish to edit,
-click on the pencil icon to the top-right of the content.
-If this is your first time editing,
-you will see with a page asking you to fork the repository before being able to edit.
-Click through the link to do this,
-and GitHub will create a copy of the entire repository linked to your own account.
-Feel free to edit any page in this repository,
-as your changes won't reflection the main repository or the Read the Docs site until you make a pull request.
-
-#### Editing the page
-
-The documentation pages are written in two different formats,
-reStructuredText (RST) and Markdown (MD).
-You can see which one of these the file you are editing is by checking its file extension,
-above the content window.
-You can find advice on formatting text [here for `.rst`]
-and [here for `.md`].
-For tasks such as correcting some information or fixing a typo,
-you don't need to worry about the formatting.
-
-Once you've made changes,
-to save them you will need to "commit" them.
-Click on the green "commit changes" button,
-and choose to either commit to your main branch or make a new branch,
-if you wish to make more complicated changes.
-When you're happy with all your changes
-and wish to update the main repository for the Read the Docs site,
-you can make a pull request (PR).
-
-  [here for `.rst`]: https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
-  [here for `.md`]: https://www.markdownguide.org/basic-syntax/
-
-### Making a pull request
-
-To Make a pull request,
-first click on the "Pull requests" tab at the top of GitHub.
-From here, click the green "New pull request" button,
-which should take you to a page comparing the main repository to your fork.
-You should see any commits you have made listed here.
-Clicking "Create pull request" will give you the opportunity to give your edits a title
-and a brief description,
-before you submit them for review.
-
-At this point,
-a maintainer of the repository will be able to review your changes
-to ensure they're sensible and don't break anything.
-If all is well, they will approve the changes and merge them into the main repo.
-After the reviewer has merged the pull request,
-Read the Docs will recompile the page and publish your changes.
+At the top of the GitHub page,
+click on the "Issues" tab.
+If there are no issues already listed about the problem that you want fixed,
+click the "New issue" button,
+give your issue a title and
+write a brief description,
+then submit it.
+If nobody has picked up your issue after several days,
+email Tech-talk and
+a developer should pick it up.
 
 ## Making a contribution
 
