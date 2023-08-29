@@ -117,7 +117,8 @@ and check the generated documentation by yourself.
 
 #### Using pip
 
-Another solution for local builds is to use [pip],
+Another solution for local builds is to use [pip]
+(ideally in a [virtual environment]),
 which comes pre-installed with most modern python installations.
 From the pip website:
 
@@ -129,6 +130,8 @@ From the pip website:
 2. Install the pip dependencies from `requirements-dev.txt`
 
 ``` console
+$ python -m venv venv                  # Create a virtual environment for your local build
+$ . venv/bin/activate                  # Activate it
 $ pip install -r requirements-dev.txt
 $ sphinx-autobuild . ./_build/html
 ```
@@ -139,6 +142,7 @@ you can open <http://127.0.0.1:8000> in your internet browser,
 and check the generated documentation by yourself.
 
   [pip]: https://pip.pypa.io/en/stable/
+  [virtual environment]: https://docs.python.org/3/library/venv.html
   [Using poetry]: #using-poetry
 
 #### Reference setup and build
