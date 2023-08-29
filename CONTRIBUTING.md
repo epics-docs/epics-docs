@@ -63,16 +63,16 @@ TODO: explain where users should contribute, when we figure out if we merge ever
 
   [Diátaxis]: https://diataxis.fr/
 
-### GitHub requirements
+#### Forking the repository
 
-To propose your changes,
-you will need a GitHub account,
-and a fork as a personal project.
-
-Follow the [Finding the GitHub page and signing up] and [Forking the repository] sections for how to proceed.
-
-  [Finding the GitHub page and signing up]: #finding-the-github-page-and-signing-up
-  [Forking the repository]: #forking-the-repository
+Once logged in and viewing the page on GitHub you wish to edit,
+click on the pencil icon to the top-right of the content.
+If this is your first time editing,
+you will see with a page asking you to fork the repository before being able to edit.
+Click through the link to do this,
+and GitHub will create a copy of the entire repository linked to your own account.
+Feel free to edit any page in this repository,
+as your changes won't reflection the main repository or the Read the Docs site until you make a pull request.
 
 ### Local setup and build
 
@@ -199,19 +199,27 @@ and run `vale path/to/your/file.md`.
   [Vale]: https://vale.sh/
   [Vale Installation]: https://vale.sh/docs/vale-cli/installation/
 
-### Pull request
+### Making a pull request
 
 After you are satisfied with your changes,
 commit and push them to your fork,
-and submit them for review by creating a Pull Request.
+and submit them for review by creating a pull request.
 
-See the [][1] section for how to proceed.
+To Make a pull request,
+first click on the "Pull requests" tab at the top of GitHub.
+From here, click the green "New pull request" button,
+which should take you to a page comparing the main repository to your fork.
+You should see any commits you have made listed here.
+Clicking "Create pull request" will give you the opportunity to give your edits a title
+and a brief description,
+before you submit them for review.
 
-If you have submitted a Pull request,
-and a reviewer haven't picked it up after a few days,
-you can ask for a review by sending a mail to the Tech-Talk mailing list.
-
-  [1]: #making-a-pull-request
+At this point,
+a maintainer of the repository will be able to review your changes
+to ensure they're sensible and don't break anything.
+If all is well, they will approve the changes and merge them into the main repo.
+After the reviewer has merged the pull request,
+Read the Docs will recompile the page and publish your changes.
 
 ## Reviewing pull requests
 
