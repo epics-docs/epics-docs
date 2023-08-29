@@ -67,12 +67,12 @@ TODO: explain where users should contribute, when we figure out if we merge ever
 
 To propose your changes,
 you will need a GitHub account,
-and a fork under your name.
+and a fork as a personal project.
 
-Follow the [][1] and [][2] sections for how to proceed.
+Follow the [Finding the GitHub page and signing up] and [Forking the repository] sections for how to proceed.
 
-  [1]: #finding-the-github-page-and-signing-up
-  [2]: #forking-the-repo
+  [Finding the GitHub page and signing up]: #finding-the-github-page-and-signing-up
+  [Forking the repository]: #forking-the-repository
 
 ### Local setup and build
 
@@ -205,13 +205,13 @@ After you are satisfied with your changes,
 commit and push them to your fork,
 and submit them for review by creating a Pull Request.
 
-See the [][3] section for how to proceed.
+See the [][1] section for how to proceed.
 
 If you have submitted a Pull request,
 and a reviewer haven't picked it up after a few days,
 you can ask for a review by sending a mail to the Tech-Talk mailing list.
 
-  [3]: #making-a-pull-request
+  [1]: #making-a-pull-request
 
 ## Reviewing pull requests
 
