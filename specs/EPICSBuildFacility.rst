@@ -233,7 +233,7 @@ Site-specific EPICS Base Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Site configuration
-'''''''''''''''''
+''''''''''''''''''
 
 To configure EPICS base for your site, you may want to modify the default
 definitions in the following files:
@@ -1020,8 +1020,8 @@ substitution file exists but the template file is not named
 
         <name>_TEMPLATE = <template file name>
 
-A *<nn>.db database file will be created from a \*.template and a
-*<nn>.substitutions file, (where nn is an optional index number).
+A \*<nn>.db database file will be created from a \*.template and a
+\*<nn>.substitutions file, (where nn is an optional index number).
 
 If a <name> substitutions file contains "file" references to other input
 files, these referenced files are made dependencies of the created
@@ -2258,7 +2258,7 @@ suffix, are defined as follows:
    System libraries to be used for any arch that does not have a
    <prodname>_LIBS_<osclass> definition when linking named product.
 
-.. _the-order-of-dependant-libraries-1:
+.. _the-order-of-dependant-libraries-2:
 
 The order of dependant libraries
 ''''''''''''''''''''''''''''''''
@@ -2625,10 +2625,10 @@ Any of the following can be specified:
    Names of java packages to be installed and added to the created jar
    file.
 
-.. _example-1-1:
+.. _example-2-1:
 
-Example 1
-'''''''''
+Example 2 1
+'''''''''''
 
 In this example, all the class files created by the current Makefile's
 "JAVA+=" definitions, are placed into a file named mytest1.jar. A manifest
@@ -2642,10 +2642,10 @@ $(INSTALL_JAVA)/,$(CLASSES)) in the EPICS base configure files.
    JAR = mytest1.jar
    JAR_INPUT = $(INSTALL_CLASSES)
 
-.. _example-2-1:
+.. _example-2-2:
 
-Example 2
-''''''''''
+Example 2 2
+'''''''''''
 
 In this example, three class files are created and placed into a new jar
 archive file named mytest2.jar. An existing manifest file, mytest2.mf is
@@ -2679,8 +2679,8 @@ Any of the following can be specified:
 
    The javah option <name> will be used on the javah tool command line.
 
-Example
-'''''''
+Example 2 2
+'''''''''''
 
 In this example, the C header xx_yy_zz.h will be created in the
 $(COMMON_DIR) subdirectory from the class xx.yy.zz (i.e. the java class
@@ -2794,7 +2794,7 @@ the current value when assembling is done.
 -  \_OUTPUTFILE\_ Name of the generated file
 -  \_SNIPPETFILE\_ Name of the current snippet
 
-.. _example-3:
+.. _example-2-3:
 
 Example
 '''''''
