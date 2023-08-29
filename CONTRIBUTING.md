@@ -119,7 +119,7 @@ Follow the [][1] and [][2] sections for how to proceed.
 and how do I serve it locally?"
 Being able to do this can be of interest to check how your contribution will render before sharing it.
 
-#### Practical setup and build
+#### Using poetry
 
 A practical solution to build the epics-docs documentation is to use [Poetry].
 Poetry is a tool for dependency management and packaging in Python.
@@ -153,6 +153,32 @@ and check the generated documentation by yourself.
   [Poetry]: https://python-poetry.org/docs/
   [the Poetry documentation]: https://python-poetry.org/docs/#system-requirements
   [GitHub requirements]: #github-requirements
+
+#### Using pip
+
+Another solution for local builds is to use [pip],
+which comes pre-installed with most modern python installations.
+From the pip website:
+
+> pip is the package installer for Python.
+> You can use it to install packages from the Python Package Index and other indexes
+
+1. Follow the first step in the [Using poetry] section to locally clone the epics-docs repository.
+
+2. Install the pip dependencies from `requirements-dev.txt`
+
+``` console
+$ pip install -r requirements-dev.txt
+$ sphinx-autobuild . ./_build/html
+```
+
+At this point,
+as above,
+you can open <http://127.0.0.1:8000> in your internet browser,
+and check the generated documentation by yourself.
+
+  [pip]: https://pip.pypa.io/en/stable/
+  [Using poetry]: #using-poetry
 
 #### Reference setup and build
 
