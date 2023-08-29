@@ -93,7 +93,7 @@ Please follow [the Poetry documentation] to install it.
 Once installed,
 you can setup, build, and serve the epics-docs documentation in two steps:
 
-1.  Clone (with SSH) the epics-docs fork you have made in the [GitHub requirements] section and change directory into it:
+1.  Clone (with SSH) the epics-docs fork you have made in the [Forking the repository] section and change directory into it:
 
 ``` console
 $ git clone git@github.com:your-user-name/epics-docs.git
@@ -113,7 +113,7 @@ and check the generated documentation by yourself.
 
   [Poetry]: https://python-poetry.org/docs/
   [the Poetry documentation]: https://python-poetry.org/docs/#system-requirements
-  [GitHub requirements]: #github-requirements
+  [Forking the repository]: #forking-the-repository
 
 #### Using pip
 
