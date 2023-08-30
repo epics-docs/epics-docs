@@ -101,7 +101,7 @@ Packages required to build EDM
   sudo dnf install giflib giflib-devel zlib-devel libpng-devel motif-devel libXtst-devel
 
 Packages required to build MEDM
-------------------------------
+-------------------------------
 
 ::
 
