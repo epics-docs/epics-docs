@@ -112,7 +112,16 @@ There are two kinds of subprojects:
 
 .. toctree::
    :maxdepth: 1
-   :caption: Community
+   :caption: Software
+
+   specs/specs
+   software/base
+   software/modules
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Training
 
    Training Material <https://epics-controls.org/resources-and-support/documents/training/>
    community/how-to-run-an-epics-collaboration-meeting.rst
