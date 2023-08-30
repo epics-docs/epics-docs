@@ -146,6 +146,11 @@ PEZCA | A Perl binding to EZCA |  | [github.com](https://epics.anl.gov/modules/s
 | Name | Description | Source Code | Documentation |
 | ---- | ----------- | ----------- | ------------- |
 NetChannelAccess | CA libraries and Gateway in native C# | [github.com](https://github.com/paulscherrerinstitute/NetChannelAccess) | [github.com](https://github.com/paulscherrerinstitute/NetChannelAccess)
+IDL | CA client libraries and scripts for IDL via EZCA | [github.com](https://github.com/epics-extensions/ezcaIDL) | [github.com](https://github.com/epics-extensions/ezcaIDL)
+igor2epics | CA client library for WaveMetrics IGOR Pro | [sourceforge.net](https://sourceforge.net/p/igor2epics/git/ci/master/tree/) | [sourceforge.net](https://sourceforge.net/p/igor2epics/wiki/Home/)
+Node EPICS **UNMAINTAINED**| EPICS CA for node.js | [github.com](https://github.com/RobbieClarken/node-epics) | [github.com](https://github.com/RobbieClarken/node-epics)
+
+
 
 ## Other Tools and Libraries
 | Name | Description | Source Code | Documentation |
