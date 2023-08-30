@@ -20,7 +20,7 @@ The default broadcast name search is limited to the subnet of the computer runni
 
 When starting the first IOC on a computer, it will listen to name searches on UDP port 5064. When starting a second IOC on the same computer, it will also listen to name searches on UDP port 5064. Due to limitations in most network kernels, however, only the IOC started _last_ will actually receive UDP search requests that are sent to that computer, port 5064. As a workaround, you need to configure the `EPICS_CA_ADDR_LIST` to use the broadcast address of the respective subnet.
 
-Alternatively, you can automatically set up iptables rules that will circumvent the problem. (See [How to Make Channel Access Reach Multiple Soft IOCs on a Linux Host](https://epics-controls.org/resources-and-support/documents/howto-documents/channel-access-reach-multiple-soft-iocs-linux/).)
+Alternatively, you can automatically set up iptables rules that will circumvent the problem. (See [How to Make Channel Access Reach Multiple Soft IOCs on a Linux Host](channel-access-reach-multiple-soft-iocs-linux).)
 
 ## Multiple IOCs on the same computer but on a different subnet
 

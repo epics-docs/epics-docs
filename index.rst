@@ -48,6 +48,9 @@ There are two kinds of subprojects:
    getting-started/creating-ioc
    getting-started/installation-windows
    getting-started/save-restore-tools.md
+   getting-started/configure-ca
+   getting-started/channel-access-reach-multiple-soft-iocs-linux
+
 
 .. toctree::
    :maxdepth: 1
