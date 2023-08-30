@@ -47,6 +47,8 @@ There are two kinds of subprojects:
    getting-started/linux-packages.rst
    getting-started/creating-ioc
    getting-started/installation-windows
+   getting-started/setup-softioc-framework-linux
+   getting-started/console-logging-vme-softioc
 
 .. toctree::
    :maxdepth: 1
