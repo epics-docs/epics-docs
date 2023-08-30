@@ -1,54 +1,9 @@
-EPICS Overview
+EPICS Introduction
 ==============
 
-What is EPICS?
---------------
+.. contents:: Table of Contents
+ :depth: 3
 
-The Experimental Physics and Industrial Control System (EPICS) comprises
-a set of software components and tools that can be used to create
-distributed control systems. EPICS provides capabilities that are
-typically expected from a distributed control system:
-
--  Remote control & monitoring of facility equipment 
-
--  Automatic sequencing of operations 
-
--  Facility mode and configuration control
-
--  Management of common time across the facility
-
--  Alarm detection, reporting and logging
-
--  Closed loop (feedback) control [1]
-
--  Modeling and simulation
-
--  Data conversions and filtering 
-
--  Data acquisition including image data 
-
--  Data trending, archiving, retrieval and plotting 
-
--  Data analysis  
-
--  Access security (basic protection against unintended manipulation)
-
-EPICS can scale from very big to very small systems. Big systems have to
-be able to transport and store large amounts of data, be robust and
-reliable but also failure-tolerant. Failure of a single component should
-not bring the system down. For small installations it has to be possible
-to set up a control system without requiring complicated or expensive
-infrastructure components.
-
-For modern applications, management of data is becoming increasingly important.
-It shall be possible to store acquired operational data for
-the long term and to retrieve it in the original form. EPICS provides the
-tools to achieve this and to tailor the data management to the needs of
-the facility.
-
-One of the most appreciated aspects of EPICS is the lively collaboration
-that is spread around the globe. Members of the collaboration are happy
-to help other users with their issues and to discuss new ideas.
 
 System components
 ~~~~~~~~~~~~~~~~~
@@ -116,40 +71,40 @@ Basic Attributes
 
 The basic attributes of EPICS are:
 
--  Tool Based: EPICS provides a set of interacting tools and components
+-  **Tool Based**: EPICS provides a set of interacting tools and components
    for creating a control system. This minimizes the need for
    customer-specific coding and helps ensure uniform operator
    interfaces.
 
--  Distributed: An arbitrary number of IOCs and CWSs can be supported.
+-  **Distributed**: An arbitrary number of IOCs and CWSs can be supported.
    As long as the network is not saturated, there is not a single
    bottleneck. If a single IOC becomes saturated, its functions can be
    spread over several IOCs. Rather than running all applications on a
    single CWS host, the applications can be spread over many CWSs.
 
--  Event Driven: The EPICS software components are all designed to be
+-  **Event Driven**: The EPICS software components are all designed to be
    event driven to the maximum extent possible. For example, an EPICS
    client may, instead of having to query IOCs for changes, request to
    be notified of a change. This design leads to efficient use of
    resources, as well as quick response times.
 
--  High Performance: An IOC can process tens of thousands of data items
+-  **High Performance**: An IOC can process tens of thousands of data items
    (“database records”, see below) per second. Clients and servers can
    handle systems with millions of process variables, with minimized
    network overhead.
 
--  Scalable: As a distributed system, EPICS can scale from systems with
+-  **Scalable**: As a distributed system, EPICS can scale from systems with
    a single IOC and a few clients to large installations with hundreds
    of IOCs and millions of I/O channels and process variables.
 
--  Robust: failure of a single components does not bring the whole
+-  **Robust**: failure of a single components does not bring the whole
    system down. Components (IOCs, clients) can be added to and removed
    from the system without having to stop operation of the control
    system. The components can withstand intermittent failures of the
    interconnecting network and recover automatically when the network
    recovers from failure.
 
--  Process-variable based: In contrast to some other control system
+-  **Process-variable based**: In contrast to some other control system
    packages, EPICS does not model control system (I/O) devices as
    objects (as in object-oriented programming) but rather as data
    entities that describe a single aspect of the process or device under
@@ -164,21 +119,21 @@ IOC Software Components
 An EPICS IOC at its core is a software entity or a process that contains
 the following software components:
 
--  IOC Database: A memory resident database containing a set of named
+-  **IOC Database**: A memory resident database containing a set of named
    records of various types. The records host the process variables that
    were mentioned above.
 
--  Scanners: The mechanisms for processing records in the IOC database.
+-  **Scanners**: The mechanisms for processing records in the IOC database.
 
--  Record Support: Each record type has an associated set of record
+-  **Record Support**: Each record type has an associated set of record
    support routines to implement the functionality of the record type.
 
--  Device Support: Device support routines bind I/O data to the database
+-  **Device Support**: Device support routines bind I/O data to the database
    records.
 
--  Device Drivers: Device drivers handle access to external devices.
+-  **Device Drivers**: Device drivers handle access to external devices.
 
--  Channel Access or pvAccess: The interface between the external world
+-  **Channel Access** or **pvAccess**: The interface between the external world
    and the IOC. It provides the interface for accessing the (EPICS)
    database via the network.
 
@@ -679,11 +634,6 @@ better than strict modeling because the abstraction can be added on top
 of the working system afterwards. Also, atomic actions – to the extent
 they can be implemented in a distributed system – have been added, thus
 removing the need of complicated workaround solutions.
-
-.. [1]
-   Strictly speaking, each field of a record can also be considered as a
-   process variable. However, for this discussion it is sufficient to
-   take the simpler approach to equate a record with a PV.
 
 .. |image0| image:: media/Intro_SimpleSystem.png
    :width: 4.05012in

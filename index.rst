@@ -1,4 +1,4 @@
-EPICS Documentation
+Welcome to the EPICS Documentation!
 ===================
 
 This is the parent project for all EPICS related documentation on read-the-docs.
@@ -33,17 +33,23 @@ There are two kinds of subprojects:
    Usually only one version exists ('latest').
 
 
+
 .. toctree::
    :hidden:
 
    EPICS Website <https://epics-controls.org>
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Overview
+
+   overview/What_Is_EPICS.rst
+   overview/EPICS_Intro.rst
 
 .. toctree::
    :maxdepth: 1
    :caption: Guides
 
-   Introduction to EPICS <guides/EPICS_Intro>
    guides/EPICS_Process_Database_Concepts.rst
    How-To Pages <https://docs.epics-controls.org/projects/how-tos/en/latest>
    CONTRIBUTING
