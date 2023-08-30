@@ -560,6 +560,20 @@ doc = ["sphinx", "sphinx-autoapi", "sphinx-autobuild", "sphinx-notfound-page", "
 test = ["tox"]
 
 [[package]]
+name = "sphinx-reredirects"
+version = "0.1.2"
+description = "Handles redirects for moved pages in Sphinx documentation projects"
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "sphinx_reredirects-0.1.2-py3-none-any.whl", hash = "sha256:3a22161771aadd448bb608a4fe7277252182a337af53c18372b7104531d71489"},
+    {file = "sphinx_reredirects-0.1.2.tar.gz", hash = "sha256:a0e7213304759b01edc22f032f1715a1c61176fc8f167164e7a52b9feec9ac64"},
+]
+
+[package.dependencies]
+sphinx = "*"
+
+[[package]]
 name = "sphinx-rtd-theme"
 version = "1.3.0"
 description = "Read the Docs theme for Sphinx"
@@ -751,4 +765,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "8e178dcac94df598e5dd5fe45c3c5b36b59509bd66fce25a91bd8bbc5047eecf"
+content-hash = "ac2f969210b42bba258874cc97e042582db3a758e1b74564675ba33db8fcc1a3"

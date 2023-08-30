@@ -1,17 +1,5 @@
-Base
-=====
-
-User Manuals and API documentation for the different software modules
-that comprise EPICS Base.
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Base and IOC Libraries
-
-   How to work with the EPICS Repository <HowToWorkWithTheEpicsRepository>
-   Application Developer's Guide (pdf, 3.16.2) <https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide.pdf>
-   Application Developer's Guide (web version, preliminary) <../appdevguide/AppDevGuide>
-   EPICS Base API Documentation <>
+PV Access repositories overview
+===============================
 
 .. toctree::
    :maxdepth: 1

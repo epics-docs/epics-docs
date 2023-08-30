@@ -47,21 +47,37 @@ a developer should pick it up.
 
 ### Structure
 
-This documentation follows the [Diátaxis] documentation framework.
-We recommend reading the [Diátaxis] documentation.
+The various documents are divided by topic,
+for example:
+
+-   Getting started
+-   Process database
+-   Modules
+-   etc.
+
+This documentation also follows the Diátaxis documentation framework.
+We recommend reading the [Diátaxis documentation].
 
 What this means for the EPICS documentation,
 is that documentation falls into 4 categories:
 
 -   Tutorials: for users to learn new concepts
 -   How-to guides: for users to achieve specific, predefined goals
--   References: for users to consult,
-    when looking for information
 -   Explanations: for users to clarify their understanding of a concept
+-   References: for users to consult,
+    when looking for specific information
 
-TODO: explain where users should contribute, when we figure out if we merge every documentation in the same place.
+Each of those type of page must be put in that order in the various topics.
+For example:
 
-  [Diátaxis]: https://diataxis.fr/
+-   Process database
+    -   Making an IOC with linked PVs (tutorial)
+    -   How to find which IOC provides a PV (guide)
+    -   How to Avoid Copying Arrays with `waveformRecord` (guide)
+    -   Process Database Concepts (explanation)
+    -   Record reference (reference)
+
+  [Diátaxis documentation]: https://diataxis.fr/
 
 #### Forking the repository
 

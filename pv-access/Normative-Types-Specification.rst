@@ -362,6 +362,7 @@ where:
 
 <*non-terminal*>
    The non-terminal term being defined.
+
 /
    A choice of terminal or non-terminal terms describing a a list or 0
    or more pvData fields.
@@ -418,10 +419,13 @@ where:
 
 <*NormativeType*>
    The name of the Normative Type being defined.
+
 /
    A choice of terms defining a pvData field
+
 :opt
    Indicates that the preceding field is optional in the Normative Type.
+
 // /
    A field production element may be followed by a comment.
 
@@ -440,6 +444,7 @@ where:
    Terminal or non-terminal terms, possibly separated by \|, from the
    valid `Normative Type Fields <#normative-type-fields>`__ as defined
    below.
+
 /
    The identifier of the field. Usually a terminal label.
 
@@ -2401,9 +2406,7 @@ The Normative Type Identifier "Type Name" and version number parts
 corresponding to `this draft <#thisversion>`__ of the Normative Types
 Document (this document), MUST be valued as following:
 
-.. table:: Type Names that may be used in the Type Name part of a
-Normative Type Identifier of an EPICS V4 Normative Type in the namespace
-of this draft of the Normative Types specification
+.. table:: Type Names that may be used in the Type Name part of a Normative Type Identifier of an EPICS V4 Normative Type in the namespace of this draft of the Normative Types specification
 
    ============== ======= =============== ============================================================================================================================
    Type Name      Version Depends on      Short Description
@@ -2460,4 +2463,4 @@ bib:rdbservice
    https://github.com/epics-base/exampleJava/tree/master/src/services/rdbService.
 bib:uri
    Uniform Resource Identifiers (URI): Generic Syntax,
-   http://www.ietf.org/rfc/rfc2396.txt. :::
+   http://www.ietf.org/rfc/rfc2396.txt.
