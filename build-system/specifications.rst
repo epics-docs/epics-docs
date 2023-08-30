@@ -1008,8 +1008,8 @@ Make will figure out how to generate the file:
 
         DB += xxx.db
 
-generates xxx.db depending on which source files exist and installs it
-into $(INSTALL_LOCATION)/db.
+generates ``xxx.db`` depending on which source files exist and installs it
+into ``$(INSTALL_LOCATION)/db``.
 
 A <name>.db database file will be created from an optional
 <name>.template file and/or an optional <name>.substitutions file, If the
@@ -1020,8 +1020,8 @@ substitution file exists but the template file is not named
 
         <name>_TEMPLATE = <template file name>
 
-A \*<nn>.db database file will be created from a \*.template and a
-\*<nn>.substitutions file, (where nn is an optional index number).
+A ``*<nn>.db`` database file will be created from a ``\*.template`` and a
+``*<nn>.substitutions`` file, (where ``nn`` is an optional index number).
 
 If a <name> substitutions file contains "file" references to other input
 files, these referenced files are made dependencies of the created
