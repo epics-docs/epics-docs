@@ -1,37 +1,55 @@
-EPICS Documentation
+Welcome to the EPICS Documentation!
 ===================
 
-This is the parent project for all EPICS related documentation on read-the-docs.
 
-A good part of the EPICS documentation is dynamically created and hosted by
-`read-the-docs <https://readthedocs.org>`_, which acts as a CI system, building
-and hosting documentation from source or dedicated documentation repositories.
+.. image:: ./images/EPICS_black_blue_logo_rgb_small_v03.jpg
 
-Read-the-docs offers valuable features that we use:
 
-- Keeps complete frozen documentation trees of all released versions under a
-  permalink with the release number.
-- Keeps the documentation of the development tree (usually 'master') up-to-date
-  and accessible using 'latest' as release number.
-- Switching versions is available through the web browser.
+The **Experimental Physics and Industrial Control System** (**EPICS**) comprises
+a set of software components and tools that can be used to create
+distributed control systems. EPICS provides capabilities that are
+typically expected from a distributed control system:
 
-This parent project page is not directly linked from the EPICS web site.
-It creates the link to the canonical URL https://docs.epics-controls.org -
-links from the EPICS web site to the documentation should point to the
-subprojects using the canonical URL, e.g.,
-'https://docs.epics-controls.org/projects/<project-slug>'
+-  Remote control & monitoring of facility equipment
 
-There are two kinds of subprojects:
+-  Automatic sequencing of operations
 
-1. Code repositories:
-   The documentation is created from comments in the source code (Javadoc or
-   Doxygen) and separate documents (PDF, Markdown, restructuredText).
-   Documentation trees of released versions are kept for reference.
+-  Facility mode and configuration control
 
-2. Documentation repositories:
-   The repositories contain only documentation (like FAQs and How-To-Pages).
-   Usually only one version exists ('latest').
+-  Management of common time across the facility
 
+-  Alarm detection, reporting and logging
+
+-  Closed loop (feedback) control
+
+-  Modeling and simulation
+
+-  Data conversions and filtering
+
+-  Data acquisition including image data
+
+-  Data trending, archiving, retrieval and plotting
+
+-  Data analysis
+
+-  Access security (basic protection against unintended manipulation)
+
+EPICS can scale from very big to very small systems. Big systems have to
+be able to transport and store large amounts of data, be robust and
+reliable but also failure-tolerant. Failure of a single component should
+not bring the system down. For small installations it has to be possible
+to set up a control system without requiring complicated or expensive
+infrastructure components.
+
+For modern applications, management of data is becoming increasingly important.
+It shall be possible to store acquired operational data for
+the long term and to retrieve it in the original form. EPICS provides the
+tools to achieve this and to tailor the data management to the needs of
+the facility.
+
+One of the most appreciated aspects of EPICS is the lively collaboration
+that is spread around the globe. Members of the collaboration are happy
+to help other users with their issues and to discuss new ideas.
 
 .. toctree::
    :hidden:
