@@ -1,5 +1,5 @@
 # Related Software
-This page attempts to list all EPICS-related source code and documentation outside of EPICS Base. If you find a link is incorrect or missing, please [submit an issue](https://github.com/epics-docs/epics-docs/issues/new/choose) or pull-request with a fix on the [epics-docs](https://github.com/epics-docs/epics-docs) repository. 
+This page attempts to list all EPICS-related source code and documentation outside of [EPICS Base](https://github.com/epics-base/). If you find a link is incorrect or missing, please [submit an issue](https://github.com/epics-docs/epics-docs/issues/new/choose) or pull-request with a fix on the [epics-docs](https://github.com/epics-docs/epics-docs) repository. 
 
 ## IOC Support Modules
 These support modules are meant to be built into an IOC. See also the [epics-modules](https://github.com/epics-modules) project on github, there may be something there that has not yet been placed in this list.
@@ -62,10 +62,6 @@ These support modules are meant to be built into an IOC. See also the [epics-mod
 | xspress3              | [github.com](https://github.com/epics-modules/xspress3)             | [github.io](https://epics-modules.github.io/xspress3/) |
 | xxx                   | [github.com](https://github.com/epics-modules/xxx)                  | [github.io](https://epics-modules.github.io/xxx/) |
 | Yokogawa_DAS          | [github.com](https://github.com/epics-modules/Yokogawa_DAS)         | [github.io](https://epics-modules.github.io/Yokogawa_DAS/) |
-
-
-
-# Other
 
 
 ## User Interface Tools
@@ -157,14 +153,11 @@ NetChannelAccess | CA libraries and Gateway in native C# | [github.com](https://
 | dbVerbose | Verbose database filter |  | [apics.anl.gov](https://epics.anl.gov/extensions/dbVerbose/index.php)
 
 
-
-
-
 ## (High Level) Application Packages
 | Name | Description | Source Code | Documentation |
 | ---- | ----------- | ----------- | ------------- |
 OpenXAL | Accelerator physics application framework (Java) | [github.com](https://github.com/openxal) | [github.io](https://openxal.github.io/)
 Matlab Middle Layer | Accelerator Physics Toolbox | [github.com](https://github.com/atcollab/MML) | [github.com](https://github.com/atcollab/MML)
-React Automation Studio | Platform to enable control of large scientific equipment through EPICS | [github.com](https://github.com/React-Automation-Studio/React-Automation-Studio) | [github.com](https://github.com/React-Automation-Studio/React-Automation-Studio)
+React Automation Studio | Web-based EPICS interface | [github.com](https://github.com/React-Automation-Studio/React-Automation-Studio) | [github.com](https://github.com/React-Automation-Studio/React-Automation-Studio)
 
 
