@@ -66,14 +66,6 @@ These support modules are meant to be built into an IOC. See also the [epics-mod
 
 
 # Other
-## Python Channel Access and PV Acess Libraries
-| Name | Source Code | Documentation | Protocol |
-| ---- | ----------- | ------------- | -------- |
-| caproto       | [github.com](https://github.com/caproto/caproto)        | [github.io](https://caproto.github.io/caproto/)                           | CA |
-| cothread      | [github.com](https://github.com/dls-controls/cothread)  | [readthedocs.io](https://cothread.readthedocs.io/en/latest/cothread.html)      | CA |
-| p4p           | [github.com](https://github.com/mdavidsaver/p4p)        | [github.io](https://mdavidsaver.github.io/p4p/)                           | PVA |
-| pvapy         | [github.com](https://github.com/epics-base/pvaPy)       | [epics.anl.gov](https://epics.anl.gov/extensions/pvaPy/production/index.html) | PVA |
-| pyepics       | [github.com](https://github.com/pyepics/pyepics)        | [github.io](https://pyepics.github.io/pyepics/)                           | CA |
 
 
 ## User Interface Tools
@@ -95,15 +87,84 @@ React Automation Studio | React-based display manager | [github.com](https://git
 | Name | Description | Source Code | Documentation |
 | ---- | ----------- | ----------- | ------------- |
 ALH | Alarm Handler (C, Motif) | [github.com](https://github.com/epics-extensions/alh) | [epics.anl.gov](https://epics.anl.gov/extensions/alh/index.php)
-BEAST | 
-Archiver Applience | 
-BEAUTY | 
-ChannelFinder | 
-MASAR | 
-CASR | 
-BURT | 
+Archiver Applience (Java) | High performance, scalable process data archiver | [github.com](https://github.com/slacmshankar/epicsarchiverap) | [github.io](https://slacmshankar.github.io/epicsarchiver_docs/index.html)
+BEAST (Java) | **DEPRECATED** Best Ever Alarm System Toolkit (within CS-Studio) | [github.com](https://github.com/ControlSystemStudio/cs-studio) | [readthedocs.io](https://control-system-studio.readthedocs.io/en/latest/app/alarm/ui/doc/index.html)
+BEAUTY (Java) | **DEPRECATED** PV Archiver (Within CS-Studio) | [github.com](https://github.com/ControlSystemStudio/cs-studio/wiki/BEAST) | [sourceforge.net](https://cs-studio.sourceforge.net/docbook/ch11.html)
+BURT | Backup and restore tool |  | [epics.anl.gov](https://epics.anl.gov/extensions/burt/index.php)
+CASR | Host-based save/restore | [github.com](https://github.com/epicsdeb/autosave/tree/master) | [epics.anl.gov](https://epics.anl.gov/extensions/casr/index.php)
+CA Gateway | PV gateway for channel access | [github.com](https://github.com/epics-extensions/ca-gateway) | [epics.anl.gov](https://epics.anl.gov/extensions/gateway/index.php)
 CA Watcher | 
+Channel Finder | Directory service for EPICS channels | [github.com](https://github.com/ChannelFinder) | [github.io](https://channelfinder.github.io/)
 Channel Watcher | 
-CA Gateway | 
-PVA Gateway | 
-NameServer | 
+MASAR | Machine Snapshot, Archive and Restore | [github.com](https://github.com/epics-base/masarService) | [epics.anl.gov (pdf)](https://epics.anl.gov/meetings/2013-10/3%20-%20Other%20Services/4%20-%20MASAR%20Service.pdf)
+NameServer | Channel Access Name Server | [github.com](https://github.com/epics-extensions/ca-nameserver) | [epics.anl.gov](https://epics.anl.gov/extensions/nameserver/index.php)
+PVA Gateway | PV Access gateway | [github.com](https://github.com/epics-base/pva2pva) | [github.io](https://mdavidsaver.github.io/p4p/gw.html)
+
+
+## Language Bindings and Interfaces to Other Tools
+
+### C/C++
+| Name | Description | Source Code | Documentation |
+| ---- | ----------- | ----------- | ------------- |
+EPICS Base | Has CA/PVA implimentations in releases | [github.com](https://github.com/epics-base/epics-base) | [epics-controls.org](https://epics-controls.org/resources-and-support/base/)
+EPICS QT | The EPICS Qt framework | [github.com](https://github.com/qtepics) | [github.io](https://qtepics.github.io/index.html)
+EZCA | Eacy CA interface for C programs | [github.com](https://github.com/epics-extensions/ezca) | [epics.anl.gov](https://epics.anl.gov/extensions/ezca/index.php)
+SCA | Simple Channel Access for C programs | [als.lbl.gov](https://controls.als.lbl.gov/epics_collaboration/sca/) | [als.lbl.gov](https://controls.als.lbl.gov/epics_collaboration/sca/)
+
+### Java
+| Name | Description | Source Code | Documentation |
+| ---- | ----------- | ----------- | ------------- |
+EPICS Core Java | Java implementation bundle | [github.com](https://github.com/epics-base/epicsCoreJava) | [github.com](https://github.com/epics-base/epicsCoreJava)
+JCA | Java CA client API | [github.io](https://github.com/epics-base/jca) | [javadoc.io](https://www.javadoc.io/doc/org.epics/jca/latest/com/cosylab/epics/caj/CAJChannel.html)
+CA | Pure Java CA client | [github.com](https://www.javadoc.io/doc/org.epics/jca/latest/com/cosylab/epics/caj/CAJChannel.html) | [github.com](https://www.javadoc.io/doc/org.epics/jca/latest/com/cosylab/epics/caj/CAJChannel.html)
+JCAE: Java CA Extensions library | [github.com](https://github.com/paulscherrerinstitute/jcae/) | [github.com](https://github.com/paulscherrerinstitute/jcae/)
+
+### LabView
+| Name | Description | Source Code | Documentation |
+| ---- | ----------- | ----------- | ------------- |
+CA Lab | CA client for Labview | [github.com](https://github.com/epics-extensions/CALab) | [github.com](https://github.com/epics-extensions/CALab)
+
+### Matlab
+| Name | Description | Source Code | Documentation |
+| ---- | ----------- | ----------- | ------------- |
+Matlab CA  (MCA) | CA client library for Matlab | [github.com](https://github.com/epics-extensions/matlab_ca) | [sns.ornl.gov](https://controlssoftware.sns.ornl.gov/mca/)
+LabCA | Ca client library for Matlab | [github.com](https://github.com/till-s/epics-labca) | [slac.stanford.edu](https://www.slac.stanford.edu/~strauman/labca/index.html)
+
+### Perl
+| Name | Description | Source Code | Documentation |
+| ---- | ----------- | ----------- | ------------- |
+CAP5 | CA for Perl 5 | [github.com](https://github.com/epics-base) | [epics.anl.gov](https://epics.anl.gov/modules/soft/cap5/)
+PEZCA | A Perl binding to EZCA |  | [github.com](https://epics.anl.gov/modules/soft/cap5/)
+
+### Python 
+| Name | Description | Source Code | Documentation | Protocol |
+| ---- | ----------- | ----------- | ------------- | -------- |
+| caproto       | Pure-python channel access | [github.com](https://github.com/caproto/caproto)        | [github.io](https://caproto.github.io/caproto/)                           | CA |
+| cothread      | Designed for cooperative threading (C, Python) | [github.com](https://github.com/dls-controls/cothread)  | [readthedocs.io](https://cothread.readthedocs.io/en/latest/cothread.html)      | CA |
+| p4p           | Python wrapper around PVA client and server | [github.com](https://github.com/mdavidsaver/p4p)        | [github.io](https://mdavidsaver.github.io/p4p/)                           | PVA |
+| pvapy         | Python interface to pvAccess | [github.com](https://github.com/epics-base/pvaPy)       | [epics.anl.gov](https://epics.anl.gov/extensions/pvaPy/production/index.html) | PVA/CA |
+| pyepics       | Python wrapper around libca | [github.com](https://github.com/pyepics/pyepics)        | [github.io](https://pyepics.github.io/pyepics/)                           | CA |
+
+### Other
+| Name | Description | Source Code | Documentation |
+| ---- | ----------- | ----------- | ------------- |
+NetChannelAccess | CA libraries and Gateway in native C# | [github.com](https://github.com/paulscherrerinstitute/NetChannelAccess) | [github.com](https://github.com/paulscherrerinstitute/NetChannelAccess)
+
+## Other Tools and Libraries
+| Name | Description | Source Code | Documentation |
+| ---- | ----------- | ----------- | ------------- |
+| MSI | Macro substitution and include tool (in Base from 3.14) | [github.com](https://github.com/epics-base) | [epics.anl.gov](https://epics.anl.gov/extensions/msi/index.php)
+| dbVerbose | Verbose database filter |  | [apics.anl.gov](https://epics.anl.gov/extensions/dbVerbose/index.php)
+
+
+
+
+
+## (High Level) Application Packages
+| Name | Description | Source Code | Documentation |
+| ---- | ----------- | ----------- | ------------- |
+OpenXAL | Accelerator physics application framework (Java) | [github.com](https://github.com/openxal) | [github.io](https://openxal.github.io/)
+Matlab Middle Layer | Accelerator Physics Toolbox | [github.com](https://github.com/atcollab/MML) | [github.com](https://github.com/atcollab/MML)
+React Automation Studio | Platform to enable control of large scientific equipment through EPICS | [github.com](https://github.com/React-Automation-Studio/React-Automation-Studio) | [github.com](https://github.com/React-Automation-Studio/React-Automation-Studio)
+
+
