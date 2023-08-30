@@ -75,6 +75,7 @@ There are two kinds of subprojects:
    :caption: The build system
 
    build-system/how-to-port-epics-to-a-new-os-architecture
+   build-system/cross-compile-epics-and-a-ioc-to-an-old-x86-linux.md
    Getting Started with EPICS on RTEMS 4 <https://epics.anl.gov/base/RTEMS/tutorial/tutorial.html>
    build-system/configuring-vxworks-6_x
    build-system/vxworks6_tornado
