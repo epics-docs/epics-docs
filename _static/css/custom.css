@@ -5,3 +5,7 @@
 .wy-side-nav-search input[type="text"] {
     border-color: #18334b;
 }
+
+.wy-table-responsive table td, .wy-table-responsive table th {
+    white-space: inherit;
+}
