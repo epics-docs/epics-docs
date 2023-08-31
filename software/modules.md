@@ -77,6 +77,7 @@ EDM | Extensible Display Manager | [github.com](https://github.com/gnartohl/edm)
 MEDM | Motif editor and display manager | [github.com](https://github.com/epics-extensions/medm) | [epics.anl.gov](https://controlssoftware.sns.ornl.gov/edm/)
 Probe | Motif channel monitoring program | [github.com](https://github.com/epics-extensions/probe) | [epics.anl.gov](https://epics.anl.gov/extensions/probe/index.php)
 PyDM | A Python-based display manager | [github.com](https://github.com/slaclab/pydm) | [github.io](https://slaclab.github.io/pydm/)
+EPICS Qt | EPICS Qt framework | [github.com](https://github.com/qtepics) | [github.io](https://qtepics.github.io/)
 React Automation Studio | React-based display manager | [github.com](https://github.com/React-Automation-Studio/React-Automation-Studio) | [github.com](https://github.com/React-Automation-Studio/React-Automation-Studio)
 Strip Tool | Strip-chart plotting tool | [github.com](https://github.com/epics-extensions/StripTool) | [epics.anl.gov](https://epics.anl.gov/extensions/StripTool/index.php)
 
@@ -96,7 +97,7 @@ Channel Finder | Directory service for EPICS channels | [github.com](https://git
 Channel Watcher  | Channel Watcher replaces the save part of EPICS save/restore | [slac.stanford.edu](https://www.slac.stanford.edu/grp/ssrl/spear/epics/extensions/ChannelWatcher/index.html) | [slac.stanford.edu](https://www.slac.stanford.edu/grp/ssrl/spear/epics/extensions/ChannelWatcher/index.html)
 MASAR | Machine Snapshot, Archive and Restore | [github.com](https://github.com/epics-base/masarService) | [epics.anl.gov (pdf)](https://epics.anl.gov/meetings/2013-10/3%20-%20Other%20Services/4%20-%20MASAR%20Service.pdf)
 NameServer | Channel Access Name Server | [github.com](https://github.com/epics-extensions/ca-nameserver) | [epics.anl.gov](https://epics.anl.gov/extensions/nameserver/index.php)
-PVA Gateway | PV Access gateway | [github.com](https://github.com/epics-base/pva2pva) | [github.io](https://mdavidsaver.github.io/p4p/gw.html)
+PVA Gateway | PV Access gateway | [github.com](https://github.com/mdavidsaver/p4p) | [github.io](https://mdavidsaver.github.io/p4p/gw.html)
 
 
 ## Language Bindings and Interfaces to Other Tools
