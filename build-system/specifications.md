@@ -982,7 +982,7 @@ DBD += <name>.dbd
 
 Definitions of the form:
 
-```
+```makefile
 DBD_INSTALLS += <name>
 ```
 
@@ -1654,13 +1654,17 @@ Combined object files will be used in builds of the library for archs without a
 
 Previous versions of epics (3.13 and before) accepted definitions like:
 
+```makefile
+LIBOBJS += <support>_BIN)/xxx.o
 ```
-LIBOBJS += $<support>_BIN)/xxx.o
 
 These are gathered together in files such as baseLIBOBJS. To use such
 definitions include the lines:
 
--include ../baseLIBOBJS <libname>_OBJS += $(LIBOBJS)
+```makefile
+-include ../baseLIBOBJS
+<libname>_OBJS += $(LIBOBJS)
+```
 
 ```{admonition} Note:
 vxWorks applications created by `makeBaseApp.pl` from 3.14 Base
@@ -1678,66 +1682,89 @@ location of the library.
 Library names, which must not have a directory and "lib" prefix nor a
 suffix, are defined as follows:
 
-```
+```makefile
 LIB_LIBS += <name>
+```
 
 Libraries to be used when linking all defined libraries.
 
+```makefile
 LIB_LIBS_<osclass> += <name>
+```
 
 Libraries to be used or all archs of the specified osclass when
 linking all defined libraries.
 
+```makefile
 LIB_LIBS_DEFAULT += <name>
+```
 
 Libraries to be used for any arch that does not have a
 `LIB_LIBS_<osclass>` definition when linking all defined libraries.
 
+```makefile
 USR_LIBS += <name>
+```
 
 Libraries to be used when linking all defined products and libraries.
 
+```makefile
 USR_LIBS_<osclass> += <name>
+```
 
 Libraries to be used or all archs of the specified osclasswhen linking
 all defined products and libraries.
 
+```makefile
 USR_LIBS_DEFAULT += <name>
+```
 
 Libraries to be used for any arch that does not have a
 `USR_LIBS_<osclass>` definition when linking all defined products
 and libraries.
 
+```makefile
 <libname>_LIBS += <name>
+```
 
 Libraries to be used for linking the named library.
 
+```makefile
 <libname>_LIBS_<osclass> += <name>
+```
 
 Libraries will be used for all archs of the specified osclass for
 linking named library.
 
+```makefile
 <libname>_LIBS_DEFAULT += <name>
+```
 
 Libraries to be used for any arch that does not have a
 `<libname>_LIBS_<osclass>` definition when linking named
 library.
 
+```makefile
 <libname>_SYS_LIBS += <name>
+```
 
 System libraries to be used for linking the named library.
 
+```makefile
 <libname>_SYS_LIBS_<osclass> += <name>
+```
 
 System libraries will be used for all archs of the specified osclass
 for linking named library.
 
+```makefile
 <libname>_SYS_LIBS_DEFAULT += <name>
+```
 
 System libraries to be used for any arch that does not have a
 `<libname>_LIBS_<osclass>` definition when linking named
 library.
-```
+
 
 #### The order of dependant libraries
 
@@ -2041,7 +2068,7 @@ other target archs.
 
 A definition of the form:
 
-```
+```makefile
 INC += <name>.h
 ```
 
@@ -2050,8 +2077,9 @@ the `$(INSTALL_LOCATION)/include` directory.
 
 Definitions of the form:
 
-```
-INC_DEFAULT += <name>.h INC_<osclass> += <name>.h
+```makefile
+INC_DEFAULT += <name>.h
+INC_<osclass> += <name>.h
 ```
 
 results in file `<name>.h` being installed or created and installed into
@@ -2061,8 +2089,9 @@ the appropriate `$(INSTALL_LOCATION)/include/os/<osclass>` directory.
 
 A definition of the form:
 
-```
-HTMLS_DIR = <dirname> HTMLS += <name>
+```makefile
+HTMLS_DIR = <dirname>
+HTMLS += <name>
 ```
 
 results in file `<name>` being installed from the src directory to the
@@ -2070,7 +2099,7 @@ results in file `<name>` being installed from the src directory to the
 
 A definition of the form:
 
-```
+```makefile
 DOCS += <name>
 ```
 
@@ -2081,8 +2110,9 @@ results in file `<name>` being installed from the src directory to the
 
 Adding definitions of the form
 
-```
-TEMPLATES_DIR = <dirname> TEMPLATES += <name>
+```makefile
+TEMPLATES_DIR = <dirname>
+TEMPLATES += <name>
 ```
 
 results in the file `<name>` being installed from the src directory to
@@ -2119,8 +2149,9 @@ PROD specifications in the Makefile for vxWorks target architectures
 create a combined object file with library references resolved and a
 corresponding .munch file.
 
-```
-PROD_HOST += <name> <name>_SRC += <srcname>.c
+```makefile
+PROD_HOST += <name>
+<name>_SRC += <srcname>.c
 ```
 
 results in the executable `<name>` being built for each HOST
@@ -2131,45 +2162,62 @@ installed into the `$(INSTALL_LOCATION)/bin/<arch>` directory.
 
 Any of the following can be specified:
 
-```
+```makefile
 PROD += <name>
+```
 
 Product `<name>` will be created for every target arch.
 
+```makefile
 PROD_<osclass> += <name>
+```
 
 Product `<name>` will be created for all archs of the specified
 osclass.
 
+```makefile
 PROD_DEFAULT += <name>
+```
 
 Product `<name>` will be created for any arch that does not have a
-PROD_<osclass> definition
+`PROD_<osclass>` definition
 
+```makefile
 PROD_IOC += <name>
+```
 
 Product `<name>` will be created for IOC type archs.
 
+```makefile
 PROD_IOC_<osclass> += <name>
+```
 
 Product `<name>` will be created for all IOC type archs of the
 specified osclass.
 
+```makefile
 PROD_IOC_DEFAULT += <name>
+```
 
 Product `<name>` will be created for any IOC type arch that does not
 have a `PROD_IOC_<osclass>` definition
 
+```makefile
 PROD_HOST += <name>
+```
 
 Product `<name>` will be created for HOST type archs.
 
+```makefile
 PROD_HOST_<osclass> += <name>
+```
 
 Product `<name>` will be created for all HOST type archs of the
 specified osclass.
 
+```makefile
 PROD_HOST_DEFAULT += <name>
+```
 
 Product `<name>` will be created for any HOST type arch that does not
 have a `PROD_HOST_<osclass>` definition
@@ -2180,45 +2228,62 @@ Object files which have filenames with a ".o" or ".obj" suffix are
 defined as follows and can be specified without the suffix but should
 have the directory prefix
 
-```
+```makefile
 USR_OBJS += <name>
+```
 
 Object files will be used in builds of all products and libraries
 
+```makefile
 USR_OBJS_<osclass> += <name>
+```
 
 Object files will be used in builds of all products and libraries for
 archs with the specified osclass.
 
+```makefile
 USR_OBJS_DEFAULT += <name>
+```
 
 Object files will be used in builds of all products and libraries for
 archs without a `USR_OBJS_<osclass>` definition specified.
 
+```makefile
 PROD_OBJS += <name>
+```
 
 Object files will be used in builds of all products
 
+```makefile
 PROD_OBJS_<osclass> += <name>
+```
 
 Object files will be used in builds of all products for archs with the
 specified osclass.
 
+```makefile
 PROD_OBJS_DEFAULT += <name>
+```
 
 Object files will be used in builds of all products for archs without
 a `PROD_OBJS_<osclass>` definition specified.
 
+```makefile
 <prodname>_OBJS += <name>
+```
 
 Object files will be used for all builds of the named product
 
+```makefile
 <prodname>_OBJS_<osclass> += <name>
+```
 
 Object files will be used in builds of the named product for archs
 with the specified osclass.
 
+```makefile
 <prodname>_OBJS_DEFAULT += <name>
+```
 
 Object files will be used in builds of the named product for archs
 without a `<prodname>_OBJS_<osclass>` definition specified.
@@ -2227,129 +2292,174 @@ Combined object files, from R3.13 built modules and applications which
 have file names that do not include a ".o" or ".obj" suffix (e.g.
 xyzLib) are defined as follows:
 
+```makefile
 USR_OBJLIBS += <name>
+```
 
 Combined object files will be used in builds of all libraries and
 products.
 
+```makefile
 USR_OBJLIBS_<osclass> += <name>
+```
 
 Combined object files will be used in builds of all libraries and
 products for archs of the specified osclass.
 
+```makefile
 USR_OBJLIBS_DEFAULT += <name>
+```
 
 Combined object files will be used in builds of all libraries and
 products for archs without a `USR_OBJLIBS_<osclass>` definition
 specified.
 
+```makefile
 PROD_OBJLIBS += <name>
+```
 
 Combined object files will be used in builds of all products.
 
+```makefile
 PROD_OBJLIBS_<osclass> += <name>
+```
 
 Combined object files will be used in builds of all products for archs
 of the specified osclass.
 
+```makefile
 PROD_OBJLIBS_DEFAULT += <name>
+```
 
 Combined object files will be used in builds of all products for archs
 without a `PROD_OBJLIBS_<osclass>` definition specified.
 
+```makefile
 <prodname>_OBJLIBS += <name>
+```
 
 Combined object files will be used for all builds of the named
 product.
 
+```makefile
 <prodname>_OBJLIBS_<osclass> += <name>
+```
 
 Combined object files will be used in builds of the named product for
 archs with the specified osclass.
 
+```makefile
 <prodname>_OBJLIBS_DEFAULT += <name>
+```
 
 Combined object files will be used in builds of the named product for
 archs without a `<prodname>_OBJLIBS_<osclass>` definition
 specified.
 
+```makefile
 <prodname>_LDOBJS += <name>
+```
 
 Object files will be used for all builds of the named product.
 (deprecated)
 
+```makefile
 <prodname>_LDOBJS_<osclass> += <name>
+```
 
 Object files will be used in builds of the name product for archs with
 the specified osclass. (deprecated)
 
+```makefile
 <prodname>_LDOBJS_DEFAULT += <name>
+```
 
 Object files will be used in builds of the product for archs without a
 `<prodname>_LDOBJS_<osclass>` definition specified. (deprecated)
-```
 
 #### Specifying product source file names
 
 Source file names, which must have a suffix, are defined as follows:
 
-```
+```makefile
 SRCS += <name>
+```
 
 Source files will be used for all defined libraries and products.
 
+```makefile
 SRCS_<osclass> += <name>
+```
 
 Source files will be used for all defined libraries and products for
 all archs of the specified osclass.
 
+```makefile
 SRCS_DEFAULT += <name>
+```
 
 Source files will be used for all defined libraries and products for
 any arch that does not have a `SRCS_<osclass>` definition
 
+```makefile
 USR_SRCS += <name>
+```
 
 Source files will be used for all products and libraries.
 
+```makefile
 USR_SRCS_<osclass> += <name>
+```
 
 Source files will be used for all defined products and libraries for
 all archs of the specified osclass.
 
+```makefile
 USR_SRCS_DEFAULT += <name>
+```
 
 Source files will be used for all defined products and libraries for
 any arch that does not have a `USR_SRCS_<osclass>` definition
 
+```makefile
 PROD_SRCS += <name>
+```
 
 Source files will be used for all products.
 
+```makefile
 PROD_SRCS_<osclass> += <name>
+```
 
 Source files will be used for all defined products for all archs of
 the specified osclass.
 
+```makefile
 PROD_SRCS_DEFAULT += <name>
+```
 
 Source files will be used for all defined products for any arch that
 does not have a `PROD_SRCS_<osclass>` definition
 
+```makefile
 <prodname>_SRCS += <name>
+```
 
 Source file will be used for the named product.
 
+```makefile
 <prodname>_SRCS_<osclass> += <name>
+```
 
 Source files will be used for named product for all archs of the
 specified osclass.
 
+```makefile
 <prodname>_SRCS_DEFAULT += <name>
+```
 
 Source files will be used for named product for any arch that does not
 have a `<prodname>_SRCS_<osclass>` definition
-```
 
 #### Specifying libraries to be linked when creating the product
 
@@ -2360,79 +2470,107 @@ the Makefile to specify the location of the library.
 Library names, which must not have a directory and "lib" prefix nor a
 suffix, are defined as follows:
 
-```
+```makefile
 PROD_LIBS += <name>
+```
 
 Libraries to be used when linking all defined products.
 
+```makefile
 PROD_LIBS_<osclass> += <name>
+```
 
 Libraries to be used or all archs of the specified osclass when
 linking all defined products.
 
+```makefile
 PROD_LIBS_DEFAULT += <name>
+```
 
 Libraries to be used for any arch that does not have a
 `PROD_LIBS_<osclass>` definition when linking all defined products.
 
+```makefile
 USR_LIBS += <name>
+```
 
 Libraries to be used when linking all defined products.
 
+```makefile
 USR_LIBS_<osclass> += <name>
+```
 
 Libraries to be used or all archs of the specified osclasswhen linking
 all defined products.
 
+```makefile
 USR_LIBS_DEFAULT += <name>
+```
 
 Libraries to be used for any arch that does not have a
 `USR_LIBS_<osclass>` definition when linking all defined products.
 
+```makefile
 <prodname>_LIBS += <name>
+```
 
 Libraries to be used for linking the named product.
 
+```makefile
 <prodname>_LIBS_<osclass> += <name>
+```
 
 Libraries will be used for all archs of the specified osclass for
 linking named product.
 
+```makefile
 <prodname>_LIBS_DEFAULT += <name>
+```
 
 Libraries to be used for any arch that does not have a
 `<prodname>_LIBS_<osclass>` definition when linking named
 product.
 
+```makefile
 SYS_PROD_LIBS += <name>
+```
 
 System libraries to be used when linking all defined products.
 
+```makefile
 SYS_PROD_LIBS_<osclass> += <name>
+```
 
 System libraries to be used for all archs of the specified osclass
 when linking all defined products.
 
+```makefile
 SYS_PROD_LIBS_DEFAULT += <name>
+```
 
 System libraries to be used for any arch that does not have a
 `PROD_LIBS_<osclass>` definition when linking all defined products.
 
+```makefile
 <prodname>_SYS_LIBS += <name>
+```
 
 System libraries to be used for linking the named product.
 
+```makefile
 <prodname>_SYS_LIBS_<osclass> += <name>
+```
 
 System libraries will be used for all archs of the specified osclass
 for linking named product.
 
+```makefile
 <prodname>_SYS_LIBS_DEFAULT += <name>
+```
 
 System libraries to be used for any arch that does not have a
 `<prodname>_LIBS_<osclass>` definition when linking named
 product.
-```
 
 #### The order of dependant libraries
 
@@ -2456,7 +2594,7 @@ line:
 
 On WIN32 only a product version number can be specified as follows:
 
-```
+```makefile
 PROD_VERSION += <version>
 ```
 
@@ -2482,11 +2620,15 @@ which includes the generated header.
 An Makefile which generates a version header named `myversion.h`
 included by `devVersionString.c` would have the following.
 
-```
-TOP=../.. include $(TOP)/configure/CONFIG # ... define PROD or
-LIBRARY names sometarget sometarget_SRCS = devVersionString.c
-GENVERSION = myversion.h include $(TOP)/configure/RULES # for each
-source file devVersionString$(DEP): $(GENVERSION)
+```makefile
+TOP=../..
+include $(TOP)/configure/CONFIG
+# ... define PROD or LIBRARY names sometarget
+sometarget_SRCS = devVersionString.c
+GENVERSION = myversion.h
+include $(TOP)/configure/RULES
+# for each source file
+devVersionString$(DEP): $(GENVERSION)
 ```
 
 The optional variables `GENVERSIONMACRO` and `GENVERSIONDEFAULT` give the
@@ -2518,49 +2660,65 @@ way as regular products.
 
 Any of the following can be specified:
 
-```
+```makefile
 TESTPROD += <name>
+```
 
 Test product `<name>` will be created for every target arch.
 
+```makefile
 TESTPROD_<osclass> += <name>
+```
 
 Test product `<name>` will be created for all archs of the specified
 osclass.
 
+```makefile
 TESTPROD_DEFAULT += <name>
+```
 
 Test product `<name>` will be created for any arch that does not
 have a `TESTPROD_<osclass>` definition
 
+```makefile
 TESTPROD_IOC += <name>
+```
 
 Test product `<name>` will be created for IOC type archs.
 
+```makefile
 TESTPROD_IOC_<osclass> += <name>
+```
 
 Test product `<name>` will be created for all IOC type archs of the
 specified osclass.
 
+```makefile
 TESTPROD_IOC_DEFAULT += <name>
+```
 
 Test product `<name>` will be created for any IOC type arch that
 does not have a `TESTPROD_IOC_<osclass>` definition
 
+```makefile
 TESTPROD_HOST += <name>
+```
 
 Test product `<name>` will be created for HOST type archs.
 
+```makefile
 TESTPROD_HOST_<osclass> += <name>
+```
 
 Test product `<name>` will be created for all HOST type archs of the
 specified osclass.
 
+```makefile
 TESTPROD_HOST_DEFAULT += <name>
+```
 
 Test product `<name>` will be created for any HOST type arch that
 does not have a `TESTPROD_HOST_<osclass>` definition
-```
 
 ### Test Scripts
 
@@ -2570,49 +2728,65 @@ library, and should send output to stdout following the Test Anything
 Protocol. Any of the following can be specified, although only
 `TESTSCRIPTS_HOST` is currently useful:
 
-```
+```makefile
 TESTSCRIPTS += <name>
+```
 
 Test script `<name>` will be created for every target arch.
 
+```makefile
 TESTSCRIPTS_<osclass> += <name>
+```
 
 Test script `<name>` will be created for all archs of the specified
 osclass.
 
+```makefile
 TESTSCRIPTS_DEFAULT += <name>
+```
 
 Test script `<name>` will be created for any arch that does not have
 a `TESTSCRIPTS_<osclass>` definition
 
+```makefile
 TESTSCRIPTS_IOC += <name>
+```
 
 Test script `<name>` will be created for IOC type archs.
 
+```makefile
 TESTSCRIPTS_IOC_<osclass> += <name>
+```
 
 Test script `<name>` will be created for all IOC type archs of the
 specified osclass.
 
+```makefile
 TESTSCRIPTS_IOC_DEFAULT += <name>
+```
 
 Test script `<name>` will be created for any IOC type arch that does
 not have a `TESTSCRIPTS_IOC_<osclass>` definition
 
+```makefile
 TESTSCRIPTS_HOST += <name>
+```
 
 Test script `<name>` will be created for HOST type archs.
 
+```makefile
 TESTSCRIPTS_HOST_<osclass> += <name>
+```
 
 Test script `<name>` will be created for all HOST type archs of the
 specified osclass.
 
+```makefile
 TESTSCRIPTS_HOST_DEFAULT += <name>
+```
 
 Test script `<name>` will be created for any HOST type arch that
 does not have a `TESTSCRIPTS_HOST_<osclass>` definition.
-```
 
 If a name in one of the above variables matches a regular executable
 program name (normally generated as a test product) with `.t`
@@ -2627,7 +2801,7 @@ ending changed to `.t`; such scripts will usually use the perl
 
 A definition of the form:
 
-```
+```makefile
 TARGETS += <name>
 ```
 
@@ -2639,10 +2813,11 @@ files are not installed.
 
 Definitions of the form:
 
-```
-BIN_INSTALLS += <name> BIN_INSTALLS += <dir>/<name>
-BIN_INSTALLS_DEFAULT += <name> BIN_INSTALLS_<osclass> +=
-<name>
+```makefile
+BIN_INSTALLS += <name>
+BIN_INSTALLS += <dir>/<name>
+BIN_INSTALLS_DEFAULT += <name>
+BIN_INSTALLS_<osclass> += <name>
 ```
 
 will result in the named files being installed to the appropriate
@@ -2656,10 +2831,11 @@ source directory for the file.
 
 Definitions of the form:
 
-```
-LIB_INSTALLS += <name> LIB_INSTALLS += <dir>/<name>
-LIB_INSTALLS_DEFAULT += <name> LIB_INSTALLS_<osclass> +=
-<name>
+```makefile
+LIB_INSTALLS += <name>
+LIB_INSTALLS += <dir>/<name>
+LIB_INSTALLS_DEFAULT += <name>
+LIB_INSTALLS_<osclass> += <name>
 ```
 
 result in files being installed to the appropriate
@@ -2700,8 +2876,9 @@ Definitions of the form:
 
 Definitions of the form:
 
-```
-TCLLIBNAME += <name> TCLINDEX += <name>
+```makefile
+TCLLIBNAME += <name>
+TCLINDEX += <name>
 ```
 
 result in the specified tcl files being installed to the
@@ -2717,22 +2894,25 @@ be specified. The configuration files set the java c option
 
 Any of the following can be specified:
 
-```
+```makefile
 JAVA += <name>.java
 ```
 
 The `<name>.java` file will be used to create the `<name>.class` file
 in the `$(INSTALL_JAVA)` directory.
 
+```makefile
 TESTJAVA += <name>.java
+```
 
 The `<name>.java` files will be used to create the `<name>.class` file
 in the `O.Common` subdirectory.
 
+```makefile
 USR_JAVACFLAGS += <name>
+```
 
 The `javac` option `<name>` will be used on the `javac` command lines.
-```
 
 #### Example 1
 
@@ -2766,26 +2946,32 @@ input file names must appear with a directory prefix.
 
 Any of the following can be specified:
 
-```
+```makefile
 JAR += <name>
+```
 
 The `<name>` jar file will be created and installed into the
 `$(INSTALL_JAVA)` directory.
 
+```makefile
 JAR_INPUT += <name>
+```
 
 Names of images, audio files and classes files to be included in the
 jar file.
 
+```makefile
 JAR_MANIFEST += <name>
+```
 
 The preexisting manifest file will be used for the created jar file.
 
+```makefile
 JAR_PACKAGES += <name>
+```
 
 Names of java packages to be installed and added to the created jar
 file.
-```
 
 #### Example 2 1
 
@@ -2810,10 +2996,12 @@ In this example, three class files are created and placed into a new jar
 archive file named `mytest2.jar`. An existing manifest file, `mytest2.mf` is
 put into the new jar file.
 
-```
-JAR = mytest2.jar JAR_INPUT = $(INSTALL_JAVA)/mytest/one.class
-JAR_INPUT = $(INSTALL_JAVA)/mytest/two.class JAR_INPUT =
-$(INSTALL_JAVA)/mytest/three.class JAR_MANIFEST = mytest2.mf
+```makefile
+JAR = mytest2.jar
+JAR_INPUT = $(INSTALL_JAVA)/mytest/one.class
+JAR_INPUT = $(INSTALL_JAVA)/mytest/two.class
+JAR_INPUT = $(INSTALL_JAVA)/mytest/three.class
+JAR_MANIFEST = mytest2.mf
 ```
 
 ### Java native method C header files
@@ -2827,16 +3015,18 @@ options for the `javah` tool can be specified.
 
 Any of the following can be specified:
 
-```
+```makefile
 JAVAINC += <name>.h
+```
 
 The `<name>.h` header file will be created in the `O.Common`
 subdirectory.
 
+```makefile
 USR_JAVAHFLAGS += <name>
+```
 
 The `javah` option `<name>` will be used on the `javah` tool command line.
-```
 
 #### Example 2 2
 
@@ -2845,7 +3035,7 @@ In this example, the C header `xx_yy_zz.h` will be created in the
 file `$(INSTALL_JAVA)/xx/yy/zz.class`)). The option `-old` will tell
 `javah` to create old JDK1.0 style header files.
 
-```
+```makefile
 JAVAINC = xx_yy_zz.h
 USR_JAVAHFLAGS = -old
 ```
@@ -2857,7 +3047,7 @@ Module developers can now create new `CONFIG` and `RULES*` files ia a
 files will be installed into the directory `$(INSTALL_LOCATION)/cfg` by
 including lines like the following Makefile line:
 
-```
+```makefile
 CFG += CONFIG_MY1 RULES_MY1
 ```
 
@@ -2876,7 +3066,7 @@ files of type `ABC` will be installed into a directory defined by
 `INSTALL_ABC`. This is done by creating a new `CONFIG_<name>` file,
 e.g. `CONFIG_ABC`, with the following lines:
 
-```
+```makefile
 FILE_TYPE += ABC
 INSTALL_ABC = $(INSTALL_LOCATION)/abc
 ```
@@ -2892,14 +3082,14 @@ The module developer installs new `CONFIG_ABC` and `RULES_ABC` files for the
 new file type into the directory `$(INSTALL_LOCATION)/cfg` by including
 the following Makefile line:
 
-```
+```makefile
 CFG += CONFIG_ABC RULES_ABC
 ```
 
 Files of type `ABC` are installed into `INSTALL_ABC` directory by adding a
 line like the following to a Makefile.
 
-```
+```makefile
 ABC += <filename1> <filename2> <filename3>
 ```
 
@@ -2931,16 +3121,17 @@ control the treatment of snippets with the same number:
 Specification of the target file is different for architecture dependent
 or independent files.
 
-```
-COMMON_ASSEMBLIES += st.cmd ASSEMBLIES += mytool.rc
+```makefile
+COMMON_ASSEMBLIES += st.cmd
+ASSEMBLIES += mytool.rc
 ```
 
 Snippet files are configured specifically (relative or absolute path) or
 as patterns (searched relative to all source directories).
 
-```
-mytool.rc_SNIPPETS += ../rc.d/10_head ../rc.d/20_init st.cmd_PATTERN
-+= st.cmd.d/*
+```makefile
+mytool.rc_SNIPPETS += ../rc.d/10_head ../rc.d/20_init
+st.cmd_PATTERN += st.cmd.d/*
 ```
 
 #### Macros
@@ -2976,10 +3167,11 @@ Given the following directories and snippets:
 
 And the following Makefile declaration:
 
-```
-SCRIPTS += $(COMMON_DIR)/st.cmd COMMON_ASSEMBLIES += st.cmd
-st.cmd_SNIPPETS += $(wildcard /global/st.cmd.d/*) st.cmd_PATTERN +=
-st.cmd.d/*
+```makefile
+SCRIPTS += $(COMMON_DIR)/st.cmd
+COMMON_ASSEMBLIES += st.cmd
+st.cmd_SNIPPETS += $(wildcard /global/st.cmd.d/*)
+st.cmd_PATTERN += st.cmd.d/*
 ```
 
 The build will create and install a st.cmd script using the following
