@@ -1,6 +1,4 @@
----
-title: Build Facility
----
+# Build Facility
 
 ::: {.contents depth="3"}
 Table of Contents
@@ -8,13 +6,13 @@ Table of Contents
 
 Janet Anderson is the author of this chapter.
 
-# Overview
+## Overview
 
 This chapter describes the EPICS build facility including directory
 structure, environment and system requirements, configuration files,
 Makefiles, and related build tools.
 
-## `<top>`Directory structure
+### `<top>`Directory structure
 
 EPICS software can be divided into multiple `<top>` areas. Examples of
 `<top>` areas are EPICS base itself, EPICS extensions, and simple or
@@ -35,7 +33,7 @@ allow make commands like `make install.vxWorks-68040`, subdirectory
 names within a `<top>` directory structure may not contain a period
 "." character.
 
-## Install Directories
+### Install Directories
 
 Files installed during the build are installed into subdirectories of an
 installation directory which defaults to `$(TOP)`, the `<top>` directory.
@@ -71,7 +69,7 @@ components.
 -   cfg - The directory into which user created configure files are
     installed
 
-## Elements of build system
+### Elements of build system
 
 The main ingredients of the build system are:
 
@@ -88,7 +86,7 @@ The main ingredients of the build system are:
 -   User created configuration files in build created
     [$(INSTALL_LOCATION)/cfg]{.title-ref} directories.
 
-## Features
+### Features
 
 The principal features of the build system are:
 
@@ -107,7 +105,7 @@ The principal features of the build system are:
     across <top> areas.
 -   gnumake is the only command used to build a <top> area.
 
-## Multiple host and target systems
+### Multiple host and target systems
 
 You can build on multiple host systems and for multiple cross target
 systems using a single EPICS directory structure. The intermediate and
@@ -133,9 +131,9 @@ architecture in its list value, the
 target to be cross-compiled, and the base/configure/ os directory must
 have the appropriate configure files.
 
-# Build Requirements
+## Build Requirements
 
-## Host Environment Variable
+### Host Environment Variable
 
 Only one environment variable, [EPICS_HOST_ARCH]{.title-ref}, is
 required to build EPICS <top> areas. This variable should be set to be
@@ -148,7 +146,7 @@ base/ configure/os show the currently supported
 [EPICS_HOST_ARCH]{.title-ref} values. Examples are solaris-sparc,
 solaris-sparc-gnu, linux-x86, win32-x86, and cygwin-x86.
 
-## Software Prerequisites
+### Software Prerequisites
 
 Before you can build EPICS components your host system must have the
 following software installed:
@@ -170,7 +168,7 @@ need:
 -   RTEMS development tools and libraries required to run EPICS IOC
     applications.
 
-## Path requirements
+### Path requirements
 
 You must have the perl executable in your path and you may need C and
 C++ compilers in your search path. Check definitions of CC and CCC in
@@ -181,14 +179,14 @@ your search path. You can override the default settings by defining
 PERL, CC and CCC, GCC and G++, GNU_DIR ... in the appropriate file
 (usually `configure/os/CONFIG_SITE.$EPICS_HOST_ARCH.Common`)
 
-### Unix path
+#### Unix path
 
 For Unix host builds you also need touch, cpp, cp, rm, mv, and mkdir in
 your search path and /bin/chmod must exist. On some Unix systems you may
 also need ar and ranlib in your path, and the c compiler may require ld
 in your path.
 
-### Win32 PATH
+#### Win32 PATH
 
 On WIN32 systems, building shared libraries is the default setting and
 you will need to add fullpathname to
@@ -198,7 +196,7 @@ libraries is determined by the value of the macro
 [SHARED_LIBRARIES]{.title-ref} in [CONFIG_SITE]{.title-ref} or
 os/CONFIG.Common.<host> (either YES or NO).
 
-## Directory names
+### Directory names
 
 Because the build rules allow make commands like
 `make <dir>.<action>,<arch>`, subdirectory names within a `<top>`
@@ -217,11 +215,11 @@ gnu will yield solaris-sparc-gnu).
 The startup directory also contains scripts to help users set the path
 and other environment variables.
 
-# Configuration Definitions
+## Configuration Definitions
 
-## Site-specific EPICS Base Configuration
+### Site-specific EPICS Base Configuration
 
-### Site configuration
+#### Site configuration
 
 To configure EPICS base for your site, you may want to modify the
 default definitions in the following files:
@@ -229,7 +227,7 @@ default definitions in the following files:
 > -   configure/CONFIG_SITE Build choices. Specify target archs.
 > -   configure/CONFIG_SITE_ENV Environment variable defaults
 
-### Host configuration
+#### Host configuration
 
 To configure each host system for your site, you may override the
 default definitions in the configure/os directory by adding a new file
@@ -241,7 +239,7 @@ to [CONFIG_SITE]{.title-ref}.
 > -   configure/os/CONFIG_SITE.<host>.Common - Host build settings for
 >     all target systems
 
-### Target configuration
+#### Target configuration
 
 To configure each target system, you may override the default
 definitions in the configure/os directory by adding a new file with
@@ -254,7 +252,7 @@ by [CONFIG_SITE]{.title-ref}.
 >     settings
 > -   configure/os/CONFIG_SITE.Common.vxWorksCommon - vxWorks full paths
 
-### R3.13 compatibility configuration
+#### R3.13 compatibility configuration
 
 To configure EPICS base for building with R3.13 extensions and ioc
 applications, you must modify the default definitions in the
@@ -268,7 +266,7 @@ must also modify the following tow macros in the
 > -   COMPAT_313 - Set to YES to build R3.13 ioc applications and
 >     extensions with this base.
 
-## Directory definitions
+### Directory definitions
 
 The configure files contain definitions for locations in which to
 install various components. These are all relative to
@@ -296,7 +294,7 @@ build's target architecture. The default value for
 > $(INSTALL_LOCATION_LIB)/$(T_A) INSTALL_BIN =
 > $(INSTALL_LOCATION_BIN)/$(T_A)
 
-## Extension and Application Specific Configuration
+### Extension and Application Specific Configuration
 
 | The base/configure directory contains files with the default build
   definitions and site specific build definitions. The
@@ -310,7 +308,7 @@ build's target architecture. The default value for
   extension or application by placing an override definition in the
   `<top>/configure/CONFIG_SITE` file.
 
-## RELEASE file
+### RELEASE file
 
 Every `<top>/configure` directory contains a RELEASE file. RELEASE
 contains a user specified list of other <top> directory structures
@@ -367,7 +365,7 @@ to YES, NO or WARN, and if YES (the default value), consistency checks
 will be performed. If [CHECK_RELEASE]{.title-ref} is set to WARN the
 build will continue even if conflicts are found.
 
-## Modifying `configure/RELEASE*` files
+### Modifying `configure/RELEASE*` files
 
 You should always do a gnumake clean uninstall in the <top> directory
 BEFORE adding, changing, or removing any definitions in the
@@ -395,7 +393,7 @@ these pathnames, for example:
 > SUPPORT = /usr/local/iocapps/R3.14.9 EPICS_BASE =
 > $(SUPPORT)/base/3-14-9-asd1
 
-## OS Class specific definitions
+### OS Class specific definitions
 
 Definitions in a Makefile will apply to the host system (the platform on
 which make is executed) and each system defined by
@@ -449,7 +447,7 @@ vxWorks-ppc603
 > PROD_IOC = aaa VX_PROD_vxWorks-68040 = bbb VX_PROD_vxWorks-ppc603 =
 > bbb PROD_IOC += [VX_PROD]()$(T_A)
 
-## Host and Ioc targets
+### Host and Ioc targets
 
 Build creates two type of makefile targets: Host and Ioc. Host targets
 are executables, object files, libraries, and scripts which are not part
@@ -480,7 +478,7 @@ all target systems.
 These definitions can be further limited by specifying an appended
 underscore "_" followed by an osclass or DEFAULT specification.
 
-## User specific override definitions
+### User specific override definitions
 
 User specific override definitions are allowed in user created files in
 the user's <home>/configure subdirectory. These override definitions
@@ -492,13 +490,13 @@ must have the following names.
 > <home>/configure/CONFIG_USER.Common.<targetarch>
 > <home>/configure/CONFIG_USER.<epics_host_arch>.<targetarch>
 
-# Makefiles
+## Makefiles
 
-## Name
+### Name
 
 The name of the makefile in each directory must be Makefile.
 
-## Included Files
+### Included Files
 
 Makefiles normally include files from <top>/configure. Thus the
 makefile "inherits" rules and definitions from configure. The files in
@@ -506,9 +504,9 @@ makefile "inherits" rules and definitions from configure. The files in
 <top>/configure. This technique makes it possible to share make
 variables and even rules across <top> directories.
 
-## Contents of Makefiles
+### Contents of Makefiles
 
-### Makefiles in directories containing subdirectories
+#### Makefiles in directories containing subdirectories
 
 A Makefile in this type of directory must define where <top> is
 relative to this directory, include <top>/configure files, and specify
@@ -521,7 +519,7 @@ components to be built.
 > TOP=../.. include $(TOP)/configure/CONFIG DIRS += <dir1> <dir2>
 > include $(TOP)/configure/RULES_DIRS
 
-### Makefiles in directories where components are to be built
+#### Makefiles in directories where components are to be built
 
 A Makefile in this type of directory must define where <top> is
 relative to this directory, include <top> configure files, and specify
@@ -534,7 +532,7 @@ contains the following lines:
 > TOP=../../.. include $(TOP)/configure/CONFIG <component definition
 > lines> include $(TOP)/configure/RULES <optional rules definitions>
 
-## Simple Makefile examples
+### Simple Makefile examples
 
 Create an IOC type library named asIoc from the source file asDbLib.c
 and install it into the $(INSTALL_LOCATION)/lib/<arch> directory.
@@ -551,9 +549,9 @@ executable into the $(INSTALL_LOCATION)/bin/<arch> directory.
 > catest_SRCS += catest1.c catest2.c catest_LIBS = ca Com include
 > $(TOP)/configure/RULES
 
-# Make
+## Make
 
-## Make vs. gnumake
+### Make vs. gnumake
 
 EPICS provides an extensive set of make rules. These rules only work
 with the GNU version of make, gnumake, which is supplied by the Free
@@ -561,7 +559,7 @@ Software Foundation. Thus, on most Unix systems, the native make will
 not work. On some systems, e.g. Linux, GNU make may be the default. This
 manual always uses gnumake in the examples.
 
-## Frequently used Make commands
+### Frequently used Make commands
 
 NOTE: It is possible to invoke the following commands for a single
 target architecture by appending <arch> to the target in the command.
@@ -646,7 +644,7 @@ gnumake cvsclean
 :   This command can be executed from the <top> directory only. It
     removes cvs .#* files in the make directory tree.
 
-## Make targets
+### Make targets
 
 The following is a summary of targets that can be specified for gnumake:
 
@@ -683,7 +681,7 @@ The build system ensures the host architecture is up to date before
 building a cross-compiled target, thus Makefiles must be explicit in
 defining which architectures a component should be built for.
 
-## Header file dependencies
+### Header file dependencies
 
 All product, test product, and library source files which appear in one
 of the source file definitions (e.g. SRCS, [PROD_SRCS]{.title-ref},
@@ -691,11 +689,11 @@ of the source file definitions (e.g. SRCS, [PROD_SRCS]{.title-ref},
 dependencies automatically generated and included as part of the
 Makefile.
 
-# Makefile definitions
+## Makefile definitions
 
 The following components can be defined in a Makefile:
 
-## Source file directories
+### Source file directories
 
 Normally all product, test product, and library source files reside in
 the same directory as the Makefile. OS specific source files are allowed
@@ -722,13 +720,13 @@ The directory search order for the above definition is
 
 where the build directory O.<arch> is . and the src directory is ...
 
-## Posix C source code
+### Posix C source code
 
 The epics base config files assume posix source code and define POSIX to
 be YES as the default. Individual Makefiles can override this by setting
 POSIX to NO. Source code files may have the suffix .c, .cc, .cpp, or .C.
 
-## Breakpoint Tables
+### Breakpoint Tables
 
 For each breakpoint table dbd file, bpt<table name>.dbd, to be created
 from an existing bpt<table name>.data file, add the definition
@@ -743,7 +741,7 @@ $(INSTALL_LOCATION)/dbd directory.
 > TOP=../../.. include $(TOP)/configure/CONFIG DBD += bptTypeJdegC.dbd
 > include $(TOP)/configure/RULES
 
-## Record Type Definitions
+### Record Type Definitions
 
 For each new record type, the following definition should be added to
 the makefile:
@@ -764,7 +762,7 @@ $(INSTALL_LOCATION)/dbd.
 > TOP=../../.. include $(TOP)/configure/CONFIG DBDINC += xxxRecord
 > include $(TOP)/configure/RULES
 
-## Menus
+### Menus
 
 If a menu menu<name>.dbd file is present, then add the following
 definition:
@@ -784,7 +782,7 @@ $(INSTALL_LOCATION)/dbd.
 > TOP=../../.. include $(TOP)/configure/CONFIG DBDINC = menuConvert.h
 > include $(TOP)/configure/RULES
 
-## Expanded Database Definition Files
+### Expanded Database Definition Files
 
 Database definition include files named <name>Include.dbd containing
 includes for other database definition files can be expanded by the
@@ -849,7 +847,7 @@ The created exampleInclude.dbd file will contain the following lines
 > include "base.dbd" include "xxxRecord.dbd" include
 > "xxxSupport.dbd"
 
-## Registering Support Routines for Expanded Database Definition Files
+### Registering Support Routines for Expanded Database Definition Files
 
 A source file which registers simple static variables and
 record/device/driver support routines with iocsh can be created. The
@@ -868,14 +866,14 @@ mySubInit and mySubProcess is <name>.dbd containg the following lines
 
 > variable(mySubDebug) function(mySubInit) function(mySubProcess)
 
-## Database Definition Files
+### Database Definition Files
 
 The following line installs the existing named dbd files into
 $(INSTALL_LOCATION)/dbd without expansion.
 
 > DBD += <name>.dbd
 
-## DBD install files
+### DBD install files
 
 Definitions of the form:
 
@@ -887,7 +885,7 @@ prefix. If the file has a directory prefix e.g. $(APPNAME)/dbd/, it is
 copied from the specified location. If a directory prefix is not
 present, make will look in the current source directory for the file.
 
-## Database Files
+### Database Files
 
 For most databases just the name of the database has to be specified.
 Make will figure out how to generate the file:
@@ -935,7 +933,7 @@ script generated substitutions files, the prefix of any inflated
 database's name may not equal the prefix of the name of any template
 used within the directory.
 
-## DB install files
+### DB install files
 
 Definitions of the form:
 
@@ -947,11 +945,11 @@ file has a directory prefix e.g. $(APPNAME)/db/, it is copied from the
 specified location. If a directory prefix is not present, make will look
 in the current source directory for the file.
 
-## Compile and link command options
+### Compile and link command options
 
 Any of the following can be specified:
 
-### Options for all compile/link commands.
+#### Options for all compile/link commands.
 
 These definitions will apply to all compiler and linker targets.
 
@@ -1032,7 +1030,7 @@ These definitions will apply to all compiler and linker targets.
 > linker options for any arch that does not have a
 > [USR_LDFLAGS]()<osclass> definition
 
-### Options for a target specific compile/link command.
+#### Options for a target specific compile/link command.
 
 > <name>_INCLUDES += -I<name>
 >
@@ -1091,7 +1089,7 @@ These definitions will apply to all compiler and linker targets.
 >
 > os specific linker options.
 
-## Libraries
+### Libraries
 
 A library is created and installed into
 $(INSTALL_LOCATION)/lib/<arch> by specifying its name and the name of
@@ -1134,7 +1132,7 @@ libraries.*
 *NOTE: the <name>.lib files are different for shared and nonshared
 builds.*
 
-### Specifying the library name.
+#### Specifying the library name.
 
 Any of the following can be specified:
 
@@ -1180,7 +1178,7 @@ Any of the following can be specified:
 > Library <name> will be created for any HOST type arch that does not
 > have a [LIBRARY_HOST]()<osclass> definition
 
-### Specifying library source file names
+#### Specifying library source file names
 
 Source file names, which must have a suffix, are defined as follows:
 
@@ -1257,7 +1255,7 @@ specified osclass.
 > Source files will be used for named library for any arch that does not
 > have a <libname>_[SRCS]()<osclass> definition
 
-### Specifying library object file names
+#### Specifying library object file names
 
 Library object file names should only be specified for object files
 which will not be built in the current directory. For object files built
@@ -1375,7 +1373,7 @@ xyzLib) are defined as follows:
 > without a <libname>_[LDOBJS]()<osclass> definition specified.
 > (deprecated)
 
-### LIBOBJS definitions
+#### LIBOBJS definitions
 
 Previous versions of epics (3.13 and before) accepted definitions like:
 
@@ -1390,7 +1388,7 @@ Previous versions of epics (3.13 and before) accepted definitions like:
 > releases no longer have a file named baseLIBOBJS. Base record and
 > device support now exists in archive libraries.*
 
-### Specifying dependant libraries to be linked when creating a library
+#### Specifying dependant libraries to be linked when creating a library
 
 For each library name specified which is not a system library nor a
 library from an EPICS top defined in the configure/ RELEASE file, a
@@ -1459,7 +1457,7 @@ suffix, are defined as follows:
 > <libname>_[LIBS]()<osclass> definition when linking named
 > library.
 
-### The order of dependant libraries
+#### The order of dependant libraries
 
 Dependant library names appear in the following order on a library link
 line:
@@ -1478,7 +1476,7 @@ line:
 11. USR_SYS_LIBS
 12. [USR_SYS_LIBS]()<osclass> or USR_SYS_LIBS_DEFAULT
 
-### Specifying library DLL file names (deprecated)
+#### Specifying library DLL file names (deprecated)
 
 WIN32 libraries require all external references to be resolved, so if a
 library contains references to items in other DLL libraries, these DLL
@@ -1496,7 +1494,7 @@ library names must be specified (without directory prefix and without
 > Each <name> must have a corresponding <name>_DIR definition
 > specifying its directory location.
 
-### Specifying shared library version number
+#### Specifying shared library version number
 
 A library version number can be specified when creating a shared library
 as follows:
@@ -1509,7 +1507,7 @@ as follows:
 | $(EPICS_VERSION).$(EPICS_REVISION) is the default value for
   SHRLIB_VERSION.
 
-### Library example:
+#### Library example:
 
 > LIBRARY_vxWorks += vxWorksOnly LIBRARY_IOC += iocOnly LIBRARY_HOST +=
 > hostOnly LIBRARY += all vxWorksOnly_OBJS += $(LINAC_BIN)/vxOnly1
@@ -1534,7 +1532,7 @@ file, then the following libraries will be created:
 -   $(INSTALL_LOCATION)/lib/solaris-sparc/liball.a :
     $(LINAC_BIN)/all1.o all2.o
 
-## Loadable libraries
+### Loadable libraries
 
 Loadable libraries are regular libraries which are not required to have
 all symbols resolved during the build. The intent is to create dynamic
@@ -1573,7 +1571,7 @@ Any of the following can be specified:
 >   that does not have a
 > | [LOADABLE_LIBRARY_HOST]()<osclass> definition
 
-## Combined object libraries (VxWorks only)
+### Combined object libraries (VxWorks only)
 
 Combined object libraries are regular combined object files which have
 been created by linking together multiple object files. OBJLIB
@@ -1593,7 +1591,7 @@ OBJLIB_SRCS/OBJLIB_OBJS definitions. The combined object file and the
 munch file are installed into the $(INSTALL_LOCATION)/bin/<arch>
 directory.
 
-## Object Files
+### Object Files
 
 It is possible to generate and install object files by using
 definitions:
@@ -1616,7 +1614,7 @@ directory.
 > TOP=../../.. include $(TOP)/configure/CONFIG OBJS += abc OBJS_vxWorks
 > += xyz OBJS_DEFAULT += def include $(TOP)/configure/RULES
 
-## State Notation Programs
+### State Notation Programs
 
 A state notation program file can be specified as a source file in any
 SRC definition. For example:
@@ -1636,7 +1634,7 @@ the module seq must be built and SNCSEQ defined in the RELEASE file. If
 the state notation language source files require c preprocessing before
 conversion to c source (.st files), gcc must be in your path.
 
-## Scripts, etc.
+### Scripts, etc.
 
 Any of the following can be specified:
 
@@ -1697,7 +1695,7 @@ archs of the specified os class <osclass> and the <name2> script
 installed into the $(INSTALL_LOCATION)/bin/<arch> directories of all
 other target archs.
 
-## Include files
+### Include files
 
 A definition of the form:
 
@@ -1713,7 +1711,7 @@ Definitions of the form:
 results in file <name>.h being installed or created and installed into
 the appropriate $(INSTALL_LOCATION)/include/os/<osclass> directory.
 
-## Html and Doc files
+### Html and Doc files
 
 A definition of the form:
 
@@ -1729,7 +1727,7 @@ A definition of the form:
 results in file <name> being installed from the src directory to the
 $(INSTALL_LOCATION)/doc directory.
 
-## Templates
+### Templates
 
 Adding definitions of the form
 
@@ -1740,7 +1738,7 @@ the $(INSTALL_LOCATION)/templates/<dirname> directory. If a directory
 structure of template files is to be installed, the template file names
 may include a directory prefix.
 
-## Lex and yacc
+### Lex and yacc
 
 If a <name>.c source file specified in a Makefile definition is not
 found in the source directory, gnumake will try to build it from
@@ -1751,7 +1749,7 @@ to a y.tab.c file, which the build rules renames to <name>.c.
 Optionally yacc can create a y.tab.h file which the build rules renames
 to <name>.h.
 
-## Products
+### Products
 
 A product executable is created for each <arch> and installed into
 $(INSTALL_LOCATION)/bin/<arch> by specifying its name and the name of
@@ -1775,7 +1773,7 @@ results in the executable <name> being built for each HOST
 architecture, <arch>, from a <srcname>.c file. Then <name> is
 installed into the $(INSTALL_LOCATION)/bin/<arch> directory.
 
-### Specifying the product name.
+#### Specifying the product name.
 
 Any of the following can be specified:
 
@@ -1821,7 +1819,7 @@ Any of the following can be specified:
 > Product <name> will be created for any HOST type arch that does not
 > have a [PROD_HOST]()<osclass> definition
 
-### Specifying product object file names
+#### Specifying product object file names
 
 Object files which have filenames with a ".o" or ".obj" suffix are
 defined as follows and can be specified without the suffix but should
@@ -1934,7 +1932,7 @@ have the directory prefix
 > Object files will be used in builds of the product for archs without a
 > <prodname>_[LDOBJS]()<osclass> definition specified. (deprecated)
 
-### Specifying product source file names
+#### Specifying product source file names
 
 Source file names, which must have a suffix, are defined as follows:
 
@@ -1994,7 +1992,7 @@ Source file names, which must have a suffix, are defined as follows:
 > Source files will be used for named product for any arch that does not
 > have a <prodname>_[SRCS]()<osclass> definition
 
-### Specifying libraries to be linked when creating the product
+#### Specifying libraries to be linked when creating the product
 
 For each library name specified which is not a system library nor a
 library from EPICS_BASE, a <name>_DIR definition must be present in
@@ -2075,7 +2073,7 @@ suffix, are defined as follows:
 > <prodname>_[LIBS]()<osclass> definition when linking named
 > product.
 
-### The order of dependant libraries {#the-order-of-dependant-libraries-2}
+#### The order of dependant libraries {#the-order-of-dependant-libraries-2}
 
 Dependant library names appear in the following order on a product link
 line:
@@ -2094,7 +2092,7 @@ line:
 11. USR_SYS_LIBS
 12. [USR_SYS_LIBS]()<osclass> or USR_SYS_LIBS_DEFAULT
 
-### Specifying product version number
+#### Specifying product version number
 
 On WIN32 only a product version number can be specified as follows:
 
@@ -2102,7 +2100,7 @@ On WIN32 only a product version number can be specified as follows:
 
 This results in "/version:$(PROD_VERSION)" link option.
 
-### Generate version header
+#### Generate version header
 
 A header can be generated which defines a single string macro with an
 automatically generated identifier. The default is the ISO 8601
@@ -2133,7 +2131,7 @@ its default value if no version control system is being used. To avoid
 conflicts, the macro name must be changed from its default MODULEVERSION
 if the version header is to be installed.
 
-### Product static builds
+#### Product static builds
 
 Product executables can be linked with either archive versions or shared
 versions of EPICS libraries. Shared versions of system libraries will
@@ -2147,7 +2145,7 @@ CONFIG_SITE.Static builds may not be possible on all systems. For static
 builds, all nonsystem libraries must have an archive version, and this
 may not be true form all libraries.
 
-## Test Products
+### Test Products
 
 Test products are product executables that are created but not installed
 into $(INSTALL_LOCATION)/bin/<arch> directories. Test product
@@ -2201,7 +2199,7 @@ Any of the following can be specified:
 >   does not have a
 > | [TESTPROD_HOST]()<osclass> definition
 
-## Test Scripts
+### Test Scripts
 
 Test scripts are perl scripts whose names end in .t that get executed to
 satisfy the runtests make target. They are run by the perl Test::Harness
@@ -2263,7 +2261,7 @@ name ending .plt will be copied into the O.<arch> directory with the
 ending changed to .t; such scripts will usually use the perl
 Test::Simple or Test::More libraries.
 
-## Miscellaneous Targets
+### Miscellaneous Targets
 
 A definition of the form:
 
@@ -2273,7 +2271,7 @@ results in the file <name> being built in the O.<arch> directory
 from existing rules and files in the source directory. These target
 files are not installed.
 
-## Installing Other Binaries
+### Installing Other Binaries
 
 Definitions of the form:
 
@@ -2288,7 +2286,7 @@ prefix e.g. $(EPICS_BASE_BIN), it is copied from the specified
 location. If a directory prefix is not present, make will look in the
 source directory for the file.
 
-## Installing Other Libraries
+### Installing Other Libraries
 
 Definitions of the form:
 
@@ -2303,7 +2301,7 @@ prefix e.g. $(EPICS_BASE_LIB), it is copied from the specified
 location. If a directory prefix is not present, make will look in the
 source directory for the file.
 
-## Win32 resource files
+### Win32 resource files
 
 Definitions of the form:
 
@@ -2330,7 +2328,7 @@ Definitions of the form:
   specified *.rc resource definition script files and linked into the
   prods and/or libraries.
 
-## TCL libraries
+### TCL libraries
 
 Definitions of the form:
 
@@ -2339,7 +2337,7 @@ Definitions of the form:
 result in the specified tcl files being installed to the
 $(INSTALL_LOCATION)/lib/<arch> directory.
 
-## Java class files
+### Java class files
 
 Java class files can be created by the javac tool into $(INSTALL_JAVA)
 or into the O.Common subdirectory, by specifying the name of the java
@@ -2363,7 +2361,7 @@ Any of the following can be specified:
 >
 > The javac option <name> will be used on the javac command lines.
 
-### Example 1
+#### Example 1
 
 In this example, three class files are created in
 $(INSTALL_LOCATION)/javalib/mytest. The javac depreciation flag is used
@@ -2373,14 +2371,14 @@ or class.
 > JAVA = mytest/one.java JAVA = mytest/two.java JAVA = mytest/three.java
 > USR_JAVACFLAGS = -deprecation
 
-### Example 2
+#### Example 2
 
 In this example, the test.class file is created in the O.Common
 subdirectory.
 
 > TESTJAVA = test.java
 
-## Java jar file
+### Java jar file
 
 | A single java jar file can be created using the java jar tool and
   installed into $(INSTALL_JAVA)
@@ -2409,7 +2407,7 @@ Any of the following can be specified:
 > Names of java packages to be installed and added to the created jar
 > file.
 
-### Example 2 1
+#### Example 2 1
 
 In this example, all the class files created by the current Makefile's
 "JAVA+=" definitions, are placed into a file named mytest1.jar. A
@@ -2420,7 +2418,7 @@ $(INSTALL_JAVA)/,$(CLASSES)) in the EPICS base configure files.
 
 > JAR = mytest1.jar JAR_INPUT = $(INSTALL_CLASSES)
 
-### Example 2 2
+#### Example 2 2
 
 In this example, three class files are created and placed into a new jar
 archive file named mytest2.jar. An existing manifest file, mytest2.mf is
@@ -2430,7 +2428,7 @@ put into the new jar file.
 > JAR_INPUT = $(INSTALL_JAVA)/mytest/two.class JAR_INPUT =
 > $(INSTALL_JAVA)/mytest/three.class JAR_MANIFEST = mytest2.mf
 
-## Java native method C header files
+### Java native method C header files
 
 A C header files for use with java native methods will be created by the
 javah tool in the O.Common subdirectory by specifying the name of the
@@ -2450,7 +2448,7 @@ Any of the following can be specified:
 >
 > The javah option <name> will be used on the javah tool command line.
 
-### Example 2 2
+#### Example 2 2
 
 In this example, the C header xx_yy_zz.h will be created in the
 $(COMMON_DIR) subdirectory from the class xx.yy.zz (i.e. the java class
@@ -2459,7 +2457,7 @@ javah to create old JDK1.0 style header files.
 
 > JAVAINC = xx_yy_zz.h USR_JAVAHFLAGS = -old
 
-## User Created CONFIG* and RULES* files
+### User Created CONFIG* and RULES* files
 
 Module developers can now create new CONFIG and RULES* files ia a
 <top> application source directory. These new CONFIG* or RULES*
@@ -2476,7 +2474,7 @@ build by so that the definitions and rules in them are available for use
 by later src directory Makefiles in the same module or by other modules
 with a RELEASE line pointing to the TOP of this module.
 
-## User Created File Types
+### User Created File Types
 
 Module developers can now define a new type of file, e.g. ABC, so that
 files of type ABC will be installed into a directory defined by
@@ -2508,7 +2506,7 @@ by the base config files, the ABC += definition lines are available for
 use by later src directory Makefiles in the same module or by other
 modules with a RELEASE line pointing to the TOP of this module.
 
-## Assemblies
+### Assemblies
 
 A single output file is generated from assembling specified snippet
 files. Snippet file names start with numbers and are sorted when the
@@ -2539,7 +2537,7 @@ as patterns (searched relative to all source directories).
 > mytool.rc_SNIPPETS += ../rc.d/10_head ../rc.d/20_init st.cmd_PATTERN
 > += st.cmd.d/*
 
-### Macros
+#### Macros
 
 The following macros can be used in snippets, and will be replaced by
 the current value when assembling is done.
@@ -2550,7 +2548,7 @@ the current value when assembling is done.
 -   _[OUTPUTFILE]() Name of the generated file
 -   _[SNIPPETFILE]() Name of the current snippet
 
-### Example {#example-2-3}
+#### Example {#example-2-3}
 
 This mechanism can be used to create an IOC startup file from snippets
 in a global and an application specific directory, allowing applications
@@ -2593,7 +2591,7 @@ snippets:
 +---------+----------------------------+----------------------------+
 :::
 
-# Table of Makefile definitions
+## Table of Makefile definitions
 
 Definitions given below containing <osclass> are used when building
 for target archs of a specific osclass, and the <osclass> part of the
@@ -3884,9 +3882,9 @@ be specified in the relevant Makefile definition.
 :::
 :::
 
-# Configuration Files
+## Configuration Files
 
-## Base Configure Directory
+### Base Configure Directory
 
 The base/configure directory has the following directory structure:
 
@@ -3898,7 +3896,7 @@ The base/configure directory has the following directory structure:
 >
 >     :   os/ tools/
 
-## Base Configure File Descriptions
+### Base Configure File Descriptions
 
 The configure files contain definitions and make rules to be included in
 the various makefiles.
@@ -4022,7 +4020,7 @@ the various makefiles.
 > installation of the CONFIG* files into the $(INSTALL_LOCATION)
 > directory.
 
-## Base configure/os File Descriptions
+### Base configure/os File Descriptions
 
 The configure/os directory contains os specific make definitions. The
 naming convention for the files in this directory is
@@ -4080,7 +4078,7 @@ definitions
 >
 > Site specific host definitions for all targets
 
-## Base src/tools File Descriptions
+### Base src/tools File Descriptions
 
 The src/tools directory contains Perl script tools used for the build. They are
 installed by the build into $(INSTALL_LOCATION)/bin/$(T_A) for Host type
@@ -4161,14 +4159,14 @@ useManifestTool.pl
 :   This tools uses MS Visual C++ compiler version number to determine
     if we want to use the Manifest Tool (status=1) or not (status=0).
 
-# Build Documentation Files
+## Build Documentation Files
 
-## Base Documentation Directory
+### Base Documentation Directory
 
 The base/documentation directory contains README files to help users
 setup and build epics/base.
 
-## Base Documentation File Descriptions
+### Base Documentation File Descriptions
 
 The files currently in the base/documentation directory are:
 
@@ -4253,15 +4251,15 @@ ReleaseChecklist.html
 :   Checklist of things that must be done when creating a new release of
     EPICS Base.
 
-# Startup Files
+## Startup Files
 
-## Base Startup Directory
+### Base Startup Directory
 
 The base/startup directory contains scripts to help users set the
 required environment variables and path. The appropriate startup files
 should be executed before any EPICS builds.
 
-## Base Startup File Descriptions
+### Base Startup File Descriptions
 
 The scripts currently in the base/startup directory are:
 
