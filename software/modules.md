@@ -88,7 +88,7 @@ ALH | Alarm Handler (C, Motif) | [github.com](https://github.com/epics-extension
 Archiver Applience (Java) | High performance, scalable process data archiver | [github.com](https://github.com/slacmshankar/epicsarchiverap) | [github.io](https://slacmshankar.github.io/epicsarchiver_docs/index.html)
 BEAST (Java) | **DEPRECATED** Best Ever Alarm System Toolkit (within CS-Studio) | [github.com](https://github.com/ControlSystemStudio/cs-studio) | [readthedocs.io](https://control-system-studio.readthedocs.io/en/latest/app/alarm/ui/doc/index.html)
 BEAUTY (Java) | **DEPRECATED** PV Archiver (Within CS-Studio) | [github.com](https://github.com/ControlSystemStudio/cs-studio/wiki/BEAST) | [sourceforge.net](https://cs-studio.sourceforge.net/docbook/ch11.html)
-BURT | Backup and restore tool |  | [epics.anl.gov](https://epics.anl.gov/extensions/burt/index.php)
+BURT | Backup and restore tool | [epics.anl.gov](https://epics.anl.gov/extensions/burt/index.php) | [epics.anl.gov](https://epics.anl.gov/extensions/burt/index.php)
 CASR | Host-based save/restore | [github.com](https://github.com/epicsdeb/autosave/tree/master) | [epics.anl.gov](https://epics.anl.gov/extensions/casr/index.php)
 CA Gateway | PV gateway for channel access | [github.com](https://github.com/epics-extensions/ca-gateway) | [epics.anl.gov](https://epics.anl.gov/extensions/gateway/index.php)
 CA Watcher | 
@@ -107,7 +107,7 @@ PVA Gateway | PV Access gateway | [github.com](https://github.com/epics-base/pva
 EPICS Base | Has CA/PVA implimentations in releases | [github.com](https://github.com/epics-base/epics-base) | [epics-controls.org](https://epics-controls.org/resources-and-support/base/)
 EPICS QT | The EPICS Qt framework | [github.com](https://github.com/qtepics) | [github.io](https://qtepics.github.io/index.html)
 EZCA | Eacy CA interface for C programs | [github.com](https://github.com/epics-extensions/ezca) | [epics.anl.gov](https://epics.anl.gov/extensions/ezca/index.php)
-SCA | Simple Channel Access for C programs | [als.lbl.gov](https://controls.als.lbl.gov/epics_collaboration/sca/) | [als.lbl.gov](https://controls.als.lbl.gov/epics_collaboration/sca/)
+SCA | Simple Channel Access for C programs | [als.lbl.gov](https://controls.als.lbl.gov/epics_collaboration/sca/NET/Readme.htm) | [als.lbl.gov](https://controls.als.lbl.gov/epics_collaboration/sca/)
 
 ### Java
 | Name | Description | Source Code | Documentation |
@@ -115,7 +115,7 @@ SCA | Simple Channel Access for C programs | [als.lbl.gov](https://controls.als.
 EPICS Core Java | Java implementation bundle | [github.com](https://github.com/epics-base/epicsCoreJava) | [github.com](https://github.com/epics-base/epicsCoreJava)
 JCA | Java CA client API | [github.io](https://github.com/epics-base/jca) | [javadoc.io](https://www.javadoc.io/doc/org.epics/jca/latest/com/cosylab/epics/caj/CAJChannel.html)
 CA | Pure Java CA client | [github.com](https://www.javadoc.io/doc/org.epics/jca/latest/com/cosylab/epics/caj/CAJChannel.html) | [github.com](https://www.javadoc.io/doc/org.epics/jca/latest/com/cosylab/epics/caj/CAJChannel.html)
-JCAE: Java CA Extensions library | [github.com](https://github.com/paulscherrerinstitute/jcae/) | [github.com](https://github.com/paulscherrerinstitute/jcae/)
+JCAE | Java CA Extensions library | [github.com](https://github.com/paulscherrerinstitute/jcae/) | [github.com](https://github.com/paulscherrerinstitute/jcae/)
 
 ### LabView
 | Name | Description | Source Code | Documentation |
@@ -132,7 +132,7 @@ LabCA | Ca client library for Matlab | [github.com](https://github.com/till-s/ep
 | Name | Description | Source Code | Documentation |
 | ---- | ----------- | ----------- | ------------- |
 CAP5 | CA for Perl 5 | [github.com](https://github.com/epics-base) | [epics.anl.gov](https://epics.anl.gov/modules/soft/cap5/)
-PEZCA | A Perl binding to EZCA |  | [github.com](https://epics.anl.gov/modules/soft/cap5/)
+PEZCA | A Perl binding to EZCA |  | 
 
 ### Python 
 | Name | Description | Source Code | Documentation | Protocol |
@@ -157,8 +157,8 @@ SDDS | **ARCHIVED** The Self-Describing Data Sets analysis package | [github.com
 | Name | Description | Source Code | Documentation |
 | ---- | ----------- | ----------- | ------------- |
 MSI | Macro substitution and include tool (in Base from 3.14) | [github.com](https://github.com/epics-base) | [epics.anl.gov](https://epics.anl.gov/extensions/msi/index.php)
-dbVerbose | Verbose database filter |  | [apics.anl.gov](https://epics.anl.gov/extensions/dbVerbose/index.php)
-pyExpander | Python macro processing tool |  | [sourceforge.io](https://pyexpander.sourceforge.io/)
+dbVerbose | Verbose database filter | [apics.anl.gov](https://epics.anl.gov/extensions/dbVerbose/index.php) | [apics.anl.gov](https://epics.anl.gov/extensions/dbVerbose/index.php)
+pyExpander | Python macro processing tool | [sourceforge.io](https://pyexpander.sourceforge.io/index.html) | [sourceforge.io](https://sourceforge.net/p/pyexpander/code/ci/default/tree/)
 pymsi | Python replacement for MSI |  | 
 E3 | ESS EPICS Environment Build System (Not limited to ESS) | [github.com](https://github.com/icshwi/e3) | [gitlab.esss.lu.se](https://gitlab.esss.lu.se/e3/e3) | [e3.pages.esss.lu.se](http://e3.pages.esss.lu.se)
 SUMO | SUpport MOdule Manager |[sourceforge.net](https://sourceforge.net/p/epics-sumo/mercurial/ci/default/tree/) | [sourceforge.io](https://epics-sumo.sourceforge.io/)
@@ -182,8 +182,8 @@ Kryten | Tool to run commands on PV changes | [github.com](https://github.com/an
 | ---- | ----------- | ----------- | ------------- |
 CA Shark | Wireshark dissector plugin for EPICS protocols | [github.com](https://github.com/mdavidsaver/cashark/tree/master) | [github.com](https://github.com/mdavidsaver/cashark/tree/master)
 Wireshark CA | CA plug-in for Wireshark | [wireshark.org](https://www.wireshark.org/download/) | [www-linac.kek.jp](http://www-linac.kek.jp/cont/epics/wireshark/)
-CMLOG | Common Message Logging System |  | [jlab.org](https://www.jlab.org/cdev/cmlog.html)
-EdlBuild | Create EDM screens in Perl scripts |  | [isacwserv.triumf.ca](http://isacwserv.triumf.ca/epics/edlbuild/TRIUMFedlbuild.html)
+CMLOG | Common Message Logging System | [jlab.org](https://www.jlab.org/cdev/cmlog.html) | [jlab.org](https://www.jlab.org/cdev/cmlog.html)
+EdlBuild | Create EDM screens in Perl scripts | [isacwserv.triumf.ca](http://isacwserv.triumf.ca/epics/edlbuild/TRIUMFedlbuild.html#Installation) | [isacwserv.triumf.ca](http://isacwserv.triumf.ca/epics/edlbuild/TRIUMFedlbuild.html)
 EPICS GNU regex | The GNU regex library built with EPICS Makefiles | [epics.anl.gov](https://epics.anl.gov/extensions/gnuregex/index.php) | [epics.anl.gov](https://epics.anl.gov/extensions/gnuregex/index.php)
 ParseCASW | CA beacon anomaly diagnostic tool | [epics.anl.gov](https://epics.anl.gov/extensions/ParseCASW/index.php) | [epics.anl.gov](https://epics.anl.gov/extensions/ParseCASW/index.php)
 procServe | Process Server with Telnet Console | [github.com](https://github.com/ralphlange/procServ) | [github.com](https://github.com/ralphlange/procServ)
