@@ -1,22 +1,23 @@
+# Scanning Specification
+
+
 *Scanning* determines when a record is processed.
 A record is *processed* when it performs any actions related to its data.
 For example,
 when an output record is processed,
-it fetches the value which
-it is to output,
+it fetches the value which it's to output,
 converts the value,
 and then writes that value to the specified location.
 Each record must specify the scanning method that determines when it will be processed.
-There are three scanning methods
-for database records:
+Three scanning methods are available for database records:
 
-1. [Periodic scanning](#Periodic Scanning) occurs on set time intervals.
-2. [Event scanning](#Event Scanning) occurs on either an I/O interrupt event
+1. [Periodic scanning](#periodic-scanning) occurs on set time intervals.
+2. [Event scanning](#Event-scanning) occurs on either an I/O interrupt event
 or a user-defined event.
-3. [Passive scanning](#Passive Scanning) occurs when the records linked to the passive record are scanned,
+3. [Passive scanning](#Passive-scanning) occurs when the records linked to the passive record are scanned,
 or when a value is "put" into a passive record through the database access routines.
 
-## Phase
+### Phase
 
 For periodic or event scanning,
 the user can also control the order in which a set of records is processed
@@ -30,19 +31,19 @@ the relative order in which records are processed within a scan cycle:
 
 For event scanning,
 the user can control the priority at which a record will process.
-The PRIO field selects Low/Medium/High priority for Soft event and I/O Interrupts.
+The `PRIO` field selects Low/Medium/High priority for Soft event and I/O Interrupts.
 
 In addition to the scan and the phase mechanisms,
 there are data links and forward processing links
-that can be used to cause processing in other records.
+that can trigger the processing of other records.
 
-# Periodic Scanning
+## Periodic scanning
 
 
 The periodic scan tasks run as close as possible to the specified frequency.
 When each periodic scan task starts,
 it calls the gettime routine,
-then processes all of the records on this period.
+then processes all the records on this period.
 After the processing,
 gettime is called again
 and this thread sleeps the difference between the scan period
@@ -67,28 +68,28 @@ though EPICS can be configured to recognize more scan periods:
 
 -  .1 second
 
-The period that best fits the nature of the signal should be specified.
+You should specify the period that best fits the nature of the signal.
 A five-second interval is adequate for the temperature of a mass of water
-because it does not change rapidly.
-However, some power levels may change very rapidly,
+because it doesn't change rapidly.
+Some power levels may change rapidly,
 so they need to be scanned every 0.5 seconds.
-In the case of a continuous control loop,
+For a continuous control loop,
 where the process variable being controlled can change quickly,
-the 0.1 second interval may be the best choice.
+the 0.1 second interval may be the optimal choice.
 
 For a record to scan periodically,
-a valid choice must be entered in its SCAN field.
+a valid choice must be entered in its `SCAN` field.
 The available choices depend on the configuration of the menuScan.dbd file.
 As with most other fields which consists of a menu of choices,
-the choices available for the SCAN field can be changed
+you can change the choices available for the `SCAN` field
 by editing the appropriate .dbd (database definition) file.
 dbd files are ASCII files
 that are used to generate header files
 that are used to compile the database code.
-Many dbd files can be used to configure other things besides the choices of menu fields.
+dbd files can also configure things besides the choices of menu fields.
 
-Here is an example of a menuScan.dbd file,
-which has the default menu choices for all periods listed above
+Here is an example of a menuScan.dbd file.
+It has the default menu choices for all periods listed earlier,
 as well as choices for event scanning,
 passive scanning,
 and I/O interrupt scanning:
@@ -109,14 +110,14 @@ and I/O interrupt scanning:
 ```
 The first three choices must appear first and in the order shown.
 The remaining definitions are for the periodic scan rates,
-which must appear in the order slowest to fastest
-(the order directly controls the thread priority assigned to the particular scan rate, 
-and faster scan rates should be assigned higher thread priorities).
+which must appear in the order slowest to fastest.
+The order directly controls the thread priority assigned to the particular scan rate, 
+and faster scan rates should be assigned higher thread priorities.
 At IOC initialization,
 the menu choice strings are read at scan initialization.
 The number of periodic scan rates
 and the period of each rate is determined from the menu choice strings.
-Thus the periodic scan rates can be changed by changing menuScan.dbd
+Thus, the periodic scan rates can be changed by changing menuScan.dbd
 and loading this version via dbLoadDatabase.
 The only requirement is that each periodic choice string must begin with a number
 and be followed by any of the following unit strings:
@@ -134,50 +135,46 @@ add the following line after the 0.1 second choice:
   choice(menuScan_015_second, " .015 second")
 ```
 The range of values for scan periods can be from one clock tick
-to the maximum number of ticks available on the system
-(for example, vxWorks out of the box supports 0.015 second
-or a maximum frequency of 60 Hz).
+to the maximum number of ticks available on the system.
+For example, vxWorks out of the box supports 0.015 second
+or a maximum frequency of 60 Hz.
 Note that the order of the choices is essential.
-The first three choices must appear in the above order.
+The first three choices must appear in the order in the earlier menuScan.dbd example.
 Then the remaining choices should follow in descending order,
-the biggest time period first
-and the smallest last.
+the biggest time period first and the smallest last.
 
-# Event Scanning
+## Event scanning
 
-
-There are two types of events supported in the input/output controller
-(IOC) database,
+Two types of events are supported in the Input Output Controller (IOC) database,
 the I/O interrupt event and the user-defined event.
 For each type of event,
-the user can specify the scheduling priority of the event using the PRIO or priority field.
+the user can specify the scheduling priority of the event using the `PRIO` or priority field.
 The scheduling priority refers to the priority the event has on the stack
 relative to other running tasks.
-There are three possible choices: LOW, MEDIUM, or HIGH.
+Three possible choices are available: LOW, MEDIUM, or HIGH.
 A low priority event has a priority a little higher than Channel Access.
 A medium priority event has a priority about equal to the median of periodic scanning tasks.
 A high priority event has a priority equal to the event scanning task.
 
-# I/O Interrupt Events
+## I/O interrupt events
 
 
-Scanning on I/O interrupt causes a record to be processed when a driver posts an I/O Event.
+Scanning on I/O interrupt causes a record to process when a driver posts an I/O Event.
 In many cases these events are posted in the interrupt service routine.
-For example, 
-if an analog input record gets its value from an I/O card
+For example, if an analog input record gets its value from an I/O card,
 and it specifies I/O interrupt as its scanning routine,
-then the record will be processed each time the card generates an interrupt
-(not all types of I/O cards can generate interrupts).
-Note that even though some cards cannot actually generate interrupts,
+then the record will be processed each time the card generates an interrupt.
+Not all types of I/O cards can generate interrupts.
+Note that even though some cards can't actually generate interrupts,
 some driver support modules can simulate interrupts.
 In order for a record to scan on I/O interrupts,
-its SCAN field must specify I/O Intr.
+its `SCAN` field must specify I/O Intr.
 
-# User-defined Events
+## User-defined events
 
 
 The user-defined event mechanism processes records that are meaningful
-only under specific circumstances.
+under specific circumstances.
 User-defined events can be generated by the post_event() database access routine.
 Two records, the event record and the timer record,
 are also used to post events.
@@ -200,33 +197,30 @@ and should be controlled through the project engineer.
 They only need to be unique per IOC
 because they only trigger processing for records in the same IOC.
 
-All records that use the user-defined event mechanism must specify Event in their SCAN field
+All records that use the user-defined event mechanism must specify Event in their `SCAN` field
 and an event number in their `EVNT` field.
 
-# Passive Scanning
+## Passive scanning
 
 
 Passive records are processed
-when they are referenced by other records through their link fields
+when they're referenced by other records through their link fields
 or when a channel access put is done to them.
 
-## Channel Access Puts to Passive Scanned Records
+### Channel Access puts to passive scanned records
 
 
-In this case where a channel access put is done to a record,
+In this case where a Channel Access put is done to a record,
 the field being written has an attribute that determines if this put causes record processing.
-In the case of all records,
-putting to the `VAL` field causes record processing.
+For all records, putting to the `VAL` field causes record processing.
 
 Consider a binary output that has a `SCAN` of Passive.
 If an operator display has a button on the `VAL` field,
 every time the button is pressed,
 a channel access put is sent to the record.
 When the `VAL` field is written,
-the Passive record is processed
-and the specified device support is called
-to write the newly converted `RVAL`
-to the device specified in the `OUT` field
+the Passive record is processed and the specified device support is called
+to write the newly converted `RVAL` to the device specified in the `OUT` field
 through the device support specified by `DTYP`.
 
 Fields determined to change the way a record behaves typically cause the record to process.
@@ -234,9 +228,9 @@ Another field that would cause the binary output to process would be the `ZSV`;
 which is the alarm severity if the binary output record is in state Zero (0).
 If the record was in state 0
 and the severity of being in that state changed from No Alarm to Minor Alarm,
-the only way to catch this on a SCAN Passive record is to process it.
+the only way to catch this on a `SCAN` Passive record is to process it.
 Fields are configured to cause binary output records to process in the `bo.dbd` file.
-The ZSV severity is configured as follows:
+The `ZSV` severity is configured as follows:
 
 ```
   field(ZSV,DBF_MENU) {
@@ -248,21 +242,18 @@ The ZSV severity is configured as follows:
   }
 ```
 
-where the line `pp(TRUE)` is the indication that this record is processed
-when a channel access put is done.
+where the line `pp(TRUE)` is the sign that this record is processed when a channel access put is done.
 
-## Database Links to Passive Record
-
+### Database links to passive records
 
 The records in the process database use link fields
 to configure data passing and scheduling (or processing).
 These fields are either `INLINK`,`OUTLINK`, or `FWDLINK` fields.
 
-# Forward Links
+## Forward links
 
 
-In the database definition file (.dbd)
-these fields are defined as follows:
+In the database definition file (.dbd) these fields are defined as follows:
 
 ```
   field(FLNK,DBF_FWDLINK) {
@@ -272,8 +263,7 @@ these fields are defined as follows:
   }
 ```
 
-If the record that is referenced by the `FLNK` field
-has a `SCAN` field set to “Passive”,
+If the record that's referenced by the `FLNK` field has a `SCAN` field set to “Passive” 
 then the record is processed after the record with the `FLNK`.
 The `FLNK` field only causes record processing,
 no data is passed.
@@ -293,7 +283,7 @@ checks the alarm condition,
 and posts monitors to Channel Access,
 then the ao record "Output_2" is processed.
 3. Output_2 reads the desired output, rate limits it, clamps the range,
-calls the device support for the OUT field, checks alarms, posts
+calls the device support for the `OUT` field, checks alarms, posts
 monitors and then is complete.
 
 ![Figure 1. Input Links](media/dbconcepts/image1.jpeg)
@@ -312,7 +302,7 @@ The default for this attribute is NPP
 (no process passive).
 In this case,
 the record takes the `VAL` field and returns it.
-If they are set to PP (process passive),
+If they're set to PP (process passive),
 then the record is processed before the field is returned.
 
 In *Figure 2*, the PP attribute is used.
@@ -342,8 +332,8 @@ write the new value, checks alarms, posts monitors and completes.
 In *Figure 3* the PP/NPP attribute is used to calculate a rate of change.
 1. At 1 Hz, the calculation record is processed.
 It fetches the inputs for the calc record in order.
-As `INPA` has an attribute of NPP, the VAL field is taken from the ai record.
-2. Before `INPB` takes the VAL field from the ai record it is processed, 
+As `INPA` has an attribute of NPP, the `VAL` field is taken from the ai record.
+2. Before `INPB` takes the `VAL` field from the ai record it gets processed, 
 as the attribute on this link is PP.
 3. The new ai value is placed in the `B` field of the calc record. 
 `A-B` is the difference between the `VAL` field of the ai one second ago and now.
@@ -353,29 +343,23 @@ as the attribute on this link is PP.
 
 ---
 
-## Process Chains
+### Process chains
 
 Links can be used to create complex scanning logic.
-In the forward link example above,
-the processing of the chain of records
-is determined by the scan rate of the input record.
+In the forward link example earlier,
+the processing of the chain of records is determined by the scan rate of the input record.
 In the PP example,
 the scan rate of the chain is determined by the scan rate of the output.
-Either of these may be appropriate
-depending on the hardware and process limitations.
+Either of these may be appropriate depending on the hardware and process limitations.
 
-Care must be taken
-as this flexibility can also lead to some incorrect configurations.
-In these next examples we look at some mistakes that can occur.
+Care must be taken as this flexibility can also lead to some incorrect configurations.
+These next examples cover some mistakes that can occur.
 
 In *Figure 4*,
-two records that are scanned at 10 Hz
-make references to the same Passive record.
+two records that are scanned at 10 Hz make references to the same Passive record.
 In this case, no alarm or error is generated.
 The Passive record is scanned twice at 10 Hz.
-The time between the two scans
-depends on what records are processed
-between the two periodic records.
+The time between the two scans depends on what records are processed between the two periodic records.
 
 ![Figure 4](media/dbconcepts/image4.jpg)
 **Figure 4**
@@ -387,24 +371,23 @@ As the record processing is recursively called for links,
 the record containing the link is marked as active
 during the entire time that the chain is being processed.
 When one of these circular references is encountered,
-the active flag is recognized
-and the request to process the record is ignored.
+the active flag is recognized and the request to process the record is ignored.
 
 ![Figure 5](media/dbconcepts/image5.jpeg)
 **Figure 5**
 
-# Channel Access Links
+## Channel Access links
 
-A Channel Access link is an input link or output link that specifies a
-link to a record located in another IOC or an input and output link with
-one of the following attributes: CA, CP, or CPP.
+A Channel Access link is an input link or output link
+that specifies a link to a record located in another IOC or an input and output link,
+using one of the following attributes: CA, CP, or CPP.
 
-## Channel Access Input Links
+### Channel Access input links
 
 If the input link specifies CA, CP, or CPP,
 regardless of the location of the process variable being referenced,
 it will be forced to be a Channel Access link.
-This is helpful for separating process chains that are not tightly related.
+This is helpful for separating process chains that aren't tightly related.
 If the input link specifies CP,
 it also causes the record containing the input link to process
 whenever a monitor is posted,
@@ -415,13 +398,13 @@ the record with the CPP link has a `SCAN` field set to Passive.
 In other words, CP and CPP cause the record containing the link to be processed
 when the process variable that they reference changes.
 
-## Channel Access Output Links
+### Channel Access output links
 
 Only CA is appropriate for an output link. Writing to a field over
 channel access causes processing as specified in 
 [Channel Access Puts to Passive Scanned Records](#Channel-Access-Puts-to-Passive-Scanned-Records).
 
-## Channel Access Forward Links
+### Channel Access forward links
 
 Forward links can also be Channel Access links,
 either when they specify a record located in another IOC
@@ -429,7 +412,7 @@ or when they specify the CA attributes.
 However, forward links will only be made Channel Access links
 if they specify the `PROC` field of another record.
 
-# Maximize Severity Attribute
+## Maximize Severity attribute
 
 The Maximize Severity attribute is one of the following :
 
@@ -447,8 +430,8 @@ is propagated to the record containing the link.
 For output links the alarm severity of the record containing the link
 is propagated to the record referred to by the link.
 If the severity is changed the associated alarm status is set to LINK_ALARM,
-except if the attribute is MSS
-in which case the alarm status will be copied along with the severity.
+except if the attribute is MSS.
+In this case the alarm status will be copied along with the severity.
 
 The method of determining if the alarm status and severity should be changed
 is called \``maximize severity".
@@ -471,21 +454,18 @@ reflect the highest severity outstanding alarm.
 If multiple alarms of the same severity are present
 the alarm status reflects the first one detected.
 
-# Phase
+## Phase
 
-The `PHAS` field is used to order the processing of records
-that are scanned at the same time,
-i.e., records that are scanned periodically
-at the same interval and priority,
+The `PHAS` field is used to order the processing of records that are scanned at the same time.
+That is, records that are scanned periodically at the same interval and priority,
 or that are scanned on the same event.
-In this manner records dependent upon other records
-can be assured of using current data.
+In this manner records dependent upon other records can be assured of using current data.
 
-To illustrate this we will look at an example from the previous section,
+To illustrate this, an example from the previous section has been edited,
 with the records being scanned periodically instead of passively (*Figure 6*).
 In this example each of these records specifies .1 second;
 thus, the records are synchronous.
-1. The phase sequence is used to assure that the analog input is processed first,
+1. The phase sequence is used to ensure that the analog input is processed first,
 meaning that it fetches its value from the specified location
 and places it in the `VAL` field (after any conversions).
 2. Next, the calc record will be processed,
@@ -503,11 +483,11 @@ and the analog output's `PHAS` field must specify 2.
 ![Figure 6](media/dbconcepts/concepts-6.png)
 **Figure 6**
 
-It is important to understand that in the above example,
+It's important to understand that in the above example,
 no record causes another to be processed.
 The phase mechanism instead causes each to process in sequence.
 
-# PVAccess Links
+## PVAccess links
 
 When built against Base >= 3.16.1,
 support is enabled for PVAccess links,
@@ -518,7 +498,7 @@ The authoritative documentation is available in the git repository [pva2pva](htt
 
 > **Note**
 >
->  The "dbjlr" and "dbpvar" IOC shell command provide information about
+>  The "dbjlr" and "dbpvar" IOC shell command offer information about
    PVA links in a running IOC.
 
 A simple configuration using defaults is
@@ -559,43 +539,43 @@ the example below:
     }})
   }
 ```
-### pv: Target PV name
+#### pv: Target PV name
 
 The PV name to search for.
 This is the same name which could be used with 'pvget'
 or other client tools.
 
-### field: Structure field name
+#### field: Structure field name
 
 The name of a sub-field of the remotely provided Structure.
 By default, an empty string "" uses the top-level Structure.
 
 If the top level structure,
 or a sub-structure is selected,
-then it is expected to conform to NTScalar,
+then it's expected to conform to NTScalar,
 NTScalarArray, or NTEnum to extract value and meta-data.
 
 If the sub-field is an PVScalar or PVScalarArray,
 then a value will be taken from it,
 but not meta-data will be available.
 
-### local: Require local PV
+#### local: Require local PV
 
-When true, link will not connect
+When true, link won't connect
 unless the named PV is provided by the local (QSRV) data provider.
 
-### Q: Monitor queue depth
+#### Q: Monitor queue depth
 
 Requests a certain monitor queue depth.
 The server may, or may not,
 take this into consideration when selecting a queue depth.
 
-### pipeline: Monitor flow control
+#### pipeline: Monitor flow control
 
 Expect that the server supports PVA monitor flow control.
 If not, then the subscription will stall.
 
-### proc: Request record processing (side-effects)
+#### proc: Request record processing (side-effects)
 
 The meaning of this option depends on the direction of the link.
 
@@ -612,30 +592,30 @@ For input links,
 this option controls whether the record containing the PVA link
 will be processed when subscription events are received.
 
--  none (default), false, "NPP" - Do not process on subscription updates.
+-  none (default), false, "NPP" - Don't process on subscription updates.
 -  true, "CP" - Always process on subscription updates.
 -  "PP", "CPP" - Process on subscription updates if `SCAN`=Passive
 
-### sevr: Alarm propagation
+#### sevr: Alarm propagation
 
 This option controls whether reading a value from an input PVA link
 has the additional effect of propagating any alarm
 via the Maximize Severity process.
 
--  false - Do not maximize severity.
+-  false - Don't maximize severity.
 -  true - Maximize alarm severity
 -  "MSI" - Maximize only if the remote severity is INVALID.
 
-### time: Time propagation
+#### time: Time propagation
 
 Somewhat analogous to sevr, but applied to timestamp.
 When true, the record `TIME` field is updated when the link value is read.
 
 >**Warning**
 >
->   `TSEL` must be set to -2 for time:true to have an effect.
+>   `TSEL` must be set to –2 for time:true to have an effect.
 
-### monorder: Monitor processing order
+#### monorder: Monitor processing order
 
 When multiple records target the same target PV,
 and request processing on subscription updates,
@@ -645,7 +625,7 @@ Records are processed in increasing order.
 monorder=-1 is processed before monorder=0.
 Both are processed before monorder=1.
 
-### defer: Defer put
+#### defer: Defer put
 
 By default, (defer=false)
 an output link will immediately start a PVA Put operation.
@@ -655,19 +635,19 @@ but not start a PVA Put.
 This option, in combination with field:
 allows a single Put to contain updates to multiple sub-fields.
 
-### retry: Put while disconnected
+#### retry: Put while disconnected
 
 Allow a Put operation to be queued while the link is disconnected.
 The Put will be executed when the link becomes connected.
 
-### always: CP/CPP always process
+#### always: CP/CPP always process
 
 By default, (always:false)
 a subscription update will only cause a CP input link to scan
 if the structure field (cf. field: option) is marked as changed.
 Set to true to override this, and always process the link.
 
-## Link semantics/behavior
+### Link semantics/behavior
 
 This section attempts to answer some questions
 about how links behave in certain situations.
@@ -678,8 +658,7 @@ Links are evaluated in three basic contexts.
 -  dbGetLink() of non-CP link
 -  dbGetLink() during a scan resulting from a CP link.
 
-An input link can bring in a Value
-as well as meta-data, alarm, time, and display/control info.
+An input link can bring in a Value as well as meta-data, alarm, time, and display/control info.
 For input links, the PVA link engine attempts to always maintain consistency
 between Value, alarm, and time. 
 However, consistency between these,

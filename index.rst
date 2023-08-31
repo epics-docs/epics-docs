@@ -44,7 +44,8 @@ There are two kinds of subprojects:
    :caption: Guides
 
    Introduction to EPICS <guides/EPICS_Intro>
-   guides/EPICS_Process_Database_Concepts.rst
+   guides/EPICS_Process_Database_Concepts.md
+   guides/Scanning_Specification.md
    How-To Pages <https://docs.epics-controls.org/projects/how-tos/en/latest>
    CONTRIBUTING
 
