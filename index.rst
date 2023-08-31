@@ -61,14 +61,9 @@ There are two kinds of subprojects:
 
 .. toctree::
    :maxdepth: 1
-   :caption: Modules
-
-   ASYN <https://epics.anl.gov/modules/soft/asyn/>
-   StreamDevice <https://paulscherrerinstitute.github.io/StreamDevice/>
-   Autosave <https://epics.anl.gov/bcda/synApps/autosave/autosave.html>
-   Soft Support Database <https://epics-controls.org/resources-and-support/modules/soft-support/>
-   Hardware Support Database <https://epics-controls.org/resources-and-support/modules/hardware-support/>
-   Extensions <https://epics-controls.org/resources-and-support/extensions/>
+   :caption: EPICS Related Software
+   
+   software/epics-related-software
 
 .. toctree::
    :maxdepth: 1
@@ -112,7 +107,14 @@ There are two kinds of subprojects:
 
 .. toctree::
    :maxdepth: 1
-   :caption: Community
+   :caption: Software
+
+   specs/specs
+   software/base
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Training
 
    Training Material <https://epics-controls.org/resources-and-support/documents/training/>
    community/how-to-run-an-epics-collaboration-meeting.rst
