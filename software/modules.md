@@ -137,11 +137,12 @@ PEZCA | A Perl binding to EZCA |  |
 ### Python 
 | Name | Description | Source Code | Documentation | Protocol |
 | ---- | ----------- | ----------- | ------------- | -------- |
-| caproto       | Pure-python channel access | [github.com](https://github.com/caproto/caproto)        | [github.io](https://caproto.github.io/caproto/)                           | CA |
-| cothread      | Designed for cooperative threading (C, Python) | [github.com](https://github.com/dls-controls/cothread)  | [readthedocs.io](https://cothread.readthedocs.io/en/latest/cothread.html)      | CA |
-| p4p           | Python wrapper around PVA client and server | [github.com](https://github.com/mdavidsaver/p4p)        | [github.io](https://mdavidsaver.github.io/p4p/)                           | PVA |
-| pvapy         | Python interface to pvAccess | [github.com](https://github.com/epics-base/pvaPy)       | [epics.anl.gov](https://epics.anl.gov/extensions/pvaPy/production/index.html) | PVA/CA |
-| pyepics       | Python wrapper around libca | [github.com](https://github.com/pyepics/pyepics)        | [github.io](https://pyepics.github.io/pyepics/)                           | CA |
+aioca         | Asynchronous EPICS Channel Access client for asyncio and Python | [github.com](https://github.com/dls-controls/aioca) | [github.io](https://dls-controls.github.io/aioca/master/contents.html) | CA
+caproto       | Pure-python channel access | [github.com](https://github.com/caproto/caproto)        | [github.io](https://caproto.github.io/caproto/)                           | CA 
+cothread      | Designed for cooperative threading (C, Python) | [github.com](https://github.com/dls-controls/cothread)  | [readthedocs.io](https://cothread.readthedocs.io/en/latest/cothread.html)      | CA 
+p4p           | Python wrapper around PVA client and server | [github.com](https://github.com/mdavidsaver/p4p)        | [github.io](https://mdavidsaver.github.io/p4p/)                           | PVA 
+pvapy         | Python interface to pvAccess | [github.com](https://github.com/epics-base/pvaPy)       | [epics.anl.gov](https://epics.anl.gov/extensions/pvaPy/production/index.html) | PVA/CA 
+pyepics       | Python wrapper around libca | [github.com](https://github.com/pyepics/pyepics)        | [github.io](https://pyepics.github.io/pyepics/)                           | CA 
 
 ### Other
 | Name | Description | Source Code | Documentation |
