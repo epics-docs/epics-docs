@@ -1,5 +1,5 @@
 Welcome to the EPICS Documentation!
-===================
+====================================
 
 
 .. image:: ./images/EPICS_black_blue_logo_rgb_small_v03.jpg
