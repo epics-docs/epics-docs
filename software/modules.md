@@ -106,7 +106,6 @@ PVA Gateway | PV Access gateway | [github.com](https://github.com/mdavidsaver/p4
 | Name | Description | Source Code | Documentation |
 | ---- | ----------- | ----------- | ------------- |
 EPICS Base | Has CA/PVA implimentations in releases | [github.com](https://github.com/epics-base/epics-base) | [epics-controls.org](https://epics-controls.org/resources-and-support/base/)
-EPICS QT | The EPICS Qt framework | [github.com](https://github.com/qtepics) | [github.io](https://qtepics.github.io/index.html)
 EZCA | Eacy CA interface for C programs | [github.com](https://github.com/epics-extensions/ezca) | [epics.anl.gov](https://epics.anl.gov/extensions/ezca/index.php)
 SCA | Simple Channel Access for C programs | [als.lbl.gov](https://controls.als.lbl.gov/epics_collaboration/sca/NET/Readme.htm) | [als.lbl.gov](https://controls.als.lbl.gov/epics_collaboration/sca/)
 
