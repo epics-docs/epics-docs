@@ -4,30 +4,58 @@ W. Eric Norum <wenorum@lbl.gov>
 
 ## 1 - Introduction
 
-This tutorial provides step-by-step instructions on how to create EPICS support for a simple serial, GPIB (IEEE-488) or network attached device. The steps are presented in a way that should make it possible to apply them in cookbook fashion to create support for other devices. For comprehensive description of all the details of the I/O system used here, refer to the [asynDriver](http://www.aps.anl.gov/epics/modules/soft/asyn/R4-14/asynDriver.pdf) and [StreamDevice](http://epics.web.psi.ch/software/streamdevice/doc/) documentation.
 
-This document isn't for the absolute newcomer though. You must have EPICS installed on a system somewhere and know how to build and run the example application. In particular you must have the following installed:
+This tutorial provides step-by-step instructions on how to create EPICS support for a simple serial, GPIB (IEEE-488) or network attached device.
+The steps are presented in a way that should make it possible to apply them in cookbook fashion to create support for other devices.
+For comprehensive description of all the details of the I/O system used here,
+refer to the
+[asynDriver](http://www.aps.anl.gov/epics/modules/soft/asyn/R4-14/asynDriver.pdf)
+and
+[StreamDevice](http://epics.web.psi.ch/software/streamdevice/doc/)
+documentation.
+
+This document isn't for the absolute newcomer though.
+You must have EPICS installed on a system somewhere
+and know how to build
+and run the example application.
+In particular you must have the following installed:
 
 *   EPICS R3.14.11 or higher.
 *   EPICS ASYN support module version 4.14 or higher.
 *   EPICS StreamDevice support module version 2.4.1 or higher.
 
-Serial, GPIB and network attached devices can now be treated in much the same way. The EPICS StreamDevice and ASYN support modules can use drivers which communicate with serial devices connected to ports on the IOC or to Ethernet/Serial converters or with GPIB devices connected to local I/O cards or to Ethernet/GPIB converters or to network attached devices using VXI-11 or plain TCP ('telnet') communication protocols.
+Serial, GPIB
+and network attached devices can now be treated in much the same way.
+The EPICS StreamDevice
+and ASYN support modules can use drivers which communicate with serial devices connected to ports on the IOC
+or to Ethernet/Serial converters
+or with GPIB devices connected to local I/O cards
+or to Ethernet/GPIB converters
+or to network attached devices using VXI-11
+or plain TCP ('telnet') communication protocols.
 
-I based this tutorial on the device support I wrote for a Hewlett Packard E3631A power supply. I chose the E3610A as the basis for this tutorial partly because it was what I found lying around but mostly because it uses SCPI-compliant commands which are common to a wide range of devices. Sections 1 through 4 of this tutorial apply to all SCPI (IEEE-488.2) devices.
+I based this tutorial on the device support I wrote for a Hewlett Packard E3631A power supply.
+I chose the E3610A as the basis for this tutorial partly because it was what I found lying around but mostly because it uses SCPI-compliant commands which are common to a wide range of devices.
+Sections 1 through 4 of this tutorial apply to all SCPI (IEEE-488.2) devices.
 
 ## 2 - Create a new device support module
 
 The easiest way to do this is with the `makeSupport.pl` script supplied with the EPICS ASYN package.
 
-Here are the commands I ran. To make the command examples a little shorter I used shell variables to hold the paths to my installation of EPICS base and the ASYN support module. You can do this with values appropriate for your site or just type the full path names to the commands.
+Here are the commands I ran.
+To make the command examples a little shorter I used shell variables to hold the paths to my installation of EPICS base
+and the ASYN support module.
+You can do this with values appropriate for your site
+or just type the full path names to the commands.
 
 ```makefile
 EPICS_BASE=/usr/local/epics/R3.14.11/base
 ASYN=/usr/local/epics/R3.14.11/modules/soft/synApps_5_5/support/asyn-4-14
 ```
 
-You will have to change these to the values appropriate for your EPICS installation or simply type the appropriate full paths to invoke the scripts. You must also have the `EPICS_HOST_ARCH` environment variable set to match the machine on which you are building.
+You will have to change these to the values appropriate for your EPICS installation
+or simply type the appropriate full paths to invoke the scripts.
+You must also have the `EPICS_HOST_ARCH` environment variable set to match the machine on which you are building.
 
 To create a new StreamDevice support module:
 
@@ -39,26 +67,35 @@ norume> $ASYN/bin/$EPICS_HOST_ARCH/makeSupport.pl -t streamSCPI HPE3631A
 
 ### 2.1 - Make changes to some files in `configure/`
 
-Edit the `configure/RELEASE` file which `makeSupport.pl` created and confirm that the entries describing the paths to your EPICS base and ASYN support are correct. For example these might be:
+Edit the `configure/RELEASE` file which `makeSupport.pl` created
+and confirm that the entries describing the paths to your EPICS base
+and ASYN support are correct.
+For example these might be:
 
 ```makefile
 ASYN = /usr/local/epics/R3.14.11/modules/soft/synApps_5_5/support/asyn-4-14
 EPICS_BASE = /usr/local/epics/R3.14.11/base
 ```
 
-You'll also have to add a line describing the path to your StreamDevice support. For example:
+You'll also have to add a line describing the path to your StreamDevice support.
+For example:
 
 ```makefile
 STREAM = /usr/local/epics/R3.14.11/modules/soft/synApps_5_5/support/stream-2-4-1
 ```
 
-Edit the `configure/CONFIG_SITE` file which `makeSupport.pl` created and specify the IOC architectures on which the application is to run. I wanted the application to run as a soft IOC, so I uncommented the `CROSS_COMPILER_TARGET_ARCHS` definition and set the definition to be empty:
+Edit the `configure/CONFIG_SITE` file which `makeSupport.pl` created
+and specify the IOC architectures on which the application is to run.
+I wanted the application to run as a soft IOC,
+so I uncommented the `CROSS_COMPILER_TARGET_ARCHS` definition
+and set the definition to be empty:
 
 ```makefile
 CROSS_COMPILER_TARGET_ARCHS =
 ```
 
-You may have to fix an error in the `HPE3631ASup/devHPE3631A.db` file produced by the `makeSupport.pl` command. Verify that the `IDNwf` record description looks like:
+You may have to fix an error in the `HPE3631ASup/devHPE3631A.db` file produced by the `makeSupport.pl` command.
+Verify that the `IDNwf` record description looks like:
 
 ```
 record(waveform, "$(P)$(R)IDNwf")
@@ -74,7 +111,10 @@ record(waveform, "$(P)$(R)IDNwf")
 
 Some versions of the template have `FTYP` rather than `FTVL` for the waveform data type field.
 
-I install the StreamDevice protocol file into the support module `db/` directory. This seems like a reasonable place to put this file since it's tied closely to its associated database file. To have the protocol file installed into the `db/` directory edit `HPE3631ASup/Makefile` and add the line
+I install the StreamDevice protocol file into the support module `db/` directory.
+This seems like a reasonable place to put this file since it's tied closely to its associated database file.
+To have the protocol file installed into the `db/` directory edit `HPE3631ASup/Makefile`
+and add the line
 
 ```makefile
 DB_INSTALLS += $(TOP)/HPE3631ASup/devHPE3631A.proto
@@ -84,9 +124,17 @@ to the list of `DB_INSTALLS`.
 
 ## 3 - Create a test application (optional)
 
-Now that a device support module has been produced it is a good idea to create a new EPICS application to confirm that the device support is operating correctly. The easiest way to do this is with the `makeBaseApp.pl` script supplied with EPICS. The files in the `configure/` directory produced in the previous step do not provide all the information needed to build an application but will not be overwritten by the `makeBaseApp.pl` script. The easiest solution to this problem is to simply remove the `configure/` directory and all its contents and then to make the changes to `configure/RELEASE` and `configure/CONFIG_SITE` at mentioned above.
+Now that a device support module has been produced it is a good idea to create a new EPICS application to confirm that the device support is operating correctly.
+The easiest way to do this is with the `makeBaseApp.pl` script supplied with EPICS.
+The files in the `configure/` directory produced in the previous step do not provide all the information needed to build an application but will not be overwritten by the `makeBaseApp.pl` script.
+The easiest solution to this problem is to simply remove the `configure/` directory
+and all its contents
+and
+then to make the changes to `configure/RELEASE`
+and `configure/CONFIG_SITE` at mentioned above.
 
 Here are the commands I ran.
+
 
 ```console
 norume> rm -rf configure
@@ -106,9 +154,15 @@ Application name?
 norume>
 ```
 
-I then added the ASYN and STREAM values to `configure/RELEASE` and made the change to the `CROSS_COMPILER_TARGET_ARCHS` line in `configure/CONFIG_SITE`.
+I then added the ASYN
+and STREAM values to `configure/RELEASE`
+and made the change to the `CROSS_COMPILER_TARGET_ARCHS` line in `configure/CONFIG_SITE`.
 
-You must add the StreamDevice and ASYN support modules to the test application. Edit `HPE3631AtestApp/src/Makefile` and add the lines:
+You must add the StreamDevice
+and ASYN support modules to the test application.
+Edit `HPE3631AtestApp/src/Makefile`
+and add the lines:
+
 
 ```makefile
 HPE3631Atest_DBD += stream.dbd
@@ -120,13 +174,18 @@ and
 HPE3631Atest_LIBS += stream asyn
 ```
 
-To install the support module files and build the test application simply run `make`:
+To install the support module files
+and build the test application simply run `make`:
 
 ```console
 norume> make
 ```
 
-The IOC startup script produced by the `makeBaseApp.pl` script must be modified before the test application can be run. Change directories to `iocBoot/iocHPE3631Atest` and edit the `st.cmd` file. Here's the file that I use:
+The IOC startup script produced by the `makeBaseApp.pl` script must be modified before the test application can be run.
+Change directories to `iocBoot/iocHPE3631Atest`
+and edit the `st.cmd` file.
+Here's the file that I use:
+
 
 ```bash
   1 #!../../bin/darwin-x86/HPE3631Atest
@@ -189,7 +248,10 @@ Lines that you'll likely have to modify are:
 | 30,31 | GPIB devices may not need line terminators since they can use the EOI line to mark the end of messages. |
 | 33 | This trace mask value prints a message showing the characters sent to and received from the device. This can produce a lot of messages on the IOC console. To display error messages only set the trace mask to 1 rather than 9. |
 
-So, if you have a LAN/Serial adapter or network attached device which uses a raw TCP ('telnet' style) connection you would replace lines 23 through 29 with a single line like:
+So, if you have a LAN/Serial adapter
+or network attached device which uses a raw TCP
+('telnet' style)
+connection you would replace lines 23 through 29 with a single line like:
 
 ```bash
 drvAsynIPPortConfigure("L0","192.168.0.23:4001",0,0,0)
@@ -197,7 +259,8 @@ drvAsynIPPortConfigure("L0","192.168.0.23:4001",0,0,0)
 
 You would also change the application Makefile to specify `drvAsynIPPort.dbd` rather than `drvAsynSerialPort.dbd`.
 
-I you have a VXI-11 LAN/GPIB adapter or network attached device you would replace lines 23 through 31 with a single line like:
+I you have a VXI-11 LAN/GPIB adapter
+or network attached device you would replace lines 23 through 31 with a single line like:
 
 ```bash
 vxi11Configure("L0","192.168.0.24",0,0.0,"gpib0",0,0)
@@ -296,7 +359,9 @@ VAL: HEWLETT-PACKARD,E3631A,0,2.1-5.0-1.0
 epics>
 ```
 
-The SCPI `IDN*?` commands are run as part of iocInit since their records have `PINI=YES`. If the stringin record has truncated the identification string you should be able to see the full string as a waveform record. In another window run:
+The SCPI `IDN*?` commands are run as part of iocInit since their records have `PINI=YES`.
+If the stringin record has truncated the identification string you should be able to see the full string as a waveform record.
+In another window run:
 
 ```console
 norume> caget -S hpE3631ATestIDNwf
@@ -306,11 +371,15 @@ norume>
 
 ## 4 - asynRecord support
 
-The asynRecord provides a convenient mechanism for controlling the diagnostic messages produced by asyn drivers. You can also use the MEDM asynOctet screen to manually send commands to and view responses from a device. This can be very handy when trying to figure out just how a new device actually works.
+The asynRecord provides a convenient mechanism for controlling the diagnostic messages produced by asyn drivers.
+You can also use the MEDM asynOctet screen to manually send commands to
+and view responses from a device.
+This can be very handy when trying to figure out just how a new device actually works.
 
 To use an asynRecord in your application:
 
 Add the line:
+
 
 ```makefile
 DB_INSTALLS += $(ASYN)/db/asynRecord.db
@@ -324,15 +393,24 @@ Create the diagnostic record in the IOC by adding a line like:
 dbLoadRecords("db/asynRecord.db","P=$(P)$(R),R=asyn,PORT=L0,ADDR=-1,OMAX=0,IMAX=0")
 ```
 
-to the application startup script. The `PORT` value must match the the value in the corresponding `drvAsynIPPortConfigure` or `drvAsynSerialPortConfigure` command. The `ADDR` value should be that of the instrument whose I/O you wish to monitor.
+to the application startup script.
+The `PORT` value must match the the value in the corresponding `drvAsynIPPortConfigure`
+or `drvAsynSerialPortConfigure` command.
+The `ADDR` value should be that of the instrument whose I/O you wish to monitor.
 
-To run the asynRecord screen, add `<asynTop>/opi/medm` to your `EPICS_DISPLAY_PATH` environment variable and start medm with `P`, `R`, `PORT` and `ADDR` values matching those given in the dbLoadRecords command:
+To run the asynRecord screen,
+add `<asynTop>/opi/medm` to your `EPICS_DISPLAY_PATH` environment variable
+and start medm with `P`, `R`, `PORT`
+and `ADDR` values matching those given in the dbLoadRecords command:
 
 ```bash
 medm -x -macro "P=hpE3631ATest,R=asyn,PORT=L0,ADDR=-1" asynRecord.adl
 ```
 
-If you have edm installed then you need to use the `asynRecord.edl` file instead. Ensure that `<asynTop>/opi/medm` is in the `EDMDATAFILES` environment variable. Start edm with the arguments appropriate for your IOC:
+If you have edm installed
+then you need to use the `asynRecord.edl` file instead.
+Ensure that `<asynTop>/opi/medm` is in the `EDMDATAFILES` environment variable.
+Start edm with the arguments appropriate for your IOC:
 
 ```bash
 edm -x -m "P=hpE3631ATest, R=asyn,PORT=L1_TCP,ADDR=-1" asynRecord.edl
@@ -342,7 +420,7 @@ edm -x -m "P=hpE3631ATest, R=asyn,PORT=L1_TCP,ADDR=-1" asynRecord.edl
 
 The descriptions in this section apply directly to the HP E3631A only but may provide useful hints for adding commands for your particular device.
 
-### 5.1 Add a record to set the device to local or remote control
+### 5.1 - Add a record to set the device to local or remote control
 
 First add an entry to `HPE3631ASup/devHPE3631A.proto`:
 
@@ -352,7 +430,8 @@ setLocRem {
 }
 ```
 
-This uses the StreamDevice ENUM converter to send one of two strings to the device based on the PV value. The corresponding addition to `HPE3631ASup/devHPE3631A.db` is:
+This uses the StreamDevice ENUM converter to send one of two strings to the device based on the PV value. 
+The corresponding addition to `HPE3631ASup/devHPE3631A.db` is:
 
 ```
 record(bo, "$(P)$(R)SetRemote")
@@ -369,11 +448,15 @@ record(bo, "$(P)$(R)SetRemote")
 
 The `PINI` and `VAL` fields ensure that the device is set into remote control mode during IOC startup.
 
-Once you've made the above changes run `make` to install the modified files. If you've created the test application you can try out the new command and see if it works.
+Once you've made the above changes run `make` to install the modified files.
+If you've created the test application you can try out the new command
+and see if it works.
 
 ### - 5.2 Add records to set and check the output on/off status
 
-These are simple since they use StreamDevice protocol entries that already exist. The `setD` and `getD` entries set and get the value of a single integer parameter whose command is passed as the argument to the protocol entry:
+These are simple since they use StreamDevice protocol entries that already exist.
+The `setD` and `getD` entries set
+and get the value of a single integer parameter whose command is passed as the argument to the protocol entry:
 
 ```
 record(bo, "$(P)$(R)SetOnOff")
@@ -409,7 +492,8 @@ getVI {
 }
 ```
 
-These entries set and get the floating point value for the channel passed as the first argument and for the parameter passed as the second argument.
+These entries set and get the floating point value for the channel passed as the first argument
+and for the parameter passed as the second argument.
 
 The corresponding additions to `HPE3631ASup/devHPE3631A.db` are:
 
@@ -560,4 +644,5 @@ record(ao, "$(P)$(R)GetN25Amps")
 }
 ```
 
-Depending on your application you might set up `FLNK` and/or `SCAN` fields to keep the setpoint readbacks up to date.
+Depending on your application you might set up `FLNK`
+and/or `SCAN` fields to keep the setpoint readbacks up to date.
