@@ -8,14 +8,17 @@ when an output record is processed,
 it fetches the value which it's to output,
 converts the value,
 and then writes that value to the specified location.
-Each record must specify the scanning method that determines when it will be processed.
+Each record must specify
+the scanning method that determines when it will be processed.
 Three scanning methods are available for database records:
 
 1. [Periodic scanning](#periodic-scanning) occurs on set time intervals.
 2. [Event scanning](#Event-scanning) occurs on either an I/O interrupt event
 or a user-defined event.
-3. [Passive scanning](#Passive-scanning) occurs when the records linked to the passive record are scanned,
-or when a value is "put" into a passive record through the database access routines.
+3. [Passive scanning](#Passive-scanning) occurs when the records
+linked to the passive record are scanned,
+or when a value is "put" into a passive record 
+4. through the database access routines.
 
 ### Phase
 
@@ -31,7 +34,8 @@ the relative order in which records are processed within a scan cycle:
 
 For event scanning,
 the user can control the priority at which a record will process.
-The `PRIO` field selects Low/Medium/High priority for Soft event and I/O Interrupts.
+The `PRIO` field selects Low/Medium/High priority 
+for Soft event and I/O Interrupts.
 
 In addition to the scan and the phase mechanisms,
 there are data links and forward processing links
@@ -111,7 +115,8 @@ and I/O interrupt scanning:
 The first three choices must appear first and in the order shown.
 The remaining definitions are for the periodic scan rates,
 which must appear in the order slowest to fastest.
-The order directly controls the thread priority assigned to the particular scan rate, 
+The order directly controls the thread priority
+assigned to the particular scan rate, 
 and faster scan rates should be assigned higher thread priorities.
 At IOC initialization,
 the menu choice strings are read at scan initialization.
@@ -119,7 +124,8 @@ The number of periodic scan rates
 and the period of each rate is determined from the menu choice strings.
 Thus, the periodic scan rates can be changed by changing menuScan.dbd
 and loading this version via dbLoadDatabase.
-The only requirement is that each periodic choice string must begin with a number
+The only requirement is
+that each periodic choice string must begin with a number
 and be followed by any of the following unit strings:
 
   - second or second**s**
@@ -139,7 +145,8 @@ to the maximum number of ticks available on the system.
 For example, vxWorks out of the box supports 0.015 second
 or a maximum frequency of 60 Hz.
 Note that the order of the choices is essential.
-The first three choices must appear in the order in the earlier menuScan.dbd example.
+The first three choices must appear
+in the order in the earlier menuScan.dbd example.
 Then the remaining choices should follow in descending order,
 the biggest time period first and the smallest last.
 
@@ -148,18 +155,21 @@ the biggest time period first and the smallest last.
 Two types of events are supported in the Input Output Controller (IOC) database,
 the I/O interrupt event and the user-defined event.
 For each type of event,
-the user can specify the scheduling priority of the event using the `PRIO` or priority field.
+the user can specify the scheduling priority of the event
+using the `PRIO` or priority field.
 The scheduling priority refers to the priority the event has on the stack
 relative to other running tasks.
 Three possible choices are available: LOW, MEDIUM, or HIGH.
 A low priority event has a priority a little higher than Channel Access.
-A medium priority event has a priority about equal to the median of periodic scanning tasks.
+A medium priority event has a priority
+about equal to the median of periodic scanning tasks.
 A high priority event has a priority equal to the event scanning task.
 
 ## I/O interrupt events
 
 
-Scanning on I/O interrupt causes a record to process when a driver posts an I/O Event.
+Scanning on I/O interrupt causes a record to process 
+when a driver posts an I/O Event.
 In many cases these events are posted in the interrupt service routine.
 For example, if an analog input record gets its value from an I/O card,
 and it specifies I/O interrupt as its scanning routine,
@@ -197,7 +207,8 @@ and should be controlled through the project engineer.
 They only need to be unique per IOC
 because they only trigger processing for records in the same IOC.
 
-All records that use the user-defined event mechanism must specify Event in their `SCAN` field
+All records that use the user-defined event mechanism
+must specify Event in their `SCAN` field
 and an event number in their `EVNT` field.
 
 ## Passive scanning
@@ -211,7 +222,8 @@ or when a channel access put is done to them.
 
 
 In this case where a Channel Access put is done to a record,
-the field being written has an attribute that determines if this put causes record processing.
+the field being written has an attribute
+that determines if this put causes record processing.
 For all records, putting to the `VAL` field causes record processing.
 
 Consider a binary output that has a `SCAN` of Passive.
@@ -223,13 +235,15 @@ the Passive record is processed and the specified device support is called
 to write the newly converted `RVAL` to the device specified in the `OUT` field
 through the device support specified by `DTYP`.
 
-Fields determined to change the way a record behaves typically cause the record to process.
+Fields determined to change the way a record behaves
+typically cause the record to process.
 Another field that would cause the binary output to process would be the `ZSV`;
 which is the alarm severity if the binary output record is in state Zero (0).
 If the record was in state 0
 and the severity of being in that state changed from No Alarm to Minor Alarm,
 the only way to catch this on a `SCAN` Passive record is to process it.
-Fields are configured to cause binary output records to process in the `bo.dbd` file.
+Fields are configured to cause binary output records to process
+in the `bo.dbd` file.
 The `ZSV` severity is configured as follows:
 
 ```
@@ -242,7 +256,8 @@ The `ZSV` severity is configured as follows:
   }
 ```
 
-where the line `pp(TRUE)` is the sign that this record is processed when a channel access put is done.
+where the line `pp(TRUE)` is the sign that this record is processed
+when a channel access put is done.
 
 ### Database links to passive records
 
@@ -263,7 +278,8 @@ In the database definition file (.dbd) these fields are defined as follows:
   }
 ```
 
-If the record that's referenced by the `FLNK` field has a `SCAN` field set to “Passive” 
+If the record that's referenced by the `FLNK` field
+has a `SCAN` field set to “Passive” 
 then the record is processed after the record with the `FLNK`.
 The `FLNK` field only causes record processing,
 no data is passed.
@@ -347,19 +363,23 @@ as the attribute on this link is PP.
 
 Links can be used to create complex scanning logic.
 In the forward link example earlier,
-the processing of the chain of records is determined by the scan rate of the input record.
+the processing of the chain of records
+is determined by the scan rate of the input record.
 In the PP example,
 the scan rate of the chain is determined by the scan rate of the output.
-Either of these may be appropriate depending on the hardware and process limitations.
+Either of these may be appropriate
+depending on the hardware and process limitations.
 
-Care must be taken as this flexibility can also lead to some incorrect configurations.
+Care must be taken
+as this flexibility can also lead to some incorrect configurations.
 These next examples cover some mistakes that can occur.
 
 In *Figure 4*,
 two records that are scanned at 10 Hz make references to the same Passive record.
 In this case, no alarm or error is generated.
 The Passive record is scanned twice at 10 Hz.
-The time between the two scans depends on what records are processed between the two periodic records.
+The time between the two scans
+depends on what records are processed between the two periodic records.
 
 ![Figure 4](media/dbconcepts/image4.jpg)
 **Figure 4**
@@ -379,7 +399,8 @@ the active flag is recognized and the request to process the record is ignored.
 ## Channel Access links
 
 A Channel Access link is an input link or output link
-that specifies a link to a record located in another IOC or an input and output link,
+that specifies a link to a record
+located in another IOC or an input and output link,
 using one of the following attributes: CA, CP, or CPP.
 
 ### Channel Access input links
@@ -441,7 +462,8 @@ The new status and severity are initially 0,
 which means NO_ALARM.
 Every time a software component wants to modify the status and severity,
 it first checks the new severity
-and only makes a change if the severity it will set is greater than the current new severity.
+and only makes a change if the severity it will set
+is greater than the current new severity.
 If it does make a change,
 it changes the new status and new severity,
 not the current status and severity.
@@ -456,10 +478,12 @@ the alarm status reflects the first one detected.
 
 ## Phase
 
-The `PHAS` field is used to order the processing of records that are scanned at the same time.
+The `PHAS` field is used to order the processing of records
+that are scanned at the same time.
 That is, records that are scanned periodically at the same interval and priority,
 or that are scanned on the same event.
-In this manner records dependent upon other records can be assured of using current data.
+In this manner records dependent upon other records
+can be assured of using current data.
 
 To illustrate this, an example from the previous section has been edited,
 with the records being scanned periodically instead of passively (*Figure 6*).
@@ -658,7 +682,8 @@ Links are evaluated in three basic contexts.
 -  dbGetLink() of non-CP link
 -  dbGetLink() during a scan resulting from a CP link.
 
-An input link can bring in a Value as well as meta-data, alarm, time, and display/control info.
+An input link can bring in a Value as well as meta-data, alarm, time,
+and display/control info.
 For input links, the PVA link engine attempts to always maintain consistency
 between Value, alarm, and time. 
 However, consistency between these,
