@@ -1,10 +1,8 @@
-How to use StreamDevice
-=======================
+# How to use StreamDevice
 
 W. Eric Norum <wenorum@lbl.gov>
 
-1 Introduction
---------------
+## 1 - Introduction
 
 This tutorial provides step-by-step instructions on how to create EPICS support for a simple serial, GPIB (IEEE-488) or network attached device. The steps are presented in a way that should make it possible to apply them in cookbook fashion to create support for other devices. For comprehensive description of all the details of the I/O system used here, refer to the [asynDriver](http://www.aps.anl.gov/epics/modules/soft/asyn/R4-14/asynDriver.pdf) and [StreamDevice](http://epics.web.psi.ch/software/streamdevice/doc/) documentation.
 
@@ -18,8 +16,7 @@ Serial, GPIB and network attached devices can now be treated in much the same wa
 
 I based this tutorial on the device support I wrote for a Hewlett Packard E3631A power supply. I chose the E3610A as the basis for this tutorial partly because it was what I found lying around but mostly because it uses SCPI-compliant commands which are common to a wide range of devices. Sections 1 through 4 of this tutorial apply to all SCPI (IEEE-488.2) devices.
 
-2 Create a new device support module
-------------------------------------
+## 2 - Create a new device support module
 
 The easiest way to do this is with the `makeSupport.pl` script supplied with the EPICS ASYN package.
 
@@ -40,7 +37,7 @@ norume> cd HPE3631A
 norume> $ASYN/bin/$EPICS_HOST_ARCH/makeSupport.pl -t streamSCPI HPE3631A
 ```
 
-### 2.1 Make changes to some files in `configure/`
+### 2.1 - Make changes to some files in `configure/`
 
 Edit the `configure/RELEASE` file which `makeSupport.pl` created and confirm that the entries describing the paths to your EPICS base and ASYN support are correct. For example these might be:
 
@@ -85,8 +82,7 @@ DB_INSTALLS += $(TOP)/HPE3631ASup/devHPE3631A.proto
 
 to the list of `DB_INSTALLS`.
 
-3 Create a test application (optional)
---------------------------------------
+## 3 - Create a test application (optional)
 
 Now that a device support module has been produced it is a good idea to create a new EPICS application to confirm that the device support is operating correctly. The easiest way to do this is with the `makeBaseApp.pl` script supplied with EPICS. The files in the `configure/` directory produced in the previous step do not provide all the information needed to build an application but will not be overwritten by the `makeBaseApp.pl` script. The easiest solution to this problem is to simply remove the `configure/` directory and all its contents and then to make the changes to `configure/RELEASE` and `configure/CONFIG_SITE` at mentioned above.
 
@@ -209,8 +205,7 @@ vxi11Configure("L0","192.168.0.24",0,0.0,"gpib0",0,0)
 
 You would also change the application Makefile to specify `drfvVxi11.dbd` rather than `drvAsynSerialPort.dbd`.
 
-3.1 Run the test application
-----------------------------
+### 3.1 - Run the test application
 
 The application can be started by running the startup script if you make the script executable:
 
@@ -309,8 +304,7 @@ hpE3631ATestIDNwf HEWLETT-PACKARD,E3631A,0,2.1-5.0-1.0
 norume>
 ```
 
-4 asynRecord support
---------------------
+## 4 - asynRecord support
 
 The asynRecord provides a convenient mechanism for controlling the diagnostic messages produced by asyn drivers. You can also use the MEDM asynOctet screen to manually send commands to and view responses from a device. This can be very handy when trying to figure out just how a new device actually works.
 
@@ -344,8 +338,7 @@ If you have edm installed then you need to use the `asynRecord.edl` file instead
 edm -x -m "P=hpE3631ATest, R=asyn,PORT=L1_TCP,ADDR=-1" asynRecord.edl
 ```
 
-5 Add records and protocol file entries
----------------------------------------
+## 5 - Add records and protocol file entries
 
 The descriptions in this section apply directly to the HP E3631A only but may provide useful hints for adding commands for your particular device.
 
@@ -378,7 +371,7 @@ The `PINI` and `VAL` fields ensure that the device is set into remote control mo
 
 Once you've made the above changes run `make` to install the modified files. If you've created the test application you can try out the new command and see if it works.
 
-### 5.2 Add records to set and check the output on/off status
+### - 5.2 Add records to set and check the output on/off status
 
 These are simple since they use StreamDevice protocol entries that already exist. The `setD` and `getD` entries set and get the value of a single integer parameter whose command is passed as the argument to the protocol entry:
 
@@ -401,7 +394,7 @@ record(bi, "$(P)$(R)GetOnOff")
 }
 ```
 
-### 5.3 Add records to set and check the output voltage and current setpoints
+### 5.3 - Add records to set and check the output voltage and current setpoints
 
 Add two entries to `HPE3631ASup/devHPE3631A.proto`:
 
