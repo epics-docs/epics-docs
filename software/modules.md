@@ -1,5 +1,5 @@
 # Related Software
-This page attempts to list all EPICS-related source code and documentation outside of [EPICS Base](https://git.launchpad.net/epics-base). If you find a link is incorrect or missing, please [submit an issue](https://github.com/epics-docs/epics-docs/issues/new/choose) or pull-request with a fix on the [epics-docs](https://github.com/epics-docs/epics-docs) repository. 
+This page attempts to list all EPICS-related source code and documentation outside of [EPICS Base](https://git.launchpad.net/epics-base). If you find a link is incorrect or missing, please [submit an issue](https://github.com/epics-docs/epics-docs/issues/new/choose) or pull-request with a fix on the [epics-docs](https://github.com/epics-docs/epics-docs) repository. When submitting a pull-request, be sure to be familiar with our [documentation contribution guide](../CONTRIBUTING.md).
 
 ## IOC Support Modules
 These support modules are meant to be built into an IOC. See also the [epics-modules](https://github.com/epics-modules) project on github, there may be something there that has not yet been placed in this list.
@@ -150,7 +150,7 @@ pyepics       | Python wrapper around libca | [github.com](https://github.com/py
 IDL | CA client libraries and scripts for IDL via EZCA | [github.com](https://github.com/epics-extensions/ezcaIDL) | [github.com](https://github.com/epics-extensions/ezcaIDL)
 igor2epics | CA client library for WaveMetrics IGOR Pro | [sourceforge.net](https://sourceforge.net/p/igor2epics/git/ci/master/tree/) | [sourceforge.net](https://sourceforge.net/p/igor2epics/wiki/Home/)
 NetChannelAccess | CA libraries and Gateway in native C# | [github.com](https://github.com/paulscherrerinstitute/NetChannelAccess) | [github.com](https://github.com/paulscherrerinstitute/NetChannelAccess)
-Node EPICS **UNMAINTAINED**| EPICS CA for node.js | [github.com](https://github.com/RobbieClarken/node-epics) | [github.com](https://github.com/RobbieClarken/node-epics)
+Node EPICS | **UNMAINTAINED** EPICS CA for node.js | [github.com](https://github.com/RobbieClarken/node-epics) | [github.com](https://github.com/RobbieClarken/node-epics)
 SDDS | **ARCHIVED** The Self-Describing Data Sets analysis package | [github.com](https://github.com/veprbl/epics-sdds) | [aps.anl.gov](https://www.aps.anl.gov/Accelerator-Operations-Physics/Software)
 
 
