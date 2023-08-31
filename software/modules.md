@@ -47,6 +47,7 @@ optics                | [github.com](https://github.com/epics-modules/optics)   
 pcas                  | [github.com](https://github.com/epics-modules/pcas)                 | [github.com](https://github.com/epics-modules/pcas)
 pyDevSup              | [github.com](https://github.com/mdavidsaver/pyDevSup)               | [github.io](http://mdavidsaver.github.io/pyDevSup/)
 quadEm                | [github.com](https://github.com/epics-modules/quadEm)               | [github.io](https://epics-modules.github.io/quadEM/quadEMDoc.html)
+recsync               | [github.com](https://github.com/mdavidsaver/recsync)                | [github.io](https://github.com/mdavidsaver/recsync)
 scaler                | [github.com](https://github.com/epics-modules/scaler)               | [github.io](https://epics-modules.github.io/scaler/)
 sequencer             | [github.com](https://github.com/ISISComputingGroup/EPICS-seq/tree/master) | [epics.anl.gov](https://epics.anl.gov/EpicsDocumentation/AppDevManuals/RecordRef/Recordref-34.html)
 softGlue              | [github.com](https://github.com/epics-modules/softGlue)             | [github.io](https://epics-modules.github.io/softGlue/)
@@ -92,7 +93,7 @@ CASR | Host-based save/restore | [github.com](https://github.com/epicsdeb/autosa
 CA Gateway | PV gateway for channel access | [github.com](https://github.com/epics-extensions/ca-gateway) | [epics.anl.gov](https://epics.anl.gov/extensions/gateway/index.php)
 CA Watcher | 
 Channel Finder | Directory service for EPICS channels | [github.com](https://github.com/ChannelFinder) | [github.io](https://channelfinder.github.io/)
-Channel Watcher | 
+Channel Watcher  | Channel Watcher replaces the save part of EPICS save/restore | [slac.stanford.edu](https://www.slac.stanford.edu/grp/ssrl/spear/epics/extensions/ChannelWatcher/index.html) | [slac.stanford.edu](https://www.slac.stanford.edu/grp/ssrl/spear/epics/extensions/ChannelWatcher/index.html)
 MASAR | Machine Snapshot, Archive and Restore | [github.com](https://github.com/epics-base/masarService) | [epics.anl.gov (pdf)](https://epics.anl.gov/meetings/2013-10/3%20-%20Other%20Services/4%20-%20MASAR%20Service.pdf)
 NameServer | Channel Access Name Server | [github.com](https://github.com/epics-extensions/ca-nameserver) | [epics.anl.gov](https://epics.anl.gov/extensions/nameserver/index.php)
 PVA Gateway | PV Access gateway | [github.com](https://github.com/epics-base/pva2pva) | [github.io](https://mdavidsaver.github.io/p4p/gw.html)
@@ -149,14 +150,44 @@ NetChannelAccess | CA libraries and Gateway in native C# | [github.com](https://
 IDL | CA client libraries and scripts for IDL via EZCA | [github.com](https://github.com/epics-extensions/ezcaIDL) | [github.com](https://github.com/epics-extensions/ezcaIDL)
 igor2epics | CA client library for WaveMetrics IGOR Pro | [sourceforge.net](https://sourceforge.net/p/igor2epics/git/ci/master/tree/) | [sourceforge.net](https://sourceforge.net/p/igor2epics/wiki/Home/)
 Node EPICS **UNMAINTAINED**| EPICS CA for node.js | [github.com](https://github.com/RobbieClarken/node-epics) | [github.com](https://github.com/RobbieClarken/node-epics)
+SDDS | **ARCHIVED** The Self-Describing Data Sets analysis package | [github.com](https://github.com/veprbl/epics-sdds) | [aps.anl.gov](https://www.aps.anl.gov/Accelerator-Operations-Physics/Software)
 
 
+## IOC Database and Module Management Tools
+| Name | Description | Source Code | Documentation |
+| ---- | ----------- | ----------- | ------------- |
+MSI | Macro substitution and include tool (in Base from 3.14) | [github.com](https://github.com/epics-base) | [epics.anl.gov](https://epics.anl.gov/extensions/msi/index.php)
+dbVerbose | Verbose database filter |  | [apics.anl.gov](https://epics.anl.gov/extensions/dbVerbose/index.php)
+pyExpander | Python macro processing tool |  | [sourceforge.io](https://pyexpander.sourceforge.io/)
+pymsi | Python replacement for MSI |  | 
+E3 | ESS EPICS Environment Build System (Not limited to ESS) | [github.com](https://github.com/icshwi/e3) | [gitlab.esss.lu.se](https://gitlab.esss.lu.se/e3/e3) | [e3.pages.esss.lu.se](http://e3.pages.esss.lu.se)
+SUMO | SUpport MOdule Manager |[sourceforge.net](https://sourceforge.net/p/epics-sumo/mercurial/ci/default/tree/) | [sourceforge.io](https://epics-sumo.sourceforge.io/)
+tdct | Visual hierarchical Database Configuration Tool, with configurable symbols |  | [http://isacwserv.triumf.ca](http://isacwserv.triumf.ca/epics/tdct/)
+VDCT | Visial Database Configuration Tool for EPICS databases | [github.com](https://github.com/epics-extensions/VisualDCT) | [github.com](https://github.com/epics-extensions/VisualDCT)
+
+## CA Server Interfaces and Applications
+| Name | Description | Source Code | Documentation |
+| ---- | ----------- | ----------- | ------------- |
+CAS | Channel Access Server Library | [github.com](https://github.com/epics-modules/pcas) | [epics.anl.gov](https://epics.anl.gov/extensions/cas/index.php)
+CaSnooper | Channel Access Search Request Diagnostic Tool | [epics.anl.gov](https://epics.anl.gov/extensions/caSnooper/index.php) | [epics.anl.gov](https://epics.anl.gov/extensions/caSnooper/index.php)
+caxy | CA tunneling over ssh | [github.com](https://github.com/till-s/caxy) | [github.io](https://till-s.github.io/caxy/)
+JCAS | Pure Java CA server library | [sourceforge,net](https://sourceforge.net/projects/epics-jca/) | [sourceforge.net](https://epics-jca.sourceforge.net/)
+CAPod | Channel Access projects for Apple iOS devices | [sourceforge.net](https://sourceforge.net/projects/capod/) | [sourceforge.net](https://sourceforge.net/projects/capod/)
+PCASpy | Python bindings for the CA server | [github.com](https://github.com/paulscherrerinstitute/pcaspy) | [readthedocs.io](https://pcaspy.readthedocs.io/en/latest/)
+CAEX | Channel Access Examples | [epics.anl.gov](https://epics.anl.gov/extensions/caex/index.php) | [epics.anl.gov](https://epics.anl.gov/extensions/caex/index.php)
+Kryten | Tool to run commands on PV changes | [github.com](https://github.com/andrewstarritt/kryten) | [github.com](https://github.com/andrewstarritt/kryten/tree/master/documentation)
 
 ## Other Tools and Libraries
 | Name | Description | Source Code | Documentation |
 | ---- | ----------- | ----------- | ------------- |
-| MSI | Macro substitution and include tool (in Base from 3.14) | [github.com](https://github.com/epics-base) | [epics.anl.gov](https://epics.anl.gov/extensions/msi/index.php)
-| dbVerbose | Verbose database filter |  | [apics.anl.gov](https://epics.anl.gov/extensions/dbVerbose/index.php)
+CA Shark | Wireshark dissector plugin for EPICS protocols | [github.com](https://github.com/mdavidsaver/cashark/tree/master) | [github.com](https://github.com/mdavidsaver/cashark/tree/master)
+Wireshark CA | CA plug-in for Wireshark | [wireshark.org](https://www.wireshark.org/download/) | [www-linac.kek.jp](http://www-linac.kek.jp/cont/epics/wireshark/)
+CMLOG | Common Message Logging System |  | [jlab.org](https://www.jlab.org/cdev/cmlog.html)
+EdlBuild | Create EDM screens in Perl scripts |  | [isacwserv.triumf.ca](http://isacwserv.triumf.ca/epics/edlbuild/TRIUMFedlbuild.html)
+EPICS GNU regex | The GNU regex library built with EPICS Makefiles | [epics.anl.gov](https://epics.anl.gov/extensions/gnuregex/index.php) | [epics.anl.gov](https://epics.anl.gov/extensions/gnuregex/index.php)
+ParseCASW | CA beacon anomaly diagnostic tool | [epics.anl.gov](https://epics.anl.gov/extensions/ParseCASW/index.php) | [epics.anl.gov](https://epics.anl.gov/extensions/ParseCASW/index.php)
+procServe | Process Server with Telnet Console | [github.com](https://github.com/ralphlange/procServ) | [github.com](https://github.com/ralphlange/procServ)
+PViewer | Python 1D and 2D viewer | [epics.anl.gov](https://epics.anl.gov/bcda/dataVis/pviewer.html) | [epics.anl.gov](https://epics.anl.gov/bcda/dataVis/pviewer.html)
 
 
 ## (High Level) Application Packages
@@ -165,5 +196,4 @@ Node EPICS **UNMAINTAINED**| EPICS CA for node.js | [github.com](https://github.
 OpenXAL | Accelerator physics application framework (Java) | [github.com](https://github.com/openxal) | [github.io](https://openxal.github.io/)
 Matlab Middle Layer | Accelerator Physics Toolbox | [github.com](https://github.com/atcollab/MML) | [github.com](https://github.com/atcollab/MML)
 React Automation Studio | Web-based EPICS interface | [github.com](https://github.com/React-Automation-Studio/React-Automation-Studio) | [github.com](https://github.com/React-Automation-Studio/React-Automation-Studio)
-
 
