@@ -1714,19 +1714,18 @@ library.
 Dependant library names appear in the following order on a library link
 line:
 
-1.  <libname>_LIBS
-2.  <libname>_LIBS_<osclass> or <libname>_LIBS_DEFAULT
-3.  LIB_LIBS
-4.  LIB_LIBS_<osclass> or LIB_LIBS_DEFAULT
-5.  USR_LIBS
-6.  USR_LIBS_<osclass> or USR_LIBS_DEFAULT
-7.  <libname>_SYS_LIBS
-8.  <libname>_SYS_LIBS_<osclass> or
-    <libname>_SYS_LIBS_DEFAULT
-9.  LIB_SYS_LIBS
-10. LIB_SYS_LIBS_<osclass> or LIB_SYS_LIBS_DEFAULT
-11. USR_SYS_LIBS
-12. USR_SYS_LIBS_<osclass> or USR_SYS_LIBS_DEFAULT
+1.  `<libname>_LIBS`
+2.  `<libname>_LIBS_<osclass>` or `<libname>_LIBS_DEFAULT`
+3.  `LIB_LIBS`
+4.  `LIB_LIBS_<osclass>` or `LIB_LIBS_DEFAULT`
+5.  `USR_LIBS`
+6.  `USR_LIBS_<osclass>` or `USR_LIBS_DEFAULT`
+7.  `<libname>_SYS_LIBS`
+8.  `<libname>_SYS_LIBS_<osclass>` or `<libname>_SYS_LIBS_DEFAULT`
+9.  `LIB_SYS_LIBS`
+10. `LIB_SYS_LIBS_<osclass>` or `LIB_SYS_LIBS_DEFAULT`
+11. `USR_SYS_LIBS`
+12. `USR_SYS_LIBS_<osclass>` or `USR_SYS_LIBS_DEFAULT`
 
 #### Specifying library DLL file names (deprecated)
 
@@ -2363,24 +2362,23 @@ System libraries to be used for any arch that does not have a
 product.
 ```
 
-#### The order of dependant libraries {#the-order-of-dependant-libraries-2}
+#### The order of dependant libraries
 
 Dependant library names appear in the following order on a product link
 line:
 
-1.  <prodname>_LIBS
-2.  <prodname>_LIBS_<osclass> or <prodname>_LIBS_DEFAULT
-3.  PROD_LIBS
-4.  PROD_LIBS_<osclass> or PROD_LIBS_DEFAULT
-5.  USR_LIBS
-6.  USR_LIBS_<osclass> or USR_LIBS_DEFAULT
-7.  <prodname>_SYS_LIBS
-8.  <prodname>_SYS_LIBS_<osclass> or
-    <prodname>_SYS_LIBS_DEFAULT
-9.  PROD_SYS_LIBS
-10. PROD_SYS_LIBS_<osclass> or PROD_SYS_LIBS_DEFAULT
-11. USR_SYS_LIBS
-12. USR_SYS_LIBS_<osclass> or USR_SYS_LIBS_DEFAULT
+1.  `<prodname>_LIBS`
+2.  `<prodname>_LIBS_<osclass>` or `<prodname>_LIBS_DEFAULT`
+3.  `PROD_LIBS`
+4.  `PROD_LIBS_<osclass>` or `PROD_LIBS_DEFAULT`
+5.  `USR_LIBS`
+6.  `USR_LIBS_<osclass>` or `USR_LIBS_DEFAULT`
+7.  `<prodname>_SYS_LIBS`
+8.  `<prodname>_SYS_LIBS_<osclass>` or `<prodname>_SYS_LIBS_DEFAULT`
+9.  `PROD_SYS_LIBS`
+10. `PROD_SYS_LIBS_<osclass>` or `PROD_SYS_LIBS_DEFAULT`
+11. `USR_SYS_LIBS`
+12. `USR_SYS_LIBS_<osclass>` or `USR_SYS_LIBS_DEFAULT`
 
 #### Specifying product version number
 
