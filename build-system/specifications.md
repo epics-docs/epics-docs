@@ -600,16 +600,20 @@ manual always uses gnumake in the examples.
 
 ### Frequently used Make commands
 
-NOTE: It is possible to invoke the following commands for a single
+```{admonition} NOTE
+It is possible to invoke the following commands for a single
 target architecture by appending `<arch>` to the target in the command.
+```
 
 The most frequently used make commands are:
 
 gnumake
 
-:   This rebuilds and installs everything that is not up to date. NOTE:
-    Executing gnumake without arguments is the same as "gnumake
-    install"
+:   This rebuilds and installs everything that is not up to date.
+
+    ```{admonition} NOTE
+    Executing gnumake without arguments is the same as `gnumake install`
+    ```
 
 gnumake help
 
@@ -635,7 +639,10 @@ gnumake<arch>
     for the host arch and then (if different) for the specified target
     arch.
 
-    NOTE: This is the same as `gnumake install.<arch>`
+    ```{admonition} NOTE
+    This is the same as `gnumake install.<arch>`
+    ```
+
 
 gnumake clean
 
@@ -1280,7 +1287,9 @@ library suffix appropriate for the library type and target arch (e.g.
 .a, .so, .lib, .dll) will be appended to the filename when the file is
 created.
 
-*vxWorks and RTEMS Note: Only archive libraries are created.*
+```{admonition} vxWorks and RTEMS
+Only archive libraries are created.
+```
 
 ```{admonition} Shared libraries
 Shared libraries can be built for any or all
@@ -1653,7 +1662,8 @@ definitions include the lines:
 
 -include ../baseLIBOBJS <libname>_OBJS += $(LIBOBJS)
 
-*Note: vxWorks applications created by `makeBaseApp.pl` from 3.14 Base
+```{admonition} Note:
+vxWorks applications created by `makeBaseApp.pl` from 3.14 Base
 releases no longer have a file named baseLIBOBJS. Base record and
 device support now exists in archive libraries.*
 ```
@@ -2783,8 +2793,11 @@ In this example, all the class files created by the current Makefile's
 `JAVA +=` definitions, are placed into a file named `mytest1.jar`. A
 manifest file will be automatically generated for the jar.
 
-Note: `$(INSTALL_CLASSES)` is set to `$(addprefix $(INSTALL_JAVA)/,$(CLASSES))`
+
+```{admonition} Note
+`$(INSTALL_CLASSES)` is set to `$(addprefix $(INSTALL_JAVA)/,$(CLASSES))`
 in the EPICS base configure files.
+```
 
 ```makefile
 JAR = mytest1.jar
