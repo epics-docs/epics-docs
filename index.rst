@@ -33,6 +33,23 @@ There are two kinds of subprojects:
    Usually only one version exists ('latest').
 
 
+How this documentation is organized
+-----------------------------------
+
+Each page is labeled by the intended audienece.
+You may also directly use related links to see documents which match you the most.
+
+    +------------------------+----------------------------------------------------------------------+
+    | **Beginner**           | :ref:`Index<beginner_docs>`                                          |
+    +------------------------+----------------------------------------------------------------------+
+    | **User**               | :ref:`Index<user_docs>`                                              |
+    +------------------------+----------------------------------------------------------------------+
+    | **Developer**          | :ref:`Index<developer_docs>`                                         |
+    +------------------------+----------------------------------------------------------------------+
+    | **Advanced**           | :ref:`Index<advanced_docs>`                                          |
+    +------------------------+----------------------------------------------------------------------+
+
+
 .. toctree::
    :hidden:
 
