@@ -1,5 +1,5 @@
 # Related Software
-This page attempts to list all EPICS-related source code and documentation outside of [EPICS Base](https://github.com/epics-base/). If you find a link is incorrect or missing, please [submit an issue](https://github.com/epics-docs/epics-docs/issues/new/choose) or pull-request with a fix on the [epics-docs](https://github.com/epics-docs/epics-docs) repository. 
+This page attempts to list all EPICS-related source code and documentation outside of [EPICS Base](https://git.launchpad.net/epics-base). If you find a link is incorrect or missing, please [submit an issue](https://github.com/epics-docs/epics-docs/issues/new/choose) or pull-request with a fix on the [epics-docs](https://github.com/epics-docs/epics-docs) repository. 
 
 ## IOC Support Modules
 These support modules are meant to be built into an IOC. See also the [epics-modules](https://github.com/epics-modules) project on github, there may be something there that has not yet been placed in this list.
