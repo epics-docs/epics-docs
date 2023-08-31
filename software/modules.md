@@ -75,10 +75,10 @@ Graphical User Interface tools are an integral part of any EPICS installation. B
 CS-Studio (Phoebus) | Control System Studio (Java) | [github.com](https://github.com/ControlSystemStudio/phoebus) | [readthedocs.io](https://control-system-studio.readthedocs.io/en/latest/)
 caQtDM | A display manager in the spirit of MEDM (C++, Qt) | [github.com](https://github.com/caqtdm/caqtdm) | [github.io](https://caqtdm.github.io/)
 EDM | Extensible Display Manager | [github.com](https://github.com/gnartohl/edm) | [controlssoftware.sns.ornl.gov](https://controlssoftware.sns.ornl.gov/edm/)
+EPICS Qt | EPICS Qt framework | [github.com](https://github.com/qtepics) | [github.io](https://qtepics.github.io/)
 MEDM | Motif editor and display manager | [github.com](https://github.com/epics-extensions/medm) | [epics.anl.gov](https://controlssoftware.sns.ornl.gov/edm/)
 Probe | Motif channel monitoring program | [github.com](https://github.com/epics-extensions/probe) | [epics.anl.gov](https://epics.anl.gov/extensions/probe/index.php)
 PyDM | A Python-based display manager | [github.com](https://github.com/slaclab/pydm) | [github.io](https://slaclab.github.io/pydm/)
-EPICS Qt | EPICS Qt framework | [github.com](https://github.com/qtepics) | [github.io](https://qtepics.github.io/)
 React Automation Studio | React-based display manager | [github.com](https://github.com/React-Automation-Studio/React-Automation-Studio) | [github.com](https://github.com/React-Automation-Studio/React-Automation-Studio)
 Strip Tool | Strip-chart plotting tool | [github.com](https://github.com/epics-extensions/StripTool) | [epics.anl.gov](https://epics.anl.gov/extensions/StripTool/index.php)
 
