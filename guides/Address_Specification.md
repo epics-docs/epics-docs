@@ -4,18 +4,17 @@
 Address parameters specify where an input record obtains input,
 where an output record obtains its desired output values,
 and where an output record writes its output.
-They are used to identify links between records,
+These are used to identify links between records,
 and to specify the location of hardware devices.
 The most common link fields are OUT, an output link,
 INP, an input link,
 and DOL (desired output location), also an input link.
 
-There are three basic types of address specifications,
-which can appear in these fields:
+Three basic types of address specifications can appear in these fields:
 hardware addresses, database addresses, and constants.
 Note that not all links support all three types, though some do.
-However, this doesn't hold true for algorithmic records,
-which cannot specify hardware addresses.
+This doesn't hold true for algorithmic records,
+which can't specify hardware addresses.
 Algorithm records are records like the Calculation, PID, and Select records.
 These records are used to process values retrieved from other records.
 Consult the documentation for each record.
@@ -26,11 +25,11 @@ The interface between EPICS process database logic and hardware drivers
 is indicated in two fields of records that support hardware interfaces:
 DTYP and INP/OUT.
 The DTYP field is the name of the device support entry table
-that is used to interface to the device.
+that's used to interface to the device.
 The address specification is dictated by the device support.
 Some conventions exist for several buses that are listed below.
 Lately, more devices have just opted to use a string
-that is then parsed by the device support as desired.
+that's then parsed by the device support as desired.
 This specification type is called INST I/O.
 The other conventions listed here include:
 VME, Allen-Bradley, CAMAC, GPIB, BITBUS, VXI, and RF.
@@ -41,7 +40,7 @@ from the device support code or document.
 ### INST
 
 
-The INST I/O specification is a string that is parsed by the device
+The INST I/O specification is a string that's parsed by the device
 support. The format of this string is determined by the device support.
 
 @*parm*
@@ -51,7 +50,7 @@ support. The format of this string is determined by the device support.
 ### VME bus
 
 The VME address specification format differs between the various devices.
-In all of these specifications the '#' character designates a hardware address.
+In all these specifications the '#' character designates a hardware address.
 The three formats are:
 
 #C*x* S*y* @*parm*
@@ -114,7 +113,7 @@ no channel was necessary.
 ### Others
 
 The GPIB, BITBUS, RF, and VXI card-types
-have been added to thesupported I/O cards.
+have been added to the supported I/O cards.
 A brief description of the address format for each follow.
 For a further explanation, see the specific documentation on each card.
 
@@ -128,7 +127,7 @@ For a further explanation, see the specific documentation on each card.
 
 #L*a* N*b* P*c* S*d* @*parm*
 >>For BITBUS I/O
->>- L precedes the link *a*, i.e., the VME bitbus interface
+>>- L precedes the link *a*, that is, the VME bitbus interface
 >>- N precedes the bitbus node *b*
 >>- P precedes the port on node *c*
 >>- S precedes the signal on port *d*
@@ -159,7 +158,7 @@ The format in each case is the same:
 
 `<RecordName>.<FieldName>`
 
-where RecordName is simply the name of the record being referenced,
+where RecordName is the name of the record being referenced,
 '.' is the separator between the record name and the field name,
 and FieldName is the name of the field within the record.
 
@@ -171,7 +170,7 @@ The record name can be a mix of the following:
 The field name is always upper case.
 If no field name is specified as part of an address,
 the value field (VAL) of the record is assumed.
-Forward processing links do not need to include the field name
+Forward processing links don't need to include the field name
 because no value is returned when a forward processing link is used;
 therefore, a forward processing link need only specify a record name.
 
@@ -196,7 +195,7 @@ for information about that record's device support.
 
 Input link fields and desired output location fields can specify a constant
 instead of a hardware or database address.
-A constant, which is not really an address,
+A constant, which isn't really an address,
 can be an integer value in whatever format
 (hex, decimal, etc.) or a floating-point value.
 The value field is initialized to the constant when the database is initialized,
@@ -211,18 +210,18 @@ and the values can be changed by modifying the value field, not the link field.
 Thus, because the calc record uses its value fields
 as the operands of its expression, the constant becomes part of the calculation.
 
-When nothing is specified in a link field, it is a NULL link.
+When nothing is specified in a link field, it's a NULL link.
 Before Release 3.13, the value fields associated with the NULL link
 were initialized with the value of zero.
-From Release 3.13 onwards,
-the value fields associated with the links are not initialized.
+From Release 3.13 onward,
+the value fields associated with the links aren't initialized.
 
 A constant may also be used in the desired output location
-or DOL field of an output record.
-In such a case, the initial desired output value (VAL) will be that constant.
+or `DOL` field of an output record.
+In such a case, the initial desired output value (`VAL`) will be that constant.
 Any specified conversions are performed on the value
-before it is written as long as the device support module supports conversions
-(the Soft Channel device support routine does not perform conversions).
+before it's written as long as the device support module supports conversions
+(the Soft Channel device support routine doesn't perform conversions).
 The desired output value can be changed by an operator at run-time
 by writing to the value field.
 
