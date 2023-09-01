@@ -1654,8 +1654,8 @@ Combined object files will be used in builds of the library for archs without a
 
 Previous versions of epics (3.13 and before) accepted definitions like:
 
-```
-LIBOBJS += <support>_BIN)/xxx.o  #TODO
+```makefile
+LIBOBJS += $(<support>_BIN)/xxx.o
 ```
 
 These are gathered together in files such as baseLIBOBJS. To use such
