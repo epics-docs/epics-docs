@@ -143,7 +143,7 @@ html_logo = "images/EPICS_green_logo.svg"
 
 extra_labels = {
     'audience': {
-        'allowed_values': ['advanced', 'developers', 'users', 'beginners', 'all'],
+        'allowed_values': ['advanced', 'developer', 'user', 'beginner', 'all'],
         'visible': True,
         'label': 'Intended audience: ',
     }
