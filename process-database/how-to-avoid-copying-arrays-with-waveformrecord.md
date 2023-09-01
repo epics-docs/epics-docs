@@ -89,7 +89,7 @@ static long init_record(waveformRecord *prec)
 {
     struct devicePvt *priv;
     if(prec->ftvl!=menuFtypeSHORT) {
-        errlogPrintf("%s.FTVL must be set to SHORT for this example\\n", prec->name);
+        errlogPrintf("%s.FTVL must be set to SHORT for this example\n", prec->name);
         return 0;
     }
 
