@@ -79,6 +79,24 @@ For example:
 
   [Diátaxis documentation]: https://diataxis.fr/
 
+
+##### Labeling the document
+
+To suggest the intended audience, we provide a mechanism to label documents.
+There are `beginner`, `user`, `developer`, `advanced` and `all` roles.
+
+To label the article,
+add line specifying labels under the title in the new `.rst` file
+for example:
+
+``` 
+:audience:`beginner, user, developer`
+```
+
+After you create the new document,
+please add it under the toctree of `index_*.rst`.
+If it contains the right role, it will be included in right index file.
+
 #### Forking the repository
 
 Once logged in and viewing the page on GitHub you wish to edit,
