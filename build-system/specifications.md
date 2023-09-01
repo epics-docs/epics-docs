@@ -3165,14 +3165,21 @@ appropriately numbered snippets into the directory.
 Given the following directories and snippets:
 
 ```
-/global/st.cmd.d: (G=GLOBAL)
-
-:   D10_init 20_environment 30_drivers D40_settings 70_start-ioc
+/global/st.cmd.d/
+├── D10_init
+├── 20_environment
+├── 30_drivers
+├── D40_settings
+└── 70_start-ioc
 ```
 
 ```
-../st.cmd.d: (L=LOCAL) D10_init 40_settings 40_settings~
-30_another-driver R70_start-my-ioc
+../st.cmd.d/
+├── D10_init
+├── 40_settings
+├── 40_settings~       # backup file
+├── 30_another-driver
+└── R70_start-my-ioc
 ```
 
 And the following Makefile declaration:
