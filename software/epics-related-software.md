@@ -141,6 +141,8 @@ PEZCA | A Perl binding to EZCA |  |
 | Name | Description | Source Code | Documentation | Protocol |
 | ---- | ----------- | ----------- | ------------- | -------- |
 aioca         | Asynchronous EPICS Channel Access client for asyncio and Python | [github.com](https://github.com/dls-controls/aioca) | [github.io](https://dls-controls.github.io/aioca/master/contents.html) | CA
+CaChannel     | CaChannel | [github.com](https://github.com/CaChannel/CaChannel) | [readthedocs.io](https://cachannel.readthedocs.org) | CA
+caffi         | Channel Access Foreign Function Interface | [github.com](https://github.com/CaChannel/caffi) | [readthedocs.io](https://caffi.readthedocs.org) | CA
 caproto       | Pure-python channel access | [github.com](https://github.com/caproto/caproto)        | [github.io](https://caproto.github.io/caproto/)                           | CA 
 cothread      | Designed for cooperative threading (C, Python) | [github.com](https://github.com/dls-controls/cothread)  | [readthedocs.io](https://cothread.readthedocs.io/en/latest/cothread.html)      | CA 
 p4p           | Python wrapper around PVA client and server | [github.com](https://github.com/mdavidsaver/p4p)        | [github.io](https://mdavidsaver.github.io/p4p/)                           | PVA 
