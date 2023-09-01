@@ -47,6 +47,7 @@ There are two kinds of subprojects:
    getting-started/linux-packages.rst
    getting-started/creating-ioc
    getting-started/installation-windows
+   getting-started/epics-macosx-firewall
    getting-started/setup-softioc-framework-linux
    getting-started/console-logging-vme-softioc
    getting-started/save-restore-tools.md
