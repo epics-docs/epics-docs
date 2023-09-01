@@ -8,12 +8,12 @@ The scan task, which detects these alarms,
 is also capable of generating a message for each change of alarm state.
 The types of alarms available fall into these categories:
 scan alarms, read/write alarms, limit alarms, and state alarms.
-Some of these alarms are configured by the user,
-and some are automatic which means that they are called
+Some of these alarms are configured by the user.
+Others are automatic which means that they're called
 by the record support routines on certain conditions,
-and cannot be changed orconfigured by the user.
+and can't be changed or configured by the user.
 
-## Alarm Severity
+## Alarm severity
 
 An alarm *severity* is used to give weight to the current alarm status.
 There are four severities:
@@ -24,7 +24,7 @@ There are four severities:
   - INVALID
 
 NO_ALARM means no alarm has been triggered.
-An alarm state that needs attention but is not dangerous is a MINOR alarm.
+An alarm state that needs attention but isn't dangerous is a MINOR alarm.
 In this instance the alarm state is meant to give a warning to the operator.
 A serious state is a MAJOR alarm.
 In this instance the operator should give immediate attention to the situation 
@@ -46,7 +46,7 @@ In addition to the MAJOR and MINOR severity,
 the user can choose the NO_ALARM severity,
 in which case no alarm is generated for that state.
 
-For the other alarm types (i.e., scan, read/write),
+For the other alarm types (that is, scan, read/write),
 the severity is always INVALID and not configurable by the user.
 
 ## Alarm Status
@@ -55,7 +55,7 @@ Alarm status is a field common to all records.
 The field is defined as an enumerated field.
 The possible states are listed below.
 
-   - NO_ALARM: This record is not in alarm
+   - NO_ALARM: This record isn't in alarm
    - READ: An INPUT link failed in the device support
    - WRITE: An OUTPUT link failed in the device support
    - HIHI: An analog value limit alarm
@@ -64,7 +64,7 @@ The possible states are listed below.
    - LOW: An analog value limit alarm
    - STATE: An digital value state alarm
    - COS: An digital value change of state alarm
-   - COMM: A device support alarm that indicates the device is not communicating
+   - COMM: A device support alarm that indicates the device isn't communicating
    - TIMEOUT: A device sup alarm that indicates the asynchronous device timed out
    - HWLIMIT: A device sup alarm that indicates a hardware limit alarm
    - CALC: A record support alarm for calculation records indicating a bad calculation
@@ -81,7 +81,7 @@ The possible states are listed below.
 There are a number of issues with this field and menu.
 
 -  The maximum enumerated strings passed through channel access is 16,
-   so nothing past SOFT is seen if the value is not requested by Channel Access
+   so nothing past SOFT is seen if the value isn't requested by Channel Access
    as a string.
 
 -  Only one state can be true at a time,
@@ -91,7 +91,7 @@ There are a number of issues with this field and menu.
    The hardware could have some combination of problems and there is no
    way to see this through the interface provided.
 
--  The list is not complete.
+-  The list isn't complete.
 
 -  In short, the ability to see failures through the `STAT` field are limited.
    Most problems in the hardware, configuration, or communication
@@ -102,7 +102,7 @@ There are a number of issues with this field and menu.
    diagnostic information.
    This is a good place to start in these cases.
 
-## Alarm Conditions Configured in the Database
+## Alarm conditions configured in the database
 
 When you have a valid value,
 there are fields in the record that allow the user
@@ -110,7 +110,7 @@ to configure off normal-conditions.
 For analog values these are limit alarms.
 For discrete values, these are state alarms.
 
-### Limit Alarms
+### Limit alarms
 
 For analog records 
 (this includes such records as the stepper motor record),
@@ -133,9 +133,9 @@ so that a warning can be set off before the value goes into a dangerous conditio
 Analog records also contain a hysteresis field,
 which is also used when determining limit violations.
 The hysteresis field is the deadband around the alarm limits.
-The deadband keeps a signal that is hovering at the limit
+The deadband keeps a signal that's hovering at the limit
 from generating too many alarms.
-Let's take an example (*Figure 1*) where the range is –100 to 100 volts,
+Take an example (*Figure 1*) where the range is –100 to 100 volts,
 the high alarm limit is 30 Volts, and the hysteresis is 10 Volts.
 If the value is normal and approaches the HIGH alarm limit,
 an alarm is generated when the value reaches 30 Volts.
@@ -148,7 +148,7 @@ Only when the value drops to 20 will this record return to normal state.
 ![Figure 1](media/dbconcepts/image11.png)
 **Figure 1**
 
-### State Alarms
+### State alarms
 
 For discrete values there are configurable state alarms.
 In this case a user may configure a certain state to be an alarm condition.
@@ -161,14 +161,14 @@ and the off state a STATE alarm of MAJOR severity.
 
 Discrete records also have a field
 in which the user can specify the severity of an unknown state
-to NO_ALARM, MINOR or MAJOR.
-Thus, the unknown state alarm is not automatic.
+to NO_ALARM, MINOR, or MAJOR.
+Thus, the unknown state alarm isn't automatic.
 
 Discrete records also have a field,
 which can specify an alarm when the record's state changes.
 Thus, an operator can know when the record's alarm state has changed.
 If this field specifies NO_ALARM,
-then a change of state will not trigger a change of state alarm.
+then a change of state won't trigger a change of state alarm.
 However, if it specifies either MINOR or MAJOR,
 a change of state will trigger an alarm with the corresponding severity.
 
