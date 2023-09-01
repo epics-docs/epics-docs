@@ -47,6 +47,11 @@ There are two kinds of subprojects:
    getting-started/linux-packages.rst
    getting-started/creating-ioc
    getting-started/installation-windows
+   getting-started/setup-softioc-framework-linux
+   getting-started/console-logging-vme-softioc
+   getting-started/save-restore-tools.md
+   getting-started/configure-ca
+   getting-started/channel-access-reach-multiple-soft-iocs-linux
 
 .. toctree::
    :maxdepth: 1
@@ -59,17 +64,13 @@ There are two kinds of subprojects:
    Application Developer's Guide (web version, preliminary) <appdevguide/AppDevGuide>
    process-database/EPICS_Process_Database_Concepts.rst
    process-database/add-new-breakpoint-table.md
+   Database Examples (external link) <https://github.com/epics-docs/database-examples>
 
 .. toctree::
    :maxdepth: 1
-   :caption: Modules
-
-   ASYN <https://epics.anl.gov/modules/soft/asyn/>
-   StreamDevice <https://paulscherrerinstitute.github.io/StreamDevice/>
-   Autosave <https://epics.anl.gov/bcda/synApps/autosave/autosave.html>
-   Soft Support Database <https://epics-controls.org/resources-and-support/modules/soft-support/>
-   Hardware Support Database <https://epics-controls.org/resources-and-support/modules/hardware-support/>
-   Extensions <https://epics-controls.org/resources-and-support/extensions/>
+   :caption: EPICS Related Software
+   
+   software/epics-related-software
 
 .. toctree::
    :maxdepth: 1
@@ -110,10 +111,19 @@ There are two kinds of subprojects:
 
    contributing/HowToWorkWithTheEpicsRepository
    CONTRIBUTING
+   Installing EPICS on Raspberry PI (External) <https://prjemian.github.io/epicspi/>
+   Area Detector: Installation Guide (External) <https://areadetector.github.io/master/install_guide.html>
 
 .. toctree::
    :maxdepth: 1
-   :caption: Community
+   :caption: Software
+
+   specs/specs
+   software/base
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Training
 
    Training Material <https://epics-controls.org/resources-and-support/documents/training/>
    community/how-to-run-an-epics-collaboration-meeting.rst
