@@ -77,6 +77,8 @@ There are two kinds of subprojects:
    build-system/configuring-vxworks-6_x
    build-system/vxworks6_tornado
    build-system/specifications
+   Installing EPICS on Raspberry PI (External) <https://prjemian.github.io/epicspi/>
+   Area Detector: Installation Guide (External) <https://areadetector.github.io/master/install_guide.html>
 
 .. toctree::
    :maxdepth: 1
@@ -106,8 +108,6 @@ There are two kinds of subprojects:
 
    contributing/HowToWorkWithTheEpicsRepository
    CONTRIBUTING
-   Installing EPICS on Raspberry PI (External) <https://prjemian.github.io/epicspi/>
-   Area Detector: Installation Guide (External) <https://areadetector.github.io/master/install_guide.html>
 
 .. toctree::
    :maxdepth: 1
