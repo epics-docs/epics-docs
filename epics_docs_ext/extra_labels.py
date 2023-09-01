@@ -107,7 +107,6 @@ class ExtraLabelTree(TocTree):
 
         return result
 
-
 def filtered_process(app, doctree, docname):
     """
     Filter the entries in the toctree for specific extra labels
@@ -147,7 +146,7 @@ def filtered_process(app, doctree, docname):
         for ent in entries:
             ent_name = ent[1]
 
-            if ent_name in env.doc_extralabels:
+            if hasattr(env, 'doc_extralabels') and ent_name in env.doc_extralabels:
                 ent_extralabels = env.doc_extralabels[ent_name]
 
                 _add = [False for _ in range(len(_filter.keys()))]

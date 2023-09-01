@@ -36,7 +36,6 @@ extensions = [
     # Markdown parser
     'myst_parser',
     'epics_docs_ext.extra_labels'
-    # 'epics_docs_ext.audience'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
