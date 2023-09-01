@@ -2983,7 +2983,7 @@ JAR_PACKAGES += <name>
 Names of java packages to be installed and added to the created jar
 file.
 
-#### Example 2 1
+#### Example 3
 
 In this example, all the class files created by the current Makefile's
 `JAVA +=` definitions, are placed into a file named `mytest1.jar`. A
@@ -3000,7 +3000,7 @@ JAR = mytest1.jar
 JAR_INPUT = $(INSTALL_CLASSES)
 ```
 
-#### Example 2 2
+#### Example 4
 
 In this example, three class files are created and placed into a new jar
 archive file named `mytest2.jar`. An existing manifest file, `mytest2.mf` is
@@ -3038,7 +3038,7 @@ USR_JAVAHFLAGS += <name>
 
 The `javah` option `<name>` will be used on the `javah` tool command line.
 
-#### Example 2 2
+#### Example 5
 
 In this example, the C header `xx_yy_zz.h` will be created in the
 `$(COMMON_DIR)` subdirectory from the class `xx.yy.zz` (i.e. the java class
@@ -3155,7 +3155,7 @@ the current value when assembling is done.
 * `OUTPUTFILE` Name of the generated file
 * `SNIPPETFILE` Name of the current snippet
 
-#### Example {#example-2-3}
+#### Example 6
 
 This mechanism can be used to create an IOC startup file from snippets
 in a global and an application specific directory, allowing applications
