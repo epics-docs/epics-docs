@@ -47,6 +47,7 @@ There are two kinds of subprojects:
    getting-started/linux-packages.rst
    getting-started/creating-ioc
    getting-started/installation-windows
+   getting-started/best-practices
 
 .. toctree::
    :maxdepth: 1
