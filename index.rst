@@ -63,6 +63,7 @@ There are two kinds of subprojects:
    Application Developer's Guide (pdf, 3.16.2) <https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide.pdf>
    Application Developer's Guide (web version, preliminary) <appdevguide/AppDevGuide>
    process-database/EPICS_Process_Database_Concepts.rst
+   process-database/add-new-breakpoint-table.md
    Database Examples (external link) <https://github.com/epics-docs/database-examples>
 
 .. toctree::
