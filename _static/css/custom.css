@@ -1,7 +1,18 @@
+.wy-table-responsive table td, .wy-table-responsive table th {
+    white-space: inherit;
+}
+
 .wy-side-nav-search {
     background-color: #18334B;
 }
 
-.wy-side-nav-search input[type="text"] {
-    border-color: #18334b;
+a:hover {
+    color: #92a61f;
+}
+
+.wy-menu-vertical p.caption {
+    color: #92a61f;
+}
+.wy-nav-content {
+    width: 90%;
 }

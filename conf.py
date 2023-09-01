@@ -98,8 +98,6 @@ master_doc = 'index'
 html_theme_options = {
     'logo_only': True,
 }
-html_logo = "images/EPICS_white_logo_v02.png"
-
 
 # -- Redirections specifications ---------------------------------------------
 
@@ -138,7 +136,5 @@ redirects = {
         "../contributing/HowToWorkWithTheEpicsRepository.html",
     
     #"appdevguide/*": "appdevguide/*",
-    
-    "software/modules":
-        "../index.html",
 }
+html_logo = "images/EPICS_green_logo.svg"
