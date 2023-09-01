@@ -162,7 +162,7 @@ SDDS | **ARCHIVED** The Self-Describing Data Sets analysis package | [github.com
 | ---- | ----------- | ----------- | ------------- |
 dbVerbose | Verbose database filter | [apics.anl.gov](https://epics.anl.gov/extensions/dbVerbose/index.php) | [apics.anl.gov](https://epics.anl.gov/extensions/dbVerbose/index.php)
 MSI | Macro substitution and include tool (in Base from 3.14) | [github.com](https://github.com/epics-base) | [epics.anl.gov](https://epics.anl.gov/extensions/msi/index.php)
-E3 | ESS EPICS Environment Build System (Not limited to ESS) | [gitlab.esss.lu.se](https://gitlab.esss.lu.se/e3/e3) | [gitlab.esss.lu.se](https://gitlab.esss.lu.se/e3/e3) | [e3.pages.esss.lu.se](http://e3.pages.esss.lu.se)
+E3 | ESS EPICS Environment Build System (Not limited to ESS) | [gitlab.esss.lu.se](https://gitlab.esss.lu.se/e3/e3) | [e3.pages.esss.lu.se](http://e3.pages.esss.lu.se)
 pyExpander | Python macro processing tool | [sourceforge.io](https://pyexpander.sourceforge.io/index.html) | [sourceforge.io](https://sourceforge.net/p/pyexpander/code/ci/default/tree/)
 pymsi | Python replacement for MSI |  | 
 SUMO | SUpport MOdule Manager |[sourceforge.net](https://sourceforge.net/p/epics-sumo/mercurial/ci/default/tree/) | [sourceforge.io](https://epics-sumo.sourceforge.io/)
