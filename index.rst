@@ -77,6 +77,7 @@ There are two kinds of subprojects:
    build-system/configuring-vxworks-6_x
    build-system/vxworks6_tornado
    build-system/specifications
+   build-system/posix-threads-priority-scheduling-linux
 
 .. toctree::
    :maxdepth: 1
