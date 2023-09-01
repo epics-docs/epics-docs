@@ -2847,30 +2847,40 @@ source directory for the file.
 
 ### Win32 resource files
 
-Definitions of the form:
+Definitions of the following forms result in resource files (`*.res` files)
+being created from the specified `*.rc` resource definition script files and
+linked into the prods and/or libraries.
 
-| RCS += <name> Resource definition script files for all products and
-  libraries.
-| RCS_<osclass> += <name>
-| 
-| PROD_RCS += <name> Resource definition script files for all
-  products.
-| PROD_RCS_<osclass> += <name>
-| PROD_RCS_DEFAULT += <name>
-| 
-| LIB_RCS += <name> Resource definition script files for all
-  libraries.
-| LIB_RCS_<osclass> += <name>
-| LIB_RCS_DEFAULT += <name>
-| 
-| <name>_RCS += <name> Resource definition script files for
-  specified product or library.
-| <name>_RCS_<osclass> += <name>
-| <name>_RCS_DEFAULT += <name>
-| 
-| result in resource files (*.res files) being created from the
-  specified *.rc resource definition script files and linked into the
-  prods and/or libraries.
+```makefile
+RCS += <name> 
+RCS_<osclass> += <name>
+```
+
+Resource definition script files for all products and libraries.
+
+```makefile
+PROD_RCS += <name> 
+PROD_RCS_<osclass> += <name>
+PROD_RCS_DEFAULT += <name>
+```
+
+Resource definition script files for all products.
+
+```makefile
+LIB_RCS += <name> 
+LIB_RCS_<osclass> += <name>
+LIB_RCS_DEFAULT += <name>
+```
+
+Resource definition script files for all libraries.
+
+```makefile
+<name>_RCS += <name> 
+<name>_RCS_<osclass> += <name>
+<name>_RCS_DEFAULT += <name>
+```
+
+Resource definition script files for specified product or library.
 
 ### TCL libraries
 
