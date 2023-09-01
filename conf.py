@@ -43,7 +43,8 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.*']
+
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.md']
 
 # Intersphinx links to subprojects
 intersphinx_mapping = {
@@ -98,8 +99,6 @@ master_doc = 'index'
 html_theme_options = {
     'logo_only': True,
 }
-html_logo = "images/EPICS_white_logo_v02.png"
-
 
 # -- Redirections specifications ---------------------------------------------
 
@@ -138,7 +137,5 @@ redirects = {
         "../contributing/HowToWorkWithTheEpicsRepository.html",
     
     #"appdevguide/*": "appdevguide/*",
-    
-    "software/modules":
-        "../index.html",
 }
+html_logo = "images/EPICS_green_logo.svg"

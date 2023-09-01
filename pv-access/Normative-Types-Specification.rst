@@ -363,22 +363,23 @@ where:
 <*non-terminal*>
    The non-terminal term being defined.
 
-/
-   A choice of terminal or non-terminal terms describing a a list or 0
+<fieldName>
+
+   A choice of terminal or non-terminal terms describing a list of 0
    or more pvData fields.
 
-Then for a label (a field name), /, the terms
+Then for a label (a field name), <fieldName>, the terms
 
 ::
 
-   <non-terminal> fieldName
+   <non-terminal> <fieldName>
 
 are replaced by
 
 ::
 
-   structure fieldName
-       fieldList
+   structure <fieldName>
+       <fieldList>
 
 The result of the any substitution is suitably indented to preserve the
 logic of the pvData meta language.
@@ -413,20 +414,20 @@ A field may be optional, and may be described along with a comment:
    <NormativeType>:=
 
    structure
-      { pvDataField [:opt] [// commentText]] }1+
+      { <pvDataField> [:opt] [// <commentText>] }1+
 
 where:
 
 <*NormativeType*>
    The name of the Normative Type being defined.
 
-/
+<pvDataField>
    A choice of terms defining a pvData field
 
 :opt
    Indicates that the preceding field is optional in the Normative Type.
 
-// /
+// <commentText>
    A field production element may be followed by a comment.
 
 In most cases a Normative Type definition will be of the form
@@ -440,12 +441,12 @@ In most cases a Normative Type definition will be of the form
 
 where:
 
-/
+<ntFieldChoice>
    Terminal or non-terminal terms, possibly separated by \|, from the
    valid `Normative Type Fields <#normative-type-fields>`__ as defined
    below.
 
-/
+<fieldName>
    The identifier of the field. Usually a terminal label.
 
 For example, a definition meeting this pattern would be
