@@ -1,6 +1,8 @@
 Installation on Linux/UNIX/DARWIN (Mac)
 =======================================
 
+:audience:`beginner`
+
 What is EPICS about?
 -----------------------------------
 We assume that you know more or less what EPICS is. Here we want to start

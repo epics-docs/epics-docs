@@ -1,6 +1,8 @@
 Getting started with EPICS
 ==========================
 
+:audience:`beginner`
+
 What is EPICS?
 --------------
 

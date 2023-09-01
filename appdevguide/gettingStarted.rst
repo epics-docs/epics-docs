@@ -1,6 +1,9 @@
 Getting Started
 ===============
 
+:audience:`beginner, user, developer`
+
+
 Introduction
 ------------
 

@@ -1,6 +1,8 @@
 Packages required for EPICS on Centos 8
 =======================================
 
+:audience:`beginner`
+
 .. contents:: Contents
 
 

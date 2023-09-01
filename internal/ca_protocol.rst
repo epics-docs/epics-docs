@@ -1,5 +1,6 @@
 Channel Access Protocol Specification
 =====================================
+:audience:`advanced`
 
 Table of Contents
 

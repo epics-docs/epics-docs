@@ -1,6 +1,9 @@
 How to Avoid Copying Arrays with waveformRecord
 ===============================================
 
+:audience:`developer`
+
+
 This page describes how to use the array field memory management feature that was introduced in EPICS 3.15.1.
 This allows array data to be moved into and out of the value (aka BPTR) field of the waveform, aai, and aao types.
 

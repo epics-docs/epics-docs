@@ -1,6 +1,8 @@
 Application Developer's Guide
 =============================
 
+:audience:`developer, advanced`
+
 The classic Application Developer's Guide as an online document.
 At this stage, this contains only the descriptive sections of the document,
 detailed API documentation will be generated from the source code with Doxygen.

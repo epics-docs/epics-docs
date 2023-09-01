@@ -2,6 +2,8 @@
 Installation on Windows
 =======================
 
+:audience:`beginner`
+
 Introduction
 ------------
 

@@ -1,6 +1,8 @@
 IOC Initialization
 ------------------
 
+:audience:`advanced`
+
 .. contents:: Table of Contents
  :depth: 3
 
