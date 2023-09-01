@@ -156,7 +156,7 @@ static void worker(void* raw)
          * and timeout when record is scanning periodic
          */
         if(epicsEventWaitWithTimeout(priv->wakeup, 1.0)==epicsEventError) {
-            cantProceed("worker encountered an error waiting for wakeup\\n");
+            cantProceed("worker encountered an error waiting for wakeup\n");
         }
 
         epicsMutexMustLock(priv->lock);
