@@ -105,6 +105,8 @@ There are two kinds of subprojects:
 
    contributing/HowToWorkWithTheEpicsRepository
    CONTRIBUTING
+   Installing EPICS on Raspberry PI (External) <https://prjemian.github.io/epicspi/>
+   Area Detector: Installation Guide (External) <https://areadetector.github.io/master/install_guide.html>
 
 .. toctree::
    :maxdepth: 1
