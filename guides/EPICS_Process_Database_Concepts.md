@@ -49,11 +49,13 @@ This Section covers the general functionality that's found in all database recor
 The topics covered are I/O scanning, I/O address specification,
 data conversions, alarms, database monitoring, and continuous control:
 
+
+
 -  [*Scanning Specification*](Scanning_Specification.md) describes the various conditions under which a record is processed.
 
--  *Address Specification* explains the source of inputs and the destination of outputs.
+-  [*Address Specification*](Address_Specification.md) explains the source of inputs and the destination of outputs.
 
--  *Conversion Specification* covers data conversions from transducer interfaces to engineering units.
+-  [*Conversion Specification*](Conversion_Specification.md) covers data conversions from transducer interfaces to engineering units.
 
 -  *Alarm Specification* presents the many alarm detection mechanisms available in the database.
 
