@@ -6,14 +6,14 @@ Contents for beginners
 Articles intended for beginners concentrate on the installation 
 and understaing of basic topics of EPICS.
 
-.. toctree::
-   :maxdepth: 1
-   :extralabel: {"audience": ["beginner", "all"]}
-
 ..
    Note that below there all the articles
    but thanks to extralabel audience only that properly labelerd are visible
 ..
+
+.. toctree::
+   :maxdepth: 1
+   :extralabel: {"audience": ["beginner", "all"]}
 
    getting-started/EPICS_Intro
    getting-started/installation

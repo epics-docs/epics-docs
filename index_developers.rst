@@ -5,14 +5,14 @@ Contents for developer
 
 Articles for developers focus on the IOCs, usage of modules and extensions
 
-.. toctree::
-   :maxdepth: 1
-   :extralabel: {"audience": ["developer", "all"]}
-
 ..
    Note that below there all the articles
    but thanks to extralabel audience only that properly labelerd are visible
 ..
+
+.. toctree::
+   :maxdepth: 1
+   :extralabel: {"audience": ["developer", "all"]}
 
    getting-started/EPICS_Intro
    getting-started/installation

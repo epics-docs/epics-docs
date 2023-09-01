@@ -6,14 +6,14 @@ Contents for users
 Users can get familarized with topics like creating IOC, 
 accessing PVs and using EPICS on specific architecture.
 
-.. toctree::
-   :maxdepth: 1
-   :extralabel: {"audience": ["user", "all"]}
-
 ..
    Note that below I put all the articles
    but thanks to extralabel audience only that with all or user are visible
 ..
+
+.. toctree::
+   :maxdepth: 1
+   :extralabel: {"audience": ["user", "all"]}
 
    getting-started/EPICS_Intro
    getting-started/installation
