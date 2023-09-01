@@ -1,5 +1,5 @@
-EPICS Overview
-==============
+Getting started with EPICS
+==========================
 
 What is EPICS?
 --------------

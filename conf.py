@@ -4,6 +4,7 @@
 # list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -31,6 +32,7 @@ extensions = [
     'hoverxref.extension',
     'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
+    "sphinx_reredirects",
     # Markdown parser
     'myst_parser',
 ]
@@ -41,6 +43,7 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
+
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.md']
 
 # Intersphinx links to subprojects
@@ -74,13 +77,13 @@ myst_enable_extensions = [
 # https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#auto-generated-header-anchors
 myst_heading_anchors = 4
 
+
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
 html_theme = 'sphinx_rtd_theme'
-
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -96,4 +99,43 @@ master_doc = 'index'
 html_theme_options = {
     'logo_only': True,
 }
-html_logo = "images/EPICS_white_logo_v02.png"
+
+# -- Redirections specifications ---------------------------------------------
+
+# Specify redirections from the <docs.epics-controls.org> architecture
+# (before 08/2023 EPICS documentathon), to the new <docs.epics-controls.org>
+# (after 08/2023 EPICS documentathon).
+# Also see https://documatt.gitlab.io/sphinx-reredirects/usage.html
+redirects = {
+    "guides/EPICS_Intro": "../getting-started/EPICS_Intro.html",
+    
+    "guides/EPICS_Process_Database_Concepts":
+        "../process-database/EPICS_Process_Database_Concepts.html",
+    
+    "specs/specs":
+        "../index.html",
+    
+    "specs/ca_protocol":
+        "../internal/ca_protocol.html",
+    
+    "specs/Normative-Types-Specification":
+        "../pv-access/Normative-Types-Specification.html",
+    
+    "specs/IOCInit":
+        "../internal/IOCInit.html",
+    
+    "appdevguide/EPICSBuildFacility":
+        "../build-system/specifications.html",
+
+    "specs/EPICSBuildFacility":
+        "../build-system/specifications.html",
+    
+    "software/base":
+        "../index.html",
+    
+    "software/HowToWorkWithTheEpicsRepository":
+        "../contributing/HowToWorkWithTheEpicsRepository.html",
+    
+    #"appdevguide/*": "appdevguide/*",
+}
+html_logo = "images/EPICS_green_logo.svg"

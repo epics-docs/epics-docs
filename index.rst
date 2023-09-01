@@ -38,15 +38,80 @@ There are two kinds of subprojects:
 
    EPICS Website <https://epics-controls.org>
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Getting started
+
+   getting-started/EPICS_Intro
+   getting-started/installation
+   getting-started/linux-packages.rst
+   getting-started/creating-ioc
+   getting-started/installation-windows
+   getting-started/setup-softioc-framework-linux
+   getting-started/console-logging-vme-softioc
+   getting-started/save-restore-tools.md
+   getting-started/configure-ca
+   getting-started/channel-access-reach-multiple-soft-iocs-linux
 
 .. toctree::
    :maxdepth: 1
-   :caption: Guides
+   :caption: Process database
 
-   Introduction to EPICS <guides/EPICS_Intro>
-   guides/EPICS_Process_Database_Concepts.rst
-   How-To Pages <https://docs.epics-controls.org/projects/how-tos/en/latest>
+   process-database/common-database-patterns
+   process-database/how-to-avoid-copying-arrays-with-waveformrecord
+   process-database/how-to-find-which-ioc-provides-a-pv
+   Application Developer's Guide (pdf, 3.16.2) <https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide.pdf>
+   Application Developer's Guide (web version, preliminary) <appdevguide/AppDevGuide>
+   process-database/EPICS_Process_Database_Concepts.rst
+   Database Examples (external link) <https://github.com/epics-docs/database-examples>
+
+.. toctree::
+   :maxdepth: 1
+   :caption: EPICS Related Software
+   
+   software/epics-related-software
+
+.. toctree::
+   :maxdepth: 1
+   :caption: The build system
+
+   build-system/how-to-port-epics-to-a-new-os-architecture
+   build-system/cross-compile-epics-and-a-ioc-to-an-old-x86-linux.md
+   Getting Started with EPICS on RTEMS 4 <https://epics.anl.gov/base/RTEMS/tutorial/tutorial.html>
+   build-system/configuring-vxworks-6_x
+   build-system/vxworks6_tornado
+   build-system/specifications
+
+.. toctree::
+   :maxdepth: 1
+   :caption: PV Access details
+
+   pv-access/overview
+   PV Access specifications <https://github.com/epics-base/pvAccessCPP/wiki/protocol>
+   pv-access/Normative-Types-Specification
+   pv-access/OverviewOfpvData
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Access security
+
+   access-security/specifications
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Internal
+
+   internal/ca_protocol
+   internal/IOCInit
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contributing
+
+   contributing/HowToWorkWithTheEpicsRepository
    CONTRIBUTING
+   Installing EPICS on Raspberry PI (External) <https://prjemian.github.io/epicspi/>
+   Area Detector: Installation Guide (External) <https://areadetector.github.io/master/install_guide.html>
 
 .. toctree::
    :maxdepth: 1
@@ -54,12 +119,10 @@ There are two kinds of subprojects:
 
    specs/specs
    software/base
-   software/modules
-   Extensions <https://epics-controls.org/resources-and-support/extensions/>
-
 
 .. toctree::
    :maxdepth: 1
    :caption: Training
 
    Training Material <https://epics-controls.org/resources-and-support/documents/training/>
+   community/how-to-run-an-epics-collaboration-meeting.rst
