@@ -148,7 +148,7 @@ static void worker(void* raw)
             ibuf = (epicsInt16*)buf;
             for(i=0; i<nbytes/2; i++)
             {
-                ibuf\[i\] = rand();
+                ibuf[i] = rand();
             }
         }
 
