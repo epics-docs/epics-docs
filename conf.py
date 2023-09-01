@@ -35,6 +35,8 @@ extensions = [
     "sphinx_reredirects",
     # Markdown parser
     'myst_parser',
+    # Enhanced, as-you-type search
+    'sphinx_search.extension',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
