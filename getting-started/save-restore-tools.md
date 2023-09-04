@@ -18,11 +18,16 @@ The XAL collection of high-level applications includes 'score': A Table of PV na
 
 Don't know a good web page, but try [this one](https://openxal.github.io/) .
 
-### CSS 'PV Table'
+### CS-Studio Phoebus [Save-And-Restore](inv:phoebus:app/save-and-restore/app/doc/index)
 
-Similar to 'score', but simpler and still unter development. Saves values to XML files, no connection to RDB.
+The save-and-restore application can be used to take “snapshots” of a pre-defined list if PVs at a certain point in time, and write the persisted values back at some later point.
 
-For more on CSS (Control System Studio), see the [main page at DESY](http://css.desy.de).
+### CS-Studio Phoebus [PV Table](inv:phoebus:app/pvtable/doc/index.html)
+
+The PV Table provides a tabular view of PV names and their current value with time stamp and alarm state.
+You can take a “snapshotData” of current values and dates, and the table will now highlight rows where the current value differs from the snapshotData.
+
+For more on CSS (Control System Studio), see the [CS Studio main page](https://controlsystemstudio.org).
 
 ### sddscasr
 
