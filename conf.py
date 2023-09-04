@@ -50,13 +50,14 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.md']
 
 # Intersphinx links to subprojects
 intersphinx_mapping = {
-    'how-tos': ('https://docs.epics-controls.org/projects/how-tos/en/latest', None),
+    "epics-base": ("https://docs.epics-controls.org/projects/epics-base/en/latest", None),
 }
+intersphinx_disabled_reftypes = ["*"]
 hoverxref_intersphinx = [
-    'how-tos',
+    'epics-base',
 ]
 hoverxref_intersphinx_types = {
-    'how-tos': 'modal',
+    'epics-base': 'modal',
 }
 
 # Enabled Markdown extensions.
