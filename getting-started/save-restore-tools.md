@@ -5,7 +5,7 @@ There are a number of different tools available within the EPICS community for s
 
 ## IOC-based Tools
 
-## [SynApps Autosave](https://epics.anl.gov/bcda/synApps/autosave/autosave.html)
+## [SynApps Autosave](https://epics-modules.github.io/autosave/)
 
 Autosave automatically saves the values of EPICS process variables (PVs) to files on a server, and restores those values when the IOC is rebooted.
 
