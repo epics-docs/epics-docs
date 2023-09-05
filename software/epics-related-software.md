@@ -162,6 +162,7 @@ pyepics       | Python wrapper around libca | [github.com](https://github.com/py
 IDL | CA client libraries and scripts for IDL via EZCA | [github.com](https://github.com/epics-extensions/ezcaIDL) | [github.com](https://github.com/epics-extensions/ezcaIDL)
 igor2epics | CA client library for WaveMetrics IGOR Pro | [sourceforge.net](https://sourceforge.net/p/igor2epics/git/ci/master/tree/) | [sourceforge.net](https://sourceforge.net/p/igor2epics/wiki/Home/)
 NetChannelAccess | CA libraries and Gateway in native C# | [github.com](https://github.com/paulscherrerinstitute/NetChannelAccess) | [github.com](https://github.com/paulscherrerinstitute/NetChannelAccess)
+Node EPICS CA | CA client library for Node.js | [npmjs.com](https://www.npmjs.com/package/node-epics-ca?activeTab=code) | [github.com](https://github.com/wanglin86769/node-epics-ca)
 Node EPICS | **UNMAINTAINED** EPICS CA for node.js | [github.com](https://github.com/RobbieClarken/node-epics) | [github.com](https://github.com/RobbieClarken/node-epics)
 SDDS | **ARCHIVED** The Self-Describing Data Sets analysis package | [github.com](https://github.com/veprbl/epics-sdds) | [aps.anl.gov](https://www.aps.anl.gov/Accelerator-Operations-Physics/Software)
 
