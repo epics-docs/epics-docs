@@ -81,6 +81,7 @@ You may also directly use related links to see documents which match you the mos
    getting-started/cross-compile-to-old-x86-linux
    getting-started/creating-ioc
    getting-started/epics-macosx-firewall
+   getting-started/configuring-vxworks-6_x
    getting-started/setup-softioc-framework-linux
    getting-started/console-logging-vme-softioc
    getting-started/save-restore-tools.md
@@ -112,7 +113,6 @@ You may also directly use related links to see documents which match you the mos
 
    build-system/how-to-port-epics-to-a-new-os-architecture
    Getting Started with EPICS on RTEMS 4 <https://epics.anl.gov/base/RTEMS/tutorial/tutorial.html>
-   build-system/configuring-vxworks-6_x
    build-system/vxworks6_tornado
    build-system/specifications
 
