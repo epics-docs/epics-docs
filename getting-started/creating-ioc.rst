@@ -1,10 +1,13 @@
-Creation of an Input/Output Controller (IOC)
-============================================
+Creating an IOC Application
+===========================
 
 .. tags:: user, developer
 
-An IOC allows to talk to devices e.g. via ethernet. Create a directory for
-the IOCs. For example ``$HOME/EPICS/IOCs``
+This example shows how to create an IOC Application
+with an IOC using StreamDevice to talk to devices, e.g., via ethernet.
+
+Create a directory for the IOC Applications.
+For example ``$HOME/EPICS/IOCs``
 
 ::
 
