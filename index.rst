@@ -83,11 +83,6 @@ You may also directly use related links to see documents which match you the mos
    getting-started/epics-macosx-firewall
    getting-started/configuring-vxworks-6_x
    getting-started/vxworks5_tornado
-   getting-started/setup-softioc-framework-linux
-   getting-started/console-logging-vme-softioc
-   getting-started/save-restore-tools.md
-   getting-started/configure-ca
-   getting-started/channel-access-reach-multiple-soft-iocs-linux
 
 .. toctree::
    :maxdepth: 1
@@ -130,6 +125,17 @@ You may also directly use related links to see documents which match you the mos
    :caption: Access security
 
    access-security/specifications
+
+.. toctree::
+   :maxdepth: 1
+   :caption: System administration
+   
+   sys-admin/configure-ca
+   sys-admin/channel-access-reach-multiple-soft-iocs-linux
+   sys-admin/setup-softioc-framework-linux
+   sys-admin/console-logging-vme-softioc
+   sys-admin/save-restore-tools.md
+   
 
 .. toctree::
    :maxdepth: 1
