@@ -155,13 +155,13 @@ tags_create_tags = True
 
 tags_create_badges = True
 
-tags_overview_title = "All tags"  # default: "Tags overview"
+tags_overview_title = "All tags"
 
 tags_extension = ["rst", "md"] 
 
-tags_intro_text = "Tags:"  # default: "Tags:"
+tags_intro_text = "Tags:"
 
-tags_page_title = "Tags"  # default: "My tags:"
+tags_page_title = "Tags"
 
 tags_page_header = "Pages with this tag"
 
