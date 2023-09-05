@@ -2,6 +2,8 @@
 IOC Access Security
 ===================
 
+.. tags:: developer, advanced
+
 .. contents:: Table of Contents
  :depth: 3
 

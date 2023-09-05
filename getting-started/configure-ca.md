@@ -1,5 +1,9 @@
 # How to Configure Channel Access
 
+
+```{tags} beginner, user
+```
+
 ## Basic Operation, One IOC on same subnet
 
 Assume an IOC has a record `fred`, and you want to use `caget fred` or a similar CA client to read it.

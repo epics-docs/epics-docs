@@ -1,6 +1,8 @@
 EPICS V4 Normative Types
 ========================
 
+.. tags:: developer, advanced
+
 EPICS V4 Normative Types, Editors Draft, 16-Mar-2015
 ----------------------------------------------------
 

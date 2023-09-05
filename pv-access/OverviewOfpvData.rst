@@ -1,6 +1,8 @@
 EPICS 7, pvAccess and pvData
 ============================
 
+.. tags:: developer, advanced
+
 pvAccess, pvData and other related modules have been introduced into EPICS
 to add support for structured data. Let us look into the
 reasons, and also at some use cases for the capabilities to handle

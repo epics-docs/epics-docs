@@ -37,6 +37,8 @@ extensions = [
     'myst_parser',
     # Enhanced, as-you-type search
     'sphinx_search.extension',
+    'sphinx_tags',
+    'sphinx_design',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -146,3 +148,25 @@ redirects = {
     #"appdevguide/*": "appdevguide/*",
 }
 html_logo = "images/EPICS_green_logo.svg"
+
+# Tags configuration
+
+tags_create_tags = True
+
+tags_create_badges = True
+
+tags_overview_title = "All tags"
+
+tags_extension = ["rst", "md"] 
+
+tags_intro_text = "Tags:"
+
+tags_page_title = "Tags"
+
+tags_page_header = "Pages with this tag"
+
+tags_index_head = "Tags:"
+
+tags_badge_colors = {
+    "*": "primary",
+}

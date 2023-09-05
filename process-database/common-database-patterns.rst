@@ -1,6 +1,8 @@
 Common Database patterns
 ========================
 
+.. tags:: developer
+
 Pull Alarm Status w/o Data
 --------------------------
 This is useful to bring alarm status in without affecting the value stored in a record. 
