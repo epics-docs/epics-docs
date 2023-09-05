@@ -1,6 +1,8 @@
 How to Work with the EPICS Repository
 =====================================
 
+.. tags:: beginner, user, developer, advanced, all
+
 This document aims to show to software developers how to get the current
 EPICS Base code, modify it and publish the changes.
 

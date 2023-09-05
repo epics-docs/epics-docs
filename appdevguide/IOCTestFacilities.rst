@@ -1,6 +1,8 @@
 IOC Test Facilities
 ===================
 
+.. tags:: user
+
 .. contents:: Table of Contents
  :depth: 3
 

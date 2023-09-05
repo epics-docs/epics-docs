@@ -2,6 +2,8 @@
 Installation on Windows
 =======================
 
+.. tags:: beginner
+
 Introduction
 ------------
 

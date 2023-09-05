@@ -1,5 +1,8 @@
 # How to Add a New Breakpoint Table
 
+```{tags} developer, advanced
+```
+
 1. Copy `menuConvert.dbd` from `base/dbd` to the app's src directory.
 
 2. In the src directory, create a breakpoint table file `<bpname>.dbd`. Look at `base/dbd/bpt*.dbd` for the proper format.

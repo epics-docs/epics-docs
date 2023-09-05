@@ -1,5 +1,8 @@
 # Configuring vxWorks 6.x
 
+```{tags} user, advanced
+```
+
 ## vxWorks 6.x Information
 
 This page provides a advice on configuring and using the Wind River’s Workbench environment and the vxWorks 6.x RTOS with EPICS. If you discover any other information that ought to be published here, please [let me know](mailto:anj@anl.dot.gov).

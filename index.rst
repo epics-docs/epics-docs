@@ -51,6 +51,14 @@ One of the most appreciated aspects of EPICS is the lively collaboration
 that is spread around the globe. Members of the collaboration are happy
 to help other users with their issues and to discuss new ideas.
 
+How this documentation is organized
+-----------------------------------
+
+Each page is labeled by the intended audienece.
+You may also directly use related links to see documents which match you the most.
+
+.. tags:: beginner, user, developer, advanced
+
 .. toctree::
    :hidden:
 

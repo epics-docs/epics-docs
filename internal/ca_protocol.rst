@@ -1,6 +1,8 @@
 Channel Access Protocol Specification
 =====================================
 
+.. tags:: advanced 
+
 Table of Contents
 
 -  `License <#license>`__

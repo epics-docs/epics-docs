@@ -1,5 +1,8 @@
 # How To cross compile EPICS and a IOC to an old x86 Linux system
 
+```{tags} user, advanced
+```
+
 ## Introduction
 
 I was given the task of developing a IOC which should run in a x86 PC with an old Linux distribution.

@@ -1,5 +1,8 @@
 # How to avoid copying arrays with waveformRecord
 
+```{tags} developer
+```
+
 ## Introduction
 
 This page describes how to use the [array field memory management](https://code.launchpad.net/~epics-core/epics-base/array-opt).

@@ -1,5 +1,8 @@
 # Configuring Tornado/vxWorks 5.5.x
 
+```{tags} user, developer, advanced
+```
+
 ## Tornado/vxWorks 5.5.x Information
 
 This page provides a repository for information about using the WRS Tornado environment and the vxWorks 5.5.x RTOS with EPICS that doesn’t really belong anywhere else on this site.

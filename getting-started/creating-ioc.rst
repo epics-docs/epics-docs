@@ -1,6 +1,8 @@
 Creation of an Input/Output Controller (IOC)
 ============================================
 
+.. tags:: user, developer
+
 An IOC allows to talk to devices e.g. via ethernet. Create a directory for
 the IOCs. For example ``$HOME/EPICS/IOCs``
 
