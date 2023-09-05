@@ -69,10 +69,16 @@ You may also directly use related links to see documents which match you the mos
    :caption: Getting started
 
    getting-started/EPICS_Intro
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Installation
+
    getting-started/installation
    getting-started/installation-linux
    getting-started/installation-windows
    getting-started/linux-packages.rst
+   getting-started/cross-compile-to-old-x86-linux
    getting-started/creating-ioc
    getting-started/epics-macosx-firewall
    getting-started/setup-softioc-framework-linux
@@ -105,7 +111,6 @@ You may also directly use related links to see documents which match you the mos
    :caption: The build system
 
    build-system/how-to-port-epics-to-a-new-os-architecture
-   build-system/cross-compile-epics-and-a-ioc-to-an-old-x86-linux.md
    Getting Started with EPICS on RTEMS 4 <https://epics.anl.gov/base/RTEMS/tutorial/tutorial.html>
    build-system/configuring-vxworks-6_x
    build-system/vxworks6_tornado

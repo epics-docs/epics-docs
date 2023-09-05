@@ -1,29 +1,29 @@
-# How To cross compile EPICS and a IOC to an old x86 Linux system
+# Cross compiling to an old x86 Linux system
 
 ```{tags} developer, advanced
 ```
 
 ## Introduction
 
-I was given the task of developing a IOC which should run in a x86 PC with an old Linux distribution.
+I was given the task of developing a IOC
+which should run in a x86 PC with an old Linux distribution.
 My development machine was a x86_64 PC running Ubuntu 12.04.
-EPICS does a great job cross compiling from a 64-bits host to a 32-bits target if both have compatible versions of glibc,
-binutils,
-kernel,
-etc.
-In my case,
-however,
-my target had much older versions. I considered two different solutions:
 
-1.  Create a Virtual Machine and install the target's Linux distribution. From the Virtual Machine,
-compile EPICS and my IOC,
-and then run the IOC in the target
-2.  Build a toolchain configured for my target and use that toolchain to compile both EPICS and the IOC.
+EPICS does a great job cross compiling from a 64-bits host to a 32-bits target,
+if both have compatible versions of glibc, binutils, kernel, etc.
+In my case, however, my target had much older versions.
 
-The first approach is the easiest,
-but compiling from inside a VM can be slow and the distribution was not very user friendly.
-So I took the second path,
-which I'll describe in this document.
+I considered two different solutions:
+
+1.  Create a Virtual Machine and install the target's Linux distribution.
+    From the Virtual Machine, compile EPICS and my IOC,
+    and then run the IOC in the target.
+2.  Build a toolchain configured for my target
+    and use that toolchain to compile both EPICS and the IOC.
+
+The first approach is the easiest, but compiling from inside a VM can be slow
+and the distribution was not very user friendly.
+So I took the second path, which I'll describe in this document.
 
 ## Overview
 
