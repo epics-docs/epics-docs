@@ -1,6 +1,6 @@
 # Configuring vxWorks 6.x
 
-```{tags} user, advanced
+```{tags} developer, advanced
 ```
 
 ## vxWorks 6.x Information

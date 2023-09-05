@@ -1,7 +1,7 @@
 How to find which IOC provides a PV
 ===================================
 
-.. tags:: user
+.. tags:: beginner, user, developer
 
 This process is for IOCs running on Linux servers.
 
