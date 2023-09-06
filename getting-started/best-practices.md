@@ -12,7 +12,7 @@ This document presents some guidelines that have been found useful. Please add y
 
 ### Device Support
 
-*   All message-based devices (with any expected lifetime) should be converted to use ASYN. If you are starting from existing devGpib support see [these guidelines for conversion](https://epics.anl.gov/modules/soft/asyn/R4-10/gpibCoreConversion/conversionNotes.html). If you are starting on brand-new support see [these notes](https://epics.anl.gov/modules/soft/asyn/R4-10/HowToDoSerial/tutorial.html) or have a look at the [stream device support](http://epics.web.psi.ch/software/streamdevice/).
+*   All message-based devices (with any expected lifetime) should be converted to use ASYN. If you are starting from existing `devGpib` support see [these guidelines for conversion](https://epics.anl.gov/modules/soft/asyn/R4-10/gpibCoreConversion/conversionNotes.html). If you are starting on brand-new support see [these notes](https://epics.anl.gov/modules/soft/asyn/R4-10/HowToDoSerial/tutorial.html) or have a look at the [stream device support](http://epics.web.psi.ch/software/streamdevice/).
 *   Support for a particular device should be in its own support module.
 
 ### Database Files
