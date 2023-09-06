@@ -90,7 +90,6 @@ You may also directly use related links to see documents which match you the mos
 
    process-database/common-database-patterns
    process-database/how-to-avoid-copying-arrays-with-waveformrecord
-   process-database/how-to-find-which-ioc-provides-a-pv
    Application Developer's Guide (pdf, 3.16.2) <https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide.pdf>
    Application Developer's Guide (web version, preliminary) <appdevguide/AppDevGuide>
    process-database/EPICS_Process_Database_Concepts.rst
@@ -131,11 +130,11 @@ You may also directly use related links to see documents which match you the mos
    :caption: System administration
    
    sys-admin/configure-ca
+   sys-admin/how-to-find-which-ioc-provides-a-pv
    sys-admin/channel-access-reach-multiple-soft-iocs-linux
    sys-admin/setup-softioc-framework-linux
    sys-admin/console-logging-vme-softioc
    sys-admin/save-restore-tools.md
-   
 
 .. toctree::
    :maxdepth: 1
