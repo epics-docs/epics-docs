@@ -70,9 +70,10 @@ You may also directly use related links to see documents which match you the mos
 
    getting-started/EPICS_Intro
    getting-started/installation
+   getting-started/installation-linux
+   getting-started/installation-windows
    getting-started/linux-packages.rst
    getting-started/creating-ioc
-   getting-started/installation-windows
    getting-started/epics-macosx-firewall
    getting-started/setup-softioc-framework-linux
    getting-started/console-logging-vme-softioc

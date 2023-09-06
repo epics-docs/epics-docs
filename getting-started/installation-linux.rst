@@ -1,17 +1,15 @@
-Installation on Linux/UNIX/DARWIN (Mac)
-=======================================
+Installation on Linux / MacOS
+=============================
 
-.. tags:: beginner
+Scope of these instructions
+---------------------------
+Starting from scratch, we get to the point where we have a working server,
+offering some PVs for reading (caget or pvget) and writing (caput or pvput).
+We read and write on them from another terminal,
+either on the same machine or on another one in the same network.
 
-What is EPICS about?
------------------------------------
-We assume that you know more or less what EPICS is. Here we want to start
-from scratch and get to the point where we have a working server, offering some
-PVs for reading (caget or pvget) and writing
-(caput or pvput), and we read and write on them from
-another terminal, either on the same machine or on another one in the same
-network. If you are going to use two different machines, you will have to
-repeat the steps for installing EPICS for both of them.
+If you are using two different machines, both of them need to have access
+to the same EPICS installation.
 
 Prepare your system
 -------------------
