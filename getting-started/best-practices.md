@@ -18,7 +18,7 @@ This document presents some guidelines that have been found useful. Please add y
 ### Database Files
 
 *   Support modules and IOC applications should install all .db files into their <top>/db directory. When an application uses a .db file from a support module that file may be copied from the support module `<top>/db` directory to the IOC application `<top>/db` directory. This is done by adding lines like `DB_INSTALLS += $(ASYN)/db/asynRecord.db` to the application `<top>/_appName_/Db/Makefile`. This allows all the .db files needed by an application to be found in a single location.
-*   Template files that are part of support modules do not need to be copied to your application Db source directory. The build system knows to look in support module db directories for template files.
+*   Template files that are part of support modules do not need to be copied to your application `Db` source directory. The build system knows to look in support module db directories for template files.
 
 ### Application Makefile
 
