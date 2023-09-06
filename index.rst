@@ -69,16 +69,20 @@ You may also directly use related links to see documents which match you the mos
    :caption: Getting started
 
    getting-started/EPICS_Intro
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Installation
+
    getting-started/installation
-   getting-started/linux-packages.rst
-   getting-started/creating-ioc
+   getting-started/installation-linux
    getting-started/installation-windows
+   getting-started/linux-packages.rst
+   getting-started/cross-compile-to-old-x86-linux
+   getting-started/creating-ioc
    getting-started/epics-macosx-firewall
-   getting-started/setup-softioc-framework-linux
-   getting-started/console-logging-vme-softioc
-   getting-started/save-restore-tools.md
-   getting-started/configure-ca
-   getting-started/channel-access-reach-multiple-soft-iocs-linux
+   getting-started/configuring-vxworks-6_x
+   getting-started/vxworks5_tornado
 
 .. toctree::
    :maxdepth: 1
@@ -86,7 +90,6 @@ You may also directly use related links to see documents which match you the mos
 
    process-database/common-database-patterns
    process-database/how-to-avoid-copying-arrays-with-waveformrecord
-   process-database/how-to-find-which-ioc-provides-a-pv
    Application Developer's Guide (pdf, 3.16.2) <https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide.pdf>
    Application Developer's Guide (web version, preliminary) <appdevguide/AppDevGuide>
    process-database/EPICS_Process_Database_Concepts.rst
@@ -104,10 +107,7 @@ You may also directly use related links to see documents which match you the mos
    :caption: The build system
 
    build-system/how-to-port-epics-to-a-new-os-architecture
-   build-system/cross-compile-epics-and-a-ioc-to-an-old-x86-linux.md
    Getting Started with EPICS on RTEMS 4 <https://epics.anl.gov/base/RTEMS/tutorial/tutorial.html>
-   build-system/configuring-vxworks-6_x
-   build-system/vxworks6_tornado
    build-system/specifications
 
 .. toctree::
@@ -124,6 +124,17 @@ You may also directly use related links to see documents which match you the mos
    :caption: Access security
 
    access-security/specifications
+
+.. toctree::
+   :maxdepth: 1
+   :caption: System administration
+   
+   sys-admin/configure-ca
+   sys-admin/how-to-find-which-ioc-provides-a-pv
+   sys-admin/channel-access-reach-multiple-soft-iocs-linux
+   sys-admin/setup-softioc-framework-linux
+   sys-admin/console-logging-vme-softioc
+   sys-admin/save-restore-tools.md
 
 .. toctree::
    :maxdepth: 1

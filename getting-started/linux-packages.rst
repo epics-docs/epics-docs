@@ -1,5 +1,5 @@
-Packages required for EPICS on Centos 8
-=======================================
+EPICS Dependencies on CentOS 8
+==============================
 
 .. tags:: beginner
 .. contents:: Contents
@@ -7,12 +7,14 @@ Packages required for EPICS on Centos 8
 
 Overview
 --------
-This document describes the packages that must be installed in order to build EPICS base, 
-synApps, and areaDetector on a new Centos 8 system.  
-For other versions of Linux the package manager and package names may be different, 
-but the requirements are likely to be the same.
+This document describes the packages that must be installed
+in order to build EPICS base, synApps, and areaDetector
+on a new CentOS 8 system.  
+For other Linux distributions the package manager and package names
+may be different, but the requirements are likely to be similar.
 
-Add the Extra Packages for Enterprise Linux (EPEL) site for the dnf package manager.  
+Add the Extra Packages for Enterprise Linux (EPEL) repository
+for the dnf package manager.  
 This site has additional packages that are needed::
 
   sudo dnf install epel-release
