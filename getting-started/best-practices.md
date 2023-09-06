@@ -46,7 +46,7 @@ To add the PVs to an application:
 DB_INSTALLS += $(AUTOSAVE)/asApp/Db/save_restoreStatus.db
 ```
 2.  If you're using the IOC shell, add the following lines to the st.cmd script (before iocInit)
-``` bash
+``` csh
 save_restoreSet_status_prefix($(IOC))  
 dbLoadRecords(db/save_restoreStatus.db,P=$(IOC))  
 ```
