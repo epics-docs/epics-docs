@@ -22,7 +22,7 @@ This document presents some guidelines that have been found useful. Please add y
 
 ### Application Makefile
 
-*   Add support module .dbd files to your application using the Makefile `_xxxxxx_DBD += _yyyyy_.dbd` mechanism.
+*   Add support module `.dbd` files to your application using the Makefile `_xxxxxx_DBD += _yyyyy_.dbd` mechanism.
 
 ### st.cmd
 
