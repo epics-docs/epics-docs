@@ -2,7 +2,7 @@
 name = "epics-docs"
 version = "0.1.0"
 description = "EPICS documentation located on https://docs.epics-controls.org/"
-authors = ["Your Name <you@example.com>"]
+authors = ["epics-docs contributors"]
 readme = "README.md"
 packages = [{include = "epics_docs"}]
 
@@ -16,6 +16,8 @@ sphinx-rtd-theme = "^1.3.0"
 sphinx-autobuild = "^2021.3.14"
 sphinx-reredirects = "^0.1.2"
 readthedocs-sphinx-search = "^0.3.1"
+sphinx-tags = "^0.2.1"
+sphinx-design = "^0.5.0"
 
 [build-system]
 requires = ["poetry-core"]

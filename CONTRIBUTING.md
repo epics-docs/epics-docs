@@ -86,7 +86,7 @@ using [sphinx-tags] extension.
 
 There are `beginner`, `user`, `developer`, `advanced` and `all` roles.
 
-* `beginner` - articles for those who don't know the EPICS and want to familarize with it. 
+* `beginner` - articles for those who don't know the EPICS and want to familiarize with it. 
 That should be mostly articles about
 installation and basic concepts.
 
@@ -95,7 +95,7 @@ mostly with client applications
 
 * `developer` - articles for those who develop IOCs, extensions or drivers 
 
-* `advanced` -articles for those who want to understand advanced topics inlcuding build system, specifications,
+* `advanced` -articles for those who want to understand advanced topics including build system, specifications,
 and details of protocols.
 
 
@@ -113,7 +113,7 @@ Example for `.md`:
 
 ~~~
 ```{tags} tag1, tag2
-```  
+```
 ~~~
 
   [sphinx-tags]: https://sphinx-tags.readthedocs.io/
@@ -275,6 +275,40 @@ to ensure they're sensible and don't break anything.
 If all is well, they will approve the changes and merge them into the main repo.
 After the reviewer has merged the pull request,
 Read the Docs will recompile the page and publish your changes.
+
+## Adding dependencies
+
+When adding a dependency,
+make sure to add them to both Poetry and the requirement files.
+
+For example,
+if you want to add the `sphinx-foo` extension,
+first run:
+
+``` bash
+poetry add sphinx-foo
+```
+
+This command adds that extension to both `pyproject.toml` and `poetry.lock`.
+It also fetches the latest version,
+and pins it in `pyproject.toml`.
+
+To add that dependency to the requirement files,
+take the version pinned in `pyproject.toml`,
+and make sure to pin that same version in the requirements files.
+
+For example,
+if you see in `pyproject.toml`:
+
+``` toml
+sphinx-foo = "^1.1.2"
+```
+
+Then you must add to both `requirements.txt` and `requirements-dev.txt`:
+
+```
+sphinx-foo==1.1.2
+```
 
 ## Reviewing pull requests
 
