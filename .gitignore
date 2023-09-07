@@ -1,4 +1,5 @@
 _build/
+_tags/
 .DS_Store
 *.autosave
 QtC-*
