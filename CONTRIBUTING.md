@@ -11,7 +11,8 @@ and are unable to fix it yourself,
 you can email Tech-talk at <tech-talk@aps.anl.gov>.
 Provide the details of the issue
 and another member of the community should be able to fix it for you.
-You can more information about using Tech-talk can be found at <https://epics.anl.gov/tech-talk/>.
+You can find more information about using Tech-talk
+at <https://epics.anl.gov/tech-talk/>.
 
 ### Creating an issue on GitHub
 
@@ -32,16 +33,13 @@ go to the [join GitHub] page and follow the instructions.
 
 #### Creating an issue
 
-At the top of the GitHub page,
-click on the "Issues" tab.
+At the top of the GitHub page, click on the "Issues" tab.
 If there are no issues already listed about the problem that you want fixed,
 click the "New issue" button,
-give your issue a title and
-write a brief description,
+give your issue a title and write a brief description,
 then submit it.
 If nobody has picked up your issue after several days,
-email Tech-talk and
-a developer should pick it up.
+email Tech-talk and a developer should pick it up.
 
 ## Making a contribution
 
