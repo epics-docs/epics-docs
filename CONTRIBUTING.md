@@ -157,7 +157,7 @@ $ cd epics-docs
 
 ``` console
 $ poetry install
-$ poetry run sphinx-autobuild . ./_build/html
+$ poetry run sphinx-autobuild --re-ignore _tags/ . ./_build/html
 ```
 
 At this point,
