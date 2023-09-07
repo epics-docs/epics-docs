@@ -276,6 +276,40 @@ If all is well, they will approve the changes and merge them into the main repo.
 After the reviewer has merged the pull request,
 Read the Docs will recompile the page and publish your changes.
 
+## Adding dependencies
+
+When adding a dependency,
+make sure to add them to both Poetry and the requirement files.
+
+For example,
+if you want to add the `sphinx-foo` extension,
+first run:
+
+``` bash
+poetry add sphinx-foo
+```
+
+This command adds that extension to both `pyproject.toml` and `poetry.lock`.
+It also fetches the latest version,
+and pins it in `pyproject.toml`.
+
+To add that dependency to the requirement files,
+take the version pinned in `pyproject.toml`,
+and make sure to pin that same version in the requirements files.
+
+For example,
+if you see in `pyproject.toml`:
+
+``` toml
+sphinx-foo = "^1.1.2"
+```
+
+Then you must add to both `requirements.txt` and `requirements-dev.txt`:
+
+```
+sphinx-foo==1.1.2
+```
+
 ## Reviewing pull requests
 
 From the point of view of a reviewer.
