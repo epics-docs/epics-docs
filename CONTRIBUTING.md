@@ -86,7 +86,7 @@ using [sphinx-tags] extension.
 
 There are `beginner`, `user`, `developer`, `advanced` and `all` roles.
 
-* `beginner` - articles for those who don't know the EPICS and want to familarize with it. 
+* `beginner` - articles for those who don't know the EPICS and want to familiarize with it. 
 That should be mostly articles about
 installation and basic concepts.
 
@@ -95,7 +95,7 @@ mostly with client applications
 
 * `developer` - articles for those who develop IOCs, extensions or drivers 
 
-* `advanced` -articles for those who want to understand advanced topics inlcuding build system, specifications,
+* `advanced` -articles for those who want to understand advanced topics including build system, specifications,
 and details of protocols.
 
 
@@ -113,7 +113,7 @@ Example for `.md`:
 
 ~~~
 ```{tags} tag1, tag2
-```  
+```
 ~~~
 
   [sphinx-tags]: https://sphinx-tags.readthedocs.io/
