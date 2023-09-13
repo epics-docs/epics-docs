@@ -84,21 +84,20 @@ using [sphinx-tags] extension.
 
 There are `beginner`, `user`, `developer`, `advanced` and `all` roles.
 
-* `beginner` - articles for those who don't know the EPICS and want to familiarize with it. 
-That should be mostly articles about
-installation and basic concepts.
+-   `beginner` - articles for those who don't know EPICS
+    and want to familiarize with it. 
+    That should be mostly articles about installation and basic concepts.
 
-* `user` - articles for those who use EPICS during their work for example as operators, 
-mostly with client applications
+-   `user` - articles for those who use EPICS during their work
+    for example as operators,  mostly with client applications.
 
-* `developer` - articles for those who develop IOCs, extensions or drivers 
+-   `developer` - articles for those who develop IOCs, extensions or drivers 
 
-* `advanced` -articles for those who want to understand advanced topics including build system, specifications,
-and details of protocols.
-
+-   `advanced` - articles for those who want to understand advanced topics
+    including build system, specifications and details of protocols.
 
 To tag the article,
-add line specifying labels under the title in the new file.
+add a line specifying labels under the title in the source file.
 Tags are supported for `.rst` and `.md`.
 
 Example for `.rst`:
@@ -121,17 +120,21 @@ Example for `.md`:
 Once logged in and viewing the page on GitHub you wish to edit,
 click on the pencil icon to the top-right of the content.
 If this is your first time editing,
-you will see with a page asking you to fork the repository before being able to edit.
+you will see with a page asking you to fork the repository
+before being able to edit.
 Click through the link to do this,
-and GitHub will create a copy of the entire repository linked to your own account.
-Feel free to edit any page in this repository,
-as your changes won't reflection the main repository or the Read the Docs site until you make a pull request.
+and GitHub will create a copy of the entire repository
+linked to your own account.
+Feel free to edit any page in this repository.
+Your changes won't show up in the main repository or the Read the Docs site
+until you create a pull request.
 
 ### Local setup and build
 
 "How do I build the epics-doc documentation locally,
 and how do I serve it locally?"
-Being able to do this can be of interest to check how your contribution will render before sharing it.
+Being able to do this can be of interest
+to check how your contribution will render before sharing it.
 
 #### Using poetry
 
@@ -146,14 +149,16 @@ Please follow [the Poetry documentation] to install it.
 Once installed,
 you can setup, build, and serve the epics-docs documentation in two steps:
 
-1.  Clone (with SSH) the epics-docs fork you have made in the [Forking the repository] section and change directory into it:
+1.  Clone (with SSH) your epics-docs fork (see [Forking the repository] above)
+    and change directory into it:
 
 ``` console
 $ git clone git@github.com:your-user-name/epics-docs.git
 $ cd epics-docs
 ```
 
-2.  Install Poetry dependencies (the "setup") and build + serve the epics-docs documentation:
+2.  Install Poetry dependencies (the "setup")
+    and build + serve the epics-docs documentation:
 
 ``` console
 $ poetry install
@@ -161,7 +166,7 @@ $ poetry run sphinx-autobuild --re-ignore _tags/ . ./_build/html
 ```
 
 At this point,
-you can open <http://127.0.0.1:8000> in your internet browser,
+you can open <http://127.0.0.1:8000> in your internet browser
 and check the generated documentation by yourself.
 
   [Poetry]: https://python-poetry.org/docs/
@@ -178,9 +183,10 @@ From the pip website:
 > pip is the package installer for Python.
 > You can use it to install packages from the Python Package Index and other indexes
 
-1. Follow the first step in the [Using poetry] section to locally clone the epics-docs repository.
+1.  Follow the first step in the [Using poetry] section
+    to locally clone the epics-docs repository.
 
-2. Install the pip dependencies from `requirements-dev.txt`
+2.  Install the pip dependencies from `requirements-dev.txt`
 
 ``` console
 $ python -m venv venv                  # Create a virtual environment for your local build
@@ -189,8 +195,7 @@ $ pip install -r requirements-dev.txt
 $ sphinx-autobuild . ./_build/html
 ```
 
-At this point,
-as above,
+At this point, same as above,
 you can open <http://127.0.0.1:8000> in your internet browser,
 and check the generated documentation by yourself.
 
@@ -200,25 +205,32 @@ and check the generated documentation by yourself.
 
 #### Reference setup and build
 
-You can check for yourself how the project is built here: <https://readthedocs.org/projects/epics/builds/>,
-and then click on the last "Passed" build (that is, the last build that succeeded),
+You can check for yourself how the project is built here:
+<https://readthedocs.org/projects/epics/builds/>,
+and then click on the last "Passed" build
+(that is, the last build that succeeded),
 for example: <https://readthedocs.org/projects/epics/builds/21001074/>.
 
 ::: {warning}
-Those commands are oriented to optimize the build in the Read the Docs environment.
-This might not always be reproducible on your computer without some level of modifications,
-depending on your own local environment,
+Those commands are oriented to optimize the build
+in the Read the Docs environment.
+This might not always be reproducible on your computer
+without some level of modifications depending on your own local environment,
 such as your OS, your distribution, your shell interpreter, etc.
-This way is the how Read the Docs builds the documentation,
-but isn't the most practical way (at least not for development/contribution purposes).
+This way is how Read the Docs builds the documentation,
+but it isn't always the most practical way
+(at least not for development/contribution purposes).
 :::
 
 ### Edit and view your changes
 
-Now that you know how to clone, setup, build, and serve the epics-docs documentation,
-you can edit any `.rst` or `.md` file and check how sphinx will render your contribution.
+Now that you know how to clone, setup,
+build, and serve the epics-docs documentation,
+you can edit any `.rst` or `.md` file
+and check how sphinx will render your contribution.
 
-After running `$ poetry run sphinx-autobuild . ./_build/html`, like described earlier,
+After running `$ poetry run sphinx-autobuild . ./_build/html`,
+like described earlier,
 any modification will update <http://127.0.0.1:8000> automatically.
 
 ### Style guide
@@ -232,9 +244,10 @@ but these pages should progressively be converted to Markdown.
 If you're unfamiliar with Markdown,
 you can look at the [Basic Syntax] page from the [Markdown Guide] website.
 
-Another convention used is [Semantic line breaks][]:
-make sure to add line breaks after each sentence,
-comma,
+Another convention used is [Semantic line breaks][],
+which increase readability and make editing the source easier:
+add line breaks after each sentence,
+after independent clauses (comma, semicolon, colon, dash),
 and before every relative clause.
 
 A configuration for [Vale] also exists in the repository,
@@ -255,22 +268,25 @@ and run `vale path/to/your/file.md`.
 ### Making a pull request
 
 After you are satisfied with your changes,
-commit and push them to your fork,
-and submit them for review by creating a pull request.
+commit and push them to your fork.
+Keeping separate things in separate commits will make reviewing easier.
+Finally submit the branch with your commits for review
+by creating a pull request.
 
-To Make a pull request,
+To create a pull request,
 first click on the "Pull requests" tab at the top of GitHub.
 From here, click the green "New pull request" button,
 which should take you to a page comparing the main repository to your fork.
 You should see any commits you have made listed here.
-Clicking "Create pull request" will give you the opportunity to give your edits a title
-and a brief description,
+Clicking "Create pull request" will give you the opportunity
+to give your edits a title and a brief description,
 before you submit them for review.
 
 At this point,
 a maintainer of the repository will be able to review your changes
 to ensure they're sensible and don't break anything.
-If all is well, they will approve the changes and merge them into the main repo.
+If all is well, they will approve the changes
+and merge them into the main repo.
 After the reviewer has merged the pull request,
 Read the Docs will recompile the page and publish your changes.
 
@@ -288,8 +304,7 @@ poetry add sphinx-foo
 ```
 
 This command adds that extension to both `pyproject.toml` and `poetry.lock`.
-It also fetches the latest version,
-and pins it in `pyproject.toml`.
+It also fetches the latest version and pins it in `pyproject.toml`.
 
 To add that dependency to the requirement files,
 take the version pinned in `pyproject.toml`,
@@ -313,4 +328,5 @@ sphinx-foo==1.1.2
 From the point of view of a reviewer.
 
 TODO: how to merge (merge commit (not FF))
+
 TODO: say if pushing to PRs from a reviewer point of view is acceptable
