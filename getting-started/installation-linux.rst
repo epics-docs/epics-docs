@@ -252,6 +252,16 @@ Now, run
 
     make
 
+If the build fails due to implicit declaration of ``xdr_*`` functions it is likely that asyn should build against libtirpc. To do so, you can uncomment ``# TIRPC=YES`` in ``configure/CONFIG_SITE`` of asyn, such that it states:
+
+::
+
+    # Some linux systems moved RPC related symbols to libtirpc
+    # To enable linking against this library, uncomment the following line
+    TIRPC=YES
+
+
+
 Install StreamDevice (by Dirk Zimoch, PSI)
 ------------------------------------------
 ::
