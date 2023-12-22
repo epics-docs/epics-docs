@@ -168,10 +168,10 @@ Now create a ``db`` file which describes PVs for your ``IOC``. Go to ``testApp\D
     }
     record(calc,"test:add")
     {
-        field(SCAN,"1 second")
+        field(SCAN, "1 second")
         field(INPA, "test:pv1")
         field(INPB, "test:pv2")
-        field("CALC", "A + B")
+        field(CALC, "A + B")
     }
     
 Open ``Makefile`` and navigate to
