@@ -77,7 +77,7 @@ For example:
 
   [Diátaxis documentation]: https://diataxis.fr/
 
-##### Tagging the document
+### Tagging the document
 
 To suggest the intended audience, we use a tag mechanism 
 using [sphinx-tags] extension. 
