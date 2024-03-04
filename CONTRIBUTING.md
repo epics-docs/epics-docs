@@ -108,10 +108,8 @@ Example for `.rst`:
 
 Example for `.md`:
 
-~~~
-```{tags} tag1, tag2
-```
-~~~
+    ```{tags} beginner, developer
+    ```
 
   [sphinx-tags]: https://sphinx-tags.readthedocs.io/
 
