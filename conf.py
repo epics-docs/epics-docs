@@ -66,6 +66,8 @@ hoverxref_intersphinx_types = {
     'how-tos': 'modal',
 }
 
+numfig = True
+
 # Enabled Markdown extensions.
 # See here for what they do:
 # https://myst-parser.readthedocs.io/en/latest/syntax/optional.html

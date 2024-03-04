@@ -336,23 +336,35 @@ follows:
     interest(1)
   }
 
-If the record that is referenced by the FLNK field has a SCAN field set
-to “Passive”, then the record is processed after the record with the
-FLNK. The FLNK field only causes record processing, no data is passed.
-In (*Figure 1*), three records are shown. The ai record "Input_2" is
-processed periodically. At each interval, Input_2 is processed. After
-Input_2 has read the new input, converted it to engineering units,
-checked the alarm condition, and posted monitors to Channel Access, then
-the calc record "Calculation_2" is processed. Calculation_2 reads the
-input, performs the calculation, checked the alarm condition, and posted
-monitors to Channel Access, then the ao record "Output_2" is processed.
-Output_2 reads the desired output, rate limits it, clamps the range,
-calls the device support for the OUT field, checks alarms, posts
-monitors and then is complete.
+If the record that is referenced by the FLNK field has a SCAN field set to “Passive”,
+then the record is processed after the record with the FLNK.
+The FLNK field only causes record processing,
+no data is passed.
+In :numref:`input-links`, three records are shown.
+The ai record "Input_2" is processed periodically.
+At each interval, Input_2 is processed.
+After Input_2 has read the new input,
+converted it to engineering units,
+checked the alarm condition,
+and posted monitors to Channel Access,
+then the calc record "Calculation_2" is processed.
+Calculation_2 reads the input,
+performs the calculation,
+checked the alarm condition,
+and posted monitors to Channel Access,
+then the ao record "Output_2" is processed.
+Output_2 reads the desired output,
+rate limits it, clamps the range,
+calls the device support for the OUT field,
+checks alarms,
+posts monitors,
+and then is complete.
 
-|image0|
+.. figure:: media/dbconcepts/image1.jpeg
+   :name: input-links
+   :alt: Input Links
 
-**Figure 1. Input Links**
+   Input Links
 
 Input links normally fetch data from one field into a field in the
 referring record. For instance, if the INPA field of a CALC record is
@@ -364,35 +376,52 @@ process passive). In this case, the record takes the VAL field and
 returns it. If they are set to PP (process passive), then the record is
 processed before the field is returned.
 
-In *Figure 2*), the PP attribute is used. In this example, Output_3 is
-processed periodically. Record processing first fetching the DOL field.
-As the DOL field has the PP attribute set, before the VAL field of
-Calc_3 is returned, the record is processed. The first thing done by the
-ai record Input_3 does is to read the input. It then converts the RVAL
-field to engineering units and places this in the VAL field, checks
-alarms, posts monitors, and then returns. The calc record then fetches
-the VAL field field from Input_3, places it in the A field, computes the
-calculation, checks alarms, posts monitors, the returns. The ao record,
-Output_3, then fetches the VAL field from the CALC record, applies rate
-of change and limits, write the new value, checks alarms, posts monitors
+In :numref:`process-passive`,
+the PP attribute is used.
+In this example, Output_3 is processed periodically.
+Record processing first fetching the DOL field.
+As the DOL field has the PP attribute set,
+before the VAL field of Calc_3 is returned,
+the record is processed.
+The first thing done by the ai record Input_3 does is to read the input.
+It then converts the RVAL field to engineering units and places this in the VAL field,
+checks alarms,
+posts monitors,
+and then returns.
+The calc record then fetches the VAL field field from Input_3,
+places it in the A field,
+computes the calculation,
+checks alarms,
+posts monitors,
+the returns.
+The ao record Output_3 then fetches the VAL field from the CALC record,
+applies rate of change and limits,
+write the new value,
+checks alarms,
+posts monitors
 and completes.
 
-|image1|
+.. figure:: media/dbconcepts/image2.jpg
+   :name: process-passive
+   :alt: Process Passive
 
-**Figure 2**
+   Process Passive
 
-In *Figure 3*)
-the PP/NPP attribute is used to calculate a rate of change. At 1 Hz, the
-calculation record is processed. It fetches the inputs for the calc
-record in order. As INPA has an attribute of NPP, the VAL field is taken
-from the ai record. Before INPB takes the VAL field from the ai record
-it is processed, as the attribute on this link is PP. The new ai value
-is placed in the B field of the calc record. A-B is the VAL field of the
-ai one second ago and the current VAL field.
+In :numref:`no-process-passive` the PP/NPP attribute is used to calculate a rate of change.
+At 1 Hz, the calculation record is processed.
+It fetches the inputs for the calc record in order.
+As INPA has an attribute of NPP,
+the VAL field is taken from the ai record.
+Before INPB takes the VAL field from the ai record it is processed,
+as the attribute on this link is PP.
+The new ai value is placed in the B field of the calc record.
+A-B is the VAL field of the ai one second ago and the current VAL field.
 
-|image2|
+.. figure:: media/dbconcepts/image3.jpeg
+   :name: no-process-passive
+   :alt: No Process Passive versus Process Passive
 
-**Figure 3**
+   No Process Passive versus Process Passive
 
 Process Chains
 ^^^^^^^^^^^^^^
@@ -407,26 +436,32 @@ Care must be taken as this flexibility can also lead to some incorrect
 configurations. In these next examples we look at some mistakes that can
 occur.
 
-In *Figure 4*) two records that are scanned at 10 Hz make references to
-the same Passive record. In this case, no alarm or error is generated.
-The Passive record is scanned twice at 10 Hz. The time between the two
-scans depends on what records are processed between the two periodic
-records.
+In :numref:`process-chain-1` two records that are scanned at 10 Hz make references to the same Passive record.
+In this case,
+no alarm or error is generated.
+The Passive record is scanned twice at 10 Hz.
+The time between the two scans depends on
+what records are processed between the two periodic records.
 
-|image3|
+.. figure:: media/dbconcepts/image4.jpg
+   :name: process-chain-1
+   :alt: Process Chain 1
 
-**Figure 4**
+   Process Chain 1
 
-In *Figure 5*),
-several circular references are made. As the record processing is
-recursively called for links, the record containing the link is marked
-as active during the entire time that the chain is being processed. When
-one of these circular references is encountered, the active flag is
-recognized and the request to process the record is ignored.
+In :numref:`process-chain-2` several circular references are made.
+As the record processing is recursively called for links,
+the record containing the link is marked as active
+during the entire time that the chain is being processed.
+When one of these circular references is encountered,
+the active flag is recognized
+and the request to process the record is ignored.
 
-|image4|
+.. figure:: media/dbconcepts/image5.jpeg
+   :name: process-chain-2
+   :alt: Process Chain 2
 
-**Figure 5**
+   Process Chain 2
 
 Channel Access Links
 --------------------
@@ -511,25 +546,32 @@ In this manner records dependent upon other records can be assured of
 using current data.
 
 To illustrate this we will look at an example from the previous section,
-with the records, however, being scanned periodically instead of
-passively (*Figure 6*). In this example each of these records specifies
-.1 second; thus, the records are synchronous. The phase sequence is used
-to assure that the analog input is processed first, meaning that it
-fetches its value from the specified location and places it in the VAL
-field (after any conversions). Next, the calc record will be processed,
-retrieving its value from the analog input and performing its
-calculation. Lastly, the analog output will be processed, retrieving its
-desired output value from the calc record's VAL field (the VAL field
-contains the result of the calc record's calculations) and writing that
-value to the location specified it its OUT link. In order for this to
-occur, the PHAS field of the analog input record must specify 0, the
-PHAS field of the calculation record must specify 1, and the analog
-output's PHAS field must specify 2.
+with the records, however,
+being scanned periodically instead of passively (:numref:`periodic-scan-example`).
+In this example each of these records specifies .1 second;
+thus, the records are synchronous.
+The phase sequence is used to assure that the analog input is processed first,
+meaning that it fetches its value from the specified location
+and places it in the VAL field (after any conversions).
+Next,
+the calc record will be processed,
+retrieving its value from the analog input,
+and performing its calculation.
+Lastly,
+the analog output will be processed,
+retrieving its desired output value from the calc record's VAL field
+(the VAL field contains the result of the calc record's calculations),
+and writing that value to the location specified it its OUT link.
+In order for this to occur,
+the PHAS field of the analog input record must specify 0,
+the PHAS field of the calculation record must specify 1,
+and the analog output's PHAS field must specify 2.
 
-|image11|
+.. figure:: media/dbconcepts/Concepts-6.png
+   :name: periodic-scan-example
+   :alt: Periodic scan example
 
-**Figure 6**
-
+   Periodic scan example
 
 It is important to understand that in the above example, no record
 causes another to be processed. The phase mechanism instead causes each
@@ -1110,7 +1152,10 @@ First let us consider a linear conversion. In this example, the
 transducer transmits 0-10 Volts, there is no amplification, and the I/O
 card uses a 0-10 Volt interface.
 
-|image5|
+.. figure:: media/dbconcepts/image6.png
+   :alt: Example transducer setup
+
+   Example transducer setup
 
 The transducer transmits pressure: 0 PSI at 0 Volts and 175 PSI at 10
 Volts. The engineering units full scale and low scale are determined as
@@ -1146,7 +1191,10 @@ Transducer Lower than the I/O module
 Let's consider a variation of this linear conversion where the
 transducer is 0-5 Volts.
 
-|image6|
+.. figure:: media/dbconcepts/image7.png
+   :alt: Example transducer setup
+
+   Example transducer setup
 
 In this example the transducer is producing 0 Volts at 0 PSI and 5 Volts
 at 175 PSI. The engineering units full scale and low scale are
@@ -1192,7 +1240,10 @@ Let's consider another variation of this linear conversion where the
 input card accepts -10 Volts to 10 Volts (i.e. Bipolar instead of
 Unipolar).
 
-|image7|
+.. figure:: media/dbconcepts/image8.png
+   :alt: Example transducer setup
+
+   Example transducer setup
 
 In this example the transducer is producing 0 Volts at 0 PSI and 10
 Volts at 175 PSI. The input module has a different range of voltages and
@@ -1235,7 +1286,10 @@ Let's consider another variation of this linear conversion where the
 input card accepts -10 Volts to 10 Volts, the transducer transmits 0 - 2
 Volts for 0 - 175 PSI and a 2x amplifier is on the transmitter.
 
-|image8|
+.. figure:: media/dbconcepts/image9.png
+   :alt: Example transducer setup
+
+   Example transducer setup
 
 At 0 PSI the transducer transmits 0 Volts. This is amplified to 0 Volts.
 At half scale, it is read as 2048. At 175 PSI, full scale, the
@@ -1342,7 +1396,10 @@ milliAmps. An amplifier is present which amplifies milliAmps to volts.
 The I/O card uses a 0-10 Volt interface and a 12-bit ADC.
 Raw value range would thus be 0 to 4095.
 
- |image9|
+.. figure:: media/dbconcepts/image10.png
+   :alt: Example transducer setup
+
+   Example transducer setup
 
 The transducer is transmitting temperature. The database entries in the
 analog input record that are needed to convert this temperature will be
@@ -1425,7 +1482,9 @@ character. The header and the actual table should be specified by
 typeJdegC.data, and can be converted to a breakpoint table with the
 **makeBpt** utility as follows:
 
-unix% makeBpt typeJdegC.data
+.. code:: shell
+
+   unix% makeBpt typeJdegC.data
 
 Alarm Specification
 ~~~~~~~~~~~~~~~~~~~
@@ -1548,21 +1607,25 @@ There are two limits at each end, two low values and two high values, so
 that a warning can be set off before the value goes into a dangerous
 condition.
 
-Analog records also contain a hysteresis field, which is also used when
-determining limit violations. The hysteresis field is the deadband
-around the alarm limits. The deadband keeps a signal that is hovering at
-the limit from generating too many alarms. Let's take an example
-(*Figure 8*) where the range is -100 to 100 volts, the high alarm limit
-is 30 Volts, and the hysteresis is 10 Volts. If the value is normal and
-approaches the HIGH alarm limit, an alarm is generated when the value
-reaches 30 Volts. This will only go to normal if the value drops below
-the limit by more than the hysteresis. For instance, if the value
-changes from 30 to 28 this record will remain in HIGH alarm. Only when
-the value drops to 20 will this record return to normal state.
+Analog records also contain a hysteresis field,
+which is also used when determining limit violations.
+The hysteresis field is the deadband around the alarm limits.
+The deadband keeps a signal that is hovering at the limit from generating too many alarms.
+Let's take :numref:`alarm-example` as an example where the range is -100 to 100 volts,
+the high alarm limit is 30 Volts,
+and the hysteresis is 10 Volts.
+If the value is normal and approaches the HIGH alarm limit,
+an alarm is generated when the value reaches 30 Volts.
+This will only go to normal if the value drops below the limit by more than the hysteresis.
+For instance,
+if the value changes from 30 to 28 this record will remain in HIGH alarm.
+Only when the value drops to 20 will this record return to normal state.
 
-**Figure 8**
+.. figure:: media/dbconcepts/image11.png
+   :name: alarm-example
+   :alt: Alarm example
 
-|image10|
+   Alarm example
 
 State Alarms
 ^^^^^^^^^^^^
@@ -1785,40 +1848,3 @@ record that controls the valve. If the binary output has the OMSL field
 set to closed_loop it sets the valve to the value of the calculation
 record. If it is set to supervisory, the operator can override the
 interlock and control the valve directly.
-
-.. |image0| image:: media/dbconcepts/image1.jpeg
-   :width: 6.44444in
-   :height: 1.36111in
-.. |image1| image:: media/dbconcepts/image2.jpg
-   :width: 6.46852in
-   :height: 1.18351in
-.. |image2| image:: media/dbconcepts/image3.jpeg
-   :width: 4.55556in
-   :height: 1.59722in
-.. |image3| image:: media/dbconcepts/image4.jpg
-   :width: 6.40176in
-   :height: 2.91048in
-.. |image4| image:: media/dbconcepts/image5.jpeg
-   :width: 6.45972in
-   :height: 2.65069in
-.. |image5| image:: media/dbconcepts/image6.png
-   :width: 3.90278in
-   :height: 0.70833in
-.. |image6| image:: media/dbconcepts/image7.png
-   :width: 3.90278in
-   :height: 0.75in
-.. |image7| image:: media/dbconcepts/image8.png
-   :width: 3.90278in
-   :height: 0.75in
-.. |image8| image:: media/dbconcepts/image9.png
-   :width: 3.90278in
-   :height: 0.65278in
-.. |image9| image:: media/dbconcepts/image10.png
-   :width: 3.90278in
-   :height: 0.80556in
-.. |image10| image:: media/dbconcepts/image11.png
-   :width: 3.90278in
-   :height: 1.94444in
-.. |image11| image:: media/dbconcepts/Concepts-6.png
-      :width: 7.64in
-      :height: 2.36in
