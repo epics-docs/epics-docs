@@ -7,7 +7,7 @@
 
 This page provides a advice on configuring and using the Wind River’s Workbench environment and the vxWorks 6.x RTOS with EPICS. If you discover any other information that ought to be published here, please [let me know](mailto:anj@anl.dot.gov).
 
-Note that there is a [separate page](vxworks6_tornado) provided for users of vxWorks 5.x and Wind River’s Tornado.
+Note that there is a [separate page](vxworks5_tornado) provided for users of vxWorks 5.x and Wind River’s Tornado.
 
 [Tornado 2.2 and Linux](https://epics-controls.org/resources-and-support/documents/howto-documents/vxworks6/t2-2-linux/)
 
