@@ -159,13 +159,9 @@ tags_overview_title = "All tags"
 
 tags_extension = ["rst", "md"] 
 
-tags_intro_text = "Tags:"
-
 tags_page_title = "Tags"
 
 tags_page_header = "Pages with this tag"
-
-tags_index_head = "Tags:"
 
 tags_badge_colors = {
     "*": "primary",
