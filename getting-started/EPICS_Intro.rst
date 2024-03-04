@@ -429,7 +429,7 @@ number of optimizations:
    achievable in practice.
 
 Client Services
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 The basic pvAccess client services are similar to Channel Access, with a
 couple of additions:

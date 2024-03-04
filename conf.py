@@ -48,16 +48,16 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.md']
+exclude_patterns = ['_build', 'Thumbs.db', '.*', 'README.md']
 
 # Intersphinx links to subprojects
 intersphinx_mapping = {
     'how-tos': ('https://docs.epics-controls.org/projects/how-tos/en/latest', None),
-    'pvxs' : ('https://mdavidsaver.github.io/pvxs',None),
-    'phoebus' : ('https://control-system-studio.readthedocs.io/en/latest/',None),
-    'sequencer' : ('https://epics-sequencer.sourceforge.io/sequencer-2-2/',None),
-    'asyn' : ('http://epics-modules.github.io/asyn/',None),
-    'channelfinder' : ('https://channelfinder.readthedocs.io/en/latest/',None),
+    'pvxs' : ('https://mdavidsaver.github.io/pvxs', None),
+    'phoebus' : ('https://control-system-studio.readthedocs.io/en/latest/', None),
+    'sequencer' : ('https://epics-modules.github.io/sequencer/', None),
+    'asyn' : ('http://epics-modules.github.io/asyn/', None),
+    'channelfinder' : ('https://channelfinder.readthedocs.io/en/latest/', None),
 }
 hoverxref_intersphinx = [
     'how-tos',
@@ -117,34 +117,34 @@ html_theme_options = {
 # Also see https://documatt.gitlab.io/sphinx-reredirects/usage.html
 redirects = {
     "guides/EPICS_Intro": "../getting-started/EPICS_Intro.html",
-    
+
     "guides/EPICS_Process_Database_Concepts":
         "../process-database/EPICS_Process_Database_Concepts.html",
-    
+
     "specs/specs":
         "../index.html",
-    
+
     "specs/ca_protocol":
         "../internal/ca_protocol.html",
-    
+
     "specs/Normative-Types-Specification":
         "../pv-access/Normative-Types-Specification.html",
-    
+
     "specs/IOCInit":
         "../internal/IOCInit.html",
-    
+
     "appdevguide/EPICSBuildFacility":
         "../build-system/specifications.html",
 
     "specs/EPICSBuildFacility":
         "../build-system/specifications.html",
-    
+
     "software/base":
         "../index.html",
-    
+
     "software/HowToWorkWithTheEpicsRepository":
         "../contributing/HowToWorkWithTheEpicsRepository.html",
-    
+
     #"appdevguide/*": "appdevguide/*",
 }
 html_logo = "images/EPICS_green_logo.svg"
@@ -159,13 +159,9 @@ tags_overview_title = "All tags"
 
 tags_extension = ["rst", "md"] 
 
-tags_intro_text = "Tags:"
-
 tags_page_title = "Tags"
 
 tags_page_header = "Pages with this tag"
-
-tags_index_head = "Tags:"
 
 tags_badge_colors = {
     "*": "primary",

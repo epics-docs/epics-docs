@@ -77,7 +77,7 @@ For example:
 
   [Diátaxis documentation]: https://diataxis.fr/
 
-##### Tagging the document
+### Tagging the document
 
 To suggest the intended audience, we use a tag mechanism 
 using [sphinx-tags] extension. 
@@ -108,10 +108,8 @@ Example for `.rst`:
 
 Example for `.md`:
 
-~~~
-```{tags} tag1, tag2
-```
-~~~
+    ```{tags} beginner, developer
+    ```
 
   [sphinx-tags]: https://sphinx-tags.readthedocs.io/
 

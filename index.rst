@@ -57,8 +57,6 @@ How this documentation is organized
 Each page is labeled by the intended audienece.
 You may also directly use related links to see documents which match you the most.
 
-.. tags:: beginner, user, developer, advanced
-
 .. toctree::
    :hidden:
 
@@ -69,6 +67,14 @@ You may also directly use related links to see documents which match you the mos
    :caption: Getting started
 
    getting-started/EPICS_Intro
+
+.. toctree::
+   :caption: Site tags
+   :maxdepth: 2
+   :hidden:
+   :titlesonly:
+
+   _tags/tagsindex
 
 .. toctree::
    :maxdepth: 1
@@ -151,13 +157,6 @@ You may also directly use related links to see documents which match you the mos
    CONTRIBUTING
    Installing EPICS on Raspberry PI (External) <https://prjemian.github.io/epicspi/>
    Area Detector: Installation Guide (External) <https://areadetector.github.io/master/install_guide.html>
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Software
-
-   specs/specs
-   software/base
 
 .. toctree::
    :maxdepth: 1
