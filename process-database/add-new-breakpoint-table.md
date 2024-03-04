@@ -19,7 +19,7 @@
 
     If Makefile is used instead of `<appname>Support.dbd`, add to `src/Makefile`:
 
-    ``` makefile
+    ```
     <appname>_DBD += <bpname>.dbd
     ```
 
