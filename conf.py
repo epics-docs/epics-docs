@@ -117,34 +117,34 @@ html_theme_options = {
 # Also see https://documatt.gitlab.io/sphinx-reredirects/usage.html
 redirects = {
     "guides/EPICS_Intro": "../getting-started/EPICS_Intro.html",
-    
+
     "guides/EPICS_Process_Database_Concepts":
         "../process-database/EPICS_Process_Database_Concepts.html",
-    
+
     "specs/specs":
         "../index.html",
-    
+
     "specs/ca_protocol":
         "../internal/ca_protocol.html",
-    
+
     "specs/Normative-Types-Specification":
         "../pv-access/Normative-Types-Specification.html",
-    
+
     "specs/IOCInit":
         "../internal/IOCInit.html",
-    
+
     "appdevguide/EPICSBuildFacility":
         "../build-system/specifications.html",
 
     "specs/EPICSBuildFacility":
         "../build-system/specifications.html",
-    
+
     "software/base":
         "../index.html",
-    
+
     "software/HowToWorkWithTheEpicsRepository":
         "../contributing/HowToWorkWithTheEpicsRepository.html",
-    
+
     #"appdevguide/*": "appdevguide/*",
 }
 html_logo = "images/EPICS_green_logo.svg"
