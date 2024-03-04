@@ -12,7 +12,7 @@ These support modules are meant to be built into an IOC. See also the [epics-mod
 | ---- | ----------- | ------------- |
 alive                 | [github.com](https://github.com/epics-modules/alive)                | [github.io](https://epics-modules.github.io/alive/)
 Area Detector         | [github.com](https://github.com/areaDetector)                       | [github.io](https://areadetector.github.io/master/index.html)
-asyn                  | [github.com](https://github.com/epics-modules/asyn)                 | [github.io](https://epics-modules.github.io/asyn/)
+asyn                  | [github.com](https://github.com/epics-modules/asyn)                 | [github.io](inv:asyn:std#index)
 autosave              | [github.com](https://github.com/epics-modules/autosave)             | [github.io](https://epics-modules.github.io/autosave/)
 busy                  | [github.com](https://github.com/epics-modules/busy)                 | [github.io](https://epics-modules.github.io/busy/)
 calc                  | [github.com](https://github.com/epics-modules/calc)                 | [github.io](https://epics-modules.github.io/calc/)
@@ -57,7 +57,7 @@ pyDevSup              | [github.com](https://github.com/mdavidsaver/pyDevSup)   
 quadEm                | [github.com](https://github.com/epics-modules/quadEm)               | [github.io](https://epics-modules.github.io/quadEM/quadEMDoc.html)
 recsync               | [github.com](https://github.com/mdavidsaver/recsync)                | [github.io](https://github.com/mdavidsaver/recsync)
 scaler                | [github.com](https://github.com/epics-modules/scaler)               | [github.io](https://epics-modules.github.io/scaler/)
-sequencer             | [github.com](https://github.com/epics-modules/sequencer)            | [github.io](https://epics-modules.github.io/sequencer/)
+sequencer             | [github.com](https://github.com/epics-modules/sequencer)            | [github.io](inv:sequencer:std#index)
 snmp                  | [groups.nscl.msu.edu](https://groups.nscl.msu.edu/controls/#snmp)   | [groups.nscl.msu.edu](https://groups.nscl.msu.edu/controls/files/devSnmp.html)
 softGlue              | [github.com](https://github.com/epics-modules/softGlue)             | [github.io](https://epics-modules.github.io/softGlue/)
 softGlueZynq          | [github.com](https://github.com/epics-modules/softGlueZynq)         | [github.com](https://github.com/epics-modules/softGlueZynq/blob/master/documentation/README.md)
@@ -80,7 +80,7 @@ Graphical User Interface tools are an integral part of any EPICS installation. B
 
 | Name | Description | Source Code | Documentation |
 | ---- | ----------- | ----------- | ------------- |
-CS-Studio (Phoebus) | Control System Studio (Java) | [github.com](https://github.com/ControlSystemStudio/phoebus) | [readthedocs.io](https://control-system-studio.readthedocs.io/en/latest/)
+CS-Studio (Phoebus) | Control System Studio (Java) | [github.com](https://github.com/ControlSystemStudio/phoebus) | [readthedocs.io](inv:phoebus:std#index)
 caQtDM | A display manager in the spirit of MEDM (C++, Qt) | [github.com](https://github.com/caqtdm/caqtdm) | [github.io](https://caqtdm.github.io/)
 EDM | Extensible Display Manager | [github.com](https://github.com/gnartohl/edm) | [controlssoftware.sns.ornl.gov](https://controlssoftware.sns.ornl.gov/edm/)
 EPICS Qt | EPICS Qt framework | [github.com](https://github.com/qtepics) | [github.io](https://qtepics.github.io/)
