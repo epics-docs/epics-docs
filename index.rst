@@ -109,6 +109,8 @@ You may also directly use related links to see documents which match you the mos
    build-system/how-to-port-epics-to-a-new-os-architecture
    Getting Started with EPICS on RTEMS 4 <https://epics.anl.gov/base/RTEMS/tutorial/tutorial.html>
    build-system/specifications
+   Installing EPICS on Raspberry PI (External) <https://prjemian.github.io/epicspi/>
+   Area Detector: Installation Guide (External) <https://areadetector.github.io/master/install_guide.html>
 
 .. toctree::
    :maxdepth: 1
@@ -149,8 +151,6 @@ You may also directly use related links to see documents which match you the mos
 
    contributing/HowToWorkWithTheEpicsRepository
    CONTRIBUTING
-   Installing EPICS on Raspberry PI (External) <https://prjemian.github.io/epicspi/>
-   Area Detector: Installation Guide (External) <https://areadetector.github.io/master/install_guide.html>
 
 .. toctree::
    :maxdepth: 1
