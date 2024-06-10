@@ -44,81 +44,81 @@ How this documentation is organized
 Each page is labeled by the intended audienece. You may also directly
 use related links to see documents which match you the most.
 
-::: {.toctree}
-EPICS Website \<<https://epics-controls.org>\>
-:::
+``` {toctree}
+EPICS Website <<https://epics-controls.org>>
+```
 
-::: {.toctree}
-getting-started/EPICS\_Intro
-:::
+``` {toctree}
+getting-started/EPICS_Intro
+```
 
-::: {.toctree}
-\_tags/tagsindex
-:::
+``` {toctree}
+_tags/tagsindex
+```
 
-::: {.toctree}
+``` {toctree}
 getting-started/installation getting-started/installation-linux
 getting-started/installation-windows getting-started/linux-packages.rst
 getting-started/cross-compile-to-old-x86-linux
 getting-started/creating-ioc getting-started/epics-macosx-firewall
-getting-started/configuring-vxworks-6\_x
-getting-started/vxworks5\_tornado
-:::
+getting-started/configuring-vxworks-6_x
+getting-started/vxworks5_tornado
+```
 
-::: {.toctree}
+``` {toctree}
 process-database/common-database-patterns
 process-database/how-to-avoid-copying-arrays-with-waveformrecord
-Application Developer\'s Guide (pdf, 3.16.2)
-\<<https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide.pdf>\>
-Application Developer\'s Guide (web version, preliminary)
-\<appdevguide/AppDevGuide\>
-process-database/EPICS\_Process\_Database\_Concepts.rst
+Application Developer's Guide (pdf, 3.16.2)
+<<https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide.pdf>>
+Application Developer's Guide (web version, preliminary)
+<appdevguide/AppDevGuide>
+process-database/EPICS_Process_Database_Concepts.rst
 process-database/add-new-breakpoint-table.md Database Examples (external
-link) \<<https://github.com/epics-docs/database-examples>\>
-:::
+link) <<https://github.com/epics-docs/database-examples>>
+```
 
-::: {.toctree}
+``` {toctree}
 software/epics-related-software
-:::
+```
 
-::: {.toctree}
+``` {toctree}
 build-system/how-to-port-epics-to-a-new-os-architecture Getting Started
 with EPICS on RTEMS 4
-\<<https://epics.anl.gov/base/RTEMS/tutorial/tutorial.html>\>
+<<https://epics.anl.gov/base/RTEMS/tutorial/tutorial.html>>
 build-system/specifications
-:::
+```
 
-::: {.toctree}
+``` {toctree}
 pv-access/overview PV Access specifications
-\<<https://github.com/epics-base/pvAccessCPP/wiki/protocol>\>
+<<https://github.com/epics-base/pvAccessCPP/wiki/protocol>>
 pv-access/Normative-Types-Specification pv-access/OverviewOfpvData
-:::
+```
 
-::: {.toctree}
+``` {toctree}
 access-security/specifications
-:::
+```
 
-::: {.toctree}
+``` {toctree}
 sys-admin/configure-ca sys-admin/how-to-find-which-ioc-provides-a-pv
 sys-admin/channel-access-reach-multiple-soft-iocs-linux
 sys-admin/setup-softioc-framework-linux
 sys-admin/console-logging-vme-softioc sys-admin/save-restore-tools.md
-:::
+```
 
-::: {.toctree}
-internal/ca\_protocol internal/IOCInit
-:::
+``` {toctree}
+internal/ca_protocol internal/IOCInit
+```
 
-::: {.toctree}
+``` {toctree}
 contributing/HowToWorkWithTheEpicsRepository CONTRIBUTING Installing
 EPICS on Raspberry PI (External)
-\<<https://prjemian.github.io/epicspi/>\> Area Detector: Installation
+<<https://prjemian.github.io/epicspi/>> Area Detector: Installation
 Guide (External)
-\<<https://areadetector.github.io/master/install_guide.html>\>
-:::
+<<https://areadetector.github.io/master/install_guide.html>>
+```
 
-::: {.toctree}
+``` {toctree}
 Training Material
-\<<https://epics-controls.org/resources-and-support/documents/training/>\>
+<<https://epics-controls.org/resources-and-support/documents/training/>>
 community/how-to-run-an-epics-collaboration-meeting.rst
-:::
+```
