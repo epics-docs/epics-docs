@@ -1007,7 +1007,8 @@ Definitions
 ^^^^^^^^^^^
 
 record_type
-   The record type, or ``"*"`` (see discussion under record_name below).
+   The record type, or ``"*"`` and ``"#"`` (see discussion under
+   record_name below).
 
 record_name
    The record name. This must be composed out of only the following
@@ -1024,6 +1025,10 @@ record_name
    the value used. If the duplicate definitions are being used and the
    record has already been loaded, subsequent definitions may use
    ``"*"`` in place of the record type in the record instance.
+
+   Previously defined record can be removed from the database using
+   ``"#"`` in place of the record type in the record instance. This
+   is useful when previously loaded records are not required or desired.
 
    The variable ``dbRecordsOnceOnly`` can be set to any non-zero value
    using the iocsh ``var`` command to make loading duplicate record
