@@ -115,6 +115,7 @@ You may also directly use related links to see documents which match you the mos
    build-system/how-to-port-epics-to-a-new-os-architecture
    Getting Started with EPICS on RTEMS 4 <https://epics.anl.gov/base/RTEMS/tutorial/tutorial.html>
    build-system/specifications
+   build-system/posix-threads-priority-scheduling-linux
 
 .. toctree::
    :maxdepth: 1
