@@ -73,6 +73,8 @@ vme                   | [github.com](https://github.com/epics-modules/vme)      
 xspress3              | [github.com](https://github.com/epics-modules/xspress3)             | [github.io](https://epics-modules.github.io/xspress3/)
 xxx                   | [github.com](https://github.com/epics-modules/xxx)                  | [github.io](https://epics-modules.github.io/xxx/)
 Yokogawa_DAS          | [github.com](https://github.com/epics-modules/Yokogawa_DAS)         | [github.io](https://epics-modules.github.io/Yokogawa_DAS/)
+adsDriver             | [github.com](https://github.com/cosylab/adsDriver)                  | [epics.cosylab.com](https://epics.cosylab.com/documentation/adsDriver/)
+autoparamDriver       | [github.com](https://github.com/cosylab/autoparamDriver)            | [epics.cosylab.com](https://epics.cosylab.com/documentation/autoparamDriver/)
 
 
 ## User Interface Tools
