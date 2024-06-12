@@ -10,9 +10,11 @@ These support modules are meant to be built into an IOC. See also the [epics-mod
 
 | Name | Source Code | Documentation |
 | ---- | ----------- | ------------- |
+adsDriver             | [github.com](https://github.com/cosylab/adsDriver)                  | [epics.cosylab.com](https://epics.cosylab.com/documentation/adsDriver/)
 alive                 | [github.com](https://github.com/epics-modules/alive)                | [github.io](https://epics-modules.github.io/alive/)
 Area Detector         | [github.com](https://github.com/areaDetector)                       | [github.io](https://areadetector.github.io/master/index.html)
 asyn                  | [github.com](https://github.com/epics-modules/asyn)                 | [github.io](inv:asyn:std#index)
+autoparamDriver       | [github.com](https://github.com/cosylab/autoparamDriver)            | [epics.cosylab.com](https://epics.cosylab.com/documentation/autoparamDriver/)
 autosave              | [github.com](https://github.com/epics-modules/autosave)             | [github.io](https://epics-modules.github.io/autosave/)
 busy                  | [github.com](https://github.com/epics-modules/busy)                 | [github.io](https://epics-modules.github.io/busy/)
 calc                  | [github.com](https://github.com/epics-modules/calc)                 | [github.io](https://epics-modules.github.io/calc/)
@@ -73,10 +75,6 @@ vme                   | [github.com](https://github.com/epics-modules/vme)      
 xspress3              | [github.com](https://github.com/epics-modules/xspress3)             | [github.io](https://epics-modules.github.io/xspress3/)
 xxx                   | [github.com](https://github.com/epics-modules/xxx)                  | [github.io](https://epics-modules.github.io/xxx/)
 Yokogawa_DAS          | [github.com](https://github.com/epics-modules/Yokogawa_DAS)         | [github.io](https://epics-modules.github.io/Yokogawa_DAS/)
-adsDriver             | [github.com](https://github.com/cosylab/adsDriver)                  | [epics.cosylab.com](https://epics.cosylab.com/documentation/adsDriver/)
-autoparamDriver       | [github.com](https://github.com/cosylab/autoparamDriver)            | [epics.cosylab.com](https://epics.cosylab.com/documentation/autoparamDriver/)
-
-
 
 
 ## User Interface Tools
