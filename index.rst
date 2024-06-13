@@ -90,15 +90,28 @@ You may also directly use related links to see documents which match you the mos
 
 .. toctree::
    :maxdepth: 1
-   :caption: Application Development
+   :caption: Application Developer's Guide
+
+   Getting Started <appdevguide/gettingStarted>
+   EPICS Overview (Introduction to EPICS) <../getting-started/EPICS_Intro>
+   Build Facility <build-system/specifications>
+   Database Locking, Scanning and Processing (EPICS Process Database Concepts) <process-database/EPICS_Process_Database_Concepts>
+   Database Definition <appdevguide/databaseDefinition>
+   IOC Initialization <appdevguide/IOCInit>
+   appdevguide/AccessSecurity
+   IOC Test Facilities <appdevguide/IOCTestFacilities>
+   Application Developer's Guide (historical, for 3.16.2) <https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide.pdf>
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Use Cases and Design Patterns
 
    process-database/common-database-patterns
-   process-database/how-to-avoid-copying-arrays-with-waveformrecord
-   Application Developer's Guide (pdf, 3.16.2) <https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide.pdf>
-   Application Developer's Guide (web version, preliminary) <appdevguide/AppDevGuide>
-   process-database/EPICS_Process_Database_Concepts.rst
-   process-database/add-new-breakpoint-table.md
    Database Examples (external link) <https://github.com/epics-docs/database-examples>
+   process-database/how-to-avoid-copying-arrays-with-waveformrecord
+   process-database/add-new-breakpoint-table.md
+   getting-started/HowToUseStreamDevice
+   build-system/how-to-port-epics-to-a-new-os-architecture
 
 .. toctree::
    :maxdepth: 1
@@ -108,26 +121,12 @@ You may also directly use related links to see documents which match you the mos
 
 .. toctree::
    :maxdepth: 1
-   :caption: The build system
-
-   build-system/how-to-port-epics-to-a-new-os-architecture
-   Getting Started with EPICS on RTEMS 4 <https://epics.anl.gov/base/RTEMS/tutorial/tutorial.html>
-   build-system/specifications
-
-.. toctree::
-   :maxdepth: 1
    :caption: PV Access details
 
    pv-access/overview
    PV Access specifications <https://github.com/epics-base/pvAccessCPP/wiki/protocol>
    pv-access/Normative-Types-Specification
    pv-access/OverviewOfpvData
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Access security
-
-   access-security/specifications
 
 .. toctree::
    :maxdepth: 1
