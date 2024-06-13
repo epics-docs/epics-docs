@@ -83,16 +83,14 @@ You may also directly use related links to see documents which match you the mos
    getting-started/installation
    getting-started/installation-linux
    getting-started/installation-windows
-   getting-started/linux-packages.rst
-   getting-started/cross-compile-to-old-x86-linux
+   getting-started/installation-rtems
    getting-started/creating-ioc
-   getting-started/epics-macosx-firewall
-   getting-started/configuring-vxworks-6_x
-   getting-started/vxworks5_tornado
+   getting-started/os-specifics
+
 
 .. toctree::
    :maxdepth: 1
-   :caption: Process database
+   :caption: Application Development
 
    process-database/common-database-patterns
    process-database/how-to-avoid-copying-arrays-with-waveformrecord
