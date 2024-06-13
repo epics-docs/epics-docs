@@ -1,11 +1,11 @@
-# Configuring RTEMS 6
+# Installation on RTEMS 6
 
 ```{tags} developer, advanced
 ```
 
 ## RTEMS 6 Information
 
-Unfortunately, RTEMS 6 has not yet been released at the time of writing. This page provides a advice on using the RTEMS Source Builder to build the RTMEMS tools, kernel and 3rd party packages from source. The process for creating this environment is documented [here] (https://docs.rtems.org/branches/master/user/rsb/index.html#). If you discover any other information that ought to be published here, please [let me know](mailto:junkes@fhi.mpg.de).
+Unfortunately, RTEMS 6 has not yet been released at the time of writing. This page provides a advice on using the RTEMS Source Builder to build the RTEMS tools, kernel and 3rd party packages from source. The process for creating this environment is documented [here] (https://docs.rtems.org/branches/master/user/rsb/index.html#). If you discover any other information that ought to be published here, please [let me know](mailto:junkes@fhi.mpg.de).
 
 Please note that we are specifically addressing the hardware used in the EPICS environment, primarily with RTEMS.
 
@@ -44,7 +44,9 @@ fi
 echo "... check ok ... proceed ..."
 ../source-builder/sb-set-builder --list-bsets
 echo "... building tool set for " ${RTEMS_CPU}
-../source-builder/sb-set-builder --warn-all --log --no-clean --with-python-version=python3.12 --prefix=${RTEMS_ROOT} ${RTEMS_VERSION}/rtems-${RTEMS_CPU}
+../source-builder/sb-set-builder --warn-all --log --no-clean \
+--with-python-version=python3.12 --prefix=${RTEMS_ROOT} \
+${RTEMS_VERSION}/rtems-${RTEMS_CPU}
 if [ $? -ne 0 ]; then
     echo "building failed"
     exit
@@ -143,6 +145,7 @@ fi
 
 ```
 To find out which BSPs are supported by the RTEMS source builder:
+
 `
 source-builder/sb-set-builder --list-bsets
 `
@@ -203,20 +206,238 @@ Now we can select the desired network stack per BSP. The following are available
 
 1. MVME6100 with legacy stack:
 
-```
-../source-builder/sb-set-builder --jobs=20 --prefix=${RTEMS_ROOT} ${RTEMS_VERSION}/rtems-net-legacy --host=powerp-rtems6 --with-rtems-bsp=powerpc/beatnik  
 
-!!! Error in Script ... wait for fix by RTEMS-group
+```
+../source-builder/sb-set-builder --jobs=20 --prefix=${RTEMS_ROOT} \
+${RTEMS_VERSION}/rtems-net-legacy --host=powerp-rtems6 \
+--with-rtems-bsp=powerpc/beatnik  
+
+Unfortunately, the main-repo has an error at the time of this writing. 
 ```
 
 2. MVME2500 with libBsd stack:
 
 ```
+Unfortunately, the main-repo has an error at the time of this writing.
+```
+As the RTEMS source builder system contains a bug at the time of writing this guide, we install the network stacks manually (see *README.waf* in the repos).
 
-!!! Error in Script ... wait for fix by RTEMS-group
+3. MVME6100 with legacy stack (manualy with waf):
+
+```
+git clone https://gitlab.rtems.org/rtems/pkg/rtems-net-legacy.git
+cd rtems-net-legacy
+
+git submodule init
+git submodule update
+
+git checkout remotes/origin/6-freebsd-12
+
+./waf configure --prefix=${RTEMS_ROOT} --rtems-bsps=powerpc/beatnik
+./waf build install
+```
+
+4. MVME2500 with libBsd stack:
+
+```
+git clone https://gitlab.rtems.org/rtems/pkg/rtems-libbsd
+
+git submodule init
+git submodule update rtems_waf
+
+git checkout remotes/origin/6-freebsd-12
+
+./waf configure --prefix=${RTEMS_ROOT} --rtems-bsps=powerpc/qoriq_e500 \
+--buildset=buildset/default.ini
+./waf
+./waf install
+```
+
+5. The other systems:
+
+```
+./waf configure --prefix=${RTEMS_ROOT} --rtems-bsps=arm/beagleboneblack \
+--buildset=buildset/default.ini
+./waf
+./waf install
+
+./waf configure --prefix=${RTEMS_ROOT} \
+--rtems-bsps=arm/xilinx_zynq_a9_qemu --buildset=buildset/default.ini
+./waf
+./waf install
+ 
+./waf configure --prefix=${RTEMS_ROOT} --rtems-bsps=powerpc/mvme3100 \
+--buildset=buildset/default.ini
+./waf
+./waf install
+```
+
+### Use of RTEMS 
+
+In the first step, we will now concentrate on a qemu variant:
+
+*xilinx\_zynq\_a9\_qemu*
+
+Run tests with this target:
+
+```
+
+junkes@Zarquon rtems-libbsd % ../rtems/6/bin/rtems-test --rtems-bsp=xilinx_zynq_a9_qemu build
+RTEMS Testing - Tester, 6.0.not_released
+ Command Line: ../rtems/6/bin/rtems-test --rtems-bsp=xilinx_zynq_a9_qemu build
+ Host: Darwin Zarquon.local 23.5.0 Darwin Kernel Version 23.5.0: Wed May  1 20:14:38 PDT 2024; root:xnu-10063.121.3~5/RELEASE_ARM64_T6020 arm64
+ Python: 3.11.9+ (heads/3.11:35c799d, Jun 12 2024, 20:06:09) [Clang 15.0.0 (clang-1500.3.9.4)]
+Host: macOS-14.5-arm64-arm-64bit (Darwin Zarquon.local 23.5.0 Darwin Kernel Version 23.5.0: Wed May  1 20:14:38 PDT 2024; root:xnu-10063.121.3~5/RELEASE_ARM64_T6020 arm64 arm)
+[  2/226] p:0   f:0   u:0   e:0   I:0   B:0   t:0   L:0   i:0   W:0   | arm/xilinx_zynq_a9_qemu: cdev01.exe
+[  1/226] p:0   f:0   u:0   e:0   I:0   B:0   t:0   L:0   i:0   W:0   | arm/xilinx_zynq_a9_qemu: arphole.exe
+[  3/226] p:0   f:0   u:0   e:0   I:0   B:0   t:0   L:0   i:0   W:0   | arm/xilinx_zynq_a9_qemu: commands01.exe
+[  4/226] p:0   f:0   u:0   e:0   I:0   B:0   t:0   L:0   i:0   W:0   | arm/xilinx_zynq_a9_qemu: condvar01.exe
+[  6/226] p:0   f:0   u:0   e:0   I:0   B:0   t:0   L:0   i:0   W:0   | arm/xilinx_zynq_a9_qemu: debugger01.exe
+[  9/226] p:0   f:0   u:0   e:0   I:0   B:0   t:0   L:0   i:0   W:0   | arm/xilinx_zynq_a9_qemu: epoch01.exe
+[  7/226] p:0   f:0   u:0   e:0   I:0   B:0   t:0   L:0   i:0   W:0   | arm/xilinx_zynq_a9_qemu: dhcpcd01.exe
+[  5/226] p:0   f:0   u:0   e:0   I:0   B:0   t:0   L:0   i:0   W:0   | arm/xilinx_zynq_a9_qemu: crypto01.exe
+[ 11/226] p:0   f:0   u:0   e:0   I:0   B:0   t:0   L:0   i:0   W:0   | arm/xilinx_zynq_a9_qemu: foobarclient.exe
+...
+```
+
+## EPICS on RTEMS
+
+We use the virtual CPU *xilinx\_zynq\_a9\_qemu* to test, install and configure EPICS:
+
+We are currently using an adaptation of EPICS to RTEMS by Chris Johns. This customisation can only be meaningfully integrated into EPICS when an RTEMS6 release (6.1?) is available.
+
+```
+git clone --recursive https://github.com/kiwichris/epics-base.git
+
+cd epics-base
+git checkout rtems-ntpd-7_0
+M	.ci
+M	modules/pvAccess
+M	modules/pvData
+M	modules/pvDatabase
+M	modules/pva2pva
+Switched to branch 'rtems-ntpd-7_0'
+Your branch is up to date with 'origin/rtems-ntpd-7_0'.
+```
+This NTP support requires the *rtems-net-services* package.
+
+Unpack this in the same place as the other packages. (here : */Volumes/Epics/LONG\_ISLAND/RTEMS\_FOR\_EPICS/*)
+
+```
+junkes@Zarquon RTEMS_FOR_EPICS % git clone \
+https://gitlab.rtems.org/rtems/pkg/rtems-net-services.git
+Cloning into 'rtems-net-services'...
+remote: Enumerating objects: 806, done.
+remote: Counting objects: 100% (31/31), done.
+remote: Compressing objects: 100% (26/26), done.
+remote: Total 806 (delta 16), reused 6 (delta 5), pack-reused 775 (from 1)
+Receiving objects: 100% (806/806), 1.29 MiB | 469.00 KiB/s, done.
+Resolving deltas: 100% (250/250), done.
+
+cd rtems-net/services
+
+git submodule init
+git submodule update
+
+./waf configure --prefix=${RTEMS_ROOT} --rtems-bsps=arm/xilinx_zynq_a9_qemu
+./waf
+./waf install
+```
+
+Switch to epics-base which has already been unpacked in the step before.
+You have to change a file (*CONFIG\_SITE.Common.RTEMS*) and add another one (*CONFIG_SITE.local*).
+
+```
+diff --git a/configure/os/CONFIG_SITE.Common.RTEMS b/configure/os/CONFIG_SITE.Common.RTEMS
+index 6857dc9a9..c3eb195e0 100644
+--- a/configure/os/CONFIG_SITE.Common.RTEMS
++++ b/configure/os/CONFIG_SITE.Common.RTEMS
+@@ -12,11 +12,9 @@
+ #    used, but for RTEMS 4.10.2 say all 3 components are required.
+ #
+ 
+-# FHI:
+-#RTEMS_VERSION = 5
+-#RTEMS_BASE = /home/h1/DBG/rtems
+-#RTEMS_BASE = /home/ad/MVME6100/rtems/$(RTEMS_VERSION)
+-#RTEMS_BASE = /opt/RTEMS/qoriq/rtems/$(RTEMS_VERSION)
++# Docu (LONG_ISLAND) 
++RTEMS_VERSION = 6
++RTEMS_BASE = /Volumes/Epics/LONG_ISLAND/RTEMS_FOR_EPICS/rtems/$(RTEMS_VERSION)
+ 
+ # APS:
+ #RTEMS_VERSION = 4.10.2
+```
+```
+junkes@Zarquon epics-base % cat configure/CONFIG_SITE.local 
+# Which target architectures to cross-compile for.
+#  Definitions in configure/os/CONFIG_SITE.<host>.Common
+#  may override this setting.
+CROSS_COMPILER_TARGET_ARCHS=RTEMS-xilinx_zynq_a9_qemu
+
+```
+
+Now it's finally time to build EPICS:
+
+```
+make -j20
+```
+
+If everything went well, these files should have been build:
+
+```
+junkes@Zarquon epics-base % ls -l bin/RTEMS-xilinx_zynq_a9_qemu 
+total 1123032
+-r-xr-xr-x  1 junkes  staff  71442428 Jun 13 19:49 caTestHarness
+-r-xr-xr-x  1 junkes  staff  37341856 Jun 13 19:46 dbTestHarness
+-r-xr-xr-x  1 junkes  staff  37029604 Jun 13 19:46 filterTestHarness
+-r-xr-xr-x  1 junkes  staff  37749336 Jun 13 19:44 libComTestHarness
+-r-xr-xr-x  1 junkes  staff  36900052 Jun 13 19:46 linkTestHarness
+-r-xr-xr-x  1 junkes  staff  69569588 Jun 13 19:51 pvDbTestHarness
+-r-xr-xr-x  1 junkes  staff  66885168 Jun 13 19:49 pvaTestHarness
+-r-xr-xr-x  1 junkes  staff  56490036 Jun 13 19:47 pvdTestHarness
+-r-xr-xr-x  1 junkes  staff  42492076 Jun 13 19:46 recordTestHarness
+-r-xr-xr-x  1 junkes  staff  41951972 Jun 13 19:45 softIoc
+-r-xr-xr-x  1 junkes  staff  77118252 Jun 13 19:52 softIocPVA
+```
+
+On OS-x you have to create a virtual network first:
+
+```
+brew install socket_vmnet
+brew tap homebrew/services
+sudo brew services start socket_vmnet
+export PATH="$(brew --prefix)/opt/socket_vmnet/bin:${PATH}"
+ping 192.168.105.1
+```
+
+Run qemu:
+
+```
+#!/bin/bash
+
+if [[ $# != 1 ]] ; then
+  echo 'USAGE: startQemu  kernelFile'
+  exit 0
+fi
+socket_vmnet_client "$(brew --prefix)/var/run/socket_vmnet" \
+qemu-system-arm -M xilinx-zynq-a9 -m 256M -no-reboot \
+-netdev socket,id=net0,fd=3 \
+-net nic,model=cadence_gem,netdev=net0 \
+-serial null -serial mon:stdio -nographic \
+-kernel $1 
+
 ```
 
 
-### Configuring image/run 
 
-not done ...
+
+
+
+
+
+
+
+
+
+
