@@ -97,7 +97,7 @@ Strip Tool | Strip-chart plotting tool | [github.com](https://github.com/epics-e
 | Name | Description | Source Code | Documentation |
 | ---- | ----------- | ----------- | ------------- |
 ALH | Alarm Handler (C, Motif) | [github.com](https://github.com/epics-extensions/alh) | [epics.anl.gov](https://epics.anl.gov/extensions/alh/index.php)
-Archiver Applience (Java) | High performance, scalable process data archiver | [github.com](https://github.com/slacmshankar/epicsarchiverap) | [readthedocs.io](https://epicsarchiver.readthedocs.io/en/latest/)
+Archiver Appliance (Java) | High performance, scalable process data archiver | [github.com](https://github.com/slacmshankar/epicsarchiverap) | [readthedocs.io](https://epicsarchiver.readthedocs.io/en/latest/)
 BEAST (Java) | **DEPRECATED** Best Ever Alarm System Toolkit (within CS-Studio) | [github.com](https://github.com/ControlSystemStudio/cs-studio) | [readthedocs.io](https://control-system-studio.readthedocs.io/en/latest/app/alarm/ui/doc/index.html)
 BEAUTY (Java) | **DEPRECATED** PV Archiver (Within CS-Studio) | [github.com](https://github.com/ControlSystemStudio/cs-studio/wiki/BEAST) | [sourceforge.net](https://cs-studio.sourceforge.net/docbook/ch11.html)
 BURT | Backup and restore tool | [epics.anl.gov](https://epics.anl.gov/extensions/burt/index.php) | [epics.anl.gov](https://epics.anl.gov/extensions/burt/index.php)
