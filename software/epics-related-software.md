@@ -104,7 +104,7 @@ BURT | Backup and restore tool | [epics.anl.gov](https://epics.anl.gov/extension
 CASR | Host-based save/restore | [github.com](https://github.com/epicsdeb/autosave/tree/master) | [epics.anl.gov](https://epics.anl.gov/extensions/casr/index.php)
 CA Gateway | PV gateway for channel access | [github.com](https://github.com/epics-extensions/ca-gateway) | [epics.anl.gov](https://epics.anl.gov/extensions/gateway/index.php)
 CA Watcher | 
-Channel Finder | Directory service for EPICS channels | [github.com](https://github.com/ChannelFinder) | [github.io](https://channelfinder.github.io/)
+Channel Finder | Directory service for EPICS channels | [github.com](https://github.com/ChannelFinder) | [readthedocs.io](https://channelfinder.readthedocs.io/en/latest/)
 Channel Watcher  | Channel Watcher replaces the save part of EPICS save/restore | [slac.stanford.edu](https://www.slac.stanford.edu/grp/ssrl/spear/epics/extensions/ChannelWatcher/index.html) | [slac.stanford.edu](https://www.slac.stanford.edu/grp/ssrl/spear/epics/extensions/ChannelWatcher/index.html)
 MASAR | Machine Snapshot, Archive and Restore | [github.com](https://github.com/epics-base/masarService) | [epics.anl.gov (pdf)](https://epics.anl.gov/meetings/2013-10/3%20-%20Other%20Services/4%20-%20MASAR%20Service.pdf)
 NameServer | Channel Access Name Server | [github.com](https://github.com/epics-extensions/ca-nameserver) | [epics.anl.gov](https://epics.anl.gov/extensions/nameserver/index.php)
