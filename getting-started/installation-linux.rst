@@ -23,7 +23,7 @@ Install EPICS
 -------------
 
 The recommended way to start working with EPICS is to download one of the released packages.
-These packages contain all the recommended submodules that have been tested to work together.
+The released versions of EPICS have been fully tested to work as documented.
 Choose the release that you want and download:
 
 ::
