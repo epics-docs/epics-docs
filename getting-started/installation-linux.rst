@@ -22,7 +22,7 @@ of the packages required to build EPICS base, the sequencer, synApps modules, an
 Install EPICS
 -------------
 
-The recommended way to start working with EPICS is to download one of the released packages.
+The recommended way to start working with EPICS is to download one of the release packages.
 The released versions of EPICS have been fully tested to work as documented.
 Choose the release that you want and download:
 
@@ -32,7 +32,7 @@ Choose the release that you want and download:
     cd $HOME/EPICS
     wget https://epics-controls.org/download/base/base-7.0.8.1.tar.gz
     tar -xvf base-7.0.8.1.tar.gz
-    cd base-R7.0.8.1
+    cd base-7.0.8.1
     make
 
 After compiling you should put the path into ``$HOME/.profile`` or into ``$HOME/.bashrc`` 
