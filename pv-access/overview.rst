@@ -18,7 +18,7 @@ and is foreseen to eventually supplant those.
 Inclusion in the EPICS release packages is foreseen from EPICS version 7.1.
 
 PVA "classic"
------------
+-------------
 
 These modules comprise the pvAccess implementation that was written in context of the "EPICS 4" project and integrated into
 EPICS base distribution as separate modules beginning from version 7.0.
