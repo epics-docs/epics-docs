@@ -10,7 +10,7 @@ PVXS
 
 PVXS <https://mdavidsaver.github.io/pvxs/> is a re-implementation of the pvAccess protocol support. 
 This module provides a library (libpvxs.so or pvxs.dll) 
-and a set of CLI utilities acting as PVAccess protocol client and/or server.
+and a set of CLI utilities acting as pvAccess protocol client and/or server.
 
 PVXS is functionally equivalent to the pvDataCPP and pvAccessCPP modules, 
 and is foreseen to eventually supplant those. 
