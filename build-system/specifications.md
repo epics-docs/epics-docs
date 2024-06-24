@@ -30,8 +30,8 @@ A `<top>` directory has the following directory structure:
 ├── ...
 ```
 
-where configure is a directory containing build configuration files and
-a Makefile, where dir1, dir2, ... are user created subdirectory trees
+where `configure` is a directory containing build configuration files and
+a `Makefile`, where `dir1, dir2,` ... are user created subdirectory trees
 with Makefiles and source files to be built. Because the build rules
 allow make commands like `make install.vxWorks-68040`, subdirectory
 names within a `<top>` directory structure may not contain a period
@@ -39,11 +39,11 @@ names within a `<top>` directory structure may not contain a period
 
 ### Install Directories
 
-Files installed during the build are installed into subdirectories of an
+Files generated during the build are installed into subdirectories of an
 installation directory which defaults to `$(TOP)`, the `<top>` directory.
 For base, extensions, and IOC applications, the default value can be
 changed in the `configure/CONFIG_SITE` file. The installation directory
-for the EPICS components is controlled by the definition of
+for the EPICS components is controlled by the definition of the
 `INSTALL_LOCATION` variable.
 
 Due to a side-effect of the build rules, the *parent* of the installation directory `($(INSTALL_LOCATION)/..)` 
@@ -54,27 +54,27 @@ The following subdirectories may exist in the installation directory.
 They are created by the build and contain the installed build
 components.
 
--   dbd - Directory into which Database Definition files are installed.
--   include - The directory into which C header files are installed.
+-   `dbd` - Directory into which Database Definition files are installed.
+-   `include` - The directory into which C header files are installed.
     These header files may be generated from menu and record type
     definitions.
--   bin - This directory contains a subdirectory for each host
+-   `bin` - This directory contains a subdirectory for each host
     architecture and for each target architecture. These are the
     directories into which executables, binaries, etc. are installed.
--   lib - This directory contains a subdirectory for each host
+-   `lib` - This directory contains a subdirectory for each host
     architecture. These are the directories into which libraries are
     installed.
--   db - This is the directory into which database record instance,
+-   `db` - This is the directory into which database record instance,
     template, and substitution files are installed.
--   html - This is the directory into which html documentation is
+-   `html` - This is the directory into which html documentation is
     installed.
--   templates - This is the directory into which template files are
+-   `templates` - This is the directory into which template files are
     installed.
--   javalib - This is the directory into which java class files and jar
+-   `javalib` - This is the directory into which java class files and jar
     files are installed.
--   configure - The directory into which configure files are installed
+-   `configure` - The directory into which configure files are installed
     (if `INSTALL_LOCATION` does not equal `TOP`).
--   cfg - The directory into which user created configure files are
+-   `cfg` - The directory into which user created configure files are
     installed
 
 ### Elements of build system
@@ -82,13 +82,13 @@ components.
 The main ingredients of the build system are:
 
 -   A set of configuration files and tools provided in the EPICS
-    base/configure directory
+    `base/configure` directory
 -   A corresponding set of configuration files in the
     `<top>/configure` directory of a non-base
     `<top>` directory structure to be built. The
     `makeBaseApp.pl` and `makeBaseExt.pl`
     scripts create these configuration files. Many of these files just
-    include a file of the same name from the base/configure directory.
+    include a file of the same name from the `base/configure` directory.
 -   Makefiles in each directory of the `<top>` directory structure to be
     built
 -   User created configuration files in build created
@@ -98,7 +98,7 @@ The main ingredients of the build system are:
 
 The principal features of the build system are:
 
--   Requires a single Makefile in each directory of a `<top>` directory
+-   Requires a single `Makefile` in each directory of a `<top>` directory
     structure
 -   Supports both host os vendor's native compiler and GNU compiler
 -   Supports building multiple types of software (libraries,
@@ -184,7 +184,7 @@ C++ compilers in your search path. Check definitions of `CC` and `CCC` in
 and G++ if `ANSI=GCC` and `CPLUSPLUS=GCC` are specified in
 `CONFIG_SITE`. For building base you also must have echo in
 your search path. You can override the default settings by defining
-`PERL`, `CC` and `CCC`, `GCC` and G++, `GNU_DIR` ... in the appropriate file
+`PERL`, `CC` and `CCC`, `GCC` and `G++`, `GNU_DIR` ... in the appropriate file
 (usually `configure/os/CONFIG_SITE.$EPICS_HOST_ARCH.Common`)
 
 #### Unix path
@@ -199,7 +199,7 @@ in your path.
 On WIN32 systems, building shared libraries is the default setting and
 you will need to add fullpathname to
 `$(INSTALL_LOCATION)/bin/$(EPICS_HOST_ARCH)` to your path so the shared
-libraries, dlls, can be found during the build.. Building shared
+libraries, dll's, can be found during the build.. Building shared
 libraries is determined by the value of the macro
 `SHARED_LIBRARIES` in `CONFIG_SITE` or
 `os/CONFIG.Common.<host>` (either `YES` or `NO`).
@@ -208,7 +208,7 @@ libraries is determined by the value of the macro
 
 Because the build rules allow make commands like
 `make <dir>.<action>,<arch>`, subdirectory names within a `<top>`
-directory structure may not contain a period"." character.
+directory structure may not contain a period "." character.
 
 ### `EPICS_HOST_ARCH` environment variable
 
@@ -216,8 +216,8 @@ The startup directory in EPICS base contains a perl script,
 `EpicsHostArch.pl`, which can be used to define
 `EPICS_HOST_ARCH`. This script can be invoked with a command
 line parameter defining the alternate compiler (e.g. if invoking
-`EpicsHostArch.pl` yields solaris-sparc, then invoking `EpicsHostArch.pl`
-gnu will yield solaris-sparc-gnu).
+`EpicsHostArch.pl` yields `solaris-sparc`, then invoking `EpicsHostArch.pl
+gnu` will yield `solaris-sparc-gnu`).
 
 The startup directory also contains scripts to help users set the path
 and other environment variables.
@@ -237,7 +237,7 @@ default definitions in the following files:
 #### Host configuration
 
 To configure each host system for your site, you may override the
-default definitions in the configure/os directory by adding a new file
+default definitions in the `configure/os` directory by adding a new file
 with override definitions. The new file should have the same name as the
 distribution file to be overridden except `CONFIG` in the name is changed
 to `CONFIG_SITE`.
@@ -249,7 +249,7 @@ to `CONFIG_SITE`.
 #### Target configuration
 
 To configure each target system, you may override the default
-definitions in the configure/os directory by adding a new file with
+definitions in the `configure/os` directory by adding a new file with
 override definitions. The new file should have the same name as the
 distribution file to be overridden except `CONFIG` in the name is replaced
 by `CONFIG_SITE`.
@@ -305,17 +305,17 @@ INSTALL_BIN = $(INSTALL_LOCATION_BIN)/$(T_A)
 
 ### Extension and Application Specific Configuration
 
-The base/configure directory contains files with the default build definitions
-and site specific build definitions. The extensions/configure directory contains
+The `base/configure` directory contains files with the default build definitions
+and site specific build definitions. The `extensions/configure` directory contains
 extension specific build definitions (e.g. location of X11 and Motif libraries)
-and `include <filename>` lines for the base/configure files. Likewise, the
+and `"include <filename>"` lines for the base/configure files. Likewise, the
 `<application>/configure` directory contains application specific build
 definitions and includes for the application source files. Build definitions
 such as `CROSS_COMPILER_TARGET_ARCHS` can be overridden in an extension or
 application by placing an override definition in the
 `<top>/configure/CONFIG_SITE` file.
 
-### `RELEASE` file
+### RELEASE file
 
 Every `<top>/configure` directory contains a `RELEASE` file. `RELEASE`
 contains a user specified list of other `<top>` directory structures
@@ -362,9 +362,11 @@ Definitions in `configure/RELEASE` can be overridden for a specific host
 and target architectures by providing the appropriate file or files
 containing overriding definitions.
 
-* `configure/RELEASE.<epics_host_arch>.Common`
-* `configure/RELEASE.Common.<targetarch>`
-* `configure/RELEASE.<epics_host_arch>.<targetarch>`
+```
+configure/RELEASE.<epics_host_arch>.Common
+configure/RELEASE.Common.<targetarch>
+configure/RELEASE.<epics_host_arch>.<targetarch>
+```
 
 For `<top>` directory structures created by `makeBaseApp.pl`, an EPICS
 base perl script, `convertRelease.pl` can perform consistency checks for
@@ -378,7 +380,7 @@ build will continue even if conflicts are found.
 
 ### Modifying `configure/RELEASE*` files
 
-You should always do a gnumake clean uninstall in the `<top>` directory
+You should always do a `gnumake clean uninstall` in the `<top>` directory
 BEFORE adding, changing, or removing any definitions in the
 `configure/RELEASE*` files and then a gnumake at the top level AFTER
 making the changes.
@@ -512,10 +514,12 @@ the user's `<home>/configure` subdirectory. These override definitions
 will be used for builds in all `<top>` directory structures. The files
 must have the following names.
 
-* `<home>/configure/CONFIG_USER`
-* `<home>/configure/CONFIG_USER.<epics_host_arch>`
-* `<home>/configure/CONFIG_USER.Common.<targetarch>`
-* `<home>/configure/CONFIG_USER.<epics_host_arch>.<targetarch>`
+```
+<home>/configure/CONFIG_USER
+<home>/configure/CONFIG_USER.<epics_host_arch>
+<home>/configure/CONFIG_USER.Common.<targetarch>
+<home>/configure/CONFIG_USER.<epics_host_arch>.<targetarch>
+```
 
 ## Makefiles
 
@@ -539,7 +543,7 @@ A Makefile in this type of directory must define where `<top>` is
 relative to this directory, include `<top>/configure` files, and specify
 the subdirectories in the desired order of make execution. Running
 gnumake in a directory with the following Makefile lines will cause
-gnumake to be executed in <dir1> first and then <dir2>. The build
+gnumake to be executed in `<dir1>` first and then `<dir2>`. The build
 rules do not allow a Makefile to specify both subdirectories and
 components to be built.
 
@@ -777,12 +781,13 @@ SRC_DIRS += ../dir1 ../dir2
 The directory search order for the above definition is
 
 ```
-. ../os/$(OS_CLASS) ../os/posix ../os/default ../dir1/os/$(OS_CLASS)
+. 
+../os/$(OS_CLASS) ../os/posix ../os/default ../dir1/os/$(OS_CLASS)
 ../dir1/os/posix ../dir1/os/default ../dir2/os/$(OS_CLASS)
 ../dir2/os/posix ../dir2/os/default .. ../dir1 ../dir2
 ```
 
-where the build directory `O.<arch>` is . and the src directory is ...
+where the build directory `O.<arch>` is `.` and the `src` directory is `..` .
 
 ### Posix C source code
 
@@ -1012,7 +1017,7 @@ generates `xxx.db` depending on which source files exist and installs it
 into `$(INSTALL_LOCATION)/db`.
 
 A `<name>.db` database file will be created from an optional
-`<name>.template` file and/or an optional `<name>.substitutions` file,
+`<name>.template` file and/or an optional `<name>.substitutions` file.
 If the substitution file exists but the template file is not named
 `<name>.template`, the template file name can be specified as
 
@@ -1657,7 +1662,7 @@ specified osclass. (deprecated)
 Combined object files will be used in builds of the library for archs without a
 `<libname>_LDOBJS_<osclass>` definition specified. (deprecated)
 
-#### `LIBOBJS` definitions
+#### LIBOBJS definitions
 
 Previous versions of epics (3.13 and before) accepted definitions like:
 
@@ -1980,7 +1985,7 @@ A state notation program file can be specified as a source file in any
 <prodname>_SRCS += <name>.stt
 ```
 
-The state notation compiler snc will generate the file `<name>.c` from
+The state notation compiler `snc` will generate the file `<name>.c` from
 the state notation program file `<name>.stt`. This C file is compiled
 and the resulting object file is linked into the `<prodname>` product.
 
@@ -3201,21 +3206,15 @@ st.cmd_PATTERN += st.cmd.d/*
 The build will create and install a st.cmd script using the following
 snippets:
 
-    +---------+----------------------------+----------------------------+
-    | Source  | Snippet                    | Comment                    |
-    +=========+============================+============================+
-    | L G     | 10_init 20_environment     | L default resets the G     |
-    |         |                            | default                    |
-    +---------+----------------------------+----------------------------+
-    | L G     | 30_another-driver          | implicit addition,         |
-    |         | 30_drivers                 | alphabetical sorting       |
-    +---------+----------------------------+----------------------------+
-    | L       | 40_settings                | replacing a default,       |
-    |         |                            | ignoring backup file       |
-    +---------+----------------------------+----------------------------+
-    | #####   | 70_start-my-ioc            | explicit replace           |
-    |  L {#l} |                            |                            |
-    +---------+----------------------------+----------------------------+
+| Source  | Snippet                    | Comment                                    |
+| ------  | -------                    | -------                                    |
+| L       | 10_init                    | L default resets the G default             |
+| G       | 20_environment             |                                            |
+| L       | 30_another-driver          | implicit addition, alphabetical sorting    |
+| G       | 30_drivers                 |                                            |
+| L       | 40_settings                | replacing a default, ignoring backup file  |
+| L       | 70_start-my-ioc            | explicit replace                           |
+
 
 ## Table of Makefile definitions
 
@@ -3227,977 +3226,390 @@ requires that the default not apply and there are no items in the
 definition that apply for that `<osclass>`, the value `-nil-` should
 be specified in the relevant Makefile definition.
 
-    +----------------------------------+----------------------------------+
-    | Build Option                     | Description                      |
-    +==================================+==================================+
-    | Products to be built (host type  |                                  |
-    | archs only)                      |                                  |
-    +----------------------------------+----------------------------------+
-    | PROD                             | products (names without          |
-    |                                  | execution suffix) to build and   |
-    |                                  | install. Specify xyz to build    |
-    |                                  | executable xyz on Unix and       |
-    |                                  | xyz.exe on WIN32                 |
-    +----------------------------------+----------------------------------+
-    | PROD_<osclass>                   | os class specific products to    |
-    |                                  | build and install for            |
-    |                                  | <osclass> archs only             |
-    +----------------------------------+----------------------------------+
-    | PROD_DEFAULT                     | products to build and install    |
-    |                                  | for archs with no                |
-    |                                  | PROD_<osclass> specified         |
-    +----------------------------------+----------------------------------+
-    | PROD_IOC                         | products to build and install    |
-    |                                  | for ioc type archs               |
-    +----------------------------------+----------------------------------+
-    | PROD_IOC_<osclass>               | os specific products to build    |
-    |                                  | and install for ioc type archs   |
-    +----------------------------------+----------------------------------+
-    | PROD_IOC_DEFAULT                 | products to build and install    |
-    |                                  | for ioc type arch systems with   |
-    |                                  | no PROD_IOC_<osclass>            |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | PROD_HOST                        | products to build and install    |
-    |                                  | for host type archs.             |
-    +----------------------------------+----------------------------------+
-    | PROD_HOST_<osclass>              | os class specific products to    |
-    |                                  | build and install for            |
-    |                                  | <osclass> type archs             |
-    +----------------------------------+----------------------------------+
-    | PROD_HOST_DEFAULT Test products  | products to build and install    |
-    | to be built                      | for arch with no                 |
-    |                                  | PROD_HOST_<osclass>              |
-    |                                  | specified                        |
-    +==================================+==================================+
-    | TESTPROD                         | test products (names without     |
-    |                                  | execution suffix) to build but   |
-    |                                  | not install                      |
-    +----------------------------------+----------------------------------+
-    | TESTPROD_<osclass>               | os class specific test products  |
-    |                                  | to build but not install         |
-    +----------------------------------+----------------------------------+
-    | TESTPROD_DEFAULT                 | test products to build but not   |
-    |                                  | install for archs with no        |
-    |                                  | TESTPROD_<osclass>               |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | TESTPROD_IOC                     | test products to build and       |
-    |                                  | install for ioc type archs       |
-    +----------------------------------+----------------------------------+
-    | TESTPROD_IOC_<osclass>           | os specific test products to     |
-    |                                  | build and install for ioc type   |
-    |                                  | archs                            |
-    +----------------------------------+----------------------------------+
-    | TESTPROD_IOC_DEFAULT             | test products to build and       |
-    |                                  | install for ioc type arch        |
-    |                                  | systems with no                  |
-    |                                  | TESTPROD_IOC_<osclass>           |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | TESTPROD_HOST                    | testproducts to build and        |
-    |                                  | install for host type archs.     |
-    +----------------------------------+----------------------------------+
-    | TESTPROD_HOST_<osclass>          | os class specific testproducts   |
-    |                                  | to build and install for         |
-    |                                  | <osclass> type archs             |
-    +----------------------------------+----------------------------------+
-    | TESTPROD_HOST_DEFAULT Test       | test products to build and       |
-    | scripts to be built              | install for arch with no         |
-    |                                  | TESTPROD_HOST_<osclass>          |
-    |                                  | specified                        |
-    +==================================+==================================+
-    | TESTSCRIPTS                      | test scripts (names with .t      |
-    |                                  | suffix) to build but not install |
-    +----------------------------------+----------------------------------+
-    | TESTSCRIPTS_<osclass>            | os class specific test scripts   |
-    |                                  | to build but not install         |
-    +----------------------------------+----------------------------------+
-    | TESTSCRIPTS_DEFAULT              | test scripts to build but not    |
-    |                                  | install for archs with no        |
-    |                                  | TESTSCRIPTS_<osclass>            |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | TESTSCRIPTS_IOC                  | test scripts to build and        |
-    |                                  | install for ioc type archs       |
-    +----------------------------------+----------------------------------+
-    | TESTSCRIPTS_IOC_<osclass>        | os specific test scripts to      |
-    |                                  | build and install for ioc type   |
-    |                                  | archs                            |
-    +----------------------------------+----------------------------------+
-    | TESTSCRIPTS_IOC_DEFAULT          | test scripts to build and        |
-    |                                  | install for ioc type arch        |
-    |                                  | systems with no                  |
-    |                                  | TESTSCRIPTS_IOC_<osclass>        |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | TESTSCRIPTS_HOST                 | test scripts to build and        |
-    |                                  | install for host type archs.     |
-    +----------------------------------+----------------------------------+
-    | TESTSCRIPTS_HOST_<osclass>       | os class specific testscripts to |
-    |                                  | build and install for            |
-    |                                  | <osclass> type archs             |
-    +----------------------------------+----------------------------------+
-    | TESTSCRIPTS_HOST_DEFAULT         | test scripts to build and        |
-    | Libraries to be built            | install for arch with no         |
-    |                                  | TESTSCRIPTS_HOST_<osclass>       |
-    |                                  | specified                        |
-    +==================================+==================================+
-    | LIBRARY                          | name of library to build and     |
-    |                                  | install. The name should NOT     |
-    |                                  | include a prefix or extension    |
-    |                                  | e.g. specify Ca to build libCa.a |
-    |                                  | on Unix, Ca.lib or Ca.dll on     |
-    |                                  | WIN32                            |
-    +----------------------------------+----------------------------------+
-    | LIBRARY_<osclass>                | os specific libraries to build   |
-    |                                  | and install                      |
-    +----------------------------------+----------------------------------+
-    | LIBRARY_DEFAULT                  | libraries to build and install   |
-    |                                  | for archs with no                |
-    |                                  | LIBRARY_<osclass> specified      |
-    +----------------------------------+----------------------------------+
-    | LIBRARY_IOC                      | name of library to build and     |
-    |                                  | install for ioc type archs. The  |
-    |                                  | name should NOT include a prefix |
-    |                                  | or extension e.g. specify Ca to  |
-    |                                  | build libCa.a on Unix, Ca.lib or |
-    |                                  | Ca.dll on WIN32                  |
-    +----------------------------------+----------------------------------+
-    | LIBRARY_IOC_<osclass>            | os specific libraries to build   |
-    |                                  | and install for ioc type archs   |
-    +----------------------------------+----------------------------------+
-    | LIBRARY_IOC_DEFAULT              | libraries to build and install   |
-    |                                  | for ioc type arch systems with   |
-    |                                  | no LIBRARY_IOC_<osclass>         |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | LIBRARY_HOST                     | name of library to build and     |
-    |                                  | install for host type archs. The |
-    |                                  | name should NOT include a prefix |
-    |                                  | or extension, e.g. specify Ca to |
-    |                                  | build libCa.a on Unix, Ca.lib or |
-    |                                  | Ca.dll on WIN32                  |
-    +----------------------------------+----------------------------------+
-    | LIBRARY_HOST_<osclass>           | os class specific libraries to   |
-    |                                  | build and install for host type  |
-    |                                  | archs                            |
-    +----------------------------------+----------------------------------+
-    | LIBRARY_HOST_DEFAULT             | libraries to build and install   |
-    |                                  | for host type arch systems with  |
-    |                                  | no LIBRARY_HOST_<osclass>        |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | SHARED_LIBRARIES                 | build shared libraries? Must be  |
-    |                                  | YES or NO                        |
-    +----------------------------------+----------------------------------+
-    | SHRLIB_VERSION Loadable          | shared library version number    |
-    | libraries to be built            |                                  |
-    +==================================+==================================+
-    | LOADABLE_LIBRARY                 | name of loadable library to      |
-    |                                  | build and install. The name      |
-    |                                  | should NOT include a prefix or   |
-    |                                  | extension e.g. specify Ca to     |
-    |                                  | build libCa.so on Unix and       |
-    |                                  | Ca.dll on WIN32                  |
-    +----------------------------------+----------------------------------+
-    | LOADABLE_LIBRARY_<osclass>       | os specific loadable libraries   |
-    |                                  | to build and install             |
-    +----------------------------------+----------------------------------+
-    | LOADABLE_LIBRARY_DEFAULT         | loadable libraries to build and  |
-    |                                  | install for archs with no        |
-    |                                  | LOADABLE_LIBRARY_<osclass>       |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | LOADABLE_LIBRARY_HOST            | name of loadable library to      |
-    |                                  | build and install for host type  |
-    |                                  | archs. The name should NOT       |
-    |                                  | include a prefix or extension,   |
-    |                                  | e.g. specify test to build       |
-    |                                  | libtest.so on Unix and test.dll  |
-    |                                  | on WIN32                         |
-    +----------------------------------+----------------------------------+
-    | LOADABLE_LIBRARY_HOST_<osclass>  | os class specific loadable       |
-    |                                  | libraries to build and install   |
-    |                                  | for host type archs              |
-    +----------------------------------+----------------------------------+
-    | LOADABLE_LIBRARY_HOST_DEFAULT    | loadable libraries to build and  |
-    | Combined object files (vxWorks   | install for host type arch       |
-    | only)                            | systems with no                  |
-    |                                  | LOADABLE_LIBRARY_HOST_<osclass>  |
-    |                                  | specified                        |
-    +==================================+==================================+
-    | OBJLIB                           | name of a combined object file   |
-    |                                  | library and corresponding munch  |
-    |                                  | file to build and install. The   |
-    |                                  | name will have a Library suffix  |
-    |                                  | appended                         |
-    +----------------------------------+----------------------------------+
-    | OBJLIB_vxWorks                   | same as OBJLIB                   |
-    +----------------------------------+----------------------------------+
-    | OBJLIB_SRCS                      | source files to build the OBJLIB |
-    +----------------------------------+----------------------------------+
-    | OBJLIB_OBJS Product and library  | object files to include in       |
-    | source files                     | OBJLIB                           |
-    +==================================+==================================+
-    | SRCS                             | source files to build all PRODs  |
-    |                                  | and LIBRARYs                     |
-    +----------------------------------+----------------------------------+
-    | SRCS_<osclass>                   | osclass specific source files to |
-    |                                  | build all PRODs and LIBRARYs     |
-    +----------------------------------+----------------------------------+
-    | SRCS_DEFAULT                     | source file to build all PRODs   |
-    |                                  | and LIBRARYs for archs with no   |
-    |                                  | SRCS_<osclass> specified         |
-    +----------------------------------+----------------------------------+
-    | USR_SRCS                         | source files to build all PRODs  |
-    |                                  | and LIBRARYs                     |
-    +----------------------------------+----------------------------------+
-    | USR_SRCS_<osclass>               | osclass specific source files to |
-    |                                  | build all PRODs and LIBRARYs     |
-    +----------------------------------+----------------------------------+
-    | USR_SRCS_DEFAULT                 | source file to build all PRODs   |
-    |                                  | and LIBRARYs for archs with no   |
-    |                                  | SRCS_<osclass> specified         |
-    +----------------------------------+----------------------------------+
-    | PROD_SRCS                        | source files to build all PRODs  |
-    +----------------------------------+----------------------------------+
-    | PROD_SRCS_<osclass>              | osclass specific source files to |
-    |                                  | build all PRODs                  |
-    +----------------------------------+----------------------------------+
-    | PROD_SRCS_DEFAULT                | source files needed to build     |
-    |                                  | PRODs for archs with no          |
-    |                                  | SRCS_<osclass> specified         |
-    +----------------------------------+----------------------------------+
-    | LIB_SRCS                         | source files for building        |
-    |                                  | LIBRARY (e.g. LIB_SRCS=la.c lb.c |
-    |                                  | lc.c)                            |
-    +----------------------------------+----------------------------------+
-    | LIB_SRCS_<osclass>               | os-specific library source files |
-    +----------------------------------+----------------------------------+
-    | LIB_SRCS_DEFAULT                 | library source files for archs   |
-    |                                  | with no LIB_SRCS_<osclass>       |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | LIBSRCS                          | source files for building        |
-    |                                  | LIBRARY (deprecated)             |
-    +----------------------------------+----------------------------------+
-    | LIBSRCS_<osclass>                | os-specific library source files |
-    |                                  | (deprecated)                     |
-    +----------------------------------+----------------------------------+
-    | LIBSRCS_DEFAULT                  | library source files for archs   |
-    |                                  | with no LIBSRCS_<osclass>        |
-    |                                  | specified (deprecated)           |
-    +----------------------------------+----------------------------------+
-    | <name>_SRCS                      | source files to build a specific |
-    |                                  | PROD or LIBRARY                  |
-    +----------------------------------+----------------------------------+
-    | <name>_SRCS_<osclass>            | os specific source files to      |
-    |                                  | build a specific PROD or LIBRARY |
-    +----------------------------------+----------------------------------+
-    | <name>_SRCS_DEFAULT Product      | source files needed to build a   |
-    | and library object files         | specific PROD or LIBRARY for     |
-    |                                  | archs with no                    |
-    |                                  | <prod>_SRCS_<osclass>            |
-    |                                  | specified                        |
-    +==================================+==================================+
-    | USR_OBJS                         | object files, specified without  |
-    |                                  | suffix, to build all PRODs and   |
-    |                                  | LIBRARYs                         |
-    +----------------------------------+----------------------------------+
-    | USR_OBJS_<osclass>               | osclass specific object files,   |
-    |                                  | specified without suffix, to     |
-    |                                  | build all PRODs and LIBRARYs     |
-    +----------------------------------+----------------------------------+
-    | USR_OBJS_DEFAULT                 | object files, specified without  |
-    |                                  | suffix, needed to build PRODs    |
-    |                                  | and LIBRARYs for archs with no   |
-    |                                  | OBJS_<osclass> specified         |
-    +----------------------------------+----------------------------------+
-    | PROD_OBJS                        | object files, specified without  |
-    |                                  | suffix, to build all PRODs       |
-    +----------------------------------+----------------------------------+
-    | PROD_OBJS_<osclass>              | osclass specific object files,   |
-    |                                  | specified without suffix, to     |
-    |                                  | build all PRODs                  |
-    +----------------------------------+----------------------------------+
-    | PROD_OBJS_DEFAULT                | object files, specified without  |
-    |                                  | suffix, needed to build PRODs    |
-    |                                  | for archs with no                |
-    |                                  | OBJS_<osclass> specified    |
-    +----------------------------------+----------------------------------+
-    | LIB_OBJS                         | object files, specified without  |
-    |                                  | suffix, for building all         |
-    |                                  | LIBRARYs (e.g.                   |
-    |                                  | LIB_OBJS+=$(AB_BIN)/la           |
-    |                                  | $(AB_BIN)/lb)                    |
-    +----------------------------------+----------------------------------+
-    | LIB_OBJS_<osclass>               | os-specific library object       |
-    |                                  | files, specify without suffix,   |
-    +----------------------------------+----------------------------------+
-    | LIB_OBJS_DEFAULT                 | library object files, specified  |
-    |                                  | without suffix, for archs with   |
-    |                                  | no LIB_OBJS_<osclass>            |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | <name>_OBJS                      | object files, specified without  |
-    |                                  | suffix, to build a specific PROD |
-    |                                  | or LIBRARY                       |
-    +----------------------------------+----------------------------------+
-    | <name>_OBJS_<osclass>            | os specific object files,        |
-    |                                  | specified without suffix, to     |
-    |                                  | build a specific PROD or         |
-    |                                  | LIBRARY                          |
-    +----------------------------------+----------------------------------+
-    | <name>_OBJS_DEFAULT Product      | object files, without suffix,    |
-    | and library R3.13 combined       | needed to build a specific PROD  |
-    | object files                     | or LIBRARY for archs with no     |
-    |                                  | <prod>_OBJS_<osclass>            |
-    |                                  | specified                        |
-    +==================================+==================================+
-    | USR_OBJLIBS                      | combined object files with       |
-    |                                  | filenames that do not have a     |
-    |                                  | suffix, needed for building all  |
-    |                                  | PRODs and LIBRARYs (e.g.         |
-    |                                  | USR_OBJLIBS+=$(XYZ_BIN)/xyzLib)  |
-    +----------------------------------+----------------------------------+
-    | USR_OBJLIBS_<osclass>            | os-specific combined object      |
-    |                                  | files with filenames that do not |
-    |                                  | have a suffix for building all   |
-    |                                  | PRODs and LIBRARYs               |
-    +----------------------------------+----------------------------------+
-    | USR_OBJLIBS_DEFAULT              | combined object files with       |
-    |                                  | filenames that do not have a     |
-    |                                  | suffix, for archs with no        |
-    |                                  | USR_OBJLIBS_<osclass>            |
-    |                                  | specified for building all PRODs |
-    |                                  | and LIBRARYs                     |
-    +----------------------------------+----------------------------------+
-    | PROD_OBJLIBS                     | combined object files with       |
-    |                                  | filenames that do not have a     |
-    |                                  | suffix, needed for building all  |
-    |                                  | PRODs (e.g.                      |
-    |                                  | P                                |
-    |                                  | ROD_OBJLIBS+=$(XYZ_BIN)/xyzLib)  |
-    +----------------------------------+----------------------------------+
-    | PROD_OBJLIBS_<osclass>           | os-specific combined object      |
-    |                                  | files with filenames that do not |
-    |                                  | have a suffix for building all   |
-    |                                  | PRODs                            |
-    +----------------------------------+----------------------------------+
-    | PROD_OBJLIBS_DEFAULT             | combined object files with       |
-    |                                  | filenames that do not have a     |
-    |                                  | suffix, for archs with no        |
-    |                                  | PROD_OBJLIBS_<osclass>           |
-    |                                  | specified for building all PRODs |
-    +----------------------------------+----------------------------------+
-    | LIB_OBJLIBS                      | combined object files with       |
-    |                                  | filenames that do not have a     |
-    |                                  | suffix, needed for building all  |
-    |                                  | LIBRARYs (e.g.                   |
-    |                                  | LIB_OBJLIBS+=$(XYZ_BIN)/xyzLib)  |
-    +----------------------------------+----------------------------------+
-    | LIB_OBJLIBS_<osclass>            | os-specific combined object      |
-    |                                  | files with filenames that do not |
-    |                                  | have a suffix for building all   |
-    |                                  | LIBRARYs                         |
-    +----------------------------------+----------------------------------+
-    | LIB_OBJLIBS_DEFAULT              | combined object files with       |
-    |                                  | filenames that do not have a     |
-    |                                  | suffix, for archs with no        |
-    |                                  | LIB_OBJLIBS_<osclass>            |
-    |                                  | specified for building all       |
-    |                                  | LIBRARYs                         |
-    +----------------------------------+----------------------------------+
-    | <name>_OBJLIBS                   | combined object files with       |
-    |                                  | filenames that do not have a     |
-    |                                  | suffix, needed to build a        |
-    |                                  | specific PROD or LIBRARY         |
-    +----------------------------------+----------------------------------+
-    | <name>_OBJLIBS_<osclass> | os specific combined object              |
-    |                                  | files with filenames that do not |
-    |                                  | have a suffix, to build a        |
-    |                                  | specific PROD or LIBRARY         |
-    +----------------------------------+----------------------------------+
-    | <name>_OBJLIBS_DEFAULT           | combined object files with       |
-    |                                  | filenames that do not have a     |
-    |                                  | suffix, needed to build a        |
-    |                                  | specific PROD or LIBRARY for     |
-    |                                  | archs with no                    |
-    |                                  | <name>_OBJLIBS_<osclass>         |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | <name>_LDOBJS                    | combined object files with       |
-    |                                  | filenames that do not have a     |
-    |                                  | suffix, needed to build a        |
-    |                                  | specific PROD or LIBRARY         |
-    |                                  | (deprecated)                     |
-    +----------------------------------+----------------------------------+
-    | <name>_LDOBJS_<osclass>          | os specific combined object      |
-    |                                  | files with filenames that do not |
-    |                                  | have a suffix, to build a        |
-    |                                  | specific PROD or LIBRARY         |
-    |                                  | (deprecated)                     |
-    +----------------------------------+----------------------------------+
-    | <name>_LDOBJS_DEFAULT Product    | combined object files with       |
-    | and library dependant libraries  | filenames that do not have a     |
-    |                                  | suffix, needed to build a        |
-    |                                  | specific PROD or LIBRARY for     |
-    |                                  | archs with no                    |
-    |                                  | <name>_LDOBJS_<osclass>          |
-    |                                  | specified (deprecated)           |
-    +==================================+==================================+
-    | <name>_DIR                       | directory to search for the      |
-    |                                  | specified lib. (For libs listed  |
-    |                                  | in all PROD_LIBS, LIB_LIBS,      |
-    |                                  | <name>_LIBS and USR_LIBS         |
-    |                                  | listed below)System libraries do |
-    |                                  | not need a <name>_dir            |
-    |                                  | definition.                      |
-    +----------------------------------+----------------------------------+
-    | USR_LIBS                         | load libraries (e.g. Xt X11) for |
-    |                                  | all products and libraries       |
-    +----------------------------------+----------------------------------+
-    | USR_LIBS_<osclass>               | os specific load libraries for   |
-    |                                  | all makefile links               |
-    +----------------------------------+----------------------------------+
-    | USR_LIBS_DEFAULT                 | load libraries for systems with  |
-    |                                  | no USR_LIBS_<osclass>            |
-    |                                  | specified libs                   |
-    +----------------------------------+----------------------------------+
-    | <name>_LIBS                      | named prod or library specific   |
-    |                                  | ld libraries (e.g.               |
-    |                                  | probe_LIBS=X11 Xt)               |
-    +----------------------------------+----------------------------------+
-    | <name>_LIBS_<osclass>            | os-specific libs needed to link  |
-    |                                  | named prod or library            |
-    +----------------------------------+----------------------------------+
-    | <name>_LIBS_DEFAULT              | libs needed to link named prod   |
-    |                                  | or library for systems with no   |
-    |                                  | <name>_LIBS_<osclass>            |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | PROD_LIBS                        | libs needed to link every PROD   |
-    +----------------------------------+----------------------------------+
-    | PROD_LIBS_<osclass>              | os-specific libs needed to link  |
-    |                                  | every PROD                       |
-    +----------------------------------+----------------------------------+
-    | PROD_LIBS_DEFAULT                | libs needed to link every PROD   |
-    |                                  | for archs with no                |
-    |                                  | PROD_LIBS_<osclass>              |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | LIB_LIBS                         | libraries to be linked with      |
-    |                                  | every library being created      |
-    +----------------------------------+----------------------------------+
-    | LIB_LIBS_<osclass>               | os class specific libraries to   |
-    |                                  | be linked with every library     |
-    |                                  | being created                    |
-    +----------------------------------+----------------------------------+
-    | LIB_LIBS_DEFAULT                 | libraries to be linked with      |
-    |                                  | every library being created for  |
-    |                                  | archs with no                    |
-    |                                  | LIB_LIBS_<osclass>               |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | USR_SYS_LIBS                     | system libraries (e.g. Xt X11)   |
-    |                                  | for all products and libraries   |
-    +----------------------------------+----------------------------------+
-    | USR_SYS_LIBS_<osclass>           | os class specific system         |
-    |                                  | libraries for all makefile links |
-    +----------------------------------+----------------------------------+
-    | USR_SYS_LIBS_DEFAULT             | system libraries for archs with  |
-    |                                  | no USR_SYS_LIBS_<osclass>        |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | <name>_SYS_LIBS                  | named prod or library specific   |
-    |                                  | system ld libraries              |
-    +----------------------------------+----------------------------------+
-    |                                  | os class specific system libs    |
-    | <name>_SYS_LIBS_<osclass>        | needed to link named prod or     |
-    |                                  | library                          |
-    +----------------------------------+----------------------------------+
-    | <name>_SYS_LIBS_DEFAULT          | system libs needed to link named |
-    |                                  | prod or library for systems with |
-    |                                  | no                               |
-    |                                  |                                  |
-    |                                  | <name>_SYS_LIBS_<osclass>        |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | PROD_SYS_LIBS                    | system libs needed to link every |
-    |                                  | PROD                             |
-    +----------------------------------+----------------------------------+
-    | PROD_SYS_LIBS_<osclass>          | os class specific system libs    |
-    |                                  | needed to link every PROD        |
-    +----------------------------------+----------------------------------+
-    | PROD_SYS_LIBS_DEFAULT            | system libs needed to link every |
-    |                                  | PROD for archs with no           |
-    |                                  | PROD_SYS_LIBS_<osclass>          |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | LIB_SYS_LIBS                     | system libraries to be linked    |
-    |                                  | with every library being created |
-    +----------------------------------+----------------------------------+
-    | LIB_SYS_LIBS_<osclass>           | os class specific system         |
-    |                                  | libraries to be linked with      |
-    |                                  | every library being created      |
-    +----------------------------------+----------------------------------+
-    | LIB_SYS_LIBS_DEFAULT             | system libraries to be linked    |
-    |                                  | with every library being created |
-    |                                  | for archs with no                |
-    |                                  | LIB_SYS_LIBS_<osclass>           |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | SYS_PROD_LIBS                    | system libs needed to link every |
-    |                                  | PROD for all systems             |
-    |                                  | (deprecated)                     |
-    +----------------------------------+----------------------------------+
-    | SYS_PROD_LIBS_<osclass>          | os class specific system libs    |
-    |                                  | needed to link every PROD        |
-    |                                  | (deprecated)                     |
-    +----------------------------------+----------------------------------+
-    | SYS_PROD_LIBS_DEFAULT Compiler   | system libs needed to link every |
-    | flags                            | PROD for systems with no         |
-    |                                  | SYS_PROD_LIBS_<osclass>          |
-    |                                  | specified (deprecated)           |
-    +==================================+==================================+
-    | USR_CFLAGS                       | C compiler flags for all systems |
-    +----------------------------------+----------------------------------+
-    | USR_CFLAGS_<T_A>                 | target architecture specific C   |
-    |                                  | compiler flags                   |
-    +----------------------------------+----------------------------------+
-    | USR_CFLAGS_<osclass>             | os class specific C compiler     |
-    |                                  | flags                            |
-    +----------------------------------+----------------------------------+
-    | USR_CFLAGS_DEFAULT               | C compiler flags for archs with  |
-    |                                  | no USR_CFLAGS_<osclass>          |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | <name>_CFLAGS                    | file specific C compiler flags   |
-    |                                  | (e.g. xxxRecord_CFLAGS=-g)       |
-    +----------------------------------+----------------------------------+
-    | <name>_CFLAGS_<T_A>              | file specific C compiler flags   |
-    |                                  | for a specific target            |
-    |                                  | architecture                     |
-    +----------------------------------+----------------------------------+
-    | <name>_CFLAGS_<osclass>          | file specific C compiler flags   |
-    |                                  | for a specific os class          |
-    +----------------------------------+----------------------------------+
-    | USR_CXXFLAGS                     | C++ compiler flags for all       |
-    |                                  | systems (e.g.                    |
-    |                                  | xyxMain_CFLAGS=-DSDDS)           |
-    +----------------------------------+----------------------------------+
-    | USR_CXXFLAGS_<T_A>               | target architecture specific C++ |
-    |                                  | compiler flags                   |
-    +----------------------------------+----------------------------------+
-    | USR_CXXFLAGS_<osclass>           | os-specific C++ compiler flags   |
-    +----------------------------------+----------------------------------+
-    | USR_CXXFLAGS_DEFAULT             | C++ compiler flags for systems   |
-    |                                  | with no                          |
-    |                                  | USR_CXXFLAGS_<osclass>           |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | <name>_CXXFLAGS                  | file specific C++ compiler flags |
-    +----------------------------------+----------------------------------+
-    | <name>_CXXFLAGS_<T_A>            | file specific C++ compiler flags |
-    |                                  | for a specific target            |
-    |                                  | architecture                     |
-    +----------------------------------+----------------------------------+
-    | \                                | file specific C++ compiler flags |
-    | <name>_CXXFLAGS_<osclass>        | for a specific osclass           |
-    +----------------------------------+----------------------------------+
-    | USR_CPPFLAGS                     | C pre-processor flags (for all   |
-    |                                  | makefile compiles)               |
-    +----------------------------------+----------------------------------+
-    | USR_CPPFLAGS_<T_A>               | target architecture specific cpp |
-    |                                  | flags                            |
-    +----------------------------------+----------------------------------+
-    | USR_CPPFLAGS_<osclass>           | os specific cpp flags            |
-    +----------------------------------+----------------------------------+
-    | USR_CPPFLAGS_DEFAULT             | cpp flags for systems with no    |
-    |                                  | USR_CPPFLAGS_<osclass>           |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | <name>_CPPFLAGS                  | file specific C pre-processor    |
-    |                                  | flags(e.g.                       |
-    |                                  | xxxRecord_CPPFLAGS=-DDEBUG)      |
-    +----------------------------------+----------------------------------+
-    | <name>_CPPFLAGS_<T_A>            | file specific cpp flags for a    |
-    |                                  | specific target architecture     |
-    +----------------------------------+----------------------------------+
-    | \                                | file specific cpp flags for a    |
-    | <name>_CPPFLAGS_<osclass>        | specific os class                |
-    +----------------------------------+----------------------------------+
-    | USR_INCLUDES                     | directories, with -I prefix, to  |
-    |                                  | search for include files(e.g.    |
-    |                                  | -I$(EPICS_EXTENSIONS_INCLUDE))   |
-    +----------------------------------+----------------------------------+
-    | USR_INCLUDES_<osclass>           | directories, with -I prefix, to  |
-    |                                  | search for include files for a   |
-    |                                  | specific os class                |
-    +----------------------------------+----------------------------------+
-    | USR_INCLUDES_DEFAULT             | directories, with -I prefix, to  |
-    |                                  | search for include files for     |
-    |                                  | systems with no                  |
-    |                                  |                                  |
-    |                                  | <name>_INCLUDES_<osclass>        |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | <name>_INCLUDES                  | directories, with -I prefix, to  |
-    |                                  | search for include files when    |
-    |                                  | building a specific object file  |
-    |                                  | (e.g. -I$(MOTIF_INC))            |
-    +----------------------------------+----------------------------------+
-    | <name>_INCLUDES_<T_A>            | file specific directories, with  |
-    |                                  | -I prefix, to search for include |
-    |                                  | files for a specific target      |
-    |                                  | architecture                     |
-    +----------------------------------+----------------------------------+
-    |                                  | file specific directories, with  |
-    | <name>_INCLUDES_<osclass>        | -I prefix, to search for include |
-    |                                  | files for a specific os class    |
-    +----------------------------------+----------------------------------+
-    | HOST_WARN                        | Are compiler warning messages    |
-    |                                  | desired for host type builds?    |
-    |                                  | (YES or NO) (default is YES)     |
-    +----------------------------------+----------------------------------+
-    | CROSS_WARN                       | C cross-compiler warning         |
-    |                                  | messages desired (YES or NO)     |
-    |                                  | (default YES)                    |
-    +----------------------------------+----------------------------------+
-    | HOST_OPT                         | Is host build compiler           |
-    |                                  | optimization desired (default is |
-    |                                  | NO optimization)                 |
-    +----------------------------------+----------------------------------+
-    | CROSS_OPT                        | Is cross-compiler optimization   |
-    |                                  | desired (YES or NO) (default is  |
-    |                                  | NO optimization)                 |
-    +----------------------------------+----------------------------------+
-    | CMPLR                            | C compiler selection, TRAD, ANSI |
-    |                                  | or STRICT (default is STRICT)    |
-    +----------------------------------+----------------------------------+
-    | CXXCMPLR Linker options          | C++ compiler selection, NORMAL   |
-    |                                  | or STRICT (default is STRICT)    |
-    +==================================+==================================+
-    | USR_LDFLAGS                      | linker options (for all makefile |
-    |                                  | links)                           |
-    +----------------------------------+----------------------------------+
-    | USR_LDFLAGS_<osclass>            | os specific linker options (for  |
-    |                                  | all makefile links)              |
-    +----------------------------------+----------------------------------+
-    | USR_LDFLAGS_DEFAULT              | linker options for systems with  |
-    |                                  | no USR_LDFLAGS_<osclass>         |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | PROD_LDFLAGS                     | prod linker options              |
-    +----------------------------------+----------------------------------+
-    | PROD_LDFLAGS_<osclass>           | os specific prod linker options  |
-    +----------------------------------+----------------------------------+
-    | PROD_LDFLAGS_DEFAULT             | prod linker options for systems  |
-    |                                  | with no                          |
-    |                                  | PROD_LDFLAGS_<osclass>           |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | LIB_LDFLAGS                      | library linker options           |
-    +----------------------------------+----------------------------------+
-    | LIB_LDFLAGS_<osclass>            | os specific library linker       |
-    |                                  | options                          |
-    +----------------------------------+----------------------------------+
-    | LIB_LDFLAGS_DEFAULT              | library linker options for       |
-    |                                  | systems with no                  |
-    |                                  | LIB_LDFLAGS_<osclass>            |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | <name>_LDFLAGS                   | prod or library specific linker  |
-    |                                  | options                          |
-    +----------------------------------+----------------------------------+
-    | <name>_LDFLAGS_<osclass>         | prod or library specific linker  |
-    |                                  | flags for a specific os class    |
-    +----------------------------------+----------------------------------+
-    | <name>_LDFLAGS_DEFAULT           | linker options for systems with  |
-    |                                  | no                               |
-    |                                  | <name>_LDFLAGS_<osclass>         |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | STATIC_BUILD Header files to be  | Is static build desired (YES or  |
-    | installed                        | NO) (default is NO). On win32 if |
-    |                                  | STATIC_BUILD=YES then set        |
-    |                                  | SHARED_LIBRARIES=NO)             |
-    +==================================+==================================+
-    | INC                              | list of include files to install |
-    |                                  | into $(INSTALL_DIR)/include      |
-    +----------------------------------+----------------------------------+
-    | INC_<osclass>                    | os specific includes to          |
-    |                                  | installed under                  |
-    |                                  | $(INSTALL_DIR)/include/os/<osclass>|
-    +----------------------------------+----------------------------------+
-    | INC_DEFAULT Perl, csh, tcl etc.  | include files to install where   |
-    | script installation              | no INC_<osclass> is              |
-    |                                  | specified                        |
-    +==================================+==================================+
-    | SCRIPTS                          | scripts to install for all       |
-    |                                  | systems                          |
-    +----------------------------------+----------------------------------+
-    | SCRIPTS_<osclass>                | os-specific scripts to install   |
-    +----------------------------------+----------------------------------+
-    | SCRIPTS_DEFAULT                  | scripts to install for systems   |
-    |                                  | with no SCRIPTS_<osclass>        |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | SCRIPTS_IOC                      | scripts to install for ioc type  |
-    |                                  | archs.                           |
-    +----------------------------------+----------------------------------+
-    | SCRIPTS_IOC_<osclass>            | os specific scripts to install   |
-    |                                  | for ioc type archs               |
-    +----------------------------------+----------------------------------+
-    | SCRIPTS_IOC_DEFAULT              | scripts to install for ioc type  |
-    |                                  | arch systems with no             |
-    |                                  | SCRIPTS_IOC_<osclass>            |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | SCRIPTS_HOST                     | scripts to install for host type |
-    |                                  | archs.                           |
-    +----------------------------------+----------------------------------+
-    | SCRIPTS_HOST_<osclass>           | os class specific scripts to     |
-    |                                  | install for host type archs      |
-    +----------------------------------+----------------------------------+
-    | SCRIPTS_HOST_DEFAULT             | scripts to install for host type |
-    |                                  | arch systems with no             |
-    |                                  | OBJS_HOST_<osclass>              |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | TCLLIBNAME                       | list of tcl scripts to install   |
-    |                                  | into                             |
-    |                                  | $(INSTALL_DIR)/lib/<osclass>     |
-    |                                  | (Unix hosts only)                |
-    +----------------------------------+----------------------------------+
-    | TCLINDEX                         | name of tcl index file to create |
-    |                                  | from TCLLIBNAME scripts          |
-    +----------------------------------+----------------------------------+
-    | Object files                     |   The names in the following     |
-    |                                  |   OBJS definitions should NOT    |
-    |                                  |   include a suffix (.o or.obj).  |
-    +==================================+==================================+
-    | OBJS                             | object files to build and        |
-    |                                  | install for all system.          |
-    +----------------------------------+----------------------------------+
-    | OBJS_<osclass>                   | os-specific object files to      |
-    |                                  | build and install.               |
-    +----------------------------------+----------------------------------+
-    | OBJS_DEFAULT                     | object files to build and        |
-    |                                  | install for systems with no      |
-    |                                  | OBJS_<osclass> specified.        |
-    +----------------------------------+----------------------------------+
-    | OBJS_IOC                         | object files to build and        |
-    |                                  | install for ioc type archs.      |
-    +----------------------------------+----------------------------------+
-    | OBJS_IOC_<osclass>               | os specific object files to      |
-    |                                  | build and install for ioc type   |
-    |                                  | archs                            |
-    +----------------------------------+----------------------------------+
-    | OBJS_IOC_DEFAULT                 | object files to build and        |
-    |                                  | install for ioc type arch        |
-    |                                  | systems with no                  |
-    |                                  | OBJS_IOC_<osclass>               |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | OBJS_HOST                        | object files to build and        |
-    |                                  | install for host type archs.     |
-    +----------------------------------+----------------------------------+
-    | OBJS_HOST_<osclass>              | os class specific object files   |
-    |                                  | to build and install for host    |
-    |                                  | type archs                       |
-    +----------------------------------+----------------------------------+
-    | OBJS_HOST_DEFAULT Documentation  | object files to build and        |
-    |                                  | install for host type arch       |
-    |                                  | systems with no                  |
-    |                                  | OBJS_HOST_<osclass>              |
-    |                                  | specified                        |
-    +==================================+==================================+
-    | DOCS                             | text files to be installed into  |
-    |                                  | the $(INSTALL_DIR)/doc           |
-    |                                  | directory                        |
-    +----------------------------------+----------------------------------+
-    | HTMLS_DIR                        | name install Hypertext directory |
-    |                                  | name i.e.                        |
-    |                                  | $(INSTALL_DIR)/html/$(HTMLS_DIR) |
-    +----------------------------------+----------------------------------+
-    | HTMLS                            | hypertext files to be installed  |
-    |                                  | into the                         |
-    |                                  | $(INSTALL_DIR)/html/$(HTMLS_DIR) |
-    |                                  | directory                        |
-    +----------------------------------+----------------------------------+
-    | TEMPLATES_DIR                    | template directory to be created |
-    |                                  | as                               |
-    |                                  | $(INSTALL_DIR)/templates/$(TEMPLATE_DIR) |
-    +----------------------------------+----------------------------------+
-    | TEMPLATES Database Definition    | template files to be installed   |
-    | files                            | into $(TEMPLATE_DIR)             |
-    +==================================+==================================+
-    | DBD                              | database definition files to be  |
-    |                                  | installed or created and         |
-    |                                  | installed into $(INSTALL_DBD).   |
-    +----------------------------------+----------------------------------+
-    | DBDINC                           | names, without suffix, of menus  |
-    |                                  | or record database definitions   |
-    |                                  | and headers to be installed or   |
-    |                                  | created and installed.           |
-    +----------------------------------+----------------------------------+
-    | USR_DBDFLAGS                     | optional flags for dbExpand.     |
-    |                                  | Currently only include path (-I  |
-    |                                  | <path>) and macro substitution   |
-    |                                  | (-S <substitution>) are          |
-    |                                  | supported.                       |
-    +----------------------------------+----------------------------------+
-    | DBD_INSTALLS Database Files      | files from specified directory   |
-    |                                  | to install into $(INSTALL_DBD)   |
-    |                                  | (e.g. DBD_INSTALLS =             |
-    |                                  | $(APPNAME)/dbd/test.dbd)         |
-    +==================================+==================================+
-    | DB                               | database files to be installed   |
-    |                                  | or created and installed into    |
-    |                                  | $(INSTALL_DB).                   |
-    +----------------------------------+----------------------------------+
-    | DB_INSTALLS                      | files from specified directory   |
-    |                                  | to install into $(INSTALL_DB)    |
-    |                                  | (e.g. DB_INSTALLS =              |
-    |                                  | $(APPNAME)/db/test.db)           |
-    +----------------------------------+----------------------------------+
-    | USR_DBFLAGS Options for other    | optional flags for msi (EPICS    |
-    | programs                         | Macro Substitution Tool)         |
-    +==================================+==================================+
-    | YACCOPT                          | yacc options                     |
-    +----------------------------------+----------------------------------+
-    | LEXOPT                           | lex options                      |
-    +----------------------------------+----------------------------------+
-    | SNCFLAGS                         | state notation language, snc,    |
-    |                                  | options                          |
-    +----------------------------------+----------------------------------+
-    | <name>_SNCFLAGS                  | product specific state notation  |
-    |                                  | language options                 |
-    +----------------------------------+----------------------------------+
-    | E2DB_FLAGS                       | e2db options                     |
-    +----------------------------------+----------------------------------+
-    | SCH2EDIF_FLAGS                   | sch2edif options                 |
-    +----------------------------------+----------------------------------+
-    | RANLIBFLAGS                      | ranlib options                   |
-    +----------------------------------+----------------------------------+
-    | USR_ARFLAGS Facilities for       | ar options                       |
-    | building Java programs           |                                  |
-    +==================================+==================================+
-    | JAVA                             | names of Java source files to be |
-    |                                  | built and installed              |
-    +----------------------------------+----------------------------------+
-    | TESTJAVA                         | names of Java source files to be |
-    |                                  | built                            |
-    +----------------------------------+----------------------------------+
-    | JAVAINC                          | names of C header file to be     |
-    |                                  | created in O.Common subdirectory |
-    +----------------------------------+----------------------------------+
-    | JAR                              | name of Jar file to be built     |
-    +----------------------------------+----------------------------------+
-    | JAR_INPUT                        | names of files to be included in |
-    |                                  | JAR                              |
-    +----------------------------------+----------------------------------+
-    | JAR_MANIFEST                     | name of manifest file for JAR    |
-    +----------------------------------+----------------------------------+
-    | USR_JAVACFLAGS                   | javac tool options               |
-    +----------------------------------+----------------------------------+
-    | USR_JAVAHFLAGS Facilities for    | javah tool options               |
-    | Windows 95/NT resource (.rc)     |                                  |
-    | files                            |                                  |
-    +==================================+==================================+
-    | RCS                              | resource files (<name>.rc)       |
-    |                                  | needed to build every PROD and   |
-    |                                  | LIBRARY                          |
-    +----------------------------------+----------------------------------+
-    | RCS_<osclass>                    | resource files (<name>.rc)       |
-    |                                  | needed to build every PROD and   |
-    |                                  | LIBRARY for ioc type archs       |
-    +----------------------------------+----------------------------------+
-    | RCS_DEFAULT                      | resource files needed to build   |
-    |                                  | every PROD and LIBRARY for ioc   |
-    |                                  | type arch systems with no        |
-    |                                  | RCS_<osclass> specified          |
-    +----------------------------------+----------------------------------+
-    | <name>_RCS                       | resource files needed to build a |
-    |                                  | specific PROD or LIBRARY         |
-    +----------------------------------+----------------------------------+
-    | <name>_RCS_<osclass>             | os specific resource files to    |
-    |                                  | build a specific PROD or LIBRARY |
-    +----------------------------------+----------------------------------+
-    | <name>_RCS_DEFAULT Assemblies    | resource files needed to build a |
-    |                                  | specific PROD or LIBRARY for ioc |
-    |                                  | type arch systems with no        |
-    |                                  | RCS_<osclass> specified          |
-    +==================================+==================================+
-    | ASSEMBLIES                       | names of files to be assembled   |
-    |                                  | from snippets                    |
-    +----------------------------------+----------------------------------+
-    | COMMON_ASSEMBLIES                | names of arch-independent files  |
-    |                                  | to be assembled from snippets    |
-    +----------------------------------+----------------------------------+
-    | <name>_SNIPPETS                  | snippet files needed to build a  |
-    |                                  | specific assembly                |
-    +----------------------------------+----------------------------------+
-    | <name>_PATTERN Other             | patterns for snippet files       |
-    | definitions:                     | (searched from all source        |
-    |                                  | directories) needed to build a   |
-    |                                  | specific assembly                |
-    +==================================+==================================+
-    | USR_VPATH                        | list of directories              |
-    +----------------------------------+----------------------------------+
-    | BIN_INSTALLS                     | files from specified directories |
-    |                                  | to be installed into             |
-    |                                  | $(INSTALL_BIN) (e.g.             |
-    |                                  | BIN_INSTALLS =                   |
-    |                                  | $(EPICS_BASE_BIN)/aiRecord$(OBJ))|
-    +----------------------------------+----------------------------------+
-    | BIN_INSTALLS_<osclass>           | os class specific files from     |
-    |                                  | specified directories to be      |
-    |                                  | installed into $(INSTALL_BIN)    |
-    +----------------------------------+----------------------------------+
-    | BIN_INSTALLS_DEFAULT             | files from specified directories |
-    |                                  | to be installed into             |
-    |                                  | $(INSTALL_BIN) for target archs  |
-    |                                  | with no                          |
-    |                                  | BIN_INSTALLS_<osclass>           |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | LIB_INSTALLS                     | files from specified directories |
-    |                                  | to be installed into             |
-    |                                  | $(INSTALL_LIB)                   |
-    +----------------------------------+----------------------------------+
-    | LIB_INSTALLS_<osclass>           | os class specific files from     |
-    |                                  | specified directories to be      |
-    |                                  | installed into $(INSTALL_LIB)    |
-    +----------------------------------+----------------------------------+
-    | LIB_INSTALLS_DEFAULT             | files from specified directories |
-    |                                  | to be installed into             |
-    |                                  | $(INSTALL_LIB) for target archs  |
-    |                                  | with no                          |
-    |                                  | LIB_INSTALLS_<osclass>           |
-    |                                  | specified                        |
-    +----------------------------------+----------------------------------+
-    | TARGETS                          | files to create but not install  |
-    +----------------------------------+----------------------------------+
-    | INSTALL_LOCATION                 | installation directory (defaults |
-    |                                  | to $(TOP))                       |
-    +----------------------------------+----------------------------------+
-    | GENVERSION                       | If set, the name of a generated  |
-    |                                  | header file with the module      |
-    |                                  | version string.                  |
-    +----------------------------------+----------------------------------+
-    | GENVERSIONMACRO                  | The CPP macro name written into  |
-    |                                  | the generated version header     |
-    |                                  | (default MODULEVERSION).         |
-    +----------------------------------+----------------------------------+
-    | GENVERSIONDEFAULT                | The default version string       |
-    |                                  | written into the generated       |
-    |                                  | header if no VCS system is in    |
-    |                                  | use. Leave unset to use build    |
-    |                                  | time.                            |
-    +----------------------------------+----------------------------------+
+### Products to be built (host type archs only)
+
+| Build Option                     | Description                                                                                  |
+| ------------                     | -----------                                                                                  |
+| PROD                             | products (names without execution suffix) to build and  install.                             |
+|                                  | Specify xyz to build executable xyz on Unix and xyz.exe on WIN32                             |
+| PROD_<osclass>                   | os class specific products to build and install for `<osclass>` archs only                     |
+| PROD_DEFAULT                     | products to build and install  for archs with no `PROD_<osclass>` specified                    |
+| PROD_IOC                         | products to build and install  for ioc type archs                                            |
+| PROD_IOC_\<osclass\>               | os specific products to build and install for ioc type archs                                 |
+| PROD_IOC_DEFAULT                 | products to build and install for ioc type arch systems with no `PROD_IOC_<osclass>` specified |
+| PROD_HOST                        | products to build and install  for host type archs.                                          |
+| PROD_HOST_\<osclass\>              | os class specific products to build and install for <osclass> type archs                     |
+| PROD_HOST_DEFAULT   | products to build and install for arch with no `PROD_HOST_<osclass>` specified                              |
+
+### Test products to be built 
+
+| Build Option                     | Description                                                                                  |
+| ------------                     | -----------                                                                                  |
+| TESTPROD                         | test products (names without execution suffix) to build but not install                      |
+| TESTPROD_\<osclass\>               | os class specific test products to build but not install                                     |
+| TESTPROD_DEFAULT                 | test products to build but not install for archs with no `TESTPROD_<osclass>` specified        |
+| TESTPROD_IOC                     | test products to build and install for ioc type archs                                        |
+| TESTPROD_IOC_\<osclass\>           | os specific test products to build and install for ioc type  archs                           |
+| TESTPROD_IOC_DEFAULT             | test products to build and install for ioc type arch systems with no `TESTPROD_IOC_<osclass>` specified |
+| TESTPROD_HOST                    | testproducts to build and  install for host type archs.                                      |
+| TESTPROD_HOST_\<osclass\>          | os class specific testproducts to build and install for `<osclass>` type archs              |
+| TESTPROD_HOST_DEFAULT            | test products to build and  install for arch with no `TESTPROD_HOST_<osclass>` specified       |
+
+### Test scripts to be built 
+
+| Build Option                     | Description                                                                                  |
+| ------------                     | -----------                                                                                  |
+| TESTSCRIPTS                      | test scripts (names with .t  suffix) to build but not install |
+| TESTSCRIPTS_\<osclass\>            | os class specific test scripts  to build but not install         |
+| TESTSCRIPTS_DEFAULT              | test scripts to build but not install for archs with no `TESTSCRIPTS_<osclass>` specified   |
+| TESTSCRIPTS_IOC                  | test scripts to build and install for ioc type archs       |
+| TESTSCRIPTS_IOC_\<osclass\>        | os specific test scripts to build and install for ioc type  archs                            |
+| TESTSCRIPTS_IOC_DEFAULT          | test scripts to build and install for ioc type arch systems with no `TESTSCRIPTS_IOC_<osclass>` specified |
+| TESTSCRIPTS_HOST                 | test scripts to build and  install for host type archs.     |
+| TESTSCRIPTS_HOST_\<osclass\>       | os class specific testscripts to  build and install for  <osclass> type archs             |
+| TESTSCRIPTS_HOST_DEFAULT         | test scripts to build and install for arch with no `TESTSCRIPTS_HOST_<osclass>` specified  |
+
+### Libraries to be built 
+
+| Build Option                     | Description                                                                                  |
+| ------------                     | -----------                                                                                  |
+| LIBRARY                          | name of library to build and  install. The name should NOT  include a prefix or extension,    |
+|                                  | e.g. specify Ca to build libCa.a  on Unix, Ca.lib or Ca.dll on  WIN32                            |
+| LIBRARY_\<osclass\>              | os specific libraries to build and install                      |
+| LIBRARY_DEFAULT                  | libraries to build and install for archs with no `LIBRARY_<osclass>` specified      |
+| LIBRARY_IOC                      | name of library to build and  install for ioc type archs. The  name should NOT include a prefix |
+|                                  | or extension e.g. specify Ca to  build libCa.a on Unix, Ca.lib or Ca.dll on WIN32                  |
+| LIBRARY_IOC_\<osclass\>          | os specific libraries to build and install for ioc type archs   |
+| LIBRARY_IOC_DEFAULT              | libraries to build and install for ioc type arch systems with no `LIBRARY_IOC_<osclass>` specified |
+| LIBRARY_HOST                     | name of library to build and install for host type archs. The name should NOT include  |
+|                                  | a prefix or extension, e.g. specify Ca to  build libCa.a on Unix, Ca.lib or Ca.dll on WIN32                  |
+| LIBRARY_HOST_\<osclass\>         | os class specific libraries to build and install for host type  archs                            |
+| LIBRARY_HOST_DEFAULT             | libraries to build and install for host type arch systems with no `LIBRARY_HOST_<osclass>` specified |
+| SHARED_LIBRARIES                 | build shared libraries? Must be YES or NO                        |
+| SHRLIB_VERSION                   | shared library version number    |
+
+
+### Loadable libraries to be built 
+
+| Build Option                     | Description                                                                                  |
+| ------------                     | -----------                                                                                  |
+| LOADABLE_LIBRARY                 | name of loadable library to build and install. The name should NOT include a prefix or   |
+|                                  | extension e.g. specify Ca to build libCa.so on Unix and  Ca.dll on WIN32                  |
+| LOADABLE_LIBRARY_\<osclass\>     | os specific loadable libraries  to build and install             |
+| LOADABLE_LIBRARY_DEFAULT         | loadable libraries to build and install for archs with no `LOADABLE_LIBRARY_<osclass>` specified |
+| LOADABLE_LIBRARY_HOST            | name of loadable library to build and install for host type  archs. The name should NOT       |
+|                                  | include a prefix or extension, e.g. specify test to build libtest.so on Unix and test.dll on WIN32 |
+| LOADABLE_LIBRARY_HOST_\<osclass\> | os class specific loadable libraries to build and install for host type archs              |
+| LOADABLE_LIBRARY_HOST_DEFAULT    | loadable libraries to build and install for host type arch | 
+|                                  | systems with no `LOADABLE_LIBRARY_HOST_<osclass>` specified |
+
+### Combined object files (vxWorks only)
+| Build Option                     | Description                                                                                  |
+| ------------                     | -----------       |
+| OBJLIB                           | name of a combined object file  library and corresponding munch  file to build and install. The   |
+|                                  | name will have a Library suffix  appended                         |
+| OBJLIB_vxWorks                   | same as OBJLIB                   |
+| OBJLIB_SRCS                      | source files to build the OBJLIB |
+| OBJLIB_OBJS                      | object files to include in OBJLIB                           |
+
+### Product and library source files
+
+| Build Option                     | Description                                                                                  |
+| ------------                     | -----------       |
+| SRCS                             | source files to build all PRODs and LIBRARYs                     |
+| SRCS_\<osclass\>                   | osclass specific source files to build all PRODs and LIBRARYs     |
+| SRCS_DEFAULT                     | source file to build all PRODs and LIBRARYs for archs with no SRCS_<osclass> specified         |
+| USR_SRCS                         | source files to build all PRODs and LIBRARYs                     |
+| USR_SRCS_\<osclass\>               | osclass specific source files to build all PRODs and LIBRARYs     |
+| USR_SRCS_DEFAULT                 | source file to build all PRODs and LIBRARYs for archs with no  SRCS_<osclass> specified         |
+| PROD_SRCS                        | source files to build all PRODs  |
+| PROD_SRCS_\<osclass\>              | osclass specific source files to  build all PRODs                  |
+| PROD_SRCS_DEFAULT                | source files needed to build  PRODs for archs with no `SRCS_<osclass>` specified         |
+| LIB_SRCS                         | source files for building  LIBRARY (e.g. LIB_SRCS=la.c lb.c lc.c)                            |
+| LIB_SRCS_\<osclass\>               | os-specific library source files |
+| LIB_SRCS_DEFAULT                 | library source files for archs with no `LIB_SRCS_<osclass>` specified                        |
+| LIBSRCS                          | source files for building LIBRARY (deprecated)             |
+| LIBSRCS_\<osclass\>                | os-specific library source files  (deprecated)                     |
+| LIBSRCS_DEFAULT                  | library source files for archs  with no LIBSRCS_<osclass>  specified (deprecated)           |
+| \<name\>_SRCS                      | source files to build a specific PROD or LIBRARY                  |
+| \<name\>_SRCS_\<osclass\>            | os specific source files to  build a specific PROD or LIBRARY |
+| \<name\>_SRCS_DEFAULT              | source files needed to build a specific PROD or LIBRARY for archs with no `<prod>_SRCS_<osclass>` specified |
+
+### Product and library object files 
+
+| Build Option          | Description                                                                                  |
+| ------------          | -----------       |
+| USR_OBJS              | object files, specified without suffix, to build all PRODs and  LIBRARYs                         |
+| USR_OBJS_\<osclass\>  | osclass specific object files, specified without suffix, to build all PRODs and LIBRARYs     |
+| USR_OBJS_DEFAULT      | object files, specified without suffix, needed to build PRODs and LIBRARYs for archs with no OBJS_\<osclass\> specified |
+| PROD_OBJS             | object files, specified without suffix, to build all PRODs       |
+| PROD_OBJS_<osclass>   | osclass specific object files, specified without suffix, to  build all PRODs                  |
+| PROD_OBJS_DEFAULT     | object files, specified without suffix, needed to build PRODs  for archs with no OBJS_\<osclass\> specified |
+| LIB_OBJS              | object files, specified without suffix, for building all LIBRARYs (e.g. `LIB_OBJS+=$(AB_BIN)/la $(AB_BIN)/lb)` |
+| LIB_OBJS_\<osclass\>  | os-specific library object files, specify without suffix,   |
+| LIB_OBJS_DEFAULT      | library object files, specified without suffix, for archs with no LIB_OBJS_\<osclass\> specified |
+| \<name\>_OBJS         | object files, specified without suffix, to build a specific PROD or LIBRARY                       |
+| \<name\>_OBJS_\<osclass\> | os specific object files, specified without suffix, to build a specific PROD or LIBRARY           |
+| \<name\>_OBJS_DEFAULT | object files, without suffix, needed to build a specific PROD or LIBRARY for archs with no `<prod>_OBJS_<osclass>` specified|
+
+### Product and library R3.13 combined object files
+
+| Build Option          | Description                                                                                  |
+| ------------          | -----------       |
+| USR_OBJLIBS                      | combined object files withfilenames that do not have a  suffix, needed for building all  |
+|                                  | PRODs and LIBRARYs (e.g. `USR_OBJLIBS+=$(XYZ_BIN)/xyzLib`)  |
+| USR_OBJLIBS_\<osclass\>            | os-specific combined object files with filenames that do not |
+|                                  | have a suffix for building all PRODs and LIBRARYs               |
+| USR_OBJLIBS_DEFAULT              | combined object files with filenames that do not have a  suffix, for archs with no        |
+|                                  | USR_OBJLIBS_<osclass>  specified for building all PRODs and LIBRARYs                     |
+| PROD_OBJLIBS                     | combined object files with  filenames that do not have a  suffix, needed for building all  |
+|                                  | PRODs (e.g.  `PROD_OBJLIBS+=$(XYZ_BIN)/xyzLib`)  |
+| PROD_OBJLIBS_\<osclass\>         | os-specific combined object files with filenames that do not  have a suffix for building all  PRODs |
+| PROD_OBJLIBS_DEFAULT             | combined object files with filenames that do not have a suffix, for archs with no        |
+|                                  | PROD_OBJLIBS_<osclass>  specified for building all PRODs |
+| LIB_OBJLIBS                      | combined object files with  filenames that do not have a  suffix, needed for building all  |
+|                                  | LIBRARYs (e.g. `LIB_OBJLIBS+=$(XYZ_BIN)/xyzLib`)  |
+| LIB_OBJLIBS_\<osclass\>            | os-specific combined object files with filenames that do not have a suffix for building all LIBRARYs |
+| LIB_OBJLIBS_DEFAULT              | combined object files with filenames that do not have a suffix, for archs with no LIB_OBJLIBS_<osclass> |
+|                                  | specified for building all LIBRARYs                         |
+| <name>_OBJLIBS                   | combined object files with filenames that do not have a suffix, needed to build a specific PROD or LIBRARY |
+| <name>_OBJLIBS_\<osclass\>       | os specific combined object files with filenames that do not have a suffix, to build a  specific PROD or LIBRARY |
+| <name>_OBJLIBS_DEFAULT           | combined object files with filenames that do not have a suffix, needed to build a specific PROD or LIBRARY |
+|                                  | for archs with no <name>_OBJLIBS_<osclass> specified                        |
+| <name>_LDOBJS                    | combined object files with filenames that do not have a suffix, needed to build a specific PROD or LIBRARY (deprecated) |
+| \<name\>\_LDOBJS_\<osclass\>     | os specific combined object files with filenames that do not  have a suffix, to build a  specific PROD or LIBRARY (deprecated) |
+| \<name\>_LDOBJS_DEFAULT          | combined object files with filenames that do not have a suffix, needed to build a        |
+|                                  | specific PROD or LIBRARY for archs with no `<name>_LDOBJS_<osclass>` specified (deprecated)           |
+
+### Product and library dependant libraries
+
+| Build Option          | Description                                                                                  |
+| ------------          | -----------       |
+| \<name\>_DIR                     | directory to search for the  specified lib. (For libs listed  in all PROD_LIBS, LIB_LIBS,      |
+|                                  | <name>_LIBS and USR_LIBS listed below) System libraries do  not need a <name>_dir definition.  |
+| USR_LIBS                         | load libraries (e.g. Xt X11) for all products and libraries       |
+| USR_LIBS_\<osclass\>             | os specific load libraries for all makefile links               |
+| USR_LIBS_DEFAULT                 | load libraries for systems with no USR_LIBS_<osclass>  specified libs                   |
+| \<name\>_LIBS                    | named prod or library specific ld libraries (e.g.  `probe_LIBS=X11 Xt`)               |
+| \<name\>\_LIBS_\<osclass\>       | os-specific libs needed to link named prod or library            |
+| \<name\>\_LIBS_DEFAULT           | libs needed to link named prod or library for systems with no <name>_LIBS_<osclass>  specified    |
+| PROD_LIBS                        | libs needed to link every PROD   |
+| PROD_LIBS_\<osclass\>            | os-specific libs needed to link every PROD                       |
+| PROD_LIBS_DEFAULT                | libs needed to link every PROD for archs with no PROD_LIBS_<osclass>  specified                        |
+| LIB_LIBS                         | libraries to be linked with every library being created      |
+| LIB_LIBS_\<osclass\>             | os class specific libraries to be linked with every library being created                    |
+| LIB_LIBS_DEFAULT                 | libraries to be linked with every library being created for archs with no  LIB_LIBS_\<osclass\> specified |
+| USR_SYS_LIBS                     | system libraries (e.g. Xt X11) for all products and libraries   |
+| USR_SYS_LIBS_\<osclass\>         | os class specific system libraries for all makefile links |
+| USR_SYS_LIBS_DEFAULT             | system libraries for archs with no USR_SYS_LIBS_<osclass> specified                        |
+| \<name\>_SYS_LIBS                | named prod or library specific system ld libraries              |
+| \<name\>\_SYS\_LIBS_\<osclass\>  | os class specific system libs needed to link named prod or library                          |
+| \<name\>_SYS_LIBS_DEFAULT        | system libs needed to link named prod or library for systems with no <name>_SYS_LIBS_<osclass>  specified  |
+| PROD_SYS_LIBS                    | system libs needed to link every PROD                             |
+| PROD_SYS_LIBS_\<osclass\>        | os class specific system libs needed to link every PROD        |
+| PROD_SYS_LIBS_DEFAULT            | system libs needed to link every PROD for archs with no PROD_SYS_LIBS_<osclass> specified |
+| LIB_SYS_LIBS                     | system libraries to be linked  with every library being created |
+| LIB_SYS_LIBS_\<osclass\>         | os class specific system libraries to be linked with every library being created      |
+| LIB_SYS_LIBS_DEFAULT     | system libraries to be linked  with every library being created for archs with no  LIB_SYS_LIBS_<osclass> specified |
+| SYS_PROD_LIBS                    | system libs needed to link every PROD for all systems (deprecated)                     |
+| SYS_PROD_LIBS_\<osclass\>        | os class specific system libs needed to link every PROD (deprecated)                     |
+| SYS_PROD_LIBS_DEFAULT            | system libs needed to link every PROD for systems with no SYS_PROD_LIBS_\<osclass\> specified (deprecated) |
+
+### Compiler flags
+
+| Build Option          | Description                                                                                  |
+| ------------          | -----------       |
+| USR_CFLAGS                       | C compiler flags for all systems |
+| USR_CFLAGS_\<T_A\>                 | target architecture specific C  compiler flags                   |
+| USR_CFLAGS_\<osclass\>             | os class specific C compiler  flags                            |
+| USR_CFLAGS_DEFAULT               | C compiler flags for archs with  no USR_CFLAGS_<osclass>  specified                        |
+| \<name\_CFLAGS                    | file specific C compiler flags  (e.g. xxxRecord_CFLAGS=-g)       |
+| \<name\>_CFLAGS_<T_A>              | file specific C compiler flags  for a specific target  architecture                     |
+| \<name\>_CFLAGS_\<osclass\>          | file specific C compiler flags  for a specific os class          |
+| USR_CXXFLAGS                     | C++ compiler flags for all  systems (e.g.  xyxMain_CFLAGS=-DSDDS)           |
+| USR_CXXFLAGS_\<T_A\>               | target architecture specific C++  compiler flags                   |
+| USR_CXXFLAGS_\<osclass\>           | os-specific C++ compiler flags   |
+| USR_CXXFLAGS_DEFAULT             | C++ compiler flags for systems  with no  USR_CXXFLAGS_<osclass> specified                        |
+| \<name\>_CXXFLAGS                  | file specific C++ compiler flags |
+| \<name\>\_CXXFLAGS_\<T_A\>            | file specific C++ compiler flags  for a specific target  architecture                     |
+| \<name\>\_CXXFLAGS_\<osclass\>        | file specific C++ compiler flags for a specific osclass           |
+| USR_CPPFLAGS                     | C pre-processor flags (for all makefile compiles)               |
+| USR_CPPFLAGS_\<T_A\>               | target architecture specific cpp  flags                            |
+| USR_CPPFLAGS_\<osclass\>           | os specific cpp flags            |
+| USR_CPPFLAGS_DEFAULT             | cpp flags for systems with no  USR_CPPFLAGS_<osclass>  specified                        |
+| \<name\>_CPPFLAGS                  | file specific C pre-processor  flags(e.g. xxxRecord_CPPFLAGS=-DDEBUG)      |
+| \<name\>\_CPPFLAGS_\<T_A\>            | file specific cpp flags for a specific target architecture     |
+| \<name\>\_CPPFLAGS_\<osclass\>        | file specific cpp flags for a specific os class                |
+| USR_INCLUDES                     | directories, with -I prefix, to search for include files(e.g.  -I$(EPICS_EXTENSIONS_INCLUDE))   |
+| USR_INCLUDES_\<osclass\>           | directories, with -I prefix, to search for include files for a  specific os class                |
+| USR_INCLUDES_DEFAULT        | directories, with -I prefix, to search for include files for systems with no <name>_INCLUDES_<osclass>  specified |
+| \<name\>_INCLUDES                  | directories, with -I prefix, to  search for include files when    |
+|                                  | building a specific object file  (e.g. -I$(MOTIF_INC))            |
+| \<name\>_INCLUDES_\<T_A\>            | file specific directories, with  -I prefix, to search for include |
+|                                  | files for a specific target  architecture                     |
+|  \<name\>_INCLUDES\_<osclass\>       | file specific directories, with -I prefix, to search for include |
+|                                  | files for a specific os class    |
+| HOST_WARN                        | Are compiler warning messages  desired for host type builds?  (YES or NO) (default is YES)     |
+| CROSS_WARN                       | C cross-compiler warning  messages desired (YES or NO)  (default YES)                    |
+| HOST_OPT                         | Is host build compiler optimization desired (default is NO optimization)                 |
+| CROSS_OPT                        | Is cross-compiler optimization desired (YES or NO) (default is NO optimization)                 |
+| CMPLR                            | C compiler selection, TRAD, ANSI or STRICT (default is STRICT)    |
+| CXXCMPLR           | C++ compiler selection, NORMAL or STRICT (default is STRICT)    |
+
+### Linker options
+
+| Build Option          | Description                                                                                  |
+| ------------          | -----------       |
+| USR_LDFLAGS                      | linker options (for all makefile links)                           |
+| USR_LDFLAGS_\<osclass\>            | os specific linker options (for all makefile links)              |
+| USR\_LDFLAGS_DEFAULT              | linker options for systems with no USR_LDFLAGS_<osclass> specified                        |
+| PROD_LDFLAGS                     | prod linker options              |
+| PROD\_LDFLAGS_\<osclass\>           | os specific prod linker options  |
+| PROD\_LDFLAGS_DEFAULT             | prod linker options for systems  with no PROD_LDFLAGS_<osclass> specified                        |
+| LIB_LDFLAGS                      | library linker options           |
+| LIB_LDFLAGS_\<osclass\>            | os specific library linker  options                          |
+| LIB\_LDFLAGS_DEFAULT              | library linker options for systems with no LIB_LDFLAGS_<osclass> specified                        |
+| \<name\>_LDFLAGS                   | prod or library specific linker  options                          |
+| \<name\>_LDFLAGS_<osclass>         | prod or library specific linker flags for a specific os class    |
+| \<name\>_LDFLAGS_DEFAULT           | linker options for systems with  no <name>_LDFLAGS_<osclass>  specified                        |
+| STATIC_BUILD   | Is static build desired (YES or  NO) (default is NO). On win32 if STATIC_BUILD=YES then set SHARED_LIBRARIES=NO)   |
+
+### Header files to be installed
+
+| Build Option          | Description                                                                                  |
+| ------------          | -----------       |
+| INC                   | list of include files to install into `$(INSTALL_DIR)/include`      |
+| INC_\<osclass\>         | os specific includes to install under `$(INSTALL_DIR)/include/os/<osclass>` |
+| INC_DEFAULT           | include files to install where no `INC_<osclass>` is  specified                        |
+
+### Perl, csh, tcl etc. script installation
+
+| Build Option          | Description                                                                                  |
+| ------------          | -----------       |
+| SCRIPTS                          | scripts to install for all systems                          |
+| SCRIPTS_\<osclass\>                | os-specific scripts to install   |
+| SCRIPTS_DEFAULT                  | scripts to install for systems with no SCRIPTS_\<osclass\>  specified                        |
+| SCRIPTS_IOC                      | scripts to install for ioc type archs.                           |
+| SCRIPTS_IOC_\<osclass\>            | os specific scripts to install  for ioc type archs               |
+| SCRIPTS_IOC_DEFAULT              | scripts to install for ioc type  arch systems with no  SCRIPTS_IOC_\<osclass\>  specified    |
+| SCRIPTS_HOST                     | scripts to install for host type archs.                           |
+| SCRIPTS_HOST_\<osclass\>           | os class specific scripts to install for host type archs      |
+| SCRIPTS_HOST_DEFAULT             | scripts to install for host type  arch systems with no OBJS_HOST_\<osclass\> specified         |
+| TCLLIBNAME                       | list of tcl scripts to install into $(INSTALL_DIR)/lib/\<osclass\>  (Unix hosts only)                |
+| TCLINDEX                         | name of tcl index file to create from TCLLIBNAME scripts          |
+
+### Object files 
+
+The names in the following OBJS definitions should NOT include a suffix (.o or.obj). 
+
+| Build Option          | Description                                                                                  |
+| ------------          | -----------       |
+| OBJS                             | object files to build and install for all system.          |
+| OBJS_\<osclass\>                 | os-specific object files to build and install.               |
+| OBJS_DEFAULT                     | object files to build and install for systems with no OBJS_\<osclass\> specified.        |
+| OBJS_IOC                         | object files to build and  install for ioc type archs.      |
+| OBJS_IOC_\<osclass\>             | os specific object files to  build and install for ioc type  archs                            |
+| OBJS\_IOC_DEFAULT                | object files to build and  install for ioc type arch systems with no  OBJS_IOC_\<osclass\>  specified  |
+| OBJS_HOST                        | object files to build and install for host type archs.     |
+| OBJS_HOST_\<osclass\>            | os class specific object files to build and install for host type archs                       |
+| OBJS_HOST_DEFAULT                | object files to build and  install for host type arch  systems with no OBJS_HOST_\<osclass\> specified  |
+
+### Documentation
+| Build Option          | Description                                                                                  |
+| ------------          | -----------       |
+| DOCS                  | text files to be installed into the $(INSTALL_DIR)/doc directory                        |
+| HTMLS_DIR             | name install Hypertext directory name i.e.  `$(INSTALL_DIR)/html/$(HTMLS_DIR)` |
+| HTMLS                 | hypertext files to be installed  into the  `$(INSTALL_DIR)/html/$(HTMLS_DIR)` directory                        |
+| TEMPLATES_DIR         | template directory to be created as  `$(INSTALL_DIR)/templates/$(TEMPLATE_DIR)` |
+| TEMPLATES             | template files to be installed into `$(TEMPLATE_DIR)`             |
+
+### Database Definition files
+
+| Build Option       | Description                                                                                  |
+| ------------       | -----------       |
+| DBD                | database definition files to be installed or created and installed into $(INSTALL_DBD).   |
+| DBDINC             | names, without suffix, of menus or record database definitions   |
+|                    | and headers to be installed or  created and installed.           |
+| USR_DBDFLAGS       | optional flags for dbExpand. Currently only include path (-I <path>) and macro substitution (-S <substitution>) are supported. |
+| DBD_INSTALLS       | files from specified directory to install into $(INSTALL_DBD)   |
+|                    | (e.g. `DBD_INSTALLS = $(APPNAME)/dbd/test.dbd)`         |
+
+### Database Files 
+
+| Build Option       | Description                                                                                  |
+| ------------       | -----------       |
+| DB                 | database files to be installed or created and installed into  $(INSTALL_DB).                   |
+| DB_INSTALLS        | files from specified directory   to install into $(INSTALL_DB)    |
+|                    | (e.g. DB_INSTALLS =  $(APPNAME)/db/test.db)           |
+| USR_DBFLAGS        | optional flags for msi (EPICS Macro Substitution Tool)         |
+
+### Options for other programs
+
+| Build Option       | Description                                                                                  |
+| ------------       | -----------       |
+| YACCOPT            | yacc options                     |
+| LEXOPT             | lex options                      |
+| SNCFLAGS           | state notation language, snc, options                          |
+| \<name\>_SNCFLAGS  | product specific state notation language options                 |
+| E2DB_FLAGS         | e2db options                     |
+| SCH2EDIF_FLAGS     | sch2edif options                 |
+| RANLIBFLAGS        | ranlib options                   |
+| USR_ARFLAGS        | ar options                       |
+
+
+### Facilities for building Java programs 
+
+| Build Option       | Description                                                                                  |
+| ------------       | -----------       |
+| JAVA               | names of Java source files to be built and installed              |
+| TESTJAVA           | names of Java source files to be built                            |
+| JAVAINC            | names of C header file to be  created in O.Common subdirectory |
+| JAR                | name of Jar file to be built     |
+| JAR_INPUT          | names of files to be included in JAR                              |
+| JAR_MANIFEST       | name of manifest file for JAR    |
+| USR_JAVACFLAGS     | javac tool options               |
+| USR_JAVAHFLAGS     | javah tool options               |
+
+### Facilities for Windows 95/NT resource (.rc) files
+| Build Option       | Description                                                                                  |
+| ------------       | -----------       |
+| RCS                        | resource files (<name>.rc) needed to build every PROD and LIBRARY                          |
+| RCS_\<osclass\>              | resource files (<name>.rc) needed to build every PROD and LIBRARY for ioc type archs       |
+| RCS_DEFAULT                | resource files needed to build  every PROD and LIBRARY for ioc  type arch systems with no RCS_\<osclass\> specified  |
+| \<name\>_RCS               | resource files needed to build a specific PROD or LIBRARY         |
+| \<name\>\_RCS_\<osclass\>  | os specific resource files to build a specific PROD or LIBRARY |
+| \<name\>_RCS_DEFAULT       | resource files needed to build a specific PROD or LIBRARY for ioc type arch systems with no  RCS_\<osclass\> specified |
+
+### Assemblies
+
+ 
+ | Build Option       | Description                                                                                  |
+| ------------        | -----------       |
+| ASSEMBLIES          | names of files to be assembled from snippets                    |
+| COMMON_ASSEMBLIES   | names of arch-independent files to be assembled from snippets    |
+| \<name\>_SNIPPETS   | snippet files needed to build a specific assembly                |
+| \<name\>_PATTERN    | patterns for snippet files (searched from all source directories) needed to build a specific assembly |
+
+### Other definitions
+
+| Build Option       | Description                                                                                  |
+| ------------       | -----------       |
+| USR_VPATH          | list of directories              |
+| BIN_INSTALLS       | files from specified directories to be installed into `$(INSTALL_BIN)` (e.g. `BIN_INSTALLS = $(EPICS_BASE_BIN)/aiRecord$(OBJ)`)|
+| BIN_INSTALLS_\<osclass\>           | os class specific files from specified directories to be installed into `$(INSTALL_BIN)`    |
+| BIN_INSTALLS_DEFAULT             | files from specified directories  to be installed into $(INSTALL_BIN) for target archs  |
+|                                  | with no  BIN_INSTALLS_\<osclass\>  specified                        |
+| LIB_INSTALLS                     | files from specified directories to be installed into $(INSTALL_LIB)                   |
+| LIB_INSTALLS_\<osclass\>           | os class specific files from  specified directories to be installed into $(INSTALL_LIB)    |
+| LIB\_INSTALLS_DEFAULT             | files from specified directories to be installed into  $(INSTALL_LIB) for target archs  |
+|                                  | with no LIB_INSTALLS_\<osclass\>  specified                        |
+| TARGETS                          | files to create but not install  |
+| INSTALL_LOCATION                 | installation directory (defaults to $(TOP))                       |
+| GENVERSION                       | If set, the name of a generated header file with the module version string.                  |
+| GENVERSIONMACRO                  | The CPP macro name written into the generated version header (default MODULEVERSION).         |
+| GENVERSIONDEFAULT                | The default version string  written into the generated  header if no VCS system is in    |
+|                                  | use. Leave unset to use build time.                            |
+
 
 
 ## Configuration Files
@@ -4208,38 +3620,31 @@ The base/configure directory has the following directory structure:
 
 ```
 base/
-
-:   
-
-configure/
-
-:   os/ tools/
+├──-configure/
+    ├── os/ 
+    ├── tools/
 ```
 
 ### Base Configure File Descriptions
 
-The configure files contain definitions and make rules to be included in
-the various makefiles.
+The configure files contain definitions and make rules to be included in the various makefiles.
 
 `CONFIG.CrossCommon`
 
-Definitions for all hosts and all targets for a cross build (host
-different than target).
+Definitions for all hosts and all targets for a cross build (host different than target).
 
 `CONFIG.gnuCommon`
 
-Definitions for all hosts and all targets for builds using the gnu
-compiler.
+Definitions for all hosts and all targets for builds using the gnu compiler.
 
 `CONFIG_ADDONS`
 
-Definitions which setup the variables that have <osclass> and
-DEFAULT options.
+Definitions which setup the variables that have <osclass> and DEFAULT options.
 
 `CONFIG_APP_INCLUDE`
 
 Definitions to generate include, bin, lib, perl module, db, and dbd
-directory definitions for `RELEASE` <top>s.
+directory definitions for `RELEASE` \<top\>s.
 
 `CONFIG_BASE`
 
@@ -4297,13 +3702,11 @@ are supported.
 
 `RULES.ioc`
 
-Rules which allow building in the iocBoot/<iocname> directory of a
-makeBaseApp created ioc application.
+Rules which allow building in the iocBoot/\<iocname\> directory of a makeBaseApp created ioc application.
 
 `RULES_ARCHS`
 
-Definitions and rules which allow building the make target for each
-target architecture.
+Definitions and rules which allow building the make target for each target architecture.
 
 `RULES_BUILD`
 
@@ -4325,8 +3728,11 @@ in a file.
 Definitions and rules to allow user created `CONFIG*` and `RULES*` files
 and rules to allow user created file types.
 
-`RULES_JAVA` Definitions and rules which allow building java class files
-and java jar files. `RULES_TARGET`
+`RULES_JAVA` 
+
+Definitions and rules which allow building java class files and java jar files. 
+
+`RULES_TARGET`
 
 Makefile code to create target specific dependency lines for libraries
 and product targets.
@@ -4336,7 +3742,7 @@ and product targets.
 Rules specific to a `<top>` level directory e.g. uninstall and tar. It
 also includes the `RULES_DIRS` file.
 
-Makefile Definitions to allow creation of `CONFIG_APP_INCLUDE` and
+`Makefile` Definitions to allow creation of `CONFIG_APP_INCLUDE` and
 installation of the `CONFIG*` files into the `$(INSTALL_LOCATION)`
 directory.
 
@@ -4509,9 +3915,7 @@ README.niCpu030
 
 README.hpux
 
-```
-HPUX 11 (hpux-parisc) specific instructions
-```
+:    HPUX 11 (hpux-parisc) specific instructions
 
 README.cris
 
@@ -4538,41 +3942,35 @@ ConvertingR3.13AppsToR3.14.html
 
 ConvertingR3.14.0alpha2AppsTobeta1.html
 
-:   Describes how to modify a R3.14.0alpha1 application so that it
-    builds with release R3.14.0beta1.
+:   Describes how to modify a R3.14.0alpha1 application so that it builds with release R3.14.0beta1.
 
 ConvertingR3.14.0beta1AppsTobeta2.html
 
-:   Describes how to modify a R3.14.0beta1 application so that it builds
-    with release R3.14.0beta2.
+:   Describes how to modify a R3.14.0beta1 application so that it builds with release R3.14.0beta2.
 
 ConvertingR3.14.0beta2AppsToR3.14.1.html
 
-:   Describes how to modify a R3.14.0beta2 application so that it builds
-    with release R3.14.1.
+:   Describes how to modify a R3.14.0beta2 application so that it builds with release R3.14.1.
 
 ConvertingR3.14.*AppsToR3.14.*.html
 
-:   Describes how to modify a R3.14.* application so that it builds
-    with next release after R3.14.*.
+:   Describes how to modify a R3.14.* application so that it builds with next release after R3.14.*.
 
 BuildingR3.13ExtensionsWithR3.14.html
 
-:   Describes how to modify a R3.13 extension so that it builds with
-    release R3.14.1.
+:   Describes how to modify a R3.13 extension so that it builds with release R3.14.1.
 
 RELEASE_NOTES.html
 
-:   Describes changes in the R3.14.1 release
+:   Describes changes in each release
 
 KnownProblems.html
 
-:   List of known problems in EPICS base R3.14.1.
+:   List of known problems in EPICS base.
 
 ReleaseChecklist.html
 
-:   Checklist of things that must be done when creating a new release of
-    EPICS Base.
+:   Checklist of things that must be done when creating a new release of EPICS Base.
 
 ## Startup Files
 
@@ -4604,10 +4002,8 @@ Site.cshrc
 
 cygwin.bat
 
-:   WIN32 bat file to set path and environment variables for building
-    with cygwin gcc/g++ compilers
+:   WIN32 bat file to set path and environment variables for building with cygwin gcc/g++ compilers
 
 win32.bat
 
-:   WIN32 bat file to set path and environment variables for building
-    with MS Visual C++ compilers
+:   WIN32 bat file to set path and environment variables for building with MS Visual C++ compilers
