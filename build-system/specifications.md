@@ -44,7 +44,11 @@ installation directory which defaults to `$(TOP)`, the `<top>` directory.
 For base, extensions, and IOC applications, the default value can be
 changed in the `configure/CONFIG_SITE` file. The installation directory
 for the EPICS components is controlled by the definition of
-`INSTALL_LOCATION`
+`INSTALL_LOCATION` variable.
+
+Due to a side-effect of the build rules, the *parent* of the installation directory `($(INSTALL_LOCATION)/..)` 
+should not contain directories with the same names as the subdirectories listed below.
+
 
 The following subdirectories may exist in the installation directory.
 They are created by the build and contain the installed build
