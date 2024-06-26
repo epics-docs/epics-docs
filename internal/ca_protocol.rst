@@ -1011,7 +1011,7 @@ Response
 +================+==================+=========================================================================+
 | Command        | 6                | Command identifier for ``CA_PROTO_SEARCH``.                             |
 +----------------+------------------+-------------------------------------------------------------------------+
-| Payload Size   | 8                | Payload size is constant.                                               |
+| Payload Size   | 0 or 8           | Payload size is 8 for UDP reply, 0 for TCP reply.                       |
 +----------------+------------------+-------------------------------------------------------------------------+
 | Data Type      | Port number      | TCP Port number of server that responded.                               |
 +----------------+------------------+-------------------------------------------------------------------------+
@@ -1034,7 +1034,12 @@ Table: Table 10. Payload
 
 Comments
 
--  Received as UDP datagram.
+-  Received as UDP datagram or in TCP connection.
+
+-  For UDP, the payload of 8 bytes holds the server protocol version.
+   For TCP, the payload is empty and the server protocol version
+   has already been communicated during the TCP connection startup
+   via the ``CA_PROTO_VERSION`` exchange.
 
 -  Search ID field value (CID) is copied from the request.
 
