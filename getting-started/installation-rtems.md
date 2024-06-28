@@ -302,7 +302,7 @@ Host: macOS-14.5-arm64-arm-64bit (Darwin Zarquon.local 23.5.0 Darwin Kernel Vers
 
 ## EPICS on RTEMS
 
-We use the virtual CPU *xilinx\_zynq\_a9\_qemu* to test, install and configure EPICS:
+### First we use the virtual CPU *xilinx\_zynq\_a9\_qemu* to test, install and configure EPICS:
 
 We are currently using an adaptation of EPICS to RTEMS by Chris Johns. This customisation can only be meaningfully integrated into EPICS when an RTEMS6 release (6.1?) is available.
 
@@ -334,7 +334,7 @@ remote: Total 806 (delta 16), reused 6 (delta 5), pack-reused 775 (from 1)
 Receiving objects: 100% (806/806), 1.29 MiB | 469.00 KiB/s, done.
 Resolving deltas: 100% (250/250), done.
 
-cd rtems-net/services
+cd rtems-net-services
 
 git submodule init
 git submodule update
@@ -429,8 +429,159 @@ qemu-system-arm -M xilinx-zynq-a9 -m 256M -no-reboot \
 
 ```
 
+### EPICS on *MVME2500*:
+
+You now only have to define the CPU to be used in *configure/CONFIG_SITE.local*.
+
+```
+# Which target architectures to cross-compile for.
+#  Definitions in configure/os/CONFIG_SITE.<host>.Common
+#  may override this setting.
+CROSS_COMPILER_TARGET_ARCHS=RTEMS-qoriq_e500
+```
+
+And then just *make* in *epics-base* and then these files should have been created:
+
+```
+junkes@Zarquon epics-base % ls -l bin/RTEMS-qoriq_e500
+total 1325888
+-r-xr-xr-x  1 junkes  staff  78069060 Jun 14 15:39 caTestHarness
+-r-xr-xr-x  1 junkes  staff   3602181 Jun 14 15:39 caTestHarness.img
+-r-xr-xr-x  1 junkes  staff  44413800 Jun 14 15:36 dbTestHarness
+-r-xr-xr-x  1 junkes  staff   2909146 Jun 14 15:36 dbTestHarness.img
+-r-xr-xr-x  1 junkes  staff  43996400 Jun 14 15:36 filterTestHarness
+-r-xr-xr-x  1 junkes  staff   2871002 Jun 14 15:36 filterTestHarness.img
+-r-xr-xr-x  1 junkes  staff  42711488 Jun 14 15:34 libComTestHarness
+-r-xr-xr-x  1 junkes  staff   2828122 Jun 14 15:34 libComTestHarness.img
+-r-xr-xr-x  1 junkes  staff  43900348 Jun 14 15:36 linkTestHarness
+-r-xr-xr-x  1 junkes  staff   2862360 Jun 14 15:36 linkTestHarness.img
+-r-xr-xr-x  1 junkes  staff  75589688 Jun 14 15:41 pvDbTestHarness
+-r-xr-xr-x  1 junkes  staff   3290916 Jun 14 15:41 pvDbTestHarness.img
+-r-xr-xr-x  1 junkes  staff  72761140 Jun 14 15:39 pvaTestHarness
+-r-xr-xr-x  1 junkes  staff   3330423 Jun 14 15:39 pvaTestHarness.img
+-r-xr-xr-x  1 junkes  staff  62018472 Jun 14 15:37 pvdTestHarness
+-r-xr-xr-x  1 junkes  staff   3106730 Jun 14 15:37 pvdTestHarness.img
+-r-xr-xr-x  1 junkes  staff  49704560 Jun 14 15:36 recordTestHarness
+-r-xr-xr-x  1 junkes  staff   3171153 Jun 14 15:36 recordTestHarness.img
+-r-xr-xr-x  1 junkes  staff  47257792 Jun 14 15:36 softIoc
+-r-xr-xr-x  1 junkes  staff   3163484 Jun 14 15:36 softIoc.img
+-r-xr-xr-x  1 junkes  staff  83454452 Jun 14 15:42 softIocPVA
+-r-xr-xr-x  1 junkes  staff   3800174 Jun 14 15:42 softIocPVA.img
+
+```
+
+### Teststand
+We are also in the process of setting up a hardware test stand for EPICS developments. Access to this is not yet fully organised. However, it is already being used here.
+
+( Description with network diagram to follow )
 
 
+In order to execute an application, the *img* file must be transferred to an NFS share and then loaded by the CPU via tftp.
+
+```
+scp bin/RTEMS-qoriq_e500/libComTestHarness.img xxx@nfs:/srv/tftp/vmeTest.img
+```
+
+Now you can trigger a reset of the board. The image is then loaded and *Epics-rtems_init* stops for diagnostics in an RTEMS shell:
+
+```
+rtems@rtems-dev:~$ telnet moxa-vme 4001
+Trying 141.14.128.77...
+Connected to moxa-vme.fhi.mpg.de.
+Escape character is '^]'.
+
+U-Boot 2013.01 (Aug 23 2016 - 12:17:55)
+
+CPU:   P2010E, Version: 2.1, (0x80eb0021)
+Core:  E500, Version: 5.1, (0x80211051)
+Clock Configuration:
+       CPU0:800  MHz, 
+       CCB:400  MHz,
+       DDR:400  MHz (800 MT/s data rate) (Asynchronous), LBC:25   MHz
+L1:    D-cache 32 kB enabled
+       I-cache 32 kB enabled
+Board: MVME2500
+       Emerson Network Power, Embedded Computing
+       Monitor Version: 2.8
+       FPGA Seq.Ver: 2.5
+       Is VME system controller
+I2C:   ready
+SPI:   ready
+DRAM:  Initializing....    DDR: 1 GiB (DDR3, 64-bit, CL=6, ECC on)
+L2:    512 KB enabled
+MMC:  FSL_SDHC: 0
+8192 KiB AT25DF641 at 0:0 is now current device
+EEPROM: Read MAC Address
+PCIe1: Root Complex of Slot 2, x1, regs @ 0xffe0a000
+  01:00.0     - 10e3:8114 - Bridge device
+   02:01.0    - 10e3:0148 - Bridge device
+PCIe1: Bus 00 - 02
+PCIe2: Root Complex of Slot 1, x1, regs @ 0xffe09000
+  04:00.0     - 11ab:6121 - Mass storage controller
+PCIe2: Bus 03 - 04
+PCIe3: Root Complex, no link, regs @ 0xffe08000
+PCIe3: Bus 05 - 05
+In:    serial
+Out:   serial
+Err:   serial
+
+Ser#: E113E4C
+I-cache enabled. (L1CSR1: 0x00000001)
+D-cache enabled. (L1CSR0: 0x00000001) (write-through)
+SCSI:  SATA link 0 timeout.
+SATA link 1 timeout.
+AHCI 0001.0000 32 slots 3 ports 3 Gbps 0x7 impl IDE mode
+flags: 64bit ncq stag led pmp slum part 
+scanning bus for devices...
+Found 0 device(s).
+Net:   eTSEC1, eTSEC2, eTSEC3
+Bootreg = a6 BootDev: SPI0   Switch: SPI0
+Enable SPI WP: 
+8192 KiB AT25DF641 at 0:0 is now current device
+8192 KiB AT25DF641 at 0:1 is now current device
+Autoboot in  3 seconds (hit 'h' to stop)
+reading mvme2500.dtb
+12363 bytes read in 13 ms (928.7 KiB/s)
+Speed: 1000, full duplex
+Using eTSEC1 device
+TFTP from server 141.14.131.192; our IP address is 141.14.128.89
+Filename 'vmeTest.img'.
+Load address: 0x10000000
+Loading: T #################################################################
+	 #################################################################
+	 ###############################################################
+	 529.3 KiB/s
+done
+Bytes transferred = 2828122 (2b275a hex)
+WARNING: adjusting available memory to 30000000
+## Booting kernel from Legacy Image at 10000000 ...
+   Image Name:   libComTestHarness
+   Created:      2024-06-14  13:34:48 UTC
+   Image Type:   PowerPC Linux Kernel Image (gzip compressed)
+   Data Size:    2828058 Bytes = 2.7 MiB
+   Load Address: 00004000
+   Entry Point:  00004000
+   Verifying Checksum ... OK
+## Flattened Device Tree blob at 20000000
+   Booting using the fdt blob at 0x20000000
+   Uncompressing Kernel Image ... OK
+   Loading Device Tree to 03ff9000, end 03fff04a ... OK
+ntpd: RTEMS service init
+Clock synchronization must be performed by the OS
+
+ initConsole --- Info ---
+stdin: fileno: 0, ttyname: /dev/ttyS0
+stdout: fileno: 1, ttyname: /dev/ttyS0
+stderr: fileno: 2, ttyname: /dev/ttyS0
+time set to : 04/14/14 07:30:06.000003899 UTC
+Startup.
+epicsThreadSetPriority called by non epics thread
+
+***** RTEMS Version: rtems-6.0.0 (PowerPC/Generic (no FPU)/qoriq_e500) *****
+
+RTEMS Shell on /dev/console. Use 'help' to list commands.
+SHLL [/] # 
+```
 
 
 
