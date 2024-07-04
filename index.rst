@@ -153,7 +153,7 @@ You may also directly use related links to see documents which match you the mos
    contributing/HowToWorkWithTheEpicsRepository
    CONTRIBUTING
    Installing EPICS on Raspberry PI (External) <https://cmd-response.readthedocs.io/en/latest/epics/rpi_epics.html>
-   Area Detector: Installation Guide (External) <https://areadetector.github.io/master/install_guide.html>
+   Area Detector: Installation Guide (External) <https://areadetector.github.io/areaDetector/install_guide.html>
 
 .. toctree::
    :maxdepth: 1
