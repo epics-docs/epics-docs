@@ -124,7 +124,7 @@ You may also directly use related links to see documents which match you the mos
    :caption: PV Access details
 
    pv-access/overview
-   PV Access specifications <https://github.com/epics-base/pvAccessCPP/wiki/protocol>
+   PV Access Protocol Specification <pv-access/protocol>
    pv-access/Normative-Types-Specification
    pv-access/OverviewOfpvData
 
