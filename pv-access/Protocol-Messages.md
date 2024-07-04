@@ -28,17 +28,17 @@
     21. [CMD_RPC (0x14)](#cmd_rpc-0x14)
     22. [CMD_CANCEL_REQUEST (0x15)](#cmd_cancel_request-0x15)
     23. [CMD_ORIGIN_TAG (0x16)](#cmd_origin_tag-0x16)
-3. [Control Messages](#controlMessages)
+3. [Control Messages](#control-messages)
     1.  [Mark Total Byte Sent
-        (0x00)](#protocolMessages:controlMessages:mark)
+        (0x00)](#mark-total-byte-sent-0x00)
     2.  [Acknowledge Total Bytes Received
-        (0x01)](#protocolMessages:controlMessages:ackMark)
+        (0x01)](#acknowledge-total-bytes-received-0x01)
     3.  [Set byte order
         (0x02)](#set-byte-order-0x02)
     4.  [Echo request
-        (0x03)](#protocolMessages:controlMessages:echoRequest)
+        (0x03)](#echo-request-0x03)
     5.  [Echo response
-        (0x04)](#protocolMessages:controlMessages:echoResponse)
+        (0x04)](#echo-response-0x04)
 
 ## Protocol Messages
 

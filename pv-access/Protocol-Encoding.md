@@ -62,9 +62,8 @@ values MUST always be a non-negative integer and encoded as follows:
 
 The basic types MUST be encoded as shown in the Table 1. Signed integer
 types (byte, short, int, long) MUST be represented as two’s complement
-numbers. Floating point types (float, double) MUST use the IEEE-754
-standard formats
-[bib:ieee754wiki](#bib:ieee754wiki).
+numbers. Floating point types (float, double) MUST use the 
+[IEEE-754](https://en.wikipedia.org/wiki/IEEE_754) standard formats.
 
 |    Type | Encoding                                                          |
 | ------: | ----------------------------------------------------------------- |
@@ -358,16 +357,16 @@ Examples of Status serialization:
 
 Introspection data describes the type of a user data item. It is not
 itself user data, but rather meta data. Introspection data appears in
-one of four forms: no introspection data (NULL\_TYPE\_CODE), a full type
-description (FULL\_TYPE\_CODE), a type identifier
-(ONLY\_ID\_TYPE\_CODE), both (FULL\_WITH\_ID\_TYPE\_CODE), according to
+one of four forms: no introspection data (NULL_TYPE_CODE), a full type
+description (FULL_TYPE_CODE), a type identifier
+(ONLY_ID_TYPE_CODE), both (FULL_WITH_ID_TYPE_CODE), according to
 the table "Encoding of Introspection Data".
 
 The sender MUST send introspection data, but is free to chose one of the
-above methods. Sending FULL\_WITH\_ID\_TYPE\_CODE defines the type
-identifier for subsequent sends using ONLY\_ID\_TYPE\_CODE. Therefore,
-before sending ONLY\_ID\_TYPE\_CODE, the sender MUST have previously
-sent at least one FULL\_WITH\_ID\_TYPE\_CODE with the same type
+above methods. Sending FULL_WITH_ID_TYPE_CODE defines the type
+identifier for subsequent sends using ONLY_ID_TYPE_CODE. Therefore,
+before sending ONLY_ID_TYPE_CODE, the sender MUST have previously
+sent at least one FULL_WITH_ID_TYPE_CODE with the same type
 identifier to the same receiver.
 
 Since user data types can be arbitrarily complex, introspection data
@@ -383,50 +382,17 @@ override a previously assigned ID by simply assigning the ID to a new
 introspection data instance. The introspection registry size MUST be
 negotiated when each connection is established.
 
-<table>
-<caption>Encoding of Introspection Data (called Field for future reference).</caption>
-<thead>
-<tr class="header">
-<th>Field Encoding</th>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>0xFF</td>
-<td>NULL_TYPE_CODE</td>
-<td>No introspection data (also implies no data).</td>
-</tr>
-<tr class="even">
-<td>0xFE + ID</td>
-<td>ONLY_ID_TYPE_CODE</td>
-<td>Serialization contains only an ID (that was assigned by one of the previous FULL_WITH_ID_TYPE_CODE or FULL_TAGGED_ID_TYPE_CODE descriptions).</td>
-</tr>
-<tr class="odd">
-<td>0xFD + ID + FieldDesc</td>
-<td>FULL_WITH_ID_TYPE_CODE</td>
-<td>Serialization contains an ID (that can be used later, if cached) and full interface description. Any existing definition with the same ID is overriden.</td>
-</tr>
-<tr class="even">
-<td>0xFC + ID + tag + FieldDesc</td>
-<td>FULL_TAGGED_ID_TYPE_CODE</td>
-<td>Serialization contains an ID (that can be used later, if cached), tag (of integer type) and full interface description. Any existing definition with the same ID is overriden. A tag must guarantee that the same (ID, FieldDesc) pair has the same tag and any previous definition with the same ID and different FieldDesc has a different tag. This identifies whether the definition with given ID overrides already existing one and allow receivers to skip deserialization of FieldDesc, if tags match. SHOULD be used in non-reliable transport systems only.<br />
-</td>
-</tr>
-<tr class="odd">
-<td>0xFB - 0xE0</td>
-<td>RESERVED</td>
-<td>Reserved for future usage, MUST NOT be used.</td>
-</tr>
-<tr class="even">
-<td>FieldDesc<br />
-(0xDF - 0x00)</td>
-<td>FULL_TYPE_CODE</td>
-<td>Serialization contains only full interface description.</td>
-</tr>
-</tbody>
-</table>
+:::{table} Encoding of Introspection Data (called Field for future reference).
+
+| Field Encoding             | Name                     | Description |
+| --------------             | ----                     | ----------- |
+| 0xFF                       | NULL_TYPE_CODE           | No introspection data (also implies no data) |
+| 0xFE + ID                  | ONLY_ID_TYPE_CODE        | Serialization contains an ID (that can be used later, if cached) and full interface description. Any existing definition with the same ID is overriden.
+| 0xFD + ID + FieldDesc      | FULL_WITH_ID_TYPE_CODE   | Serialization contains an ID (that can be used later, if cached) and full interface description. Any existing definition with the same ID is overriden.
+|0xFC + ID + tag + FieldDesc | FULL_TAGGED_ID_TYPE_CODE | Serialization contains an ID (that can be used later, if cached), tag (of integer type) and full interface description. Any existing definition with the same ID is overriden. A tag must guarantee that the same (ID, FieldDesc) pair has the same tag and any previous definition with the same ID and different FieldDesc has a different tag. This identifies whether the definition with given ID overrides already existing one and allow receivers to skip deserialization of FieldDesc, if tags match. SHOULD be used in non-reliable transport systems only.
+| 0xFB - 0xE0                | RESERVED                 | Reserved for future usage, MUST NOT be used. |
+| FieldDesc (0xDF - 0x00)    | FULL_TYPE_CODE           | Serialization contains only full interface description. 
+:::
 
 Each instance of a Field introspection description (FieldDesc) MUST be
 encoded as a byte. The upper 3 bits (Most Significant Bits, MSBs) are
@@ -435,89 +401,58 @@ The middle 2 bits distinguish between arrays and scalars.
 The remaining 3 lower bits are type dependent and used for size
 encoding, e.g. to select a 'short' or 'long' integer.
 
-<table>
-<caption>Type Encoding.</caption>
-<thead>
-<tr class="header">
-<th>Bit</th>
-<th>Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr><td rowspan="7">7-5</td><td>111</td><td>reserved (MUST never be used)</td></tr>
-<tr><td>110, 101</td><td>reserved (MUST not be used)</td></tr>
-<tr><td>100</td><td>complex</td></tr>
-<tr><td>011</td><td>string</td></tr>
-<tr><td>010</td><td>floating-point</td></tr>
-<tr><td>001</td><td>integer</td></tr>
-<tr><td>000</td><td>boolean</td></tr>
+:::{table} Type Encoding
 
-<tr><td rowspan="4">4-3</td><td>11</td><td>fixed-size array flag</td></tr>
-<tr><td>10</td><td>bounded-size array flag</td></tr>
-<tr><td>01</td><td>variable-size array flag</td></tr>
-<tr><td>00</td><td>scalar flag</td></tr>
+| Bit | Value | Description |
+| --- | ----- | ----------- |
+| 7-5 | 111 | reserved (MUST **never** be used) |
+| 7-5 | 110, 101 | reserved (MUST not be used) |
+| 7-5 | 100 | complex |
+| 7-5 | 111 | string  |
+| 7-5 | 111 | floating-point |
+| 7-5 | 111 | integer |
+| 7-5 | 111 | boolean |
+| 4-3 |  11 | fixed-size array flag    |
+| 4-3 |  10 | bounded-size array flag  |
+| 4-3 |  01 | variable-size array flag |
+| 4-3 |  00 | scalar flag |
+| 2-0 | 111 | type (bits 7-5) dependent |
+:::
 
-<tr><td>2-0</td><td> </td><td>type (bits 7-5) depended</td></tr>
-</tbody>
-</table>
+:::{table} Integer Type Size Encoding
 
-<table>
-<caption>Integer Type Size Encoding (type = '0b001').</caption>
-<thead>
-<tr class="header">
-<th>Bit</th>
-<th>Value</th>
-<th>Type Name</th>
-</tr>
-</thead>
-<tbody>
-<tr><td rowspan="2">2</td><td>1</td><td>unsigned flag</td></tr>
-<tr><td>0</td><td>signed flag</td></tr>
-<tr><td rowspan="4">1-0</td><td>11</td><td>long</td></tr>
-<tr><td>10</td><td>int</td></tr>
-<tr><td>01</td><td>short</td></tr>
-<tr><td>00</td><td>byte</td></tr>
-</tbody>
-</table>
+| Bit | Value | Type Name |
+| --- | ----- | --------- |
+| 2   |  1    | unsigned flag |
+| 2   |  0    | signed flag |
+| 1-0 |  11   | long |
+| 1-0 |  10   | int  |
+| 1-0 |  01   | short |
+| 1-0 |  00   | byte |
+:::
 
-<table>
-<caption>Floating-Point Size Encoding (type = '0b010').</caption>
-<thead>
-<tr class="header">
-<th>Bit</th>
-<th>Value</th>
-<th>Type Name</th>
-<th>IEEE 754-2008 Name</th>
-</tr>
-</thead>
-<tbody>
-<tr><td rowspan="6">2-0</td><td>111, 110, 101</td><td>reserved</td><td></td></tr>
-<tr><td>100</td><td>reserved</td><td>binary128 (Quadruple)</td></tr>
-<tr><td>011</td><td>double</td><td>binary64 (Double)</td></tr>
-<tr><td>010</td><td>float</td><td>binary32 (Single)</td></tr>
-<tr><td>001</td><td>reserved</td><td>binary16 (Half)</td></tr>
-<tr><td>000</td><td>reserved</td><td></td></tr>
-</tbody>
-</table>
+:::{table} Floating-Point Size Encoding (type = '0b010')
 
-<table>
-<caption>Complex Type Encoding (type = '0b100').</caption>
-<thead>
-<tr class="header">
-<th>Bit</th>
-<th>Value</th>
-<th>Type Name</th>
-</tr>
-</thead>
-<tbody>
-<tr><td rowspan="5">2-0</td><td>111, 110, 101, 100</td><td>reserved</td></tr>
-<tr><td>011</td><td>bounded string</td></tr>
-<tr><td>010</td><td>variant union</td></tr>
-<tr><td>001</td><td>union</td></tr>
-<tr><td>000</td><td>structure</td></tr>
-</tbody>
-</table>
+| Bit | Value | Type Name | IEEE 754-2008 Name |
+| --- | ----- | --------- | ------------------ |
+| 2-0 |  111,110,101    | reserved | |
+| 2-0 |  100    | reserved | binary128 |
+| 2-0 |  011   | double |  binary64 |
+| 2-0 |  010   | float  | binary32 |
+| 2-0 |  001   | reserved | binary16 |
+| 2-0 |  000   | reserved | |
+:::
+
+:::{table} Complex Type Encoding (type = '0b100')
+
+| Bit | Value | Type Name |
+| --- | ----- | --------- |
+| 2-0 |  111,110,101,100    | reserved |
+| 2-0 |  011   | bounded string |
+| 2-0 |  010   | variant union  |
+| 2-0 |  001   | union |
+| 2-0 |  000   | structure | 
+:::
 
 For all other types, bits 2-0 MUST be '0b000'.
 
@@ -527,28 +462,22 @@ array of Fields - size followed by one or more (field name, FieldDesc)
 pairs. Arrays of structures/unions REQUIRE an introspection data of a
 structure/union defining an array element type.
 
-<table>
-<caption>FieldDesc Encoding.</caption>
-<thead>
-<tr class="header">
-<th>FieldDesc Encoding</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>0bxxx00xxx</td><td>Scalar</td></tr>
-<tr><td>0bxxx01xxx</td><td>Variable-size array of scalars</td></tr>
-<tr><td>0bxxx10xxx + bound (encoded as size)</td><td>Bounded-size array of scalars</td></tr>
-<tr><td>0bxxx11xxx + fixed size (encoded as size)</td><td>Fixed-size array of scalars</td></tr>
-<tr><td>0b10000000 + identification string + (field name, FieldDesc)[]</td><td>Structure</td></tr>
-<tr><td>0b10001000 + structure FieldDesc</td><td>Array of structures.</td></tr>
-<tr><td>0b10000001 + identification string + (field name, FieldDesc)[]</td><td>Union</td></tr>
-<tr><td>0b10001001 + union FieldDesc</td><td>Array of unions</td></tr>
-<tr><td>0b10000010</td><td>Variant union</td></tr>
-<tr><td>0b10001010</td><td>Array of variant unions</td></tr>
-<tr><td>0b10000110 + bound (encoded as size)</td><td>Bounded string</td></tr>
-</tbody>
-</table>
+:::{table} FieldDesc Encoding
+
+| FieldDesc Encoding | Description |
+| ------------------ | ----------- |
+| 0bxxx00xxx |  Scalar |
+| 0bxxx01xxx |  Variable-size array of scalars |
+| 0bxxx10xxx + bound |  Bounded-size array of scalars  |
+| 0bxxx11xxx + fixed size (encoded as size) |  Fixed-size array of scalars |
+| 0b10000000 + identification string + (field name, FieldDesc)[] |  Structure | 
+| 0b10001000 + structure FieldDesc | Array of structures. |
+| 0b10000001 + identification string + (field name, FieldDesc)[] | Union |
+| 0b10001001 + union FieldDesc | Array of unions |
+| 0b10000010 | Variant union |
+| 0b10001010 | Array of variant unions |
+| 0b10000110 + bound (encoded as size) | Bounded string |
+:::
 
 
 ##### Example \#1
