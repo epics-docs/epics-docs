@@ -4,6 +4,7 @@
 # list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 
+import os
 
 # -- Path setup --------------------------------------------------------------
 
@@ -110,6 +111,15 @@ master_doc = 'index'
 html_theme_options = {
     'logo_only': True,
 }
+
+# Set canonical URL from the Read the Docs Domain
+html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "")
+
+html_context = {}
+
+# Tell Jinja2 templates the build is running on Read the Docs
+if os.environ.get("READTHEDOCS", "") == "True":
+    html_context["READTHEDOCS"] = True
 
 # -- Redirections specifications ---------------------------------------------
 
