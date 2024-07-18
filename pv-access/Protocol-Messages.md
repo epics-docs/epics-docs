@@ -1,44 +1,7 @@
 # Protocol messages specification
 
-[Back to main](protocol)
-
-1.  [Protocol Messages](#protocol-messages)
-    1.  [Message header](#message-header)
-2. [Application Messages](#application-messages)
-    1.  [CMD_BEACON (0x00)](#cmd_beacon-0x00)
-    2.  [CMD_CONNECTION_VALIDATION (0x01)](#cmd_connection_validation-0x01)
-    3.  [CMD_ECHO (0x02)](#cmd_echo-0x02)
-    4.  [CMD_SEARCH (0x03)](#cmd_search-0x03)
-    5.  [CMD_SEARCH_RESPONSE (0x04)](#cmd_search_response-0x04)
-    6.  [CMD_AUTHNZ (0x05)](#cmd_authnz-0x05)
-    7.  [CMD_ACL_CHANGE (0x06)](#cmd_acl_change-0x06)
-    8.  [CMD_CREATE_CHANNEL (0x07)](#cmd_create_channel-0x07)
-    9.  [CMD_DESTROY_CHANNEL (0x08)](#cmd_destroy_channel-0x08)
-    10.  [CMD_CONNECTION_VALIDATED (0x09)](#cmd_connection_validated-0x09)
-    11.  [CMD_GET (0x0A)](#cmd_get-0x0a)
-    12.  [CMD_PUT (0x0B)](#cmd_put-0x0b)
-    13. [CMD_PUT_GET (0x0C)](#cmd_put_get-0x0c)
-    14. [CMD_MONITOR (0x0D)](Protocol-Operation-Monitor)
-    15. [CMD_ARRAY (0x0E)](#cmd_array-0x0e)
-    16. [CMD_DESTROY_REQUEST (0xF)](#cmd_destroy_request-0x0f)
-    17. [CMD_PROCESS (0x10)](#cmd_process-0x10)
-    18. [CMD_GET_FIELD (0x11)](#cmd_get_field-0x11)
-    19. [CMD_MESSAGE (0x12)](#cmd_message-0x12)
-    20. [CMD_MULTIPLE_DATA (0x13)](#cmd_multiple_data-0x13)
-    21. [CMD_RPC (0x14)](#cmd_rpc-0x14)
-    22. [CMD_CANCEL_REQUEST (0x15)](#cmd_cancel_request-0x15)
-    23. [CMD_ORIGIN_TAG (0x16)](#cmd_origin_tag-0x16)
-3. [Control Messages](#control-messages)
-    1.  [Mark Total Byte Sent
-        (0x00)](#mark-total-byte-sent-0x00)
-    2.  [Acknowledge Total Bytes Received
-        (0x01)](#acknowledge-total-bytes-received-0x01)
-    3.  [Set byte order
-        (0x02)](#set-byte-order-0x02)
-    4.  [Echo request
-        (0x03)](#echo-request-0x03)
-    5.  [Echo response
-        (0x04)](#echo-response-0x04)
+```{contents}
+```
 
 The pvAccess protocol uses two protocol message types:
 

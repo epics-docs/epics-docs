@@ -1,15 +1,5 @@
 # Overview
 
-[Back to main](protocol)
-
-1.  [Connection Management](#connection-management)
-2.  [Channel Life-cycle](#channel-life-cycle)
-3.  [Channel Request Life-cycle](#channel-request-life-cycle)
-4.  [Flow Control](#flow-control)
-    1.  [Flow Control Example](#flow-control-example)
-5.  [Channel Discovery](#channel-discovery)
-6.  [Communication Example](#communication-example)
-
 ## Connection Management
 
 pvAccess uses the concept of a "channel" to denote a connection to a
@@ -245,7 +235,7 @@ server where the client issues a get request on a channel.
 |                              | \<----                     | channelGetRequestInit                   |
 | channelGetResponseInit       | \----\>                    |                                         |
 |                              | \<----                     | channelGetRequest                       |
-| channelGetResponse           | \----\>                    |                                         | 
+| channelGetResponse           | \----\>                    |                                         |
 |                              | \<----                     | ...                                     |
 | ...                          | \----\>                    |                                         |
 |                              | \<----                     | destroyRequest                          |

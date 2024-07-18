@@ -1,27 +1,7 @@
 # Data Encoding
 
-[Back to main](protocol)
-
-1.  [Sizes](#sizes)
-2.  [User Data](#user-data)
-    - [Basic Types](#basic-types)
-    - [Arrays](#arrays)
-    - [Strings](#strings)
-    - [Bounded Strings](#bounded-strings)
-    - [Structures](#structures)
-    - [Arrays of Structures](#variable-size-structure-arrays)
-    - [Unions](#unions)
-    - [Variant Unions](#variant-unions)
-    - [Encoding Example](#encoding-example)
-3.  [Meta Data](#meta-data)
-    - [BitSets](#bitsets)
-        - [Partial Structure Serialization](#partial-structure-serialization)
-    - [Status](#status)
-    - [Introspection Data](#introspection-data)
-        - [Example \#1](#example-1)
-        - [Example \#2](#example-2)
-
-
+```{contents}
+```
 
 Encoding does not align primitive types on word boundaries.
 
