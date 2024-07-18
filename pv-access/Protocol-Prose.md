@@ -38,9 +38,9 @@ a response is received or the connection is reported to be lost. If an
 echo response is received and transport is marked as unresponsive, then
 transport SHOUD be reported to be responsive.
 
-![Connection State Diagram](img/pvAccessSpec_ConnectionStates.png)
-
-Connection State Diagram.
+```{figure} img/pvAccessSpec_ConnectionStates.png
+Connection State Diagram
+```
 
 When connection is terminated all related resources MUST be freed. On
 the server side all channels including their requests MUST be destroyed
@@ -58,9 +58,9 @@ re-started.
 
 ## Channel Life-cycle
 
-![Channel State Diagram](img/pvAccessSpec_ChannelStates.png)
-
-Channel State Diagram.
+```{figure} img/pvAccessSpec_ChannelStates.png
+Channel State Diagram
+```
 
 When a channel is instantiated by a client application, its state MUST
 be set to a NEVER\_CONNECTED state. This indicates that the channel is
@@ -94,9 +94,9 @@ used anymore.
 
 ## Channel Request Life-cycle
 
-![Channel Request State Diagram](img/pvAccessSpec_RequestStates.png)
-
-Channel Request State Diagram.
+```{figure} img/pvAccessSpec_RequestStates.png
+Channel Request State Diagram
+```
 
 Channel requests (get, put, get-put, RPC, process) have a state. When
 instantiated, they MUST be set to the INIT state. A specific per request
