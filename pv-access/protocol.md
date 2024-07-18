@@ -130,24 +130,17 @@ specification and will be specified in future revisions:
 
 ## Bibliography
 
-bib:caref
 
-EPICS R3.14 Channel Access Reference Manual, J.O. Hill, R. Lange, 2002,
+- EPICS R3.14 Channel Access Reference Manual, J.O. Hill, R. Lange, 2002,
 <http://www.aps.anl.gov/epics/base/R3-14/8-docs/CAref.html>
 
-bib:pvdatarefcpp
-
-EPICS pvDataCPP \[pvData C++ Programmers Reference Manual\], M. Kraimer,
+- EPICS pvDataCPP \[pvData C++ Programmers Reference Manual\], M. Kraimer,
 2011 under development,
 <http://epics-pvdata.sourceforge.net/docbuild/pvDataCPP/tip/documentation/pvDataCPP.html>
 
-bib:pvdatarefjava
-
-EPICS pvDataJava \[pvData Java Programmers Reference Manual\], M.
+- EPICS pvDataJava \[pvData Java Programmers Reference Manual\], M.
 Kraimer, 2011 under development,
 <http://epics-pvdata.sourceforge.net/docbuild/pvDataJava/tip/documentation/pvDataJava.html>
 
-bib:ieee754wiki
-
-IEEE 754-2008, Wikipedia article, April 2012,
+- IEEE 754-2008, Wikipedia article, April 2012,
 <http://en.wikipedia.org/wiki/IEEE_754-1985>
