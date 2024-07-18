@@ -113,59 +113,59 @@ TODO: describe 'record._options.ackAny' option.
 ## Request Encoding (Client -> Server)
 
 ```c
-    struct channelMonitorRequest {
-        int serverChannelID;
-        int requestID;
-        byte subcommand;
-        if subcommmand&0x08 { // Init
-            StructureDesc pvRequestIF;
-            PVStructure pvRequest;
-            if subcommand&0x80 { // pipeline support
-                int nfree; // initial window size
-            }
-        } else {
-            if subcommand&0x80 { // pipeline support
-                int nfree; // increment window size
-            }
-            if subcommand&0x04 {
-                if subcommand&0x40 {
-                    // subscription start
-                } else {
-                    // subscription stop
-                }
-            }
-            if subcommand&0x10 {
-                // last request (requestID released)
+struct channelMonitorRequest {
+    int serverChannelID;
+    int requestID;
+    byte subcommand;
+    if subcommmand&0x08 { // Init
+        StructureDesc pvRequestIF;
+        PVStructure pvRequest;
+        if subcommand&0x80 { // pipeline support
+            int nfree; // initial window size
+        }
+    } else {
+        if subcommand&0x80 { // pipeline support
+            int nfree; // increment window size
+        }
+        if subcommand&0x04 {
+            if subcommand&0x40 {
+                // subscription start
+            } else {
+                // subscription stop
             }
         }
-    };
+        if subcommand&0x10 {
+            // last request (requestID released)
+        }
+    }
+};
 ```
 
 ## Response Encoding (Server -> Client)
 
 ```c
-    struct channelMonitorResponse {
-        int requestID;
-        byte subcommand;
-        if subcommmand&0x08 { // Init
+struct channelMonitorResponse {
+    int requestID;
+    byte subcommand;
+    if subcommmand&0x08 { // Init
+        Status status;
+        if status.type == OK | WARNING {
+            FieldDesc pvStructureIF;
+        }
+    } else {
+        if subcommand&0x10 {
             Status status;
-            if status.type == OK | WARNING {
-                FieldDesc pvStructureIF;
-            }
-        } else {
-            if subcommand&0x10 {
-                Status status;
-                if ! payloadBuffer.empty() {
-                    BitSet changedBitSet;
-                    PVField pvStructureData;
-                    BitSet overrunBitSet;
-                }
-                // final update (requestID released)
-            } else { // normal update
+            if ! payloadBuffer.empty() {
                 BitSet changedBitSet;
                 PVField pvStructureData;
                 BitSet overrunBitSet;
             }
+            // final update (requestID released)
+        } else { // normal update
+            BitSet changedBitSet;
+            PVField pvStructureData;
+            BitSet overrunBitSet;
         }
-    };
+    }
+};
 ```
