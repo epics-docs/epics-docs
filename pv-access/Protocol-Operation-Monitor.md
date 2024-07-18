@@ -1,14 +1,10 @@
-# pvAccess Protocol Specification
-
-[Back to main](protocol)
-
-## CMD_MONITOR (0x0D)
+# CMD_MONITOR (0x0D)
 
 The "channel monitor" set of messages are used by client agents to
 indicate that they wish to be asynchronously informed of changes in the
 state or values of the process variable of a channel.
 
-### Setup
+## Setup
 
 Starting with a valid serverChannelID (cf. Create Channel message), a client first
 sends a channelMonitorRequest with subcommand==0x08 or 0x88 (if using the pipeline protocol).
@@ -23,7 +19,7 @@ and the subscription is established.
 The subscription is initially in the Stopped state.
 In this state the Server must not send any updates.
 
-### Normal Operation
+## Normal Operation
 
 After a monitor subscription is established either peer may send non-init messages (subcommand&0xF7)
 asynchronously.
@@ -52,7 +48,7 @@ The pvStructureData will only contain the complete structure data once,
 it will not repeat data for elements 1 and 2, since they are already contained
 in the serialized data addressed by bit 0.
 
-### pvRequest options
+## pvRequest options
 
 standard options
 
@@ -60,7 +56,7 @@ standard options
 2. 'record._options.pipeline'
 3. 'record._options.ackAny'
 
-### Pipeline protocol option
+## Pipeline protocol option
 
 Usage of the pipeline protocol option requires both sides to agree
 and maintain a flow control window counter indicating the number of
@@ -82,7 +78,7 @@ Each time an update is sent by the server, and received by the client, the count
 The client may send a channelMonitorRequest with subcommand&0x80 and a 'nfree' count
 which is added to the counter.
 
-#### Acknowledgement Algorithm
+### Acknowledgement Algorithm
 
 In this way, the client can manage the rate at which the server can send update.
 

@@ -1,4 +1,4 @@
-# pvAccess Protocol Specification
+# Protocol messages specification
 
 [Back to main](protocol)
 
@@ -40,8 +40,6 @@
     5.  [Echo response
         (0x04)](#echo-response-0x04)
 
-## Protocol Messages
-
 The pvAccess protocol uses two protocol message types:
 
   - Control messages. These include flow control and have no payload
@@ -56,7 +54,7 @@ specification versions of the protocol. Every implementation of the
 protocol MUST clearly indicate the most recent specification version to
 which it is conformant, using the version URLs above.
 
-### Message Header
+## Message Header
 
 Each protocol message has a fixed 8-byte header that MUST be encoded as
 if it were expressed by the following structure:
@@ -482,7 +480,7 @@ a single channel, i.e. the `count` must be 1.
 |    accessRights | Access rights (TBD).                            |
 
 Create channel response (per channel) message members.
- 
+
 :::{note}
 A server MUST store the clientChannelID and respond with its value
 in a destroyChannelMessage when a channel destroy request is requested,
@@ -499,7 +497,7 @@ that was previously created (with a create channel message).
 
 A server may also send this message to the client when the channel is no longer
 available. Examples include a PVA gateway that sends this message from its server
-side when it lost a channel on its client side. 
+side when it lost a channel on its client side.
 
     struct destroyChannelRequest {
         int serverChannelID;
@@ -528,7 +526,7 @@ Destroy channel response.
 If the request (clientChannelID, serverChannelID) pair does not match,
 the server MUST respond with an error status. The server MAY break its
 response into several messages.
- 
+
 :::{note}
 A server MUST send this message to a client to notify the client
 about server-side initiated channel destruction. Subsequently, a client
@@ -889,6 +887,10 @@ Channel get get request.
 | pvGetStructureData | Remote get data structure.              |
 
 Channel get get response.
+
+```{include} ./Protocol-Operation-Monitor.md
+:heading-offset: 2
+```
 
 ### CMD_ARRAY (0x0E)
 
