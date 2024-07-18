@@ -21,17 +21,17 @@ In this state the Server must not send any updates.
 
 ## Normal Operation
 
-After a monitor subscription is established either peer may send non-init messages (subcommand&0xF7)
+After a monitor subscription is established either peer may send non-init messages (`subcommand&0xF7`)
 asynchronously.
 
 A Client may send a channelMonitorRequest which performs up to three actions.
 
-1. subcommand&0x80 indicates an acknowledgement (increment) to the pipeline flow control window.
+1. `subcommand&0x80` indicates an acknowledgement (increment) to the pipeline flow control window.
 
-2. subcommand&0x44==0x44 Changes the subscription state from Stopped to Running.
-   subcommand&0x44==0x04 Changes the subscription state from Running to Stopped.
+2. `subcommand&0x44==0x44` Changes the subscription state from Stopped to Running.
+   `subcommand&0x44==0x04` Changes the subscription state from Running to Stopped.
 
-3. subcommand&0x10 requests that the subscription be terminated.
+3. `subcommand&0x10` requests that the subscription be terminated.
 
 A Server subscription update is a channelMonitorResponse with subcommand==0x00 or 0x10.
 If 0x10 then this update is the last update, and the subscription has ended.
@@ -52,9 +52,9 @@ in the serialized data addressed by bit 0.
 
 standard options
 
-1. 'record._options.queueSize'
-2. 'record._options.pipeline'
-3. 'record._options.ackAny'
+1. `record._options.queueSize`
+2. `record._options.pipeline`
+3. `record._options.ackAny`
 
 ## Pipeline protocol option
 
