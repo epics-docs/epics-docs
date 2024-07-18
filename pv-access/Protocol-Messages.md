@@ -33,6 +33,9 @@ if it were expressed by the following structure:
 The semantics of these message header components are given in the
 following table.
 
+:::{table} pvAccess Header Members
+:align: center
+
 |         Member | Description                                             |
 | -------------: | ------------------------------------------------------- |
 |          magic | pvAccess protocol magic code. This MUST always be 0xCA. |
@@ -40,9 +43,11 @@ following table.
 |          flags | Message flags.                                          |
 | messageCommand | Message command (i.e. create, get, put, process, etc.). |
 |    payloadSize | Message payload size (non-aligned, in bytes).           |
+:::
 
-pvAccess Header Members.
 
+:::{table} pvAccess Header Flags Description
+:align: center
 
 | bit   | Value | Description                            |
 | ---   | ----- | -----------                            |
@@ -57,8 +62,7 @@ pvAccess Header Members.
 | 6     | 1     | Message sent by server                 |
 | 7     | 0     | Little endian byte order               |
 | 7     | 1     | Big endian byte order                  |
-
-pvAccess Header Flags Description.
+:::
 
 Between two segmented messages of the same set there MUST NOT be any
 other application message than the segmented message of the same set.
@@ -121,6 +125,9 @@ and may use this information to more quickly retry unanswered CMD_SEARCH message
         [if serverStatusIF != NULL_TYPE_CODE] PVField serverStatus;
     };
 
+:::{table} Beacon Message Members
+:align: center
+
 |            Member | Description                                                                                       |
 | ----------------: | ------------------------------------------------------------------------------------------------- |
 |              guid | Server GUID (Globally Unique Identifier). MUST change every restart.                              |
@@ -132,8 +139,7 @@ and may use this information to more quickly retry unanswered CMD_SEARCH message
 |          protocol | Protocol/transport name (e.g. "tcp" for standard pvAccess TCP/IP communication).                  |
 |    serverStatusIF | Optional server status Field description, NULL\_TYPE\_CODE MUST be used indicate absence of data. |
 |      serverStatus | Optional server data.                                                                             |
-
-Beacon Message Members.
+:::
 
 When a pvAccess server is started it MUST begin emitting beacons.
 Clients MUST monitor all beacons. A beacon received from an as yet
@@ -205,15 +211,19 @@ In the connectionValidationResponse, the client selects one of these.
 For "anonymous" or "x509", no further detail is required and the `FieldDesc` is 0xFF for the 'null' type code with no `PVField`.
 For "ca", a structure with string elements "user" and "host" needs to follow.
 
+:::{table} Connection Validation Request Message Members
+:align: center
+
 |                             Member | Description                                                                |
 | ---------------------------------: | -------------------------------------------------------------------------- |
 |            serverReceiveBufferSize | Server receive buffer size in bytes.                                       |
 |      serverReceiveSocketBufferSize | Server socket buffer size in bytes.                                        |
 | serverIntrospectionRegistryMaxSize | Maximum number of introspection registry entries server is able to handle. |
 |                             authNZ | List of supported authentication modes                                     |
+:::
 
-Connection Validation Request Message
-Members.
+:::{table} Connection Validation Response Message Members
+:align: center
 
 |                             Member | Description                                                                |
 | ---------------------------------: | -------------------------------------------------------------------------- |
@@ -221,8 +231,10 @@ Members.
 |      clientReceiveSocketBufferSize | Client socket buffer size in bytes.                                        |
 | clientIntrospectionRegistryMaxSize | Maximum number of introspection registry entries client is able to handle. |
 |                      connectionQoS | Connection QoS parameters.                                                 |
+:::
 
-Connection Validation Response Message Members.
+:::{table} Connection QoS Parameters Description
+:align: center
 
 |   bit | Description               |
 | ----: | ------------------------- |
@@ -232,8 +244,7 @@ Connection Validation Response Message Members.
 |     9 | Throughput priority.      |
 |    10 | Enable compression.       |
 | 11-15 | Unused, MUST be 0.        |
-
-Connection QoS Parameters Description.
+:::
 
 Each Quality of Service (QoS) parameter value REQUIRES a separate TCP/IP
 connection. If the Low-latency priority bit is set, this indicates
@@ -258,17 +269,21 @@ is still valid.
         byte[] samePayloadAsInRequest;
     };
 
+:::{table} Echo request message members
+:align: center
+
 |      Member | Description                              |
 | ----------: | ---------------------------------------- |
 | somePayload | Arbitrary payload content, can be empty. |
+:::
 
-Echo request message members.
+:::{table} Echo response message members
+:align: center
 
 |                 Member | Description                         |
 | ---------------------: | ----------------------------------- |
 | samePayloadAsInRequest | Same paylaod as in request message. |
-
-Echo response message members.
+:::
 
 Version 1 servers do not support the payload and will always send an empty reply.
 Version 2 servers return the payload.
@@ -300,6 +315,9 @@ struct searchRequest {
 };
 ```
 
+:::{table} Search request message members
+:align: center
+
 |           Member | Description                                                                             |
 | ---------------: | --------------------------------------------------------------------------------------- |
 | searchSequenceID | Search sequence ID (counter w/ rollover), can be used by congestion control algorithms. |
@@ -307,8 +325,7 @@ struct searchRequest {
 |         protocol | A set of allowed protocols to respond ("tcp", "tls"). Unrestricted if array is empty.   |
 | searchInstanceID | ID to be used to associate response with the following channel name.                    |
 |      channelName | Non-empty channel name, maximum length of 500 characters.                               |
-
-Search request message members.
+:::
 
 The protocol "tcp" indicates that the client would like to then continue the data communication via a plain TCP connection.
 "tls" indicates that the client can also support an SSL/TLS TCP connection.
@@ -346,6 +363,9 @@ search request (0x03) message.
         int[] searchInstanceIDs;
     };
 
+:::{table} Search response message members
+:align: center
+
 |            Member | Description                                                                       |
 | ----------------: | --------------------------------------------------------------------------------- |
 |  searchSequenceID | Search sequence ID, same as specified in search request.                          |
@@ -354,8 +374,7 @@ search request (0x03) message.
 |        serverPort | Server port (e.g. in case of IP transport socket port where server is listening). |
 |          protocol | Protocol name, "tcp" for standard pvAccess TCP/IP communication, "tls" for secure TCP |
 | searchInstanceIDs | IDs, associated with names in the request, relevant to this response.             |
-
-Search response message members.
+:::
 
 A client MUST examine the protocol member field to verify it supports
 the given exchange protocol; if not, the search response is ignored.
@@ -420,20 +439,22 @@ Each channel instance MUST be bound only to one connection.
         // [if status.type == OK | WARNING] short accessRights; // never used
     };
 
+:::{table} Create channel request message members
+:align: center
+
 |          Member | Description                                                                        |
 | --------------: | ---------------------------------------------------------------------------------- |
 | clientChannelID | Client generated channel ID.                                                       |
 |     channelName | Name of the channel to be created, non-empty and maximum length of 500 characters. |
-
-Create channel request message members.
-
+:::
 
 The `createChannelRequest.channels` array starts with a `short` count,
 not using the normal size encoding.
 Current PVA server implementations only support requests for creating
 a single channel, i.e. the `count` must be 1.
 
-
+:::{table} Create channel response (per channel) message members
+:align: center
 
 |          Member | Description                                     |
 | --------------: | ----------------------------------------------- |
@@ -441,8 +462,7 @@ a single channel, i.e. the `count` must be 1.
 | serverChannelID | Server generated channel ID.                    |
 |          status | Completion status.                              |
 |    accessRights | Access rights (TBD).                            |
-
-Create channel response (per channel) message members.
+:::
 
 :::{note}
 A server MUST store the clientChannelID and respond with its value
@@ -472,19 +492,23 @@ side when it lost a channel on its client side.
         int clientChannelID;
     };
 
-|          Member | Description                                              |
-| --------------: | -------------------------------------------------------- |
-| serverChannelID | Server generated channel ID, same as in create response. |
-| clientChannelID | Client generated channel ID, same as in create request.  |
-
-Destroy channel request.
+:::{table} Destroy channel request
+:align: center
 
 |          Member | Description                                              |
 | --------------: | -------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create response. |
 | clientChannelID | Client generated channel ID, same as in create request.  |
+:::
 
-Destroy channel response.
+:::{table} Destroy channel response
+:align: center
+
+|          Member | Description                                              |
+| --------------: | -------------------------------------------------------- |
+| serverChannelID | Server generated channel ID, same as in create response. |
+| clientChannelID | Client generated channel ID, same as in create request.  |
+:::
 
 If the request (clientChannelID, serverChannelID) pair does not match,
 the server MUST respond with an error status. The server MAY break its
@@ -527,6 +551,9 @@ channel.
         [if status.type == OK | WARNING] FieldDesc pvStructureIF;
     };
 
+:::{table} Channel get init request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
@@ -534,8 +561,10 @@ channel.
 |      subcommand | 0x08                                                             |
 |     pvRequestIF | pvRequest Field description.                                     |
 |       pvRequest | pvRequest structure.                                             |
+:::
 
-Channel get init request.
+:::{table} Channel get init response
+:align: center
 
 |        Member | Description                                     |
 | ------------: | ----------------------------------------------- |
@@ -543,8 +572,7 @@ Channel get init request.
 |    subcommand | 0x08, same as in request message.               |
 |        status | Completion status.                              |
 | pvStructureIF | pvStructure (data container) Field description. |
-
-Channel get init response.
+:::
 
 After a get request is successfully initialized, the client can issue
 actual get request(s).
@@ -563,13 +591,18 @@ actual get request(s).
         [if status.type == OK | WARNING] PVField pvStructureData;
     };
 
+:::{table} Channel get request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in init message.                             |
 |      subcommand | 0x00 for GET, additional 0x10 mask for DESTROY.                  |
+:::
 
-Channel get request.
+:::{table} Channel get response
+:align: center
 
 |          Member | Description                             |
 | --------------: | --------------------------------------- |
@@ -578,8 +611,7 @@ Channel get request.
 |          status | Completion status.                      |
 |   changedBitSet | Changed BitSet for pvStructureData.     |
 | pvStructureData | Data structure.                         |
-
-Channel get response.
+:::
 
 Most implementations send a 0x00 subcommand to GET data,
 but based on the original protocol documentation 0x40
@@ -611,6 +643,9 @@ channel.
         [if status.type == OK | WARNING] FieldDesc pvPutStructureIF;
     };
 
+:::{table} Channel put init request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
@@ -618,9 +653,10 @@ channel.
 |      subcommand | 0x08                                                             |
 |     pvRequestIF | pvRequest Field description.                                     |
 |       pvRequest | pvRequest structure.                                             |
+:::
 
-Channel put init
-request.
+:::{table} Channel put init response
+:align: center
 
 |           Member | Description                                        |
 | ---------------: | -------------------------------------------------- |
@@ -628,8 +664,7 @@ request.
 |       subcommand | 0x08, same as in request message.                  |
 |           status | Completion status.                                 |
 | pvPutStructureIF | pvPutStructure (data container) Field description. |
-
-Channel put init response.
+:::
 
 After a put request is successfully initialized, the client can issue
 actual put request(s) on the channel.
@@ -648,6 +683,9 @@ actual put request(s) on the channel.
         Status status;
     };
 
+:::{table} Channel put request
+:align: center
+
 |             Member | Description                                                      |
 | -----------------: | ---------------------------------------------------------------- |
 |    serverChannelID | Server generated channel ID, same as in create channel response. |
@@ -655,16 +693,17 @@ actual put request(s) on the channel.
 |         subcommand | 0x00 for PUT, additional 0x10 mask for DESTROY.                  |
 |        toPutBitSet | To-put BitSet for pvPutStructureData.                            |
 | pvPutStructureData | Data to put structure.                                           |
+:::
 
-Channel put request.
+:::{table} Channel put response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 | subcommand | Same as in request message.             |
 |     status | Completion status.                      |
-
-Channel put response.
+:::
 
 A "get-put" request retrieves the remote put structure. This MAY be used
 by user applications to show data that was set the last time by the
@@ -685,13 +724,18 @@ application.
             PVField pvStructureData;
     };
 
+:::{table} Channel get put request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in init message.                             |
 |      subcommand | 0x40.                                                            |
+:::
 
-Channel get put request.
+:::{table} Channel get put response
+:align: center
 
 |             Member | Description                             |
 | -----------------: | --------------------------------------- |
@@ -700,8 +744,7 @@ Channel get put request.
 |             status | Completion status.                      |
 | returnedDataBitSet | Which fields are provided in data.      |
 | pvStructureData    | The returned data.                      |
-
-Channel get put response.
+:::
 
 ### CMD_PUT_GET (0x0C)
 
@@ -726,6 +769,9 @@ so that the get reflects changes in the process variable's state.
         [if status.type == OK | WARNING] FieldDesc pvGetStructureIF;
     };
 
+:::{table} Channel put-get init request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
@@ -733,9 +779,10 @@ so that the get reflects changes in the process variable's state.
 |      subcommand | 0x08                                                             |
 |     pvRequestIF | pvRequest Field description.                                     |
 |       pvRequest | pvRequest structure.                                             |
+:::
 
-Channel put-get init
-request.
+:::{table} Channel put-get init response
+:align: center
 
 |           Member | Description                                        |
 | ---------------: | -------------------------------------------------- |
@@ -744,8 +791,7 @@ request.
 |           status | Completion status.                                 |
 | pvPutStructureIF | pvPutStructure (data container) Field description. |
 | pvGetStructureIF | pvGetStructure (data container) Field description. |
-
-Channel put-get init response.
+:::
 
 After a put-get request is successfully initialized, the client can
 issue actual put-get request(s) on the channel.
@@ -765,6 +811,9 @@ issue actual put-get request(s) on the channel.
         [if status.type == OK | WARNING] PVField pvGetStructureData;
     };
 
+:::{table} Channel put-get request
+:align: center
+
 |             Member | Description                                                      |
 | -----------------: | ---------------------------------------------------------------- |
 |    serverChannelID | Server generated channel ID, same as in create channel response. |
@@ -772,8 +821,10 @@ issue actual put-get request(s) on the channel.
 |         subcommand | 0x00 for PUT\_GET, additional 0x01 mask for DESTROY.             |
 |        toPutBitSet | To-put BitSet for pvPutStructureData.                            |
 | pvPutStructureData | Data to put structure.                                           |
+:::
 
-Channel put-get request.
+:::{table} Channel put-get response
+:align: center
 
 |             Member | Description                             |
 | -----------------: | --------------------------------------- |
@@ -781,8 +832,7 @@ Channel put-get request.
 |         subcommand | Same as in request message.             |
 |             status | Completion status.                      |
 | pvGetStructureData | Get data structure.                     |
-
-Channel put-get response.
+:::
 
 A "get-put" request retrieves the remote put structure. This MAY be used
 by user applications to show data that was set the last time by the
@@ -801,13 +851,18 @@ application.
         [if status.type == OK | WARNING] PVField pvPutStructureData;
     };
 
+:::{table} Channel get put request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in init message.                             |
 |      subcommand | 0x80.                                                            |
+:::
 
-Channel get put request.
+:::{table} Channel get put response
+:align: center
 
 |             Member | Description                             |
 | -----------------: | --------------------------------------- |
@@ -815,8 +870,7 @@ Channel get put request.
 |         subcommand | Same as in request message.             |
 |             status | Completion status.                      |
 | pvPutStructureData | Remote put data structure.              |
-
-Channel get put response.
+:::
 
 A "get-get" request retrieves remote get structure. This MAY be used by
 user applications to show data that was retrieved the last time.
@@ -834,13 +888,18 @@ user applications to show data that was retrieved the last time.
         [if status.type == OK | WARNING] PVField pvGetStructureData;
     };
 
+:::{table} Channel get get request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in init message.                             |
 |      subcommand | 0x40.                                                            |
+:::
 
-Channel get get request.
+:::{table} Channel get get response
+:align: center
 
 |             Member | Description                             |
 | -----------------: | --------------------------------------- |
@@ -848,8 +907,7 @@ Channel get get request.
 |         subcommand | Same as in request message.             |
 |             status | Completion status.                      |
 | pvGetStructureData | Remote get data structure.              |
-
-Channel get get response.
+:::
 
 ```{include} ./Protocol-Operation-Monitor.md
 :heading-offset: 2
@@ -877,6 +935,9 @@ valid elements in the array).
         [if status.type == OK | WARNING] FieldDesc pvArrayIF;
     };
 
+:::{table} Channel array init request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
@@ -884,8 +945,10 @@ valid elements in the array).
 |      subcommand | 0x08                                                             |
 |     pvRequestIF | pvRequest Field description.                                     |
 |       pvRequest | pvRequest structure.                                             |
+:::
 
-Channel array init request.
+:::{table} Channel array init response
+:align: center
 
 |     Member | Description                                 |
 | ---------: | ------------------------------------------- |
@@ -893,8 +956,7 @@ Channel array init request.
 | subcommand | 0x08, same as in request message.           |
 |     status | Completion status.                          |
 |  pvArrayIF | pvArray (data container) Field description. |
-
-Channel array init response.
+:::
 
 After an array request is successfully initialized, the client can issue
 the actual array request(s).
@@ -914,6 +976,9 @@ the actual array request(s).
         [if status.type == OK | WARNING] PVField pvArrayData;
     };
 
+:::{table} Channel array get request
+:align: center
+
 |          Member | Description                                                                |
 | --------------: | -------------------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response.           |
@@ -921,8 +986,10 @@ the actual array request(s).
 |      subcommand | 0x40 for GET, additional 0x10 mask for DESTROY.                            |
 |          offset | Offset from the beginning of the array.                                    |
 |           count | Number of elements requested, 0 means form offset to the end of the array. |
+:::
 
-Channel array get request.
+:::{table} Channel array get response
+:align: center
 
 |      Member | Description                             |
 | ----------: | --------------------------------------- |
@@ -930,8 +997,8 @@ Channel array get request.
 |  subcommand | Same as in request message.             |
 |      status | Completion status.                      |
 | pvArrayData | Data array.                             |
+:::
 
-Channel array get response.
 
     struct channelPutArrayRequest {
         int serverChannelID;
@@ -947,6 +1014,9 @@ Channel array get response.
         Status status;
     };
 
+:::{table} Channel array put request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
@@ -954,16 +1024,17 @@ Channel array get response.
 |      subcommand | 0x00 for PUT, additional 0x10 mask for DESTROY.                  |
 |          offset | Offset from the beginning of the array.                          |
 |     pvArrayData | Subarray to be put.                                              |
+:::
 
-Channel array put request.
+:::{table} Channel array put response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 | subcommand | Same as in request message.             |
 |     status | Completion status.                      |
-
-Channel array put response.
+:::
 
 /// TODO GetLength is missing, fix the codes \!\!\!
 
@@ -980,22 +1051,26 @@ Channel array put response.
         Status status;
     };
 
+:::{table} Channel array set length request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in init message.                             |
 |      subcommand | 0x40 for GET, additional 0x10 mask for DESTROY.                  |
 |          length | New length.                                                      |
+:::
 
-Channel array set length request.
+:::{table} Channel array set length response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 | subcommand | Same as in request message.             |
 |     status | Completion status.                      |
-
-Channel array set length response.
+:::
 
 ### CMD_DESTROY_REQUEST (0x0F)
 
@@ -1008,12 +1083,14 @@ an instance with requestID.
         int requestID;
     };
 
+:::{table} Destroy request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in request init message.                     |
-
-Destroy request.
+:::
 
 ### CMD_PROCESS (0x10)
 
@@ -1036,6 +1113,9 @@ be "processed".
         Status status;
     };
 
+:::{table} Channel process init request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
@@ -1043,16 +1123,17 @@ be "processed".
 |      subcommand | 0x08                                                             |
 |     pvRequestIF | Optional pvRequest Field description, NULL\_TYPE\_CODE is none.  |
 |       pvRequest | Optional pvRequest structure.                                    |
+:::
 
-Channel process init request.
+:::{table} Channel process init response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 | subcommand | 0x08, same as in request message.       |
 |     status | Completion status.                      |
-
-Channel process init response.
+:::
 
 After a process request is successfully initialized, the client can
 issue the actual process request(s).
@@ -1069,21 +1150,25 @@ issue the actual process request(s).
         Status status;
     };
 
+:::{table} Channel process request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in init message.                             |
 |      subcommand | 0x00 for PROCESS, additional 0x10 mask for DESTROY.              |
+:::
 
-Channel proces request.
+:::{table} Channel process response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 | subcommand | Same as in request message.             |
 |     status | Completion status.                      |
-
-Channel process response.
+:::
 
 ### CMD_GET_FIELD (0x11)
 
@@ -1102,21 +1187,25 @@ i.e. a description of all the channel's fields and their data types.
         [if status.type == OK | WARNING] FieldDesc subFieldIF;
     };
 
+:::{table} Get channel introspection data request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Client generated request ID.                                     |
 |    subFieldName | Name of the subfield to get or entire record if empty.           |
+:::
 
-Get channel introspection data request.
+:::{table} Get channel introspection data response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 |     status | Completion status.                      |
 | subFieldIF | Requested field introspection data.     |
-
-Get channel introspection data response.
+:::
 
 ### CMD_MESSAGE (0x12)
 
@@ -1130,13 +1219,15 @@ MUST NOT be used to report request completion status.
         string message;
     };
 
+:::{table} Message response
+:align: center
+
 |      Member | Description        |
 | ----------: | ------------------ |
 |   requestID | Request ID.        |
 | messageType | Message type enum. |
 |     message | Message.           |
-
-Message response.
+:::
 
 ### CMD_MULTIPLE_DATA (0x13)
 
@@ -1161,6 +1252,9 @@ call (RPC) support over pvAccess.
         Status status;
     };
 
+:::{table} Channel RPC init request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
@@ -1168,16 +1262,17 @@ call (RPC) support over pvAccess.
 |      subcommand | 0x08                                                             |
 |     pvRequestIF | pvRequest Field description.                                     |
 |       pvRequest | pvRequest structure.                                             |
+:::
 
-Channel RPC init request.
+:::{table} Channel RPC init response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 | subcommand | 0x08, same as in request message.       |
 |     status | Completion status.                      |
-
-Channel RPC init response.
+:::
 
 After a RPC request is successfully initialized, the client can issue
 actual RPC request(s).
@@ -1198,6 +1293,9 @@ actual RPC request(s).
         [if status.type == OK | WARNING] PVField pvResponseData;
     };
 
+:::{table} Channel RPC request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
@@ -1205,8 +1303,10 @@ actual RPC request(s).
 |      subcommand | 0x00 for RPC, additional 0x10 mask for DESTROY.                  |
 |   pvStructureIF | pvStructureData Field description.                               |
 | pvStructureData | Argument data structure.                                         |
+:::
 
-Channel RPC request.
+:::{table} Channel RPC response
+:align: center
 
 |         Member | Description                             |
 | -------------: | --------------------------------------- |
@@ -1215,8 +1315,7 @@ Channel RPC request.
 |         status | Completion status.                      |
 |   pvResponseIF | pvResponseDataField description.        |
 | pvResponseData | Response data structure.                |
-
-Channel RPC response.
+:::
 
 ### CMD_CANCEL_REQUEST (0x15)
 
@@ -1229,14 +1328,14 @@ instance with requestID.
         int requestID;
     };
 
+:::{table} Cancel request
+:align: center
+
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in request init message.                     |
-
-Cancel request.
-
-
+:::
 
 ### CMD_ORIGIN_TAG (0x16)
 
@@ -1312,18 +1411,20 @@ order.
 The client's decoding byte order for messages received from the server depends on the payload size field value as
 follows:
 
+:::{table} Client Decoding
+:align: center
+
 | Payload Size Field Value | Meaning                                                                                                         |
 | ------------------------ | --------------------------------------------------------------------------------------------------------------- |
 | 0x00000000               | Client MUST decode all the messages received via this connection using server's selected byte order.            |
 | 0xFFFFFFFF               | Client MUST decode all the messages sent received this connection as indicated by each message byte order flag. |
+:::
 
 :::{note}
 Existing implementations have been found to ignore the "payload size".
 They decode each received message based on the byte order bit in the message header flags field,
 i.e., they always behave as per "payload size" = 0xFFFFFFFF.
 :::
-
-Client Decoding
 
 This MUST be the first message sent by a server when connection is
 established. For connection-less protocols this message is not sent and

@@ -43,6 +43,9 @@ types (byte, short, int, long) MUST be represented as two’s complement
 numbers. Floating point types (float, double) MUST use the 
 [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754) standard formats.
 
+:::{table} Encoding for basic types
+:align: center
+
 |    Type | Encoding                                                          |
 | ------: | ----------------------------------------------------------------- |
 | boolean | A single byte with value non-zero value for true, zero for false. |
@@ -56,8 +59,7 @@ numbers. Floating point types (float, double) MUST use the
 |   ulong | Unsigned 64-bit integer.                                          |
 |   float | 32-bit float (IEEE-754 single-precision float).                   |
 |  double | 64-bit float (IEEE-754 double-precision float).                   |
-
-Encoding for basic types.
+:::
 
 *Note on boolean encoding: a receiver MUST NOT assume that a boolean
 value of true is represented by any special non-zero number, nor that
@@ -147,7 +149,7 @@ description of the encoded value, followed by the encoded value itself.
 
 Given the following structure:
 
-    structure 
+    structure
         byte[] value [1,2,3]
         byte<16> boundedSizeArray [4,5,6,7,8]
         byte[4] fixedSizeArray [9,10,11,12]
@@ -361,6 +363,7 @@ introspection data instance. The introspection registry size MUST be
 negotiated when each connection is established.
 
 :::{table} Encoding of Introspection Data (called Field for future reference).
+:align: center
 
 | Field Encoding             | Name                     | Description |
 | --------------             | ----                     | ----------- |
@@ -380,6 +383,7 @@ The remaining 3 lower bits are type dependent and used for size
 encoding, e.g. to select a 'short' or 'long' integer.
 
 :::{table} Type Encoding
+:align: center
 
 | Bit | Value | Description |
 | --- | ----- | ----------- |
@@ -398,6 +402,7 @@ encoding, e.g. to select a 'short' or 'long' integer.
 :::
 
 :::{table} Integer Type Size Encoding
+:align: center
 
 | Bit | Value | Type Name |
 | --- | ----- | --------- |
@@ -410,6 +415,7 @@ encoding, e.g. to select a 'short' or 'long' integer.
 :::
 
 :::{table} Floating-Point Size Encoding (type = '0b010')
+:align: center
 
 | Bit | Value | Type Name | IEEE 754-2008 Name |
 | --- | ----- | --------- | ------------------ |
@@ -422,6 +428,7 @@ encoding, e.g. to select a 'short' or 'long' integer.
 :::
 
 :::{table} Complex Type Encoding (type = '0b100')
+:align: center
 
 | Bit | Value | Type Name |
 | --- | ----- | --------- |
@@ -441,6 +448,7 @@ pairs. Arrays of structures/unions REQUIRE an introspection data of a
 structure/union defining an array element type.
 
 :::{table} FieldDesc Encoding
+:align: center
 
 | FieldDesc Encoding | Description |
 | ------------------ | ----------- |
@@ -448,7 +456,7 @@ structure/union defining an array element type.
 | 0bxxx01xxx |  Variable-size array of scalars |
 | 0bxxx10xxx + bound |  Bounded-size array of scalars  |
 | 0bxxx11xxx + fixed size (encoded as size) |  Fixed-size array of scalars |
-| 0b10000000 + identification string + (field name, FieldDesc)[] |  Structure | 
+| 0b10000000 + identification string + (field name, FieldDesc)[] |  Structure |
 | 0b10001000 + structure FieldDesc | Array of structures. |
 | 0b10000001 + identification string + (field name, FieldDesc)[] | Union |
 | 0b10001001 + union FieldDesc | Array of unions |
