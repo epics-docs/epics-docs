@@ -8,7 +8,7 @@ There are (at the time of writing) two generations of pvAccess C++ implementatio
 PVXS
 ----
 
-PVXS <https://mdavidsaver.github.io/pvxs/> is a re-implementation of the pvAccess protocol support. 
+PVXS <https://epics-base.github.io/pvxs/> is a re-implementation of the pvAccess protocol support. 
 This module provides a library (libpvxs.so or pvxs.dll) 
 and a set of CLI utilities acting as pvAccess protocol client and/or server.
 
