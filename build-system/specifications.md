@@ -3423,9 +3423,9 @@ be specified in the relevant Makefile definition.
 | USR_CFLAGS_\<T_A\>                 | target architecture specific C  compiler flags                   |
 | USR_CFLAGS_\<osclass\>             | os class specific C compiler  flags                            |
 | USR_CFLAGS_DEFAULT               | C compiler flags for archs with  no USR_CFLAGS_<osclass>  specified                        |
-| \<name\_CFLAGS                    | file specific C compiler flags  (e.g. xxxRecord_CFLAGS=-g)       |
-| \<name\>_CFLAGS_<T_A>              | file specific C compiler flags  for a specific target  architecture                     |
-| \<name\>_CFLAGS_\<osclass\>          | file specific C compiler flags  for a specific os class          |
+| \<name\>_CFLAGS                    | file specific C compiler flags  (e.g. xxxRecord_CFLAGS=-g)       |
+| \<name\>\_CFLAGS_<T_A>              | file specific C compiler flags  for a specific target  architecture                     |
+| \<name\>\_CFLAGS_\<osclass\>          | file specific C compiler flags  for a specific os class          |
 | USR_CXXFLAGS                     | C++ compiler flags for all  systems (e.g.  xyxMain_CFLAGS=-DSDDS)           |
 | USR_CXXFLAGS_\<T_A\>               | target architecture specific C++  compiler flags                   |
 | USR_CXXFLAGS_\<osclass\>           | os-specific C++ compiler flags   |
@@ -3442,12 +3442,12 @@ be specified in the relevant Makefile definition.
 | \<name\>\_CPPFLAGS_\<osclass\>        | file specific cpp flags for a specific os class                |
 | USR_INCLUDES                     | directories, with -I prefix, to search for include files(e.g.  -I$(EPICS_EXTENSIONS_INCLUDE))   |
 | USR_INCLUDES_\<osclass\>           | directories, with -I prefix, to search for include files for a  specific os class                |
-| USR_INCLUDES_DEFAULT        | directories, with -I prefix, to search for include files for systems with no <name>_INCLUDES_<osclass>  specified |
+| USR_INCLUDES_DEFAULT        | directories, with -I prefix, to search for include files for systems with no <name>\_INCLUDES_\<osclass\>  specified |
 | \<name\>_INCLUDES                  | directories, with -I prefix, to  search for include files when    |
 |                                  | building a specific object file  (e.g. -I$(MOTIF_INC))            |
-| \<name\>_INCLUDES_\<T_A\>            | file specific directories, with  -I prefix, to search for include |
+| \<name\>\_INCLUDES_\<T_A\>            | file specific directories, with  -I prefix, to search for include |
 |                                  | files for a specific target  architecture                     |
-|  \<name\>_INCLUDES\_<osclass\>       | file specific directories, with -I prefix, to search for include |
+|  \<name\>\_INCLUDES_\<osclass\>       | file specific directories, with -I prefix, to search for include |
 |                                  | files for a specific os class    |
 | HOST_WARN                        | Are compiler warning messages  desired for host type builds?  (YES or NO) (default is YES)     |
 | CROSS_WARN                       | C cross-compiler warning  messages desired (YES or NO)  (default YES)                    |
@@ -3470,8 +3470,8 @@ be specified in the relevant Makefile definition.
 | LIB_LDFLAGS_\<osclass\>            | os specific library linker  options                          |
 | LIB\_LDFLAGS_DEFAULT              | library linker options for systems with no LIB_LDFLAGS_<osclass> specified                        |
 | \<name\>_LDFLAGS                   | prod or library specific linker  options                          |
-| \<name\>_LDFLAGS_<osclass>         | prod or library specific linker flags for a specific os class    |
-| \<name\>_LDFLAGS_DEFAULT           | linker options for systems with  no <name>_LDFLAGS_<osclass>  specified                        |
+| \<name\>\_LDFLAGS_<osclass>         | prod or library specific linker flags for a specific os class    |
+| \<name\>_LDFLAGS_DEFAULT           | linker options for systems with  no <name>\_LDFLAGS_<osclass>  specified                        |
 | STATIC_BUILD   | Is static build desired (YES or  NO) (default is NO). On win32 if STATIC_BUILD=YES then set SHARED_LIBRARIES=NO)   |
 
 ### Header files to be installed
