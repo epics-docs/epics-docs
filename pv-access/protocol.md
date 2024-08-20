@@ -6,7 +6,7 @@ This document was converted from the
 [Public Working Draft, 16-October-2015](https://github.com/epics-base/pvDataWWW/blob/ca3848712682132d67b63c7be0fc63e5b0256f6c/mainPage/pvAccess_Protocol_Specification.html)
 and continues to be updated.
 
-  - Editors:  
+  - Editors:
     * Matej Sekoranja, Cosylab
     * Marty Kraimer, BNL
     * Greg White, SLAC, PSI
@@ -63,32 +63,7 @@ As a special exception, a TCP peer must be disconnected if it does not send a va
 ### Version 0
  * Obsolete version code used by early clients/servers.  Messages are not compatible with >=v1.
 
-## Table of Contents
-
-<div class="toc">
-
-1.  [Overview](#overview)
-2.  [Data Encoding](Protocol-Encoding)
-3.  [Connection Management](Protocol-Prose.md#connection-management)
-4.  [Channel Life-cycle](Protocol-Prose.md#channel-life-cycle)
-5.  [Channel Request Life-cycle](Protocol-Prose.md#channel-request-life-cycle)
-6.  [Flow Control](Protocol-Prose.md#flow-control)
-7.  [Channel Discovery](Protocol-Prose.md#channel-discovery)
-8.  [Communication Example](Protocol-Prose.md#communication-example)
-9.  [Protocol Messages](Protocol-Messages.md#protocol-messages)
-    1.  [Message header](Protocol-Messages.md#message-header)
-10. [Application Messages](Protocol-Messages.md#application-messages)
-11. [Control Messages](Protocol-Messages.md#controlMessages)
-12. [Future Protocol Changes/Updates](#futureProtocolChanges)
-13. [Missing Aspects](#missing)
-
-</div>
-
------
-
-<div id="contents" class="contents">
-
-## Overview
+## Summary
 
 pvAccess is a high-performance network communication protocol. It is
 designed for efficient signal monitoring and the data
@@ -144,26 +119,28 @@ specification and will be specified in future revisions:
     'size', however 'size' cannot be negative
   - update Communication Example section to show messages
 
+## Specifications
+
+```{toctree}
+:maxdepth: 2
+./Protocol-Prose.md
+./Protocol-Encoding.md
+./Protocol-Messages.md
+```
+
 ## Bibliography
 
-bib:caref
 
-EPICS R3.14 Channel Access Reference Manual, J.O. Hill, R. Lange, 2002,
+- EPICS R3.14 Channel Access Reference Manual, J.O. Hill, R. Lange, 2002,
 <http://www.aps.anl.gov/epics/base/R3-14/8-docs/CAref.html>
 
-bib:pvdatarefcpp
-
-EPICS pvDataCPP \[pvData C++ Programmers Reference Manual\], M. Kraimer,
+- EPICS pvDataCPP \[pvData C++ Programmers Reference Manual\], M. Kraimer,
 2011 under development,
 <http://epics-pvdata.sourceforge.net/docbuild/pvDataCPP/tip/documentation/pvDataCPP.html>
 
-bib:pvdatarefjava
-
-EPICS pvDataJava \[pvData Java Programmers Reference Manual\], M.
+- EPICS pvDataJava \[pvData Java Programmers Reference Manual\], M.
 Kraimer, 2011 under development,
 <http://epics-pvdata.sourceforge.net/docbuild/pvDataJava/tip/documentation/pvDataJava.html>
 
-bib:ieee754wiki
-
-IEEE 754-2008, Wikipedia article, April 2012,
+- IEEE 754-2008, Wikipedia article, April 2012,
 <http://en.wikipedia.org/wiki/IEEE_754-1985>

@@ -1,14 +1,4 @@
-# pvAccess Protocol Specification
-
-[Back to main](protocol)
-
-1.  [Connection Management](#connection-management)
-2.  [Channel Life-cycle](#channel-life-cycle)
-3.  [Channel Request Life-cycle](#channel-request-life-cycle)
-4.  [Flow Control](#flow-control)
-    1.  [Flow Control Example](#flow-control-example)
-5.  [Channel Discovery](#channel-discovery)
-6.  [Communication Example](#communication-example)
+# Overview
 
 ## Connection Management
 
@@ -48,9 +38,9 @@ a response is received or the connection is reported to be lost. If an
 echo response is received and transport is marked as unresponsive, then
 transport SHOUD be reported to be responsive.
 
-![Connection State Diagram](img/pvAccessSpec_ConnectionStates.png)
-
-Connection State Diagram.
+```{figure} img/pvAccessSpec_ConnectionStates.png
+Connection State Diagram
+```
 
 When connection is terminated all related resources MUST be freed. On
 the server side all channels including their requests MUST be destroyed
@@ -68,9 +58,9 @@ re-started.
 
 ## Channel Life-cycle
 
-![Channel State Diagram](img/pvAccessSpec_ChannelStates.png)
-
-Channel State Diagram.
+```{figure} img/pvAccessSpec_ChannelStates.png
+Channel State Diagram
+```
 
 When a channel is instantiated by a client application, its state MUST
 be set to a NEVER\_CONNECTED state. This indicates that the channel is
@@ -104,9 +94,9 @@ used anymore.
 
 ## Channel Request Life-cycle
 
-![Channel Request State Diagram](img/pvAccessSpec_RequestStates.png)
-
-Channel Request State Diagram.
+```{figure} img/pvAccessSpec_RequestStates.png
+Channel Request State Diagram
+```
 
 Channel requests (get, put, get-put, RPC, process) have a state. When
 instantiated, they MUST be set to the INIT state. A specific per request
@@ -245,7 +235,7 @@ server where the client issues a get request on a channel.
 |                              | \<----                     | channelGetRequestInit                   |
 | channelGetResponseInit       | \----\>                    |                                         |
 |                              | \<----                     | channelGetRequest                       |
-| channelGetResponse           | \----\>                    |                                         | 
+| channelGetResponse           | \----\>                    |                                         |
 |                              | \<----                     | ...                                     |
 | ...                          | \----\>                    |                                         |
 |                              | \<----                     | destroyRequest                          |

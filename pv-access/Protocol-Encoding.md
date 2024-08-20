@@ -1,29 +1,7 @@
-# pvAccess Protocol Specification
+# Data Encoding
 
-[Back to main](protocol)
-
-## Data Encoding
-
-1.  [Sizes](#sizes)
-2.  [User Data](#user-data)
-    - [Basic Types](#basic-types)
-    - [Arrays](#arrays)
-    - [Strings](#strings)
-    - [Bounded Strings](#bounded-strings)
-    - [Structures](#structures)
-    - [Arrays of Structures](#variable-size-structure-arrays)
-    - [Unions](#unions)
-    - [Variant Unions](#variant-unions)
-    - [Encoding Example](#encoding-example)
-3.  [Meta Data](#meta-data)
-    - [BitSets](#bitsets)
-        - [Partial Structure Serialization](#partial-structure-serialization)
-    - [Status](#status)
-    - [Introspection Data](#introspection-data)
-        - [Example \#1](#example-1)
-        - [Example \#2](#example-2)
-
-
+```{contents}
+```
 
 Encoding does not align primitive types on word boundaries.
 
@@ -37,7 +15,7 @@ require a specific byte order for connection-less protocols (UDP/IP).
 Deviation: Current peers ignore the header endian bit for messages received over TCP.
 The `SET_ENDIANESS` control message is used instead.  Similarly w/ protocol version.
 
-### Sizes
+## Sizes
 
 Many of the types involved in the data encoding, as well as several
 protocol message components, have an associated size (or "count"). Size
@@ -56,14 +34,17 @@ values MUST always be a non-negative integer and encoded as follows:
     followed by a positive signed 64-bit integer indicating the number
     of elements. This implies a maximum size of 2^63-1.
 
-### User Data
+## User Data
 
-#### Basic Types
+### Basic Types
 
 The basic types MUST be encoded as shown in the Table 1. Signed integer
 types (byte, short, int, long) MUST be represented as two’s complement
 numbers. Floating point types (float, double) MUST use the 
 [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754) standard formats.
+
+:::{table} Encoding for basic types
+:align: center
 
 |    Type | Encoding                                                          |
 | ------: | ----------------------------------------------------------------- |
@@ -78,35 +59,34 @@ numbers. Floating point types (float, double) MUST use the
 |   ulong | Unsigned 64-bit integer.                                          |
 |   float | 32-bit float (IEEE-754 single-precision float).                   |
 |  double | 64-bit float (IEEE-754 double-precision float).                   |
-
-Encoding for basic types.
+:::
 
 *Note on boolean encoding: a receiver MUST NOT assume that a boolean
 value of true is represented by any special non-zero number, nor that
 the same sender consistently uses the same number.*
 
-#### Arrays
+### Arrays
 
-##### Variable-size Arrays
+#### Variable-size Arrays
 
 Variable-size arrays MUST be encoded as a size representing the number
 of elements in the array, followed by the elements encoded as specified
 for their type (as specified in these sections).
 
-##### Bounded-size Arrays
+#### Bounded-size Arrays
 
 Bounded-size arrays MUST be encoded as a size representing the number of
 elements in the array, followed by the elements encoded as specified for
 their type (as specified in these sections). The size MUST be less then
 or equal to the array's declared bound.
 
-##### Fixed-size Arrays
+#### Fixed-size Arrays
 
 Fixed-size arrays MUST be encoded as elements encoded as specified for
 their type (as specified in these sections). The number of elements
 encoded MUST equal to the array's fixed size.
 
-#### Strings
+### Strings
 
 Strings are encoded as arrays of bytes. The actual content (the bytes in
 the array) MUST be a valid [UTF-8](http://tools.ietf.org/html/rfc3629)
@@ -122,18 +102,18 @@ Implementations that internally use a zero byte or a zero character to
 indicate end-of-string SHOULD NOT include a terminating zero byte in the
 pvAccess string encoding. 'null' strings are not supported.
 
-#### Bounded Strings
+### Bounded Strings
 
 Same as strings, just that size MUST be less than or equal to the
 string's bound.
 
-#### Structures
+### Structures
 
 Structures MUST be encoded by appending the data of all comprising
 fields in the order in which the fields have been defined. A structure
 can contain a structure and an union (see below) for its field.
 
-#### Variable-size Structure Arrays
+### Variable-size Structure Arrays
 
 An array of structures is encoded as a size representing the number
 of elements in the array. For each array element, the encoding then
@@ -151,7 +131,7 @@ would be encoded as
 
     03 01 11 11 22 22 00 01 33 33 44 44
 
-#### Unions
+### Unions
 
 Unions MUST be encoded as a selector value (encoded as a size), followed
 by the selected union member data. The selector chooses one member of a
@@ -159,17 +139,17 @@ union as specified in the union introspection data, so must be a value
 in the range 0..N-1 where N is the number of union members. A union can
 contain a structure and a union for its field.
 
-#### Variant Unions
+### Variant Unions
 
 Variant Unions are open ended union type, also known as *any* type.
 Variant Unions MUST be encoded as a introspection data (*Field*)
 description of the encoded value, followed by the encoded value itself.
 
-#### Encoding Example
+### Encoding Example
 
 Given the following structure:
 
-    structure 
+    structure
         byte[] value [1,2,3]
         byte<16> boundedSizeArray [4,5,6,7,8]
         byte[4] fixedSizeArray [9,10,11,12]
@@ -197,9 +177,9 @@ big-endian byte order, *valueUnion* selector with value 1 is selected):
     69 6E 73 69  64 65 20 76  61 72 69 61  6E 74 20 75  insi de v aria nt u 
     6E 69 6F 6E  2E                                     nion .
 
-### Meta Data
+## Meta Data
 
-#### BitSets
+### BitSets
 
 BitSet is a data type that represents a finite sequence of bits.
 
@@ -266,7 +246,7 @@ Examples of BitSet serialization:
     Hexdump [{8, 17, 24, 25, 34, 40, 42, 49, 50, 56, 57, 58, 67, 72, 75, 81, 83}] size = 12
     0B 00 01 02  03 04 05 06  07 08 09 0A               .... .... .... 
 
-##### Partial Structure Serialization
+#### Partial Structure Serialization
 
 Each structure can (depending on message definition) have a BitSet
 instance defining what subset of that structure's fields have been
@@ -304,7 +284,7 @@ The structure above requires a BitSet that contains 9 bits.
 If the bit corresponding to a structure node is set, then all the fields
 of that node MUST be serialized.
 
-#### Status
+### Status
 
 pvAccess defines a structure to inform endpoints about completion
 status. It is nominally defined as:
@@ -353,7 +333,7 @@ Examples of Status serialization:
     61 74 69 6F  6E 45 78 61  6D 70 6C 65  73 2E 6A 61  atio nExa mple s.ja 
     76 61 3A 31  32 36 29 0A                            va:1 26). 
 
-#### Introspection Data
+### Introspection Data
 
 Introspection data describes the type of a user data item. It is not
 itself user data, but rather meta data. Introspection data appears in
@@ -383,6 +363,7 @@ introspection data instance. The introspection registry size MUST be
 negotiated when each connection is established.
 
 :::{table} Encoding of Introspection Data (called Field for future reference).
+:align: center
 
 | Field Encoding             | Name                     | Description |
 | --------------             | ----                     | ----------- |
@@ -402,6 +383,7 @@ The remaining 3 lower bits are type dependent and used for size
 encoding, e.g. to select a 'short' or 'long' integer.
 
 :::{table} Type Encoding
+:align: center
 
 | Bit | Value | Description |
 | --- | ----- | ----------- |
@@ -420,6 +402,7 @@ encoding, e.g. to select a 'short' or 'long' integer.
 :::
 
 :::{table} Integer Type Size Encoding
+:align: center
 
 | Bit | Value | Type Name |
 | --- | ----- | --------- |
@@ -432,6 +415,7 @@ encoding, e.g. to select a 'short' or 'long' integer.
 :::
 
 :::{table} Floating-Point Size Encoding (type = '0b010')
+:align: center
 
 | Bit | Value | Type Name | IEEE 754-2008 Name |
 | --- | ----- | --------- | ------------------ |
@@ -444,6 +428,7 @@ encoding, e.g. to select a 'short' or 'long' integer.
 :::
 
 :::{table} Complex Type Encoding (type = '0b100')
+:align: center
 
 | Bit | Value | Type Name |
 | --- | ----- | --------- |
@@ -463,6 +448,7 @@ pairs. Arrays of structures/unions REQUIRE an introspection data of a
 structure/union defining an array element type.
 
 :::{table} FieldDesc Encoding
+:align: center
 
 | FieldDesc Encoding | Description |
 | ------------------ | ----------- |
@@ -470,7 +456,7 @@ structure/union defining an array element type.
 | 0bxxx01xxx |  Variable-size array of scalars |
 | 0bxxx10xxx + bound |  Bounded-size array of scalars  |
 | 0bxxx11xxx + fixed size (encoded as size) |  Fixed-size array of scalars |
-| 0b10000000 + identification string + (field name, FieldDesc)[] |  Structure | 
+| 0b10000000 + identification string + (field name, FieldDesc)[] |  Structure |
 | 0b10001000 + structure FieldDesc | Array of structures. |
 | 0b10000001 + identification string + (field name, FieldDesc)[] | Union |
 | 0b10001001 + union FieldDesc | Array of unions |
@@ -480,7 +466,7 @@ structure/union defining an array element type.
 :::
 
 
-##### Example \#1
+#### Example \#1
 
 Given the following structure, as may be expressed by a pvData
 Structure:
@@ -499,7 +485,7 @@ pvAccess as the following:
     63 68 23 0B  6E 61 6E 6F  53 65 63 6F  6E 64 73 22  ch#. nano Seco nds" 
     07 75 73 65  72 54 61 67  22                        .use rTag "
 
-##### Example \#2
+#### Example \#2
 
 Given the following structure, as may be expressed by a pvData
 Structure:
