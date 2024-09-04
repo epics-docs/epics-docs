@@ -19,6 +19,12 @@ dependencies can be installed by using e.g. ``homebrew``. On Linux you
 can use ``apt-get install``.  The :doc:`linux-packages` document lists all 
 of the packages required to build EPICS base, the sequencer, synApps modules, and areaDetector.
 
+Example on standard Linux
+
+::
+    sudo apt install build-essential
+    sudo apt install libreadline-dev
+
 Install EPICS
 -------------
 
