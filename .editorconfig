@@ -6,3 +6,6 @@ root = true
 # Not 'end_of_line = lf' because Git is configured to convert EOL
 # in .gitattributes
 insert_final_newline = true
+# Markdown can use trailing whitespaces for forcing line breaks,
+# but we can just use paragraphs instead.
+trim_trailing_whitespace = true
