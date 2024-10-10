@@ -52,6 +52,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.*', 'README.md']
 
 # Intersphinx links to subprojects
 intersphinx_mapping = {
+    "epics-base": ("https://docs.epics-controls.org/projects/base/en/latest/", None),
     'how-tos': ('https://docs.epics-controls.org/projects/how-tos/en/latest', None),
     'pvxs' : ('https://mdavidsaver.github.io/pvxs', None),
     'phoebus' : ('https://control-system-studio.readthedocs.io/en/latest/', None),
@@ -59,11 +60,12 @@ intersphinx_mapping = {
     'asyn' : ('http://epics-modules.github.io/asyn/', None),
     'channelfinder' : ('https://channelfinder.readthedocs.io/en/latest/', None),
 }
+intersphinx_disabled_reftypes = ["*"]
 hoverxref_intersphinx = [
-    'how-tos',
+    'epics-base',
 ]
 hoverxref_intersphinx_types = {
-    'how-tos': 'modal',
+    'epics-base': 'modal',
 }
 
 numfig = True

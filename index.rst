@@ -86,6 +86,7 @@ You may also directly use related links to see documents which match you the mos
    getting-started/installation-rtems
    getting-started/creating-ioc
    getting-started/os-specifics
+   EPICS 7.0 Release Notes <https://docs.epics-controls.org/projects/base/en/latest/RELEASE_NOTES.html>
 
 
 .. toctree::
@@ -106,6 +107,7 @@ You may also directly use related links to see documents which match you the mos
    :maxdepth: 1
    :caption: Use Cases and Design Patterns
 
+   IOC Component Reference <https://docs.epics-controls.org/projects/base/en/latest/ComponentReference.html>
    process-database/common-database-patterns
    Database Examples (external link) <https://github.com/epics-docs/database-examples>
    process-database/how-to-avoid-copying-arrays-with-waveformrecord
@@ -116,7 +118,7 @@ You may also directly use related links to see documents which match you the mos
 .. toctree::
    :maxdepth: 1
    :caption: EPICS Related Software
-   
+
    software/epics-related-software
 
 .. toctree::
@@ -131,7 +133,7 @@ You may also directly use related links to see documents which match you the mos
 .. toctree::
    :maxdepth: 1
    :caption: System administration
-   
+
    sys-admin/configure-ca
    sys-admin/how-to-find-which-ioc-provides-a-pv
    sys-admin/channel-access-reach-multiple-soft-iocs-linux
@@ -145,6 +147,8 @@ You may also directly use related links to see documents which match you the mos
 
    internal/ca_protocol
    internal/IOCInit
+   Common Library C/C++ APIs <https://docs.epics-controls.org/projects/base/en/latest/libcom-api.html>
+   IOC Database C/C++ APIs <https://docs.epics-controls.org/projects/base/en/latest/database-api.html>
 
 .. toctree::
    :maxdepth: 1
