@@ -1,46 +1,7 @@
-# pvAccess Protocol Specification
+# Protocol messages specification
 
-[Back to main](protocol)
-
-1.  [Protocol Messages](#protocol-messages)
-    1.  [Message header](#message-header)
-2. [Application Messages](#application-messages)
-    1.  [CMD_BEACON (0x00)](#cmd_beacon-0x00)
-    2.  [CMD_CONNECTION_VALIDATION (0x01)](#cmd_connection_validation-0x01)
-    3.  [CMD_ECHO (0x02)](#cmd_echo-0x02)
-    4.  [CMD_SEARCH (0x03)](#cmd_search-0x03)
-    5.  [CMD_SEARCH_RESPONSE (0x04)](#cmd_search_response-0x04)
-    6.  [CMD_AUTHNZ (0x05)](#cmd_authnz-0x05)
-    7.  [CMD_ACL_CHANGE (0x06)](#cmd_acl_change-0x06)
-    8.  [CMD_CREATE_CHANNEL (0x07)](#cmd_create_channel-0x07)
-    9.  [CMD_DESTROY_CHANNEL (0x08)](#cmd_destroy_channel-0x08)
-    10.  [CMD_CONNECTION_VALIDATED (0x09)](#cmd_connection_validated-0x09)
-    11.  [CMD_GET (0x0A)](#cmd_get-0x0a)
-    12.  [CMD_PUT (0x0B)](#cmd_put-0x0b)
-    13. [CMD_PUT_GET (0x0C)](#cmd_put_get-0x0c)
-    14. [CMD_MONITOR (0x0D)](Protocol-Operation-Monitor)
-    15. [CMD_ARRAY (0x0E)](#cmd_array-0x0e)
-    16. [CMD_DESTROY_REQUEST (0xF)](#cmd_destroy_request-0x0f)
-    17. [CMD_PROCESS (0x10)](#cmd_process-0x10)
-    18. [CMD_GET_FIELD (0x11)](#cmd_get_field-0x11)
-    19. [CMD_MESSAGE (0x12)](#cmd_message-0x12)
-    20. [CMD_MULTIPLE_DATA (0x13)](#cmd_multiple_data-0x13)
-    21. [CMD_RPC (0x14)](#cmd_rpc-0x14)
-    22. [CMD_CANCEL_REQUEST (0x15)](#cmd_cancel_request-0x15)
-    23. [CMD_ORIGIN_TAG (0x16)](#cmd_origin_tag-0x16)
-3. [Control Messages](#control-messages)
-    1.  [Mark Total Byte Sent
-        (0x00)](#mark-total-byte-sent-0x00)
-    2.  [Acknowledge Total Bytes Received
-        (0x01)](#acknowledge-total-bytes-received-0x01)
-    3.  [Set byte order
-        (0x02)](#set-byte-order-0x02)
-    4.  [Echo request
-        (0x03)](#echo-request-0x03)
-    5.  [Echo response
-        (0x04)](#echo-response-0x04)
-
-## Protocol Messages
+```{contents}
+```
 
 The pvAccess protocol uses two protocol message types:
 
@@ -56,21 +17,26 @@ specification versions of the protocol. Every implementation of the
 protocol MUST clearly indicate the most recent specification version to
 which it is conformant, using the version URLs above.
 
-### Message Header
+## Message Header
 
 Each protocol message has a fixed 8-byte header that MUST be encoded as
 if it were expressed by the following structure:
 
-    struct pvAccessHeader {
-        byte magic;
-        byte version;
-        byte flags;
-        byte messageCommand;
-        int payloadSize;
-    };
+```c
+struct pvAccessHeader {
+    byte magic;
+    byte version;
+    byte flags;
+    byte messageCommand;
+    int payloadSize;
+};
+```
 
 The semantics of these message header components are given in the
 following table.
+
+:::{table} pvAccess Header Members
+:align: center
 
 |         Member | Description                                             |
 | -------------: | ------------------------------------------------------- |
@@ -79,9 +45,11 @@ following table.
 |          flags | Message flags.                                          |
 | messageCommand | Message command (i.e. create, get, put, process, etc.). |
 |    payloadSize | Message payload size (non-aligned, in bytes).           |
+:::
 
-pvAccess Header Members.
 
+:::{table} pvAccess Header Flags Description
+:align: center
 
 | bit   | Value | Description                            |
 | ---   | ----- | -----------                            |
@@ -96,8 +64,7 @@ pvAccess Header Members.
 | 6     | 1     | Message sent by server                 |
 | 7     | 0     | Little endian byte order               |
 | 7     | 1     | Big endian byte order                  |
-
-pvAccess Header Flags Description.
+:::
 
 Between two segmented messages of the same set there MUST NOT be any
 other application message than the segmented message of the same set.
@@ -148,17 +115,22 @@ Beacons are be used to announce the appearance and continued presence of servers
 Clients may use Beacons to detect when new servers appear,
 and may use this information to more quickly retry unanswered CMD_SEARCH messages.
 
-    struct beaconMessage {
-        byte[12] guid;
-        byte flags;
-        byte beaconSequenceId;
-        short changeCount;
-        byte[16] serverAddress;
-        short serverPort;
-        string protocol;
-        FieldDesc serverStatusIF;
-        [if serverStatusIF != NULL_TYPE_CODE] PVField serverStatus;
-    };
+```c
+struct beaconMessage {
+    byte[12] guid;
+    byte flags;
+    byte beaconSequenceId;
+    short changeCount;
+    byte[16] serverAddress;
+    short serverPort;
+    string protocol;
+    FieldDesc serverStatusIF;
+    [if serverStatusIF != NULL_TYPE_CODE] PVField serverStatus;
+};
+```
+
+:::{table} Beacon Message Members
+:align: center
 
 |            Member | Description                                                                                       |
 | ----------------: | ------------------------------------------------------------------------------------------------- |
@@ -171,8 +143,7 @@ and may use this information to more quickly retry unanswered CMD_SEARCH message
 |          protocol | Protocol/transport name (e.g. "tcp" for standard pvAccess TCP/IP communication).                  |
 |    serverStatusIF | Optional server status Field description, NULL\_TYPE\_CODE MUST be used indicate absence of data. |
 |      serverStatus | Optional server data.                                                                             |
-
-Beacon Message Members.
+:::
 
 When a pvAccess server is started it MUST begin emitting beacons.
 Clients MUST monitor all beacons. A beacon received from an as yet
@@ -219,24 +190,25 @@ it has received a connection validation message from the server.
 The connection validation request and connection validation response
 messages are defined as follows:
 
-    // Server to Client
-    struct connectionValidationRequest {
-        int serverReceiveBufferSize;
-        short serverIntrospectionRegistryMaxSize;
-        string[] authNZ;                        // list of supported authNZ;
-    };
+```c
+// Server to Client
+struct connectionValidationRequest {
+    int serverReceiveBufferSize;
+    short serverIntrospectionRegistryMaxSize;
+    string[] authNZ;                        // list of supported authNZ;
+};
 
-    // Client to Server
-    struct connectionValidationResponse {
-        int clientReceiveBufferSize;
-        short clientIntrospectionRegistryMaxSize;
-        short connectionQos;
-        string authNZ;                          // selected authNZ plugin;
-        // Optional, content depends on authNZ
-        FieldDesc dataIF;  
-        PVField data;
-    };
-
+// Client to Server
+struct connectionValidationResponse {
+    int clientReceiveBufferSize;
+    short clientIntrospectionRegistryMaxSize;
+    short connectionQos;
+    string authNZ;                          // selected authNZ plugin;
+    // Optional, content depends on authNZ
+    FieldDesc dataIF;
+    PVField data;
+};
+```
 
 In the connectionValidationRequest, the server lists the support authentication methods.
 Currently supported are "anonymous", "ca", "x509".
@@ -244,15 +216,19 @@ In the connectionValidationResponse, the client selects one of these.
 For "anonymous" or "x509", no further detail is required and the `FieldDesc` is 0xFF for the 'null' type code with no `PVField`.
 For "ca", a structure with string elements "user" and "host" needs to follow.
 
+:::{table} Connection Validation Request Message Members
+:align: center
+
 |                             Member | Description                                                                |
 | ---------------------------------: | -------------------------------------------------------------------------- |
 |            serverReceiveBufferSize | Server receive buffer size in bytes.                                       |
 |      serverReceiveSocketBufferSize | Server socket buffer size in bytes.                                        |
 | serverIntrospectionRegistryMaxSize | Maximum number of introspection registry entries server is able to handle. |
 |                             authNZ | List of supported authentication modes                                     |
+:::
 
-Connection Validation Request Message
-Members.
+:::{table} Connection Validation Response Message Members
+:align: center
 
 |                             Member | Description                                                                |
 | ---------------------------------: | -------------------------------------------------------------------------- |
@@ -260,8 +236,10 @@ Members.
 |      clientReceiveSocketBufferSize | Client socket buffer size in bytes.                                        |
 | clientIntrospectionRegistryMaxSize | Maximum number of introspection registry entries client is able to handle. |
 |                      connectionQoS | Connection QoS parameters.                                                 |
+:::
 
-Connection Validation Response Message Members.
+:::{table} Connection QoS Parameters Description
+:align: center
 
 |   bit | Description               |
 | ----: | ------------------------- |
@@ -271,8 +249,7 @@ Connection Validation Response Message Members.
 |     9 | Throughput priority.      |
 |    10 | Enable compression.       |
 | 11-15 | Unused, MUST be 0.        |
-
-Connection QoS Parameters Description.
+:::
 
 Each Quality of Service (QoS) parameter value REQUIRES a separate TCP/IP
 connection. If the Low-latency priority bit is set, this indicates
@@ -289,25 +266,31 @@ be whether a streaming mode algorithm should be specified.
 An Echo diagnostic message is usually sent to check if TCP/IP connection
 is still valid.
 
-    struct echoRequest {
-        byte[] somePayload;
-    };
-    
-    struct echoResponse {
-        byte[] samePayloadAsInRequest;
-    };
+```c
+struct echoRequest {
+    byte[] somePayload;
+};
+
+struct echoResponse {
+    byte[] samePayloadAsInRequest;
+};
+```
+
+:::{table} Echo request message members
+:align: center
 
 |      Member | Description                              |
 | ----------: | ---------------------------------------- |
 | somePayload | Arbitrary payload content, can be empty. |
+:::
 
-Echo request message members.
+:::{table} Echo response message members
+:align: center
 
 |                 Member | Description                         |
 | ---------------------: | ----------------------------------- |
 | samePayloadAsInRequest | Same paylaod as in request message. |
-
-Echo response message members.
+:::
 
 Version 1 servers do not support the payload and will always send an empty reply.
 Version 2 servers return the payload.
@@ -318,26 +301,29 @@ A channel "search request" message SHOULD be sent over UDP/IP, however
 UDP congestion control SHOULD be implemented in this case. A server MUST
 accept this message also over TCP/IP.
 
-```         
+```c
 struct searchRequest {
     int searchSequenceID;
     byte flags; // 0-bit for replyRequired, 7-th bit for "sent as unicast" (1)/"sent as broadcast/multicast" (0)
 
     byte[3] reserved;
-    
+
     // if not provided (or zero), the same transport is used for responses
     // needs to be set when local broadcast (multicast on loop interface) is done
     byte[16] responseAddress; // e.g. IPv6 address in case of IP based transport, UDP
     short responsePort;       // e.g. socket port in case of IP based transport
-    
+
     string[] protocols;
-    
+
     struct {
         int searchInstanceID;
         string channelName;
     } channels[];
 };
 ```
+
+:::{table} Search request message members
+:align: center
 
 |           Member | Description                                                                             |
 | ---------------: | --------------------------------------------------------------------------------------- |
@@ -346,8 +332,7 @@ struct searchRequest {
 |         protocol | A set of allowed protocols to respond ("tcp", "tls"). Unrestricted if array is empty.   |
 | searchInstanceID | ID to be used to associate response with the following channel name.                    |
 |      channelName | Non-empty channel name, maximum length of 500 characters.                               |
-
-Search request message members.
+:::
 
 The protocol "tcp" indicates that the client would like to then continue the data communication via a plain TCP connection.
 "tls" indicates that the client can also support an SSL/TLS TCP connection.
@@ -375,15 +360,20 @@ TCP connection.
 A search response message MUST be sent as the response to a specific
 search request (0x03) message.
 
-    struct searchResponse {
-        byte[12] guid;          
-        int searchSequenceID;
-        byte[16] serverAddress; // e.g. IPv6 address in case of IP based transport 
-        short serverPort;       // e.g. socket port in case of IP based transport
-        string protocol;
-        boolean found;
-        int[] searchInstanceIDs;
-    };
+```c
+struct searchResponse {
+    byte[12] guid;          
+    int searchSequenceID;
+    byte[16] serverAddress; // e.g. IPv6 address in case of IP based transport 
+    short serverPort;       // e.g. socket port in case of IP based transport
+    string protocol;
+    boolean found;
+    int[] searchInstanceIDs;
+};
+```
+
+:::{table} Search response message members
+:align: center
 
 |            Member | Description                                                                       |
 | ----------------: | --------------------------------------------------------------------------------- |
@@ -393,8 +383,7 @@ search request (0x03) message.
 |        serverPort | Server port (e.g. in case of IP transport socket port where server is listening). |
 |          protocol | Protocol name, "tcp" for standard pvAccess TCP/IP communication, "tls" for secure TCP |
 | searchInstanceIDs | IDs, associated with names in the request, relevant to this response.             |
-
-Search response message members.
+:::
 
 A client MUST examine the protocol member field to verify it supports
 the given exchange protocol; if not, the search response is ignored.
@@ -413,29 +402,33 @@ the client should use that same TCP connection for further communication.
 
 ### CMD_AUTHNZ (0x05)
 
-    struct authNZRequest {
-        FieldDesc dataIF;
-        [if dataIF != NULL_TYPE_CODE] PVField data;
-    };
-    
-    struct authNZResponse {
-        FieldDesc dataIF;
-        [if dataIF != NULL_TYPE_CODE] PVField data;
-    };
+```c
+struct authNZRequest {
+    FieldDesc dataIF;
+    [if dataIF != NULL_TYPE_CODE] PVField data;
+};
+
+struct authNZResponse {
+    FieldDesc dataIF;
+    [if dataIF != NULL_TYPE_CODE] PVField data;
+};
+```
 
 ### CMD_ACL_CHANGE (0x06)
 
 
 This is a placeholder message code not used by existing peers.
-    
-    // TODO new message code (from server) 0x06
-    struct aclChange {
-        int clientChannelID;
-        struct {
-            int requestID;  // invalid ID is 0 (means for channel)
-            BitSet[] rights;   // get has only one bit-set (readRights), put-get has 2 (read and write), channel has one (allowed/dissallowed request)
-        } changes[];
-    };
+
+```c
+// TODO new message code (from server) 0x06
+struct aclChange {
+    int clientChannelID;
+    struct {
+        int requestID;  // invalid ID is 0 (means for channel)
+        BitSet[] rights;   // get has only one bit-set (readRights), put-get has 2 (read and write), channel has one (allowed/dissallowed request)
+    } changes[];
+};
+```
 
 ### CMD_CREATE_CHANNEL (0x07)
 
@@ -444,35 +437,39 @@ hosted "process variable."
 
 Each channel instance MUST be bound only to one connection.
 
-    struct createChannelRequest {
-        short count;
-        struct {
-            int clientChannelID;
-            string channelName;
-        } channels[];
-    };
-    
-    struct createChannelResponse {
+```c
+struct createChannelRequest {
+    short count;
+    struct {
         int clientChannelID;
-        int serverChannelID;
-        Status status;		
-        // [if status.type == OK | WARNING] short accessRights; // never used
-    };
+        string channelName;
+    } channels[];
+};
+
+struct createChannelResponse {
+    int clientChannelID;
+    int serverChannelID;
+    Status status;
+    // [if status.type == OK | WARNING] short accessRights; // never used
+};
+```
+
+:::{table} Create channel request message members
+:align: center
 
 |          Member | Description                                                                        |
 | --------------: | ---------------------------------------------------------------------------------- |
 | clientChannelID | Client generated channel ID.                                                       |
 |     channelName | Name of the channel to be created, non-empty and maximum length of 500 characters. |
-
-Create channel request message members.
-
+:::
 
 The `createChannelRequest.channels` array starts with a `short` count,
 not using the normal size encoding.
 Current PVA server implementations only support requests for creating
 a single channel, i.e. the `count` must be 1.
 
-
+:::{table} Create channel response (per channel) message members
+:align: center
 
 |          Member | Description                                     |
 | --------------: | ----------------------------------------------- |
@@ -480,9 +477,8 @@ a single channel, i.e. the `count` must be 1.
 | serverChannelID | Server generated channel ID.                    |
 |          status | Completion status.                              |
 |    accessRights | Access rights (TBD).                            |
+:::
 
-Create channel response (per channel) message members.
- 
 :::{note}
 A server MUST store the clientChannelID and respond with its value
 in a destroyChannelMessage when a channel destroy request is requested,
@@ -499,36 +495,42 @@ that was previously created (with a create channel message).
 
 A server may also send this message to the client when the channel is no longer
 available. Examples include a PVA gateway that sends this message from its server
-side when it lost a channel on its client side. 
+side when it lost a channel on its client side.
 
-    struct destroyChannelRequest {
-        int serverChannelID;
-        int clientChannelID;
-    };
-    
-    struct destroyChannelResponse {
-        int serverChannelID;
-        int clientChannelID;
-    };
+```c
+struct destroyChannelRequest {
+    int serverChannelID;
+    int clientChannelID;
+};
 
-|          Member | Description                                              |
-| --------------: | -------------------------------------------------------- |
-| serverChannelID | Server generated channel ID, same as in create response. |
-| clientChannelID | Client generated channel ID, same as in create request.  |
+struct destroyChannelResponse {
+    int serverChannelID;
+    int clientChannelID;
+};
+```
 
-Destroy channel request.
+:::{table} Destroy channel request
+:align: center
 
 |          Member | Description                                              |
 | --------------: | -------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create response. |
 | clientChannelID | Client generated channel ID, same as in create request.  |
+:::
 
-Destroy channel response.
+:::{table} Destroy channel response
+:align: center
+
+|          Member | Description                                              |
+| --------------: | -------------------------------------------------------- |
+| serverChannelID | Server generated channel ID, same as in create response. |
+| clientChannelID | Client generated channel ID, same as in create request.  |
+:::
 
 If the request (clientChannelID, serverChannelID) pair does not match,
 the server MUST respond with an error status. The server MAY break its
 response into several messages.
- 
+
 :::{note}
 A server MUST send this message to a client to notify the client
 about server-side initiated channel destruction. Subsequently, a client
@@ -541,30 +543,36 @@ messages for the channel.
 
 Sent from Client to Server to indicate the completion of an Authentication handshake.
 
-    struct connectionValidated {
-        Status status;
-    };
-    
+```c
+struct connectionValidated {
+    Status status;
+};
+```
 
 ### CMD_GET (0x0A)
 
 A "channel get" set of messages are used to retrieve (get) data from the
 channel.
 
-    struct channelGetRequestInit {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x08 for INIT;
-        FieldDesc pvRequestIF;
-        PVField pvRequest;
-    };
-    
-    struct channelGetResponseInit {
-        int requestID;
-        byte subcommand;
-        Status status;
-        [if status.type == OK | WARNING] FieldDesc pvStructureIF;
-    };
+```c
+struct channelGetRequestInit {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x08 for INIT;
+    FieldDesc pvRequestIF;
+    PVField pvRequest;
+};
+
+struct channelGetResponseInit {
+    int requestID;
+    byte subcommand;
+    Status status;
+    [if status.type == OK | WARNING] FieldDesc pvStructureIF;
+};
+```
+
+:::{table} Channel get init request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
@@ -573,8 +581,10 @@ channel.
 |      subcommand | 0x08                                                             |
 |     pvRequestIF | pvRequest Field description.                                     |
 |       pvRequest | pvRequest structure.                                             |
+:::
 
-Channel get init request.
+:::{table} Channel get init response
+:align: center
 
 |        Member | Description                                     |
 | ------------: | ----------------------------------------------- |
@@ -582,33 +592,39 @@ Channel get init request.
 |    subcommand | 0x08, same as in request message.               |
 |        status | Completion status.                              |
 | pvStructureIF | pvStructure (data container) Field description. |
-
-Channel get init response.
+:::
 
 After a get request is successfully initialized, the client can issue
 actual get request(s).
 
-    struct channelGetRequest {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x00 or 0x40 for GET; additional 0x10 mask for DESTROY;
-    };
-    
-    struct channelGetResponse {
-        int requestID;
-        byte subcommand;
-        Status status;
-        [if status.type == OK | WARNING] BitSet changedBitSet;
-        [if status.type == OK | WARNING] PVField pvStructureData;
-    };
+```c
+struct channelGetRequest {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x00 or 0x40 for GET; additional 0x10 mask for DESTROY;
+};
+
+struct channelGetResponse {
+    int requestID;
+    byte subcommand;
+    Status status;
+    [if status.type == OK | WARNING] BitSet changedBitSet;
+    [if status.type == OK | WARNING] PVField pvStructureData;
+};
+```
+
+:::{table} Channel get request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in init message.                             |
 |      subcommand | 0x00 for GET, additional 0x10 mask for DESTROY.                  |
+:::
 
-Channel get request.
+:::{table} Channel get response
+:align: center
 
 |          Member | Description                             |
 | --------------: | --------------------------------------- |
@@ -617,8 +633,7 @@ Channel get request.
 |          status | Completion status.                      |
 |   changedBitSet | Changed BitSet for pvStructureData.     |
 | pvStructureData | Data structure.                         |
-
-Channel get response.
+:::
 
 Most implementations send a 0x00 subcommand to GET data,
 but based on the original protocol documentation 0x40
@@ -635,20 +650,25 @@ receives the response.
 A "channel put" set of messages are used to set (put) data to the
 channel.
 
-    struct channelPutRequestInit {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x08;
-        FieldDesc pvRequestIF;
-        PVField pvRequest;
-    };
-    
-    struct channelPutResponseInit {
-        int requestID;
-        byte subcommand;
-        Status status;
-        [if status.type == OK | WARNING] FieldDesc pvPutStructureIF;
-    };
+```c
+struct channelPutRequestInit {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x08;
+    FieldDesc pvRequestIF;
+    PVField pvRequest;
+};
+
+struct channelPutResponseInit {
+    int requestID;
+    byte subcommand;
+    Status status;
+    [if status.type == OK | WARNING] FieldDesc pvPutStructureIF;
+};
+```
+
+:::{table} Channel put init request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
@@ -657,9 +677,10 @@ channel.
 |      subcommand | 0x08                                                             |
 |     pvRequestIF | pvRequest Field description.                                     |
 |       pvRequest | pvRequest structure.                                             |
+:::
 
-Channel put init
-request.
+:::{table} Channel put init response
+:align: center
 
 |           Member | Description                                        |
 | ---------------: | -------------------------------------------------- |
@@ -667,25 +688,29 @@ request.
 |       subcommand | 0x08, same as in request message.                  |
 |           status | Completion status.                                 |
 | pvPutStructureIF | pvPutStructure (data container) Field description. |
-
-Channel put init response.
+:::
 
 After a put request is successfully initialized, the client can issue
 actual put request(s) on the channel.
 
-    struct channelPutRequest {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x00 for PUT; 0x10 mask for DESTROY;
-        BitSet toPutBitSet;
-        PVField pvPutStructureData;
-    };
-    
-    struct channelPutResponse {
-        int requestID;
-        byte subcommand;
-        Status status;
-    };
+```c
+struct channelPutRequest {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x00 for PUT; 0x10 mask for DESTROY;
+    BitSet toPutBitSet;
+    PVField pvPutStructureData;
+};
+
+struct channelPutResponse {
+    int requestID;
+    byte subcommand;
+    Status status;
+};
+```
+
+:::{table} Channel put request
+:align: center
 
 |             Member | Description                                                      |
 | -----------------: | ---------------------------------------------------------------- |
@@ -694,43 +719,51 @@ actual put request(s) on the channel.
 |         subcommand | 0x00 for PUT, additional 0x10 mask for DESTROY.                  |
 |        toPutBitSet | To-put BitSet for pvPutStructureData.                            |
 | pvPutStructureData | Data to put structure.                                           |
+:::
 
-Channel put request.
+:::{table} Channel put response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 | subcommand | Same as in request message.             |
 |     status | Completion status.                      |
-
-Channel put response.
+:::
 
 A "get-put" request retrieves the remote put structure. This MAY be used
 by user applications to show data that was set the last time by the
 application.
 
-    struct channelGetPutRequest {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x40;
-    };
-    
-    struct channelGetPutResponse {
-        int requestID;
-        byte subcommand;
-        Status status;
-        [if status.type == OK | WARNING]
-            BitSet returnedDataBitSet;
-            PVField pvStructureData;
-    };
+```c
+struct channelGetPutRequest {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x40;
+};
+
+struct channelGetPutResponse {
+    int requestID;
+    byte subcommand;
+    Status status;
+    [if status.type == OK | WARNING]
+        BitSet returnedDataBitSet;
+        PVField pvStructureData;
+};
+```
+
+:::{table} Channel get put request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in init message.                             |
 |      subcommand | 0x40.                                                            |
+:::
 
-Channel get put request.
+:::{table} Channel get put response
+:align: center
 
 |             Member | Description                             |
 | -----------------: | --------------------------------------- |
@@ -739,8 +772,7 @@ Channel get put request.
 |             status | Completion status.                      |
 | returnedDataBitSet | Which fields are provided in data.      |
 | pvStructureData    | The returned data.                      |
-
-Channel get put response.
+:::
 
 ### CMD_PUT_GET (0x0C)
 
@@ -749,21 +781,26 @@ channel and then immediately retrieve data from the channel. Channels
 are usually "processed" or "updated" by their host between put and get,
 so that the get reflects changes in the process variable's state.
 
-    struct channelPutGetRequestInit {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x08;
-        FieldDesc pvRequestIF;
-        PVField pvRequest;
-    };
-    
-    struct channelPutGetResponseInit {
-        int requestID;
-        byte subcommand; 
-        Status status;
-        [if status.type == OK | WARNING] FieldDesc pvPutStructureIF;
-        [if status.type == OK | WARNING] FieldDesc pvGetStructureIF;
-    };
+```c
+struct channelPutGetRequestInit {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x08;
+    FieldDesc pvRequestIF;
+    PVField pvRequest;
+};
+
+struct channelPutGetResponseInit {
+    int requestID;
+    byte subcommand;
+    Status status;
+    [if status.type == OK | WARNING] FieldDesc pvPutStructureIF;
+    [if status.type == OK | WARNING] FieldDesc pvGetStructureIF;
+};
+```
+
+:::{table} Channel put-get init request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
@@ -772,9 +809,10 @@ so that the get reflects changes in the process variable's state.
 |      subcommand | 0x08                                                             |
 |     pvRequestIF | pvRequest Field description.                                     |
 |       pvRequest | pvRequest structure.                                             |
+:::
 
-Channel put-get init
-request.
+:::{table} Channel put-get init response
+:align: center
 
 |           Member | Description                                        |
 | ---------------: | -------------------------------------------------- |
@@ -783,26 +821,30 @@ request.
 |           status | Completion status.                                 |
 | pvPutStructureIF | pvPutStructure (data container) Field description. |
 | pvGetStructureIF | pvGetStructure (data container) Field description. |
-
-Channel put-get init response.
+:::
 
 After a put-get request is successfully initialized, the client can
 issue actual put-get request(s) on the channel.
 
-    struct channelPutGetRequest {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x00 for PUT_GET; 0x10 mask for DESTROY;
-        BitSet toPutBitSet;
-        PVField pvPutStructureData;
-    };
-    
-    struct channelPutGetResponse {
-        int requestID;
-        byte subcommand;
-        Status status;
-        [if status.type == OK | WARNING] PVField pvGetStructureData;
-    };
+```c
+struct channelPutGetRequest {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x00 for PUT_GET; 0x10 mask for DESTROY;
+    BitSet toPutBitSet;
+    PVField pvPutStructureData;
+};
+
+struct channelPutGetResponse {
+    int requestID;
+    byte subcommand;
+    Status status;
+    [if status.type == OK | WARNING] PVField pvGetStructureData;
+};
+```
+
+:::{table} Channel put-get request
+:align: center
 
 |             Member | Description                                                      |
 | -----------------: | ---------------------------------------------------------------- |
@@ -811,8 +853,10 @@ issue actual put-get request(s) on the channel.
 |         subcommand | 0x00 for PUT\_GET, additional 0x01 mask for DESTROY.             |
 |        toPutBitSet | To-put BitSet for pvPutStructureData.                            |
 | pvPutStructureData | Data to put structure.                                           |
+:::
 
-Channel put-get request.
+:::{table} Channel put-get response
+:align: center
 
 |             Member | Description                             |
 | -----------------: | --------------------------------------- |
@@ -820,33 +864,39 @@ Channel put-get request.
 |         subcommand | Same as in request message.             |
 |             status | Completion status.                      |
 | pvGetStructureData | Get data structure.                     |
-
-Channel put-get response.
+:::
 
 A "get-put" request retrieves the remote put structure. This MAY be used
 by user applications to show data that was set the last time by the
 application.
 
-    struct channelGetPutRequest {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x80;
-    };
-    
-    struct channelGetPutResponse {
-        int requestID;
-        byte subcommand;
-        Status status;
-        [if status.type == OK | WARNING] PVField pvPutStructureData;
-    };
+```c
+struct channelGetPutRequest {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x80;
+};
+
+struct channelGetPutResponse {
+    int requestID;
+    byte subcommand;
+    Status status;
+    [if status.type == OK | WARNING] PVField pvPutStructureData;
+};
+```
+
+:::{table} Channel get put request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in init message.                             |
 |      subcommand | 0x80.                                                            |
+:::
 
-Channel get put request.
+:::{table} Channel get put response
+:align: center
 
 |             Member | Description                             |
 | -----------------: | --------------------------------------- |
@@ -854,32 +904,38 @@ Channel get put request.
 |         subcommand | Same as in request message.             |
 |             status | Completion status.                      |
 | pvPutStructureData | Remote put data structure.              |
-
-Channel get put response.
+:::
 
 A "get-get" request retrieves remote get structure. This MAY be used by
 user applications to show data that was retrieved the last time.
 
-    struct channelGetGetRequest {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x40;
-    };
-    
-    struct channelGetGetResponse {
-        int requestID;
-        byte subcommand;
-        Status status;
-        [if status.type == OK | WARNING] PVField pvGetStructureData;
-    };
+```c
+struct channelGetGetRequest {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x40;
+};
+
+struct channelGetGetResponse {
+    int requestID;
+    byte subcommand;
+    Status status;
+    [if status.type == OK | WARNING] PVField pvGetStructureData;
+};
+```
+
+:::{table} Channel get get request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in init message.                             |
 |      subcommand | 0x40.                                                            |
+:::
 
-Channel get get request.
+:::{table} Channel get get response
+:align: center
 
 |             Member | Description                             |
 | -----------------: | --------------------------------------- |
@@ -887,8 +943,11 @@ Channel get get request.
 |         subcommand | Same as in request message.             |
 |             status | Completion status.                      |
 | pvGetStructureData | Remote get data structure.              |
+:::
 
-Channel get get response.
+```{include} ./Protocol-Operation-Monitor.md
+:heading-offset: 2
+```
 
 ### CMD_ARRAY (0x0E)
 
@@ -897,20 +956,25 @@ values. Requests allow a client agent to: retrieve (get) and set (put)
 data from/to the array, and to change the array's length (number of
 valid elements in the array).
 
-    struct channelArrayRequestInit {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x08;
-        FieldDesc pvRequestIF;
-        PVField pvRequest;
-    };
-    
-    struct channelArrayResponseInit {
-        int requestID;
-        byte subcommand;
-        Status status;
-        [if status.type == OK | WARNING] FieldDesc pvArrayIF;
-    };
+```c
+struct channelArrayRequestInit {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x08;
+    FieldDesc pvRequestIF;
+    PVField pvRequest;
+};
+
+struct channelArrayResponseInit {
+    int requestID;
+    byte subcommand;
+    Status status;
+    [if status.type == OK | WARNING] FieldDesc pvArrayIF;
+};
+```
+
+:::{table} Channel array init request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
@@ -919,8 +983,10 @@ valid elements in the array).
 |      subcommand | 0x08                                                             |
 |     pvRequestIF | pvRequest Field description.                                     |
 |       pvRequest | pvRequest structure.                                             |
+:::
 
-Channel array init request.
+:::{table} Channel array init response
+:align: center
 
 |     Member | Description                                 |
 | ---------: | ------------------------------------------- |
@@ -928,26 +994,30 @@ Channel array init request.
 | subcommand | 0x08, same as in request message.           |
 |     status | Completion status.                          |
 |  pvArrayIF | pvArray (data container) Field description. |
-
-Channel array init response.
+:::
 
 After an array request is successfully initialized, the client can issue
 the actual array request(s).
 
-    struct channelGetArrayRequest {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x40 mask for GET; 0x10 mask for DESTROY;
-        size offset;
-        size count;
-    };
-    
-    struct channelGetArrayResponse {
-        int requestID;
-        byte subcommand;
-        Status status;
-        [if status.type == OK | WARNING] PVField pvArrayData;
-    };
+```c
+struct channelGetArrayRequest {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x40 mask for GET; 0x10 mask for DESTROY;
+    size offset;
+    size count;
+};
+
+struct channelGetArrayResponse {
+    int requestID;
+    byte subcommand;
+    Status status;
+    [if status.type == OK | WARNING] PVField pvArrayData;
+};
+```
+
+:::{table} Channel array get request
+:align: center
 
 |          Member | Description                                                                |
 | --------------: | -------------------------------------------------------------------------- |
@@ -956,8 +1026,10 @@ the actual array request(s).
 |      subcommand | 0x40 for GET, additional 0x10 mask for DESTROY.                            |
 |          offset | Offset from the beginning of the array.                                    |
 |           count | Number of elements requested, 0 means form offset to the end of the array. |
+:::
 
-Channel array get request.
+:::{table} Channel array get response
+:align: center
 
 |      Member | Description                             |
 | ----------: | --------------------------------------- |
@@ -965,22 +1037,26 @@ Channel array get request.
 |  subcommand | Same as in request message.             |
 |      status | Completion status.                      |
 | pvArrayData | Data array.                             |
+:::
 
-Channel array get response.
+```c
+struct channelPutArrayRequest {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x00 mask for PUT; 0x10 mask for DESTROY;
+    size offset;
+    PVField pvArrayData;
+};
 
-    struct channelPutArrayRequest {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x00 mask for PUT; 0x10 mask for DESTROY;
-        size offset;
-        PVField pvArrayData;
-    };
-    
-    struct channelPutArrayResponse {
-        int requestID;
-        byte subcommand;
-        Status status;
-    };
+struct channelPutArrayResponse {
+    int requestID;
+    byte subcommand;
+    Status status;
+};
+```
+
+:::{table} Channel array put request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
@@ -989,31 +1065,37 @@ Channel array get response.
 |      subcommand | 0x00 for PUT, additional 0x10 mask for DESTROY.                  |
 |          offset | Offset from the beginning of the array.                          |
 |     pvArrayData | Subarray to be put.                                              |
+:::
 
-Channel array put request.
+:::{table} Channel array put response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 | subcommand | Same as in request message.             |
 |     status | Completion status.                      |
+:::
 
-Channel array put response.
-
+```c
 /// TODO GetLength is missing, fix the codes \!\!\!
 
-    struct channelSetLengthRequest {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x80 mask for SET_LENGTH; 0x10 mask for DESTROY;
-        size length;
-    };
-    
-    struct channelSetLengthResponse {
-        int requestID;
-        byte subcommand;
-        Status status;
-    };
+struct channelSetLengthRequest {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x80 mask for SET_LENGTH; 0x10 mask for DESTROY;
+    size length;
+};
+
+struct channelSetLengthResponse {
+    int requestID;
+    byte subcommand;
+    Status status;
+};
+```
+
+:::{table} Channel array set length request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
@@ -1021,34 +1103,39 @@ Channel array put response.
 |       requestID | Request ID, same as in init message.                             |
 |      subcommand | 0x40 for GET, additional 0x10 mask for DESTROY.                  |
 |          length | New length.                                                      |
+:::
 
-Channel array set length request.
+:::{table} Channel array set length response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 | subcommand | Same as in request message.             |
 |     status | Completion status.                      |
-
-Channel array set length response.
+:::
 
 ### CMD_DESTROY_REQUEST (0x0F)
 
 A "destroy request" messages is used destroy any request instance, i.e.
 an instance with requestID.
 
-    // destroys any request with given requestID
-    struct destroyRequest {
-        int serverChannelID;
-        int requestID;
-    };
+```c
+// destroys any request with given requestID
+struct destroyRequest {
+    int serverChannelID;
+    int requestID;
+};
+```
+
+:::{table} Destroy request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in request init message.                     |
-
-Destroy request.
+:::
 
 ### CMD_PROCESS (0x10)
 
@@ -1057,19 +1144,24 @@ that the computation actions associated with a channel should be
 executed. In the language of EPICS, this means that the channel should
 be "processed".
 
-    struct channelProcessRequestInit {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x08;
-        FieldDesc pvRequestIF;
-        [if serverStatusIF != NULL_TYPE_CODE] PVField pvRequest;
-    };
-    
-    struct channelProcessResponseInit {
-        int requestID;
-        byte subcommand;
-        Status status;
-    };
+```c
+struct channelProcessRequestInit {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x08;
+    FieldDesc pvRequestIF;
+    [if serverStatusIF != NULL_TYPE_CODE] PVField pvRequest;
+};
+
+struct channelProcessResponseInit {
+    int requestID;
+    byte subcommand;
+    Status status;
+};
+```
+
+:::{table} Channel process init request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
@@ -1078,80 +1170,93 @@ be "processed".
 |      subcommand | 0x08                                                             |
 |     pvRequestIF | Optional pvRequest Field description, NULL\_TYPE\_CODE is none.  |
 |       pvRequest | Optional pvRequest structure.                                    |
+:::
 
-Channel process init request.
+:::{table} Channel process init response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 | subcommand | 0x08, same as in request message.       |
 |     status | Completion status.                      |
-
-Channel process init response.
+:::
 
 After a process request is successfully initialized, the client can
 issue the actual process request(s).
 
-    struct channelProcessRequest {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x00 mask for PROCESS; 0x10 mask for DESTROY;
-    };
-    
-    struct channelProcessResponse {
-        int requestID;
-        byte subcommand;
-        Status status;
-    };
+```c
+struct channelProcessRequest {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x00 mask for PROCESS; 0x10 mask for DESTROY;
+};
+
+struct channelProcessResponse {
+    int requestID;
+    byte subcommand;
+    Status status;
+};
+```
+
+:::{table} Channel process request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in init message.                             |
 |      subcommand | 0x00 for PROCESS, additional 0x10 mask for DESTROY.              |
+:::
 
-Channel proces request.
+:::{table} Channel process response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 | subcommand | Same as in request message.             |
 |     status | Completion status.                      |
-
-Channel process response.
+:::
 
 ### CMD_GET_FIELD (0x11)
 
 Thus message is used to retrieve a channel's type introspection data,
 i.e. a description of all the channel's fields and their data types.
 
-    struct channelGetFieldRequest {
-        int serverChannelID;
-        int requestID;
-        string subFieldName;  // entire record if empty
-    };
-    
-    struct channelGetFieldResponse {
-        int requestID;
-        Status status;
-        [if status.type == OK | WARNING] FieldDesc subFieldIF;
-    };
+```c
+struct channelGetFieldRequest {
+    int serverChannelID;
+    int requestID;
+    string subFieldName;  // entire record if empty
+};
+
+struct channelGetFieldResponse {
+    int requestID;
+    Status status;
+    [if status.type == OK | WARNING] FieldDesc subFieldIF;
+};
+```
+
+:::{table} Get channel introspection data request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Client generated request ID.                                     |
 |    subFieldName | Name of the subfield to get or entire record if empty.           |
+:::
 
-Get channel introspection data request.
+:::{table} Get channel introspection data response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 |     status | Completion status.                      |
 | subFieldIF | Requested field introspection data.     |
-
-Get channel introspection data response.
+:::
 
 ### CMD_MESSAGE (0x12)
 
@@ -1159,19 +1264,23 @@ A "message" message is used by a server to provide to a client human
 readable text regarding the status of a specific request. This message
 MUST NOT be used to report request completion status.
 
-    struct message {
-        int requestID;
-        byte messageType; // info = 0, warning = 1, error = 2, fatalError = 3
-        string message;
-    };
+```c
+struct message {
+    int requestID;
+    byte messageType; // info = 0, warning = 1, error = 2, fatalError = 3
+    string message;
+};
+```
+
+:::{table} Message response
+:align: center
 
 |      Member | Description        |
 | ----------: | ------------------ |
 |   requestID | Request ID.        |
 | messageType | Message type enum. |
 |     message | Message.           |
-
-Message response.
+:::
 
 ### CMD_MULTIPLE_DATA (0x13)
 
@@ -1182,19 +1291,24 @@ This message code never used, and considered deprecated.
 The "channel RPC" set of messages are used to provide remote procedure
 call (RPC) support over pvAccess.
 
-    struct channelRPCRequestInit {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x08;
-        FieldDesc pvRequestIF;
-        PVField pvRequest;
-    };
-    
-    struct channelRPCResponseInit {
-        int requestID;
-        byte subcommand;
-        Status status;
-    };
+```c
+struct channelRPCRequestInit {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x08;
+    FieldDesc pvRequestIF;
+    PVField pvRequest;
+};
+
+struct channelRPCResponseInit {
+    int requestID;
+    byte subcommand;
+    Status status;
+};
+```
+
+:::{table} Channel RPC init request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
@@ -1203,35 +1317,41 @@ call (RPC) support over pvAccess.
 |      subcommand | 0x08                                                             |
 |     pvRequestIF | pvRequest Field description.                                     |
 |       pvRequest | pvRequest structure.                                             |
+:::
 
-Channel RPC init request.
+:::{table} Channel RPC init response
+:align: center
 
 |     Member | Description                             |
 | ---------: | --------------------------------------- |
 |  requestID | Request ID, same as in request message. |
 | subcommand | 0x08, same as in request message.       |
 |     status | Completion status.                      |
-
-Channel RPC init response.
+:::
 
 After a RPC request is successfully initialized, the client can issue
 actual RPC request(s).
 
-    struct channelRPCRequest {
-        int serverChannelID;
-        int requestID;
-        byte subcommand = 0x00 mask for RPC; 0x10 mask for DESTROY;
-        FieldDesc pvStructureIF;
-        PVField pvStructureData;
-    };
-    
-    struct channelRPCResponse {
-        int requestID;
-        byte subcommand;
-        Status status;
-        [if status.type == OK | WARNING] FieldDesc pvResponseIF;
-        [if status.type == OK | WARNING] PVField pvResponseData;
-    };
+```c
+struct channelRPCRequest {
+    int serverChannelID;
+    int requestID;
+    byte subcommand = 0x00 mask for RPC; 0x10 mask for DESTROY;
+    FieldDesc pvStructureIF;
+    PVField pvStructureData;
+};
+
+struct channelRPCResponse {
+    int requestID;
+    byte subcommand;
+    Status status;
+    [if status.type == OK | WARNING] FieldDesc pvResponseIF;
+    [if status.type == OK | WARNING] PVField pvResponseData;
+};
+```
+
+:::{table} Channel RPC request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
@@ -1240,8 +1360,10 @@ actual RPC request(s).
 |      subcommand | 0x00 for RPC, additional 0x10 mask for DESTROY.                  |
 |   pvStructureIF | pvStructureData Field description.                               |
 | pvStructureData | Argument data structure.                                         |
+:::
 
-Channel RPC request.
+:::{table} Channel RPC response
+:align: center
 
 |         Member | Description                             |
 | -------------: | --------------------------------------- |
@@ -1250,28 +1372,29 @@ Channel RPC request.
 |         status | Completion status.                      |
 |   pvResponseIF | pvResponseDataField description.        |
 | pvResponseData | Response data structure.                |
-
-Channel RPC response.
+:::
 
 ### CMD_CANCEL_REQUEST (0x15)
 
 A "cancel request" messages is used cancel any pending request, i.e. an
 instance with requestID.
 
-    // cancel any request with given requestID
-    struct cancelRequest {
-        int serverChannelID;
-        int requestID;
-    };
+```c
+// cancel any request with given requestID
+struct cancelRequest {
+    int serverChannelID;
+    int requestID;
+};
+```
+
+:::{table} Cancel request
+:align: center
 
 |          Member | Description                                                      |
 | --------------: | ---------------------------------------------------------------- |
 | serverChannelID | Server generated channel ID, same as in create channel response. |
 |       requestID | Request ID, same as in request init message.                     |
-
-Cancel request.
-
-
+:::
 
 ### CMD_ORIGIN_TAG (0x16)
 
@@ -1306,10 +1429,12 @@ This is an OS dependent process.  A suggested start point is to consider
 a match if either forwarderAddress or socket bind address is "0.0.0.0"
 (INADDR_ANY).  Identical forwarderAddress and bind address also match.
 
-    // Indicate who forwarded the search request
-    struct originTag {
-        byte[16] forwarderAddress;
-    };
+```c
+// Indicate who forwarded the search request
+struct originTag {
+    byte[16] forwarderAddress;
+};
+```
 
 ## Control Messages
 
@@ -1347,18 +1472,20 @@ order.
 The client's decoding byte order for messages received from the server depends on the payload size field value as
 follows:
 
+:::{table} Client Decoding
+:align: center
+
 | Payload Size Field Value | Meaning                                                                                                         |
 | ------------------------ | --------------------------------------------------------------------------------------------------------------- |
 | 0x00000000               | Client MUST decode all the messages received via this connection using server's selected byte order.            |
 | 0xFFFFFFFF               | Client MUST decode all the messages sent received this connection as indicated by each message byte order flag. |
+:::
 
 :::{note}
 Existing implementations have been found to ignore the "payload size".
 They decode each received message based on the byte order bit in the message header flags field,
 i.e., they always behave as per "payload size" = 0xFFFFFFFF.
 :::
-
-Client Decoding
 
 This MUST be the first message sent by a server when connection is
 established. For connection-less protocols this message is not sent and
