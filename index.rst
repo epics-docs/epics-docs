@@ -54,7 +54,7 @@ to help other users with their issues and to discuss new ideas.
 How this documentation is organized
 -----------------------------------
 
-Each page is labeled by the intended audienece.
+Each page is labeled by the intended audience.
 You may also directly use related links to see documents which match you the most.
 
 .. toctree::
@@ -140,6 +140,7 @@ You may also directly use related links to see documents which match you the mos
    sys-admin/setup-softioc-framework-linux
    sys-admin/console-logging-vme-softioc
    sys-admin/save-restore-tools.md
+   build-system/posix-threads-priority-scheduling-linux
 
 .. toctree::
    :maxdepth: 1
