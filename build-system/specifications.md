@@ -1032,7 +1032,7 @@ If a `<name>` substitutions file contains "file" references to other
 input files, these referenced files are made dependencies of the created
 `<name>.db` by the `makeDbDepends.pl` perl tool.
 
-The Macro Substitutions and Include tool, msi, will be used to generate
+The [Macro Substitutions and Include tool](msi.md), msi, will be used to generate
 the database, and msi must either be in your path or you must redefine
 `MSI` as the full path name to the msi binary in a `RELEASE` file or
 Makefile. An example `MSI` definition is
@@ -4007,3 +4007,9 @@ cygwin.bat
 win32.bat
 
 :   WIN32 bat file to set path and environment variables for building with MS Visual C++ compilers
+
+## See also:
+
+```{toctree}
+msi.md
+```
