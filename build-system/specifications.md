@@ -4007,9 +4007,3 @@ cygwin.bat
 win32.bat
 
 :   WIN32 bat file to set path and environment variables for building with MS Visual C++ compilers
-
-## See also:
-
-```{toctree}
-msi.md
-```
