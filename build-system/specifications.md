@@ -1032,7 +1032,7 @@ If a `<name>` substitutions file contains "file" references to other
 input files, these referenced files are made dependencies of the created
 `<name>.db` by the `makeDbDepends.pl` perl tool.
 
-The Macro Substitutions and Include tool, msi, will be used to generate
+The {doc}`epics-base:msi` will be used to generate
 the database. For EPICS Base versions before 3.15 msi had to be in your
 path or the variable `MSI` set in a `CONFIG_SITE` file or Makefile to the
 full path to the msi binary. In Base 3.15 the msi program was added to

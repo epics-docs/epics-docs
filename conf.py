@@ -65,7 +65,7 @@ hoverxref_intersphinx = [
     'epics-base',
 ]
 hoverxref_intersphinx_types = {
-    'epics-base': 'modal',
+    'epics-base': 'tooltip',
 }
 
 numfig = True
