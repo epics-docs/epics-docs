@@ -1033,13 +1033,13 @@ input files, these referenced files are made dependencies of the created
 `<name>.db` by the `makeDbDepends.pl` perl tool.
 
 The {doc}`epics-base:msi` will be used to generate
-the database, and msi must either be in your path or you must redefine
-`MSI` as the full path name to the msi binary in a `RELEASE` file or
-Makefile. An example `MSI` definition is
-
-```makefile
-MSI = /usr/local/epics/extensions/bin/${EPICS_HOST_ARCH}/msi
-```
+the database. For EPICS Base versions before 3.15 msi had to be in your
+path or the variable `MSI` set in a `CONFIG_SITE` file or Makefile to the
+full path to the msi binary. In Base 3.15 the msi program was added to
+Base and an additional command-line option `-D` added which made the old
+version of msi no longer compatible. This also removed the need to have
+msi in your path though, and the variable name used in the build rules
+was changed to `MSI3_15` to allow for overriding if needed.
 
 Template files `<name>.template`, and db files, `<name>.db`, will be
 created from an edf file `<name>.edf` and an `<name>.edf` file will be
