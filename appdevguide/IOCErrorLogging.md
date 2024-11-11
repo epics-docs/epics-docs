@@ -47,9 +47,7 @@ This chapter describes the following:
   - [iocLog](#ioclog), a system wide error logger supplied with base.
     It writes all messages to a system wide file.
 
-```{note}
-Many sites use CMLOG instead of iocLog.
-```
+
 ```{note}
 `recGbl` error routines are also provided.
 They in turn call one of the error message routines.
@@ -221,11 +219,14 @@ It also reports the messages from the vxWorks logMsg facility.
 
 ### iocLogServer
 
+```{note}
+ iocLogServer is still supplied with EPICS Base but deprecated. Consider using other logging servers (e.g. [Logstash](https://www.elastic.co/logstash) or [Graylog](https://graylog.org/)instead.
+```
 This runs on a host.
 It receives messages for all enabled iocLogClients in the local area network.
 The messages are written to a file.
 
-To start a log server on a UNIX or PC workstation you must first set the following environment variables and then run the executable ``iocLogServer" on your PC or UNIX workstation.
+To start a log server on a UNIX or PC workstation you must first set the following environment variables and then run the executable `iocLogServer` on your PC or UNIX workstation.
 
 {external+epics-base:cpp:member}`EPICS_IOC_LOG_FILE_NAME`
 
