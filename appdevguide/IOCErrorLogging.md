@@ -220,7 +220,7 @@ It also reports the messages from the vxWorks logMsg facility.
 ### iocLogServer
 
 ```{note}
- iocLogServer is still supplied with EPICS Base but deprecated. Consider using other logging servers (e.g. [Logstash](https://www.elastic.co/logstash) or [Graylog](https://graylog.org/)instead.
+ iocLogServer is still supplied with EPICS Base but **deprecated**. Consider using other logging servers (e.g. [Logstash](https://www.elastic.co/logstash) or [Graylog](https://graylog.org/) instead.
 ```
 This runs on a host.
 It receives messages for all enabled iocLogClients in the local area network.
