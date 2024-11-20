@@ -371,7 +371,7 @@ configure/RELEASE.<epics_host_arch>.<targetarch>
 For `<top>` directory structures created by `makeBaseApp.pl`, an EPICS
 base perl script, `convertRelease.pl` can perform consistency checks for
 the external `<top>` definitions in the `RELEASE` file and its includes as
-part of the `<top>` level build. Consistancy checks are controlled by
+part of the `<top>` level build. Consistency checks are controlled by
 value of `CHECK_RELEASE` which is defined in
 `<top>/configure/CONFIG_SITE`. `CHECK_RELEASE` can be set
 to `YES`, `NO` or `WARN`, and if `YES` (the default value), consistency checks
