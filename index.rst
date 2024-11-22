@@ -102,6 +102,7 @@ You may also directly use related links to see documents which match you the mos
    appdevguide/AccessSecurity
    IOC Test Facilities <appdevguide/IOCTestFacilities>
    appdevguide/IOCErrorLogging
+   appdevguide/deviceSupport
    Application Developer's Guide (historical pdf, for 3.16.2) <https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide.pdf>
 
 .. toctree::
