@@ -474,25 +474,23 @@ Environment Variables
 
 Various environment variables are used by iocCore:
 
-.. code ::
+- :envvar:`EPICS_CA_ADDR_LIST`
+- :envvar:`EPICS_CA_AUTO_ADDR_LIST`
+- :envvar:`EPICS_CA_CONN_TMO`
+- :envvar:`EPICS_CAS_BEACON_PERIOD`
+- :envvar:`EPICS_CA_REPEATER_PORT`
+- :envvar:`EPICS_CA_SERVER_PORT`
+- :envvar:`EPICS_CA_MAX_ARRAY_BYTES`
+- ``EPICS_TS_NTP_INET``
+- ``EPICS_IOC_LOG_PORT``
+- ``EPICS_IOC_LOG_INET``
 
-        EPICS_CA_ADDR_LIST
-        EPICS_CA_AUTO_ADDR_LIST
-        EPICS_CA_CONN_TMO
-        EPICS_CAS_BEACON_PERIOD
-        EPICS_CA_REPEATER_PORT
-        EPICS_CA_SERVER_PORT
-        EPICS_CA_MAX_ARRAY_BYTES
-        EPICS_TS_NTP_INET
-        EPICS_IOC_LOG_PORT
-        EPICS_IOC_LOG_INET
-
-For an explanation of the EPICS_CA\_... and EPICS_CAS\_... variables see
-the EPICS Channel Access Reference Manual. For an explanation of the
-EPICS_IOC_LOG\_... variables see "iocLogClient" (To be added).
-EPICS_TS_NTP_INET is used only on vxWorks and RTEMS, where it sets the
-address of the Network Time Protocol server. If it is not defined the IOC
-uses the boot server as its NTP server.
+For an explanation of the ``EPICS_CA_...`` and ``EPICS_CAS_...`` variables
+see the :ref:`ca-client-env-vars` and :ref:`ca-server-env-vars`.
+For an explanation of the ``EPICS_IOC_LOG_...`` variables see "iocLogClient" (To be added).
+``EPICS_TS_NTP_INET`` is used only on vxWorks and RTEMS,
+where it sets the address of the Network Time Protocol server.
+If it is not defined the IOC uses the boot server as its NTP server.
 
 These variables can be set through iocsh via the epicsEnvSet command, or
 on vxWorks using putenv. For example:

@@ -18,29 +18,65 @@ If running multiple IOCs, each on their own computer, on the same subnet, the ba
 
 ## IOCs on different subnets
 
-The default broadcast name search is limited to the subnet of the computer running the CA client. To reach IOCs on one or more additional subnets, the environment variable `EPICS_CA_ADDR_LIST` needs to be configured. It can list either the specific IP addresses of each IOC, or the broadcast address of their subnet. Note, however, that routers will often not forward broadcast requests, which suggests using specific IP addresses.
+The default broadcast name search is limited
+to the subnet of the computer running the CA client.
+To reach IOCs on one or more additional subnets,
+the environment variable {envvar}`EPICS_CA_ADDR_LIST` needs to be configured.
+It can list either the specific IP addresses of each IOC,
+or the broadcast address of their subnet.
+Note, however,
+that routers will often not forward broadcast requests,
+which suggests using specific IP addresses.
 
 ## Multiple IOCs on the same computer
 
-When starting the first IOC on a computer, it will listen to name searches on UDP port 5064. When starting a second IOC on the same computer, it will also listen to name searches on UDP port 5064. Due to limitations in most network kernels, however, only the IOC started _last_ will actually receive UDP search requests that are sent to that computer, port 5064. As a workaround, you need to configure the `EPICS_CA_ADDR_LIST` to use the broadcast address of the respective subnet.
+When starting the first IOC on a computer,
+it will listen to name searches on UDP port 5064.
+When starting a second IOC on the same computer,
+it will also listen to name searches on UDP port 5064.
+Due to limitations in most network kernels, however,
+only the IOC started _last_ will actually receive UDP search requests
+that are sent to that computer, port 5064.
+As a workaround,
+you need to configure the {envvar}`EPICS_CA_ADDR_LIST`
+to use the broadcast address of the respective subnet.
 
 Alternatively, you can automatically set up iptables rules that will circumvent the problem. (See [How to Make Channel Access Reach Multiple Soft IOCs on a Linux Host](channel-access-reach-multiple-soft-iocs-linux).)
 
 ## Multiple IOCs on the same computer but on a different subnet
 
-Combining the last two points results in a problem: To reach multiple IOCs on the same computer, `EPICS_CA_ADDR_LIST` must be set to the broadcast address of that computer's subnet. If the IOCs' subnet is different from the CA client's subnet however, the broadcast search packets will not usually be forwarded by the intermediate network routers.
+Combining the last two points results in a problem:
+to reach multiple IOCs on the same computer,
+{envvar}`EPICS_CA_ADDR_LIST` must be set
+to the broadcast address of that computer's subnet.
+If the IOCs' subnet is different from the CA client's subnet however,
+the broadcast search packets will not usually be forwarded
+by the intermediate network routers.
 
 There are several options to solve this:
 
 ### Channel Access Gateway
 
-The PV gateway, running on the subnet that has the desired IOCs, will use the broadcast address of that subnet in its `EPICS_CA_ADDR_LIST`, so it can reach all IOCs, including multiple IOCs running on the same computer, throughout that subnet. A CA client on a different subnet uses only `EPICS_CA_ADDR_LIST=ip-of-the-gateway` to directly reach the gateway, which is possible via routers.
+The PV gateway,
+running on the subnet that has the desired IOCs,
+will use the broadcast address of that subnet in its {envvar}`EPICS_CA_ADDR_LIST`,
+so it can reach all IOCs,
+including multiple IOCs running on the same computer,
+throughout that subnet.
+A CA client on a different subnet uses only `EPICS_CA_ADDR_LIST=ip-of-the-gateway` to directly reach the gateway,
+which is possible via routers.
 
 In addition to establishing the basic connectivity, the gateway also offers IOC load reduction and it can add access security, for example limit write access.
 
 ### CA Nameserver
 
-You can run a CA Name Server in the GUI subnet which knows about the IOCs and responds to search requests; in this case you would _not_ set the `EPICS_CA_ADDR_LIST` variables. This is almost equivalent to running a CA Gateway, but is slightly more robust because if the Nameserver process dies it wouldn't kill any existing connections.
+You can run a CA Name Server in the GUI subnet
+which knows about the IOCs and responds to search requests;
+in this case you would _not_ set the {envvar}`EPICS_CA_ADDR_LIST` variables.
+This is almost equivalent to running a CA Gateway,
+but is slightly more robust
+because if the Nameserver process dies,
+it wouldn't kill any existing connections.
 
 ### UDP Broadcast Packet Relay
 
