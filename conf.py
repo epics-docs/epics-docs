@@ -53,7 +53,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.*', 'README.md']
 # Intersphinx links to subprojects
 intersphinx_mapping = {
     "epics-base": ("https://docs.epics-controls.org/projects/base/en/latest/", None),
-    'how-tos': ('https://docs.epics-controls.org/projects/how-tos/en/latest', None),
+    'docs': ('https://docs.epics-controls.org/en/latest', None),
     'pvxs' : ('https://mdavidsaver.github.io/pvxs', None),
     'phoebus' : ('https://control-system-studio.readthedocs.io/en/latest/', None),
     'sequencer' : ('https://epics-modules.github.io/sequencer/', None),
