@@ -100,7 +100,8 @@ Channel Request State Diagram
 
 Channel requests (get, put, get-put, RPC, process) have a state. When
 instantiated, they MUST be set to the INIT state. A specific per request
-initialization message MUST be sent to the server. The request MUST NOT
+initialization message MUST be sent by the client to the server.
+The request MUST NOT
 be used until a successful initialization response is received from the
 server and put to the READY state. If initialization fails, the client
 MUST be notified about the failure and the request put to the DESTROYED
@@ -123,6 +124,59 @@ completion callback mechanism.
 A request MAY be destroyed at any time (in any state) and then its state
 MUST be set to DESTROYED. Once the request is destroyed, it MUST NOT be
 used anymore.
+
+## ID Number Assignment and Lifetime
+
+- `searchSequenceID` and `searchInstanceID`
+
+Present in search messages.
+These identifiers are chosen by the client,
+and echoed back by the server.
+
+Used by a client to match up a pair for search request and response messages.
+May be reused at a client's discretion.
+The client is responsible for detecting any duplication when search messages come through unreliable transport.
+
+- `clientChannelID` and `serverChannelID`
+
+Present in channel creation/destruction messages.
+
+`clientChannelID` is chosen by the client in a `CMD_CREATE_CHANNEL` request message,
+and tracked by the server.
+
+`serverChannelID` is chosen by the server for a successful `CMD_CREATE_CHANNEL` reply message.
+
+In a `CMD_CREATE_CHANNEL` reply indicating an error,
+the `clientChannelID` goes out of scope,
+and the `serverChannelID` field should be ignored.
+
+After a successful `CMD_CREATE_CHANNEL` reply, both channel IDs remain valid
+for the lifetime of the TCP connection, or until being paired again in a `CMD_DESTROY_CHANNEL` message.
+
+When a client receives an unsolicited `CMD_DESTROY_CHANNEL` from a server,
+both IDs go out of scope.
+
+When channel IDs go out of scope, all `requestID` created with those IDs
+also go out of scope.
+
+- `requestID`
+
+Chosen by a client in an operation INIT message,
+and tracked by the server.
+
+If an operation INIT reply message indicates an error,
+then the `requestID` goes out of scope.
+
+After a successful INIT reply, the `requestID` remains valid for
+the lifetime of the associated channel, or until a operation
+request with DESTROY or a `CMD_DESTROY_REQUEST` message.
+
+### Handling of out-of-scope IDs
+
+As there is no handshake for channel or request ID destruction,
+it is possible that the peer initiating the destruction may continue
+to receive messages with that ID for some time.
+Thus must not be treated as a fatal error.
 
 ## Flow Control
 
