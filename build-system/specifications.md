@@ -2661,7 +2661,7 @@ to use. When `STATIC_BUILD` is `NO`, shared libraries will be used.
 `STATIC_BUILD` definition in a Makefile will override the definition in
 `CONFIG_SITE`. Static builds may not be possible on all systems. For static
 builds, all nonsystem libraries must have an archive version, and this
-may not be true form all libraries.
+may not be true for all libraries.
 
 ### Test Products
 
