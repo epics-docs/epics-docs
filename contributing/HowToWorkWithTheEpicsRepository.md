@@ -12,7 +12,7 @@ and create pull request with the changes.
 The main EPICS repositories are hosted on Github: [github.com/epics-base](https://github.com/epics-base/). 
 The source code of EPICS Base is at [github.com/epics-base/epics-base](https://github.com/epics-base/epics-base).
 
-A mirror of the repository is available on Launchpad: https://git.launchpad.net/epics-base.
+A mirror of the repository is available on Launchpad: <https://git.launchpad.net/epics-base>.
 
 All current and past EPICS Base versions are in the same repository on different branches.
 
@@ -44,7 +44,7 @@ not against the release tags.
 For bug fixes check out the branch where the bug appears first.
 The fix will be merged into newer EPICS versions by the core developer team.
 
-For new features better announce your idea on the core-talk@aps.anl.gov mailing list 
+For new features better announce your idea on the <core-talk@aps.anl.gov> mailing list 
 and ask which branch is most appropriate.
 For revolutionary new features it is probably the EPICS 7 master branch
 respectively the branch of the submodule as referenced in the .gitmodule file.
@@ -132,18 +132,18 @@ MAIN(xxxTest) {
     testIocInitOk();
 
     /* You may structure the test output with your own comments
-        * (This does not count as a test.)
-        */
+    * (This does not count as a test.)
+    */
     testDiag("##### This text goes to the test log #####");
 
     /* Set values and check for success. Counts as 1 test.
-        * Make sure that DBF type matches your variable
-        */
+    * Make sure that DBF type matches your variable
+    */
     testdbPutFieldOk("record.FIELD", DBF_ULONG, value);
     
     /* Get value and compare with expected result. Counts as 1 test.
-        * Make sure that DBF type matches your variable
-        */
+    * Make sure that DBF type matches your variable
+    */
     testdbGetFieldEqual("record.FIELD", DBF_ULONG, value);
 
     /* Do some arbitrary test. Counts as 1 test. */
@@ -170,7 +170,7 @@ make runtests
 Before creating a pull request,
 you should first [synchronize your fork](https://docs.github.com/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork),
 pull the latest changes
-and merge it with your changes if necessary.
+and rebase your changes on top of it, if necessary.
 
 You can then proceed to create a [pull request](https://docs.github.com/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
 The core developer team will review your changes,
@@ -178,5 +178,6 @@ suggest changes, highlight issues
 or merge your code into EPICS base.
 You can push updates at any time,
 even after making a pull request.
-The updates will automatically be part of the merge request.
-Do **not** create a new merge request because of an update!
+The updates will automatically be part of the pull request.
+Do **not** create a new pull request,
+if you want to update your contribution.
