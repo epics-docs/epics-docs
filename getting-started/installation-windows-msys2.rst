@@ -127,15 +127,15 @@ Replace 'user' with the actual Windows user folder name existing in your Windows
 
 Run ``softIoc`` and, if everything is ok, you should see an EPICS prompt::
 
-    $ cd /home/'user'/base-R7.0.4.1/bin/windows-x64-mingw
+    $ cd /home/'user'/base-7.0.9/bin/windows-x64-mingw
     $ ./softIoc -x test
     Starting iocInit
     iocRun: All initialization complete
-    dbLoadDatabase("C:\msys64\home\'user'\base-R7.0.4.1\bin\windows-x64-mingw\..\..\dbd\softIoc.dbd")
+    dbLoadDatabase("C:\msys64\home\'user'\base-7.0.9\bin\windows-x64-mingw\..\..\dbd\softIoc.dbd")
     softIoc_registerRecordDeviceDriver(pdbbase)
     iocInit()
     ############################################################################
-    ## EPICS R7.0.4.1
+    ## EPICS R7.0.9
     ## Rev. 2020-10-21T11:57+0200
     ############################################################################
     epics>
@@ -154,11 +154,11 @@ If you built EPICS Base with dynamic (DLL) linking, you need to add the location
 ::
 
     >set "PATH=%PATH%C:\msys64\mingw64\bin;"
-    >cd C:\msys64\home\'user'\base-R7.0.4.1\bin\windows-x64-mingw
+    >cd C:\msys64\home\'user'\base-7.0.9\bin\windows-x64-mingw
     >softIoc -x test
     Starting iocInit
     ############################################################################
-    ## EPICS R7.0.4.1
+    ## EPICS R7.0.9
     ## Rev. 2020-10-21T11:57+0200
     ############################################################################
     iocRun: All initialization complete
@@ -260,7 +260,7 @@ Go to ``iocBoot/ioctest`` . Open the ``envPaths`` file and change the MSYS2 rela
 
     epicsEnvSet("IOC","ioctest")
     epicsEnvSet("TOP","C:/msys64/home/'user'/testioc")
-    epicsEnvSet("EPICS_BASE","C:/msys64/home/'user'/base-7.0.4.1")
+    epicsEnvSet("EPICS_BASE","C:/msys64/home/'user'/base-7.0.9")
 
 **Note:** You can use Linux style forward slash characters in path specifications inside this file or double backslashes (``\\``).
 
@@ -285,7 +285,7 @@ In both cases, the IOC should start like this::
     < envPaths
     epicsEnvSet("IOC","ioctest")
     epicsEnvSet("TOP","C:/msys64/home/'user'/testioc")
-    epicsEnvSet("EPICS_BASE","C:/msys64/home/'user'/base-R7.0.4.1")
+    epicsEnvSet("EPICS_BASE","C:/msys64/home/'user'/base-7.0.9")
     cd "C:/msys64/home/'user'/testioc"
     ## Register all support components
     dbLoadDatabase "dbd/test.dbd"
@@ -297,7 +297,7 @@ In both cases, the IOC should start like this::
     cd "C:/msys64/home/'user'/testioc/iocBoot/ioctest"
     iocInit
     ############################################################################
-    ## EPICS R7.0.4.1
+    ## EPICS R7.0.9
     ## Rev. 2020-10-21T11:57+0200
     ############################################################################
     ## Start any sequence programs
