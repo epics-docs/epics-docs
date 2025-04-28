@@ -89,12 +89,13 @@ Then your shell has picked up the MSYS rather than MinGW64 environment and the b
 
 Download and build EPICS Base
 -----------------------------
-Start the "MSYS MinGW 64-bit" shell and do::
+
+Review https://github.com/epics-base/epics-base/releases and/or https://epics-controls.org/resources-and-support/base/epics-7/ and choose a base release number. At time of writing the most recent version is **7.0.9** which to build you would start the "MSYS MinGW 64-bit" shell and do::
 
     $ cd $HOME
-    $ wget https://epics-controls.org/download/base/base-7.0.4.1.tar.gz
-    $ tar -xvf base-7.0.4.1.tar.gz
-    $ cd base-R7.0.4.1
+    $ wget https://epics-controls.org/download/base/base-7.0.9.tar.gz
+    $ tar -xvf base-7.0.9.tar.gz
+    $ cd base-7.0.9
     $ export EPICS_HOST_ARCH=windows-x64-mingw
     $ make
 
