@@ -9,7 +9,7 @@ MSYS2 provides a Bash shell, Autotools, revision control systems and other tools
 The default location of the MSYS2 installation is ``C:\msys64``. If you don't have Administrator rights, you can install MSYS2 in any location you have access to, e.g. ``C:\Users\'user'\msys64`` (with 'user' being your Windows user directory name). We will assume the default location in this document.
 
 Once installation is complete, you have three options available for starting a shell. The difference between these options is the preset of the environment variables that select the compiler toolchain to use.
-Launch the "MSYS MinGW 64-bit" option to use the MinGW 64bit toolchain, producing 64bit binaries that run on 64bit Windows systems. The "MSYS MinGW 32-bit" option will use the MinGW 32bit toolchain, producing 32bit binaries that will run on 32bit and 64bit Windows systems.
+Launch the "MSYS MinGW 64-bit" option to use the MinGW 64bit toolchain, producing 64bit binaries that run on 64bit Windows systems. The "MSYS MinGW 32-bit" option will use the MinGW 32bit toolchain, producing 32bit binaries that will run on 32bit and 64bit Windows systems. Do not use the "MSYS2 MSYS" window as this will not build EPICS.
 
 Again: you have a single installation of MSYS2, these different shells are just setups to use different compilers. Installation and update of your MSYS2 system only has to be done once - you can use any of the shell options for that.
 
@@ -66,14 +66,36 @@ As mentioned above, you can update your complete installation (including all too
 
 You should do this in regular intervals.
 
+Check Setup
+-----------
+
+From your build window type
+
+    $ gcc -v
+
+You should see something like::
+
+    COLLECT_GCC=C:\msys64\mingw64\bin\gcc.exe
+    COLLECT_LTO_WRAPPER=C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe
+    Target: x86_64-w64-mingw32
+
+If you however see::
+
+    COLLECT_GCC=gcc
+    COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-msys/13.3.0/lto-wrapper.exe
+    Target: x86_64-pc-msys
+
+Then your shell has picked up the MSYS rather than MinGW64 environment and the build will not work
+
 Download and build EPICS Base
 -----------------------------
-Start the "MSYS MinGW 64-bit" shell and do::
+
+Review https://github.com/epics-base/epics-base/releases and/or https://epics-controls.org/resources-and-support/base/epics-7/ and choose a base release number. At time of writing the most recent version is **7.0.9** which to build you would start the "MSYS MinGW 64-bit" shell and do::
 
     $ cd $HOME
-    $ wget https://epics-controls.org/download/base/base-7.0.4.1.tar.gz
-    $ tar -xvf base-7.0.4.1.tar.gz
-    $ cd base-R7.0.4.1
+    $ wget https://epics-controls.org/download/base/base-7.0.9.tar.gz
+    $ tar -xvf base-7.0.9.tar.gz
+    $ cd base-7.0.9
     $ export EPICS_HOST_ARCH=windows-x64-mingw
     $ make
 
@@ -105,15 +127,15 @@ Replace 'user' with the actual Windows user folder name existing in your Windows
 
 Run ``softIoc`` and, if everything is ok, you should see an EPICS prompt::
 
-    $ cd /home/'user'/base-R7.0.4.1/bin/windows-x64-mingw
+    $ cd /home/'user'/base-7.0.9/bin/windows-x64-mingw
     $ ./softIoc -x test
     Starting iocInit
     iocRun: All initialization complete
-    dbLoadDatabase("C:\msys64\home\'user'\base-R7.0.4.1\bin\windows-x64-mingw\..\..\dbd\softIoc.dbd")
+    dbLoadDatabase("C:\msys64\home\'user'\base-7.0.9\bin\windows-x64-mingw\..\..\dbd\softIoc.dbd")
     softIoc_registerRecordDeviceDriver(pdbbase)
     iocInit()
     ############################################################################
-    ## EPICS R7.0.4.1
+    ## EPICS R7.0.9
     ## Rev. 2020-10-21T11:57+0200
     ############################################################################
     epics>
@@ -132,11 +154,11 @@ If you built EPICS Base with dynamic (DLL) linking, you need to add the location
 ::
 
     >set "PATH=%PATH%C:\msys64\mingw64\bin;"
-    >cd C:\msys64\home\'user'\base-R7.0.4.1\bin\windows-x64-mingw
+    >cd C:\msys64\home\'user'\base-7.0.9\bin\windows-x64-mingw
     >softIoc -x test
     Starting iocInit
     ############################################################################
-    ## EPICS R7.0.4.1
+    ## EPICS R7.0.9
     ## Rev. 2020-10-21T11:57+0200
     ############################################################################
     iocRun: All initialization complete
@@ -238,7 +260,7 @@ Go to ``iocBoot/ioctest`` . Open the ``envPaths`` file and change the MSYS2 rela
 
     epicsEnvSet("IOC","ioctest")
     epicsEnvSet("TOP","C:/msys64/home/'user'/testioc")
-    epicsEnvSet("EPICS_BASE","C:/msys64/home/'user'/base-7.0.4.1")
+    epicsEnvSet("EPICS_BASE","C:/msys64/home/'user'/base-7.0.9")
 
 **Note:** You can use Linux style forward slash characters in path specifications inside this file or double backslashes (``\\``).
 
@@ -263,7 +285,7 @@ In both cases, the IOC should start like this::
     < envPaths
     epicsEnvSet("IOC","ioctest")
     epicsEnvSet("TOP","C:/msys64/home/'user'/testioc")
-    epicsEnvSet("EPICS_BASE","C:/msys64/home/'user'/base-R7.0.4.1")
+    epicsEnvSet("EPICS_BASE","C:/msys64/home/'user'/base-7.0.9")
     cd "C:/msys64/home/'user'/testioc"
     ## Register all support components
     dbLoadDatabase "dbd/test.dbd"
@@ -275,7 +297,7 @@ In both cases, the IOC should start like this::
     cd "C:/msys64/home/'user'/testioc/iocBoot/ioctest"
     iocInit
     ############################################################################
-    ## EPICS R7.0.4.1
+    ## EPICS R7.0.9
     ## Rev. 2020-10-21T11:57+0200
     ############################################################################
     ## Start any sequence programs
