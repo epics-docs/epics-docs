@@ -52,7 +52,9 @@ Download and build EPICS Base
 1. Review https://github.com/epics-base/epics-base/releases and/or https://epics-controls.org/resources-and-support/base/epics-7/ and choose a base release number. At time of writing the most recent version is **7.0.9**
 2. Download the distribution from e.g. https://epics-controls.org/download/base/base-7.0.9.tar.gz
 3. Unpack it into a work directory.
-4. Open a Windows command prompt and change into the directory you unpacked EPICS Base into.
+4. Open a Windows command prompt and change into the directory you unpacked EPICS Base into. It is best to use a ``cmd`` command prompt for this - running ``bat`` files by e.g. ``&`` from powershell prompt does not preserve environment variables set in the bat file, such as by ``vcvarsall.bat``.
+   If you wish to use powershell, you need to launch powershell from a cmd window after you have run the relevant bat files to set the environment.
+   See https://stackoverflow.com/questions/49027851/setting-environment-variables-with-batch-file-lauched-by-powershell-script 
 
    **Note:** The complete path of the current directory mustn't contain any spaces or parentheses. If your working directory path does, you can do another cd into the same directory, replacing every path component containing spaces or parentheses with its Windows short path (that can be displayed with ``dir /x``).
 5. Set the EPICS host architecture EPICS_HOST_ARCH (windows-x64 for 64bit builds, win32-x86 for 32bit builds).
