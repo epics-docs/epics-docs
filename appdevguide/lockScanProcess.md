@@ -61,7 +61,7 @@ INLINKs and OUTLINKs can be one of the following:
         If it does reference the PROC field a channel access put with a value of 1 is issued.
 
 
-Links are defined in file {doc}`link.h`.
+Links are defined in file `link.h`.
 
 ```{note}
 This chapter discusses mainly database links.

@@ -39,6 +39,7 @@ extensions = [
     'sphinx_search.extension',
     'sphinx_tags',
     'sphinx_design',
+    'sphinx_sitemap',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -48,7 +49,7 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 
-exclude_patterns = ['_build', 'Thumbs.db', '.*', 'README.md']
+exclude_patterns = ['_build', 'Thumbs.db', '.*', 'README.md', 'venv']
 
 # Intersphinx links to subprojects
 intersphinx_mapping = {
@@ -98,6 +99,24 @@ myst_heading_anchors = 4
 #
 html_theme = 'sphinx_rtd_theme'
 
+html_title = 'EPICS Documentation'
+html_short_title = 'EPICS Docs'
+html_baseurl = 'https://docs.epics-controls.org/'
+
+html_show_sphinx = False
+html_show_copyright = True
+html_copy_source = False
+html_permalinks = True
+html_permalinks_icon = '#'
+
+# Meta tags for SEO
+html_meta = {
+    'description': 'EPICS (Experimental Physics and Industrial Control System) documentation - Learn about EPICS, the open-source software framework for building distributed control systems.',
+    'keywords': 'EPICS, control systems, experimental physics, industrial control, documentation',
+    'viewport': 'width=device-width, initial-scale=1',
+    'robots': 'index, follow',
+}
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
@@ -111,6 +130,8 @@ master_doc = 'index'
 
 html_theme_options = {
     'logo_only': True,
+    'navigation_depth': 4,
+    'titles_only': False
 }
 
 # -- Redirections specifications ---------------------------------------------
@@ -170,3 +191,9 @@ tags_page_header = "Pages with this tag"
 tags_badge_colors = {
     "*": "primary",
 }
+
+# Sitemap settings
+
+sitemap_url_scheme = "{link}"
+sitemap_locales = [None]
+sitemap_filename = "sitemap.xml"
