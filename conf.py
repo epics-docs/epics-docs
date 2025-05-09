@@ -98,6 +98,24 @@ myst_heading_anchors = 4
 #
 html_theme = 'sphinx_rtd_theme'
 
+html_title = 'EPICS Documentation'
+html_short_title = 'EPICS Docs'
+html_baseurl = 'https://docs.epics-controls.org/'
+
+html_show_sphinx = False
+html_show_copyright = True
+html_copy_source = False
+html_permalinks = True
+html_permalinks_icon = '#'
+
+# Meta tags for SEO
+html_meta = {
+    'description': 'EPICS (Experimental Physics and Industrial Control System) documentation - Learn about EPICS, the open-source software framework for building distributed control systems.',
+    'keywords': 'EPICS, control systems, experimental physics, industrial control, documentation',
+    'viewport': 'width=device-width, initial-scale=1',
+    'robots': 'index, follow',
+}
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
