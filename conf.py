@@ -49,7 +49,7 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 
-exclude_patterns = ['_build', 'Thumbs.db', '.*', 'README.md']
+exclude_patterns = ['_build', 'Thumbs.db', '.*', 'README.md', 'venv']
 
 # Intersphinx links to subprojects
 intersphinx_mapping = {
@@ -130,6 +130,8 @@ master_doc = 'index'
 
 html_theme_options = {
     'logo_only': True,
+    'navigation_depth': 4,
+    'titles_only': False
 }
 
 # -- Redirections specifications ---------------------------------------------
