@@ -39,6 +39,7 @@ extensions = [
     'sphinx_search.extension',
     'sphinx_tags',
     'sphinx_design',
+    'sphinx_sitemap',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -188,3 +189,9 @@ tags_page_header = "Pages with this tag"
 tags_badge_colors = {
     "*": "primary",
 }
+
+# Sitemap settings
+
+sitemap_url_scheme = "{link}"
+sitemap_locales = [None]
+sitemap_filename = "sitemap.xml"
