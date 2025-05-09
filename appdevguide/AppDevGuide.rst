@@ -19,3 +19,4 @@ detailed API documentation will be generated from the source code with Doxygen.
    IOC Initialization <IOCInit>
    AccessSecurity
    IOC Test Facilities <IOCTestFacilities>
+   Database Locking and Processing Details <lockScanProcess>
