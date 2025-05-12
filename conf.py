@@ -4,6 +4,7 @@
 # list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 
+import os
 
 # -- Path setup --------------------------------------------------------------
 
@@ -100,7 +101,9 @@ html_theme = 'sphinx_rtd_theme'
 
 html_title = 'EPICS Documentation'
 html_short_title = 'EPICS Docs'
-html_baseurl = 'https://docs.epics-controls.org/'
+
+# Use RTD's canonical URL if available
+html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
 
 html_show_sphinx = False
 html_show_copyright = True
