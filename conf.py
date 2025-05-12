@@ -111,7 +111,7 @@ html_permalinks_icon = '#'
 # Meta tags for SEO
 html_meta = {
     'description': 'EPICS (Experimental Physics and Industrial Control System) documentation - Learn about EPICS, the open-source software framework for building distributed control systems.',
-    'keywords': 'EPICS, control systems, experimental physics, industrial control, documentation',
+    'keywords': 'EPICS, control systems, experimental physics, industrial control, documentation, rrm, record reference manual',
     'viewport': 'width=device-width, initial-scale=1',
     'robots': 'index, follow',
 }
