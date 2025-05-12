@@ -135,8 +135,6 @@ master_doc = 'index'
 
 html_theme_options = {
     'logo_only': True,
-    'navigation_depth': 4,
-    'titles_only': False
 }
 
 # -- Redirections specifications ---------------------------------------------
