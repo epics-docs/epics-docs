@@ -106,9 +106,7 @@ html_short_title = 'EPICS Docs'
 html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
 
 html_show_sphinx = False
-html_show_copyright = True
 html_copy_source = False
-html_permalinks = True
 html_permalinks_icon = '#'
 
 # Meta tags for SEO
