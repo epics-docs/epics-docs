@@ -194,6 +194,4 @@ tags_badge_colors = {
 
 # Sitemap settings
 
-sitemap_url_scheme = "{link}"
 sitemap_locales = [None]
-sitemap_filename = "sitemap.xml"
