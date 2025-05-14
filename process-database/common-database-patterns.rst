@@ -54,5 +54,43 @@ In the following example the value read from a ‘bi’ is inverted so that the 
         field(FLNK, "$(P):rbv")
     }
 
-The important point is the NPP modifier on output link of the ‘calcout’ record. 
+The important point is the NPP modifier on output link of the ‘calcout’ record.
 This updates the VAL field of the ‘bo’ record (and posts monitors) without processing it.
+
+Readback from a different hardware address
+------------------------------------------
+Use when the readback value of an ‘out‘ record comes from a different hardware address. In this case it can be undesirable for an update of the readback value to trigger processing of the ‘out‘ record again as this could lead to infinite loops. SDIS is used to ensure that writes to the hardware only happen when they are not triggered by the readback value changing. The main record is a soft record, this ensures that monitors are updated when its value changes.
+
+In the following example a longout record gets its readback value from a different longin record.
+
+::
+
+    record(longout, "$(P)") {
+        field(OUT,  "$(P):write PP")
+    }
+
+::
+
+    record(longout, "$(P):write") {
+        field(DTYP, "...")
+        field(OUT,  "...")
+        field(SDIS, "$(P):update.PACT")
+    }
+
+::
+
+    record(calcout, "$(P):update") {
+        field(CALC, "A")
+        field(INPA, "$(P):rbv")
+        field(OUT,  "$(P) PP")
+    }
+
+::
+
+    record(longin, "$(P):rbv") {
+        field(DTYP, "...")
+        field(INP,  "...")
+        field(PINI, "YES")
+        field(FLNK, "$(P):update")
+    }
+
