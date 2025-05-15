@@ -79,9 +79,9 @@ In the following example a longout record gets its readback value from a differe
 
 ::
 
-    record(calcout, "$(P):update") {
-        field(CALC, "A")
-        field(INPA, "$(P):rbv")
+    record(longout, "$(P):update") {
+        field(OMSL, "closed_loop")
+        field(DOL,  "$(P):rbv")
         field(OUT,  "$(P) PP")
     }
 
