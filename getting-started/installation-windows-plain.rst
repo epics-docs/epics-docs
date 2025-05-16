@@ -49,18 +49,21 @@ In VS 2019, you also have the option to additionally install the Visual C++ 2017
 Download and build EPICS Base
 -----------------------------
 
-1. Download the distribution from e.g. https://epics-controls.org/download/base/base-7.0.4.1.tar.gz.
-2. Unpack it into a work directory.
-3. Open a Windows command prompt and change into the directory you unpacked EPICS Base into.
+1. Review https://github.com/epics-base/epics-base/releases and/or https://epics-controls.org/resources-and-support/base/epics-7/ and choose a base release number. At time of writing the most recent version is **7.0.9**
+2. Download the distribution from e.g. https://epics-controls.org/download/base/base-7.0.9.tar.gz
+3. Unpack it into a work directory.
+4. Open a Windows command prompt and change into the directory you unpacked EPICS Base into. It is best to use a ``cmd`` command prompt for this - running ``bat`` files by e.g. ``&`` from powershell prompt does not preserve environment variables set in the bat file, such as by ``vcvarsall.bat``.
+   If you wish to use powershell, you need to launch powershell from a cmd window after you have run the relevant bat files to set the environment.
+   See https://stackoverflow.com/questions/49027851/setting-environment-variables-with-batch-file-lauched-by-powershell-script 
 
    **Note:** The complete path of the current directory mustn't contain any spaces or parentheses. If your working directory path does, you can do another cd into the same directory, replacing every path component containing spaces or parentheses with its Windows short path (that can be displayed with ``dir /x``).
-4. Set the EPICS host architecture EPICS_HOST_ARCH (windows-x64 for 64bit builds, win32-x86 for 32bit builds).
-5. Run the ``vcvarsall.bat`` script of your installation (the exact path depends on the type and language of installation) to set the environment for your build.
-6. Run ``make`` (or ``gmake`` if using the version from Strawberry Perl).
+5. Set the EPICS host architecture EPICS_HOST_ARCH (windows-x64 for 64bit builds, win32-x86 for 32bit builds).
+6. Run the ``vcvarsall.bat`` script of your installation (the exact path depends on the type and language of installation) to set the environment for your build.
+7. Run ``make`` (or ``gmake`` if using the version from Strawberry Perl).
 
 ::
 
-    >cd base-R7.0.4.1
+    >cd base-7.0.9
     >set EPICS_HOST_ARCH=windows-x64
     >"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
     **********************************************************************
@@ -83,15 +86,15 @@ Open the Windows command prompt. Again, replace 'user' with the actual Windows u
 
 Run ``softIoc`` and, if everything is ok, you should see an EPICS prompt::
 
-    >cd C:\Users\'user'\base-R7.0.4.1\bin\windows-x64-mingw
+    >cd C:\Users\'user'\base-7.0.9\bin\windows-x64
     >softIoc -x test
     Starting iocInit
     iocRun: All initialization complete
-    dbLoadDatabase("C:\Users\'user'\base-R7.0.4.1\bin\windows-x64\..\..\dbd\softIoc.dbd")
+    dbLoadDatabase("C:\Users\'user'\base-7.0.9\bin\windows-x64\..\..\dbd\softIoc.dbd")
     softIoc_registerRecordDeviceDriver(pdbbase)
     iocInit()
     ############################################################################
-    ## EPICS R7.0.4.1
+    ## EPICS R7.0.9
     ## Rev. 2020-10-21T11:57+0200
     ############################################################################
     epics>
@@ -104,15 +107,15 @@ Quick test from MSYS2 Bash
 --------------------------
 Obviously, if you have an installation of MSYS2, you can run the same verification from the MSYS2 Bash shell::
 
-    $ cd /c/Users/'user'/base-R7.0.4.1/bin/windows-x64
+    $ cd /c/Users/'user'/base-7.0.9/bin/windows-x64
     $ ./softIoc -x test
     Starting iocInit
     iocRun: All initialization complete
-    dbLoadDatabase("C:\Users\'user'\base-R7.0.4.1\bin\windows-x64\..\..\dbd\softIoc.dbd")
+    dbLoadDatabase("C:\Users\'user'\base-7.0.9\bin\windows-x64\..\..\dbd\softIoc.dbd")
     softIoc_registerRecordDeviceDriver(pdbbase)
     iocInit()
     ############################################################################
-    ## EPICS R7.0.4.1
+    ## EPICS R7.0.9
     ## Rev. 2020-10-21T11:57+0200
     ############################################################################
     epics>
@@ -239,7 +242,7 @@ In both cases, the IOC should start like this::
     < envPaths
     epicsEnvSet("IOC","ioctest")
     epicsEnvSet("TOP","C:/Users/'user'/testioc")
-    epicsEnvSet("EPICS_BASE","C:/Users/'user'/base-R7.0.4.1")
+    epicsEnvSet("EPICS_BASE","C:/Users/'user'/base-7.0.9")
     cd "C:/Users/'user'/testioc"
     ## Register all support components
     dbLoadDatabase "dbd/test.dbd"
@@ -249,7 +252,7 @@ In both cases, the IOC should start like this::
     cd "C:/Users/'user'/testioc/iocBoot/ioctest"
     iocInit
     ############################################################################
-    ## EPICS R7.0.4.1
+    ## EPICS R7.0.9
     ## Rev. 2020-10-21T11:57+0200
     ############################################################################
     iocRun: All initialization complete

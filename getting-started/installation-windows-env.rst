@@ -32,6 +32,7 @@ EPICS Base provides script and batch files to help setting the environment for r
 
 The ``windows.bat`` batch file in the folder called ``startup`` sets the environment if you use the Windows command prompt and compiled your EPICS Base using Visual Studio compilers with the help of Strawberry Perl.
 You probably will have to edit ``windows.bat`` to adapt it to your needs and ``call`` it from any Windows command prompt before doing EPICS commands or builds.
+As ``windows.bat`` sets environment variables, it will not work properly if run from a ``powershell`` prompt via e.g. ``&``. You can either use a ``cmd`` command prompt for the EPICS build, or start the powershell session from a ``cmd`` session where you have already run the appropriate bat files. See https://stackoverflow.com/questions/49027851/setting-environment-variables-with-batch-file-lauched-by-powershell-script    
 
 If you use the MSYS2 bash shell, you similarly need to adapt and run the ``unix.sh`` shell script from any bash shell prompt before doing EPICS commands or builds.
 
@@ -44,7 +45,7 @@ If you have Administrator rights and want to do it globally, you can also select
 
 1. Select ``Advance`` tab, navigate to ``Environment Variables`` button. That should open editable tables of settings for Windows Environment. 
 2. Select ``User Variable for 'user'`` option, press NEW
-3. Add EPICS BASE path here. In ``Variable Name``, put "EPICS_BASE". For ``Variable Value``, enter the location of your EPICS Base installation, e.g.,  "C:\\msys64\\home\\'user'\\base-R7.0.4.1"
+3. Add EPICS BASE path here. In ``Variable Name``, put "EPICS_BASE". For ``Variable Value``, enter the location of your EPICS Base installation, e.g.,  "C:\\msys64\\home\\'user'\\base-7.0.9"
 4. Set the host architecture. In ``Variable Name``, put "EPICS_HOST_ARCH". For ``Variable Value``, put "windows-x64-mingw" or "windows-x64" (depending on your selection of compilers).
 5. Navigate to the variable called ``Path``. Press Edit. 
 6. If you are using the MinGW compilers and dynamic (DLL) linking, add the path for the MinGW64 DLLs. Press NEW and enter "C:\\msys64\\mingw64\\bin". Press ok.

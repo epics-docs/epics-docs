@@ -1277,7 +1277,7 @@ struct message {
 
 |      Member | Description        |
 | ----------: | ------------------ |
-|   requestID | Request ID.        |
+|   requestID | Client generated request ID. |
 | messageType | Message type enum. |
 |     message | Message.           |
 :::
