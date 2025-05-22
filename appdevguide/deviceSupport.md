@@ -202,16 +202,15 @@ static long read_bi(biRecord *prec)
 ```
 
 The example is `devBiSoft` (status at Base release 7.0.8) which supports soft binary inputs.
-The `INP` field can be a constant or a database link or a channel access (CA or PVA) link.
+The `INP` field can be set to any valid link type.
 Only two routines are provided in the dset (the rest are declared `NULL`).
 The `init_record` routine first checks that the link type is valid.
 If the link is a constant, it initializes `VAL` and clears the UDF alarm.
 
-Atomic processing of a group of records that belong to the same lockset was implemented in Base release 3.16.1. 
-For this purpose, the `read_bi` routine was split into two parts: 
-First part tries to do a an atomic read within the lockset. If this is not possible or necessary
-(the record does not belong to a lockset or the link does not support locked reads),
-value and timestamp are read from the input link.
+The `read_bi()` routine first tries to atomically fetch the value and
+(if requested by `TSEL`) the timestamp from the link.
+If that link type doesn't support atomic transactions (`S_db_noLSET`)
+the value and timestamp are fetched separately.
 
 ###  Example Asynchronous Device Support Module
 
