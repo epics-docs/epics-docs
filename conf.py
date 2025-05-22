@@ -105,7 +105,6 @@ html_short_title = 'EPICS Docs'
 # Use RTD's canonical URL if available
 html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
 
-html_show_sphinx = False
 html_copy_source = False
 
 # Meta tags for SEO
