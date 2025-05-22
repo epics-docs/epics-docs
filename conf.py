@@ -107,7 +107,6 @@ html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
 
 html_show_sphinx = False
 html_copy_source = False
-html_permalinks_icon = '#'
 
 # Meta tags for SEO
 html_meta = {
