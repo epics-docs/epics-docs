@@ -1719,7 +1719,7 @@ database changes. The VAL field is the exception. If the MDEL field is
 set, then the VAL field is sent when a monitor is set, and then only
 sent again, when the VAL field has changed by MDEL.
 
-..note:: 
+.. note:: 
 
   A MDEL of 0 sends a monitor whenever the VAL fields changes and an MDEL of -1
   sends a monitor whenever the record is processed as the MDEL is applied
