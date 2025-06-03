@@ -227,6 +227,46 @@ Multiple RULEs can be defined for a given ASG, even RULEs with identical
 levels and access permissions. The TRAPWRITE setting used for a client
 is determined by the first WRITE rule that passes the rule checks.
 
+Channel Access Security: Check Hostname Against DNS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+(from EPICS Base 7.0.3.1)
+
+Host names given in a HAG entry of an IOC's Access Security Configuration
+File (ACF) have to date been compared against the hostname provided by the CA
+client at connection time, which may or may not be the actual name of that
+client. This allows rogue clients to pretend to be a different host, and the
+IOC would believe them.
+
+An option is now available to cause an IOC to ask its operating system to look
+up the IP address of any hostnames listed in its ACF (which will normally be
+done using the DNS or the `/etc/hosts` file). The IOC will then compare the
+resulting IP address against the client's actual IP address when checking
+access permissions at connection time. This name resolution is performed at
+ACF file load time, which has a few consequences:
+
+  1. If the DNS is slow when the names are resolved this will delay the process of loading the ACF file.
+  2. If a host name cannot be resolved the IOC will proceed, but this host name will never be matched.
+  3. Any changes in the hostname to IP address mapping will not be picked up by the IOC unless and until the ACF file gets reloaded.
+
+Optionally, IP addresses may be added instead of, or in addition to, host
+names in the ACF file.
+
+This feature can be enabled before `iocInit` with
+
+::
+
+    var("asCheckClientIP",1)
+
+
+or with the VxWorks target shell use
+
+::
+
+    asCheckClientIP = 1
+
+
+
 ascheck - Check Syntax of Access Configuration File
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
