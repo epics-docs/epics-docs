@@ -232,8 +232,8 @@ Check Hostname Against DNS
 
 Before EPICS Base release 7.0.3.1, host names given in a HAG entry of an IOC's 
 Access Security Configuration File (ACF) were compared against the hostname provided by the CA
-client at connection time, which may or may not be the actual name of that
-client. This allows rogue clients to pretend to be a different host, and the
+client at connection time, which may or may not be the actual name of the host that
+client is running on. This allows rogue clients to pretend to be a different host, and the
 IOC would believe them.
 
 From that release on, it is possible to tell an IOC to ask its operating system to look
