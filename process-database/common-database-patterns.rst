@@ -34,6 +34,7 @@ In the following example the value read from a ‘bi’ is inverted so that the 
     record(bi, "$(P):rbv") {
         field(DTYP, "...")
         field(INP , "...")
+        field(SCAN, "...")
         field(PINI, "YES")
         field(FLNK, "$(P):inv")
     }
@@ -79,18 +80,18 @@ In the following example a longout record gets its readback value from a differe
 
 ::
 
-    record(calcout, "$(P):update") {
-        field(CALC, "A")
-        field(INPA, "$(P):rbv")
-        field(OUT,  "$(P) PP")
-    }
-
-::
-
     record(longin, "$(P):rbv") {
         field(DTYP, "...")
         field(INP,  "...")
+        field(SCAN, "...")
         field(PINI, "YES")
         field(FLNK, "$(P):update")
     }
 
+::
+
+    record(longout, "$(P):update") {
+        field(OMSL, "closed_loop")
+        field(DOL,  "$(P):rbv")
+        field(OUT,  "$(P) PP")
+    }
