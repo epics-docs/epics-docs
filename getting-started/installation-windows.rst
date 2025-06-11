@@ -107,7 +107,7 @@ Windows Path Names
 ------------------
 Make based builds do not work properly when there are space characters or parentheses in the paths that are part of the build (including the path where the `make` application resides and the path of the workspace).
 
-If you cannot avoid paths with such characters, use the Windows short path (can be displayed with ``dir /x``) for all path components with those characters in any path settings and/or your workspace directory.
+If you cannot avoid paths with such characters, use the Windows short path (can be displayed with ``dir /x``) for all path components with those characters in any path settings and/or your workspace directory. The full short path to the current directory can be obtained with ``for %A in (".") do @echo %~sA``.
 
 Put Tools in the PATH
 ---------------------
