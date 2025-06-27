@@ -4,6 +4,7 @@
 # list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 
+import os
 
 # -- Path setup --------------------------------------------------------------
 
@@ -48,7 +49,7 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 
-exclude_patterns = ['_build', 'Thumbs.db', '.*', 'README.md']
+exclude_patterns = ['_build', 'Thumbs.db', '.*', 'README.md', 'venv']
 
 # Intersphinx links to subprojects
 intersphinx_mapping = {
@@ -97,6 +98,22 @@ myst_heading_anchors = 4
 # a list of builtin themes.
 #
 html_theme = 'sphinx_rtd_theme'
+
+html_title = 'EPICS Documentation'
+html_short_title = 'EPICS Docs'
+
+# Use RTD's canonical URL if available
+html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
+
+html_copy_source = False
+
+# Meta tags for SEO
+html_meta = {
+    'description': 'EPICS (Experimental Physics and Industrial Control System) documentation - Learn about EPICS, the open-source software framework for building distributed control systems.',
+    'keywords': 'EPICS, control systems, experimental physics, industrial control, documentation, rrm, record reference manual',
+    'viewport': 'width=device-width, initial-scale=1',
+    'robots': 'index, follow',
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

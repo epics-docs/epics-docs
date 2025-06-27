@@ -1,0 +1,31 @@
+{% extends "!layout.html" %}
+
+{% block extrahead %}
+{{ super() }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "{{ title|striptags|e }}",
+  "description": "EPICS (Experimental Physics and Industrial Control System) documentation",
+  "publisher": {
+    "@type": "Organization",
+    "name": "EPICS Controls",
+    "url": "https://epics-controls.org"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ pathto(pagename, 1) }}"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "EPICS",
+    "description": "Experimental Physics and Industrial Control System"
+  },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Technical Documentation"
+  }
+}
+</script>
+{% endblock %} 
