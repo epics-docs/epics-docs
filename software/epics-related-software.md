@@ -12,7 +12,7 @@ These support modules are meant to be built into an IOC. See also the [epics-mod
 | ---- | ----------- | ------------- |
 adsDriver             | [github.com](https://github.com/cosylab/adsDriver)                  | [epics.cosylab.com](https://epics.cosylab.com/documentation/adsDriver/)
 alive                 | [github.com](https://github.com/epics-modules/alive)                | [github.io](https://epics-modules.github.io/alive/)
-Area Detector         | [github.com](https://github.com/areaDetector)                       | [github.io](https://areadetector.github.io/master/index.html)
+Area Detector         | [github.com](https://github.com/areaDetector)                       | [github.io](https://areadetector.github.io/areaDetector/index.html)
 asyn                  | [github.com](https://github.com/epics-modules/asyn)                 | [github.io](inv:asyn:std#index)
 autoparamDriver       | [github.com](https://github.com/cosylab/autoparamDriver)            | [epics.cosylab.com](https://epics.cosylab.com/documentation/autoparamDriver/)
 autosave              | [github.com](https://github.com/epics-modules/autosave)             | [github.io](https://epics-modules.github.io/autosave/)
