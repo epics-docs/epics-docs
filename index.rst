@@ -96,7 +96,8 @@ You may also directly use related links to see documents which match you the mos
    Getting Started <appdevguide/gettingStarted>
    EPICS Overview (Introduction to EPICS) <../getting-started/EPICS_Intro>
    Build Facility <build-system/specifications>
-   Database Locking, Scanning and Processing (EPICS Process Database Concepts) <process-database/EPICS_Process_Database_Concepts>
+   EPICS Process Database Concepts <process-database/EPICS_Process_Database_Concepts>
+   Database Locking, Scanning and Processing <appdevguide/lockScanProcess>
    Database Definition <appdevguide/databaseDefinition>
    IOC Initialization <appdevguide/IOCInit>
    appdevguide/AccessSecurity
