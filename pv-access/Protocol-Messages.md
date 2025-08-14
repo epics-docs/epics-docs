@@ -416,19 +416,53 @@ struct authNZResponse {
 
 ### CMD_ACL_CHANGE (0x06)
 
-
-This is a placeholder message code not used by existing peers.
+A server sends this message to inform the client about
+write permissions for a channel.
 
 ```c
-// TODO new message code (from server) 0x06
 struct aclChange {
     int clientChannelID;
-    struct {
-        int requestID;  // invalid ID is 0 (means for channel)
-        BitSet[] rights;   // get has only one bit-set (readRights), put-get has 2 (read and write), channel has one (allowed/dissallowed request)
-    } changes[];
+    // Permission bits:
+    // Bit 0: Client may write via PUT
+    // Bit 1: Client may perform a PUT-GET
+    // Bit 2: Client may call RPC
+    byte permissions;
 };
 ```
+
+The server sends an inital `CMD_ACL_CHANGE` right before
+the `CMD_CREATE_CHANNEL` `createChannelResponse` described
+in the next section, and whenever the write permissions
+change.
+
+This message is a hint.
+The key use case for this message is graphical user interfaces
+that need to indicate if a channel is "read only",
+for example by disabling associated GUI elements.
+
+For normative types, permission bit 0 (`PUT`) indicates
+that the client can write to the "value" field of the data structure.
+It does not imply that the client can write to the "units",
+"timeStamp", "severity" or other fields.
+For custom data types, `PUT` access will similarly indicate
+that the client has write access to at least one field.
+Clients may always perform a `PUT` and then learn from the
+response status if it was successful.
+
+Permission bit 1 (`PUT-GET`) indicates that the channel supports
+`PUT-GET` operations.
+
+Permission bit 2 (`RPC`) indicates that the channel supports
+`RPC` calls.
+
+Note that `aclChange` had a different earlier definition
+which was never implemented. Older servers never sent `aclChange`.
+Some older clients went as far as recognizing the `CMD_ACL_CHANGE` message command code
+but never parsed the `aclChange` body nor reacted in any way.
+
+For compatibility of new clients with older servers,
+clients should assume write access until they receive `CMD_ACL_CHANGE`.
+
 
 ### CMD_CREATE_CHANNEL (0x07)
 
@@ -467,6 +501,9 @@ The `createChannelRequest.channels` array starts with a `short` count,
 not using the normal size encoding.
 Current PVA server implementations only support requests for creating
 a single channel, i.e. the `count` must be 1.
+
+Note that the server may send a `CMD_ACL_CHANGE` message right before the
+`CMD_CREATE_CHANNEL` response.
 
 :::{table} Create channel response (per channel) message members
 :align: center
