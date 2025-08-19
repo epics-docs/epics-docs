@@ -832,6 +832,8 @@ Example
 
    registrar(myRegistrar)
 
+.. _dbd-variable:
+
 ``variable`` – Variable Declaration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
