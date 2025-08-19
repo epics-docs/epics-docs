@@ -61,7 +61,7 @@ INLINKs and OUTLINKs can be one of the following:
         If it does reference the PROC field a channel access put with a value of 1 is issued.
 
 
-Links are defined in file `link.h`.
+Links are defined in file {doc}`epics-base:dbLink_h`.
 
 ```{note}
 This chapter discusses mainly database links.
@@ -72,13 +72,13 @@ This chapter discusses mainly database links.
 The basic operations which can be performed on a link (excluding hardware links)
 are as follows.
 
- - dbGetLink:
+ - {external+epics-base:cpp:func}`dbGetLink`:
    The value of the field referenced by the input link retrieved.
 
- - dbPutLink:
+ - {external+epics-base:cpp:func}`dbPutLink`:
    The value of the field referenced by the output link is changed.
 
- - dbScanPassive:
+ - `dbScanPassive`:
    The record referred to by the forward link is processed if it is passive.
 
 
