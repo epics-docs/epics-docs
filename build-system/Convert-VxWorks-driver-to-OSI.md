@@ -1,24 +1,26 @@
-# How to make your EPICS driver operating system independent
+# How to convert a VxWorks driver to use OSI calls
 
-From EPICSWIKI
-
-**W. Eric Norum et. al.**
+Original author: **W. Eric Norum et. al.**
 
 ## Introduction
 
-The following table shows the changes made to some existing drivers to allow them to be used on systems other than vxWorks.
-Note that it is a very preliminary start at a set of conversion instructions.
-There's still no 'cookbook' document to guide you,
-but many drivers can be converted without doing much more than applying the translations shown.
-A technique that I've found works well is to first change all the `#include` statements that mention vxWorks header files to their OSI equivalents,
-then enter a compile-edit cycle until all compile errors have been eliminated.
+The following table shows the changes made to some older drivers to allow
+them to be used on operating systems other than vxWorks.
+Note that this is not a comprehensive set of conversion instructions.
+There's no 'cookbook' document to guide you in detail,
+but many drivers can be converted without doing much more than applying
+the translations shown here.
+A technique that we've found works well is to first change all the
+`#include` statements that mention vxWorks header files into their OSI
+equivalents, then enter a compile-edit cycle until all compile errors have
+been eliminated.
 
 ## Conversions
 
 | **vxWorks** | **OSI** |
 |---|---|
 | `#include <vxWorks.h>` | `#include <epicsStdlib.h>` |
-| `#include <stdlib.h>` | `#include <epicsStdioRedirect.h>` |
+| `#include <stdlib.h>` | `#include <epicsStdio.h>` |
 | `#include <iosLib.h>` |  |
 | `#include <taskLib.h>` | `#include <epicsThread.h>` |
 | `#include <memLib.h>` |  |
@@ -52,11 +54,7 @@ then enter a compile-edit cycle until all compile errors have been eliminated.
 
 ## Some other changes
 
-*   Some R3.13 record support database definitions explicitly mention all fields rather than including `dbCommon.dbd`.
-This can cause problems with `FAST_LOCK`.
-The solution is to add `include "dbCommon.dbd"` at the beginning of the file in question
-and to remove all entries for the fields provided by `dbCommon.dbd`.
-*   You should set up IOC shell command registrations for all 'configure' functions
+* You will need IOC shell command registrations for all 'configure' functions
 and for any other commands you may need to call from the IOC shell.
 Here's an example of a fairly complex configuration command:
 
@@ -112,9 +110,3 @@ registrar(drvVtr10012RegisterCommands)
     *   `#include <registryFunction.h>`
     *   Add an `epicsExportFunction()` statement for each such function.
     *   Add a corresponding `function` statement in a `.dbd` file.
-
-## Additional Information
-
-The procedure for converting a support module from R3.13 to R3.14 is described in the
-[Converting R3.13 Apps to R3.14](https://epics.anl.gov/base/R3-14/8-docs/ConvertingR3.13AppsToR3.14.html)
-document.
