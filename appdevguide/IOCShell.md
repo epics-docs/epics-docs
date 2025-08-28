@@ -293,6 +293,12 @@ In the absence of both environment variables,
 10 command lines will be remembered.
 :::
 
+:::{envvar} IOCSH_HISTEDIT_DISABLE
+If defined,
+disables the history editing features of the command-line
+by preventing the use of the readline library, or equivalent.
+:::
+
 Other environment variables such as `TERM` and `INPUTRC`
 are used by the readline and termcap libraries
 and are described in the documentation for those libraries.
