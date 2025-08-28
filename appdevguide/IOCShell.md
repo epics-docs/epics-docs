@@ -269,6 +269,19 @@ Show names and values of all EPICS configuration parameters.
 
 :::{describe} iocLogInit
 Initialize IOC logging.
+
+- EPICS environment variable {envvar}`EPICS_IOC_LOG_INET` has to be defined
+- Logging controlled via the `iocLogDisable` variable,
+       see the `setIocLogDisable` command
+:::
+
+:::{describe} setIocLogDisable
+Usage: `setIocLogDisable (0,1)=>(false,true)`
+
+Controls the `iocLogDisable` variable:
+
+:0: enable logging
+:1: disable logging
 :::
 
 :::{describe} epicsThreadSleep sec
