@@ -238,11 +238,20 @@ The default level is 0.
 The thread arguments can be thread names or thread i.d. numbers.
 :::
 
-:::{describe} system command_string
+::::{describe} system command_string
 Send `command_string` to the system command interpreter for execution.
-This command is present only if some application database definition file contains `registrar(iocshSystemCommand)`
-and if the system provides a suitable command interpreter (VxWorks does not).
+
+To enable this command,
+add `registrar(iocshSystemCommand)` to an application dbd file,
+or include `system.dbd`.
+
+:::{warning}
+This command isn't available on all OSes:
+this command is present only
+if the system provides a suitable command interpreter
+(VxWorks does not).
 :::
+::::
 
 :::{describe} epicsEnvSet name value
 Set environment variable name to the specified value.
