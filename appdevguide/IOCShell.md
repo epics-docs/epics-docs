@@ -229,13 +229,13 @@ See {ref}`dbd-variable` in the Database Definition reference
 for more information.
 :::
 
-:::{describe} show [-level] [task ...]
-Show information about specified tasks.
-If no task arguments are present,
-show information on all tasks.
+:::{describe} epicsThreadShow [-level] [thread ...]
+Show information about the specified threads.
+If no thread arguments are present,
+show information on all threads.
 The level argument controls the amount of information printed.
 The default level is 0.
-The task arguments can be task names or task i.d. numbers.
+The thread arguments can be thread names or thread i.d. numbers.
 :::
 
 :::{describe} system command_string
