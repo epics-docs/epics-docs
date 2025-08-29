@@ -200,6 +200,16 @@ to recognize it as a comment.
 :::
 ::::
 
+::::{describe} #-
+:::{versionadded} 3.16.0.1
+:::
+
+Same as `#`
+but expresses a "quiet" comment,
+a comment who won't be echoed in the terminal
+when the script runs.
+::::
+
 :::{describe} exit
 Stop reading commands.
 When the top-level command interpreter encounters an exit command
