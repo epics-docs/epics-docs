@@ -110,7 +110,7 @@ html_copy_source = False
 # Meta tags for SEO
 html_meta = {
     'description': 'EPICS (Experimental Physics and Industrial Control System) documentation - Learn about EPICS, the open-source software framework for building distributed control systems.',
-    'keywords': 'EPICS, control systems, experimental physics, industrial control, documentation, rrm, record reference manual',
+    'keywords': 'EPICS, control system, distributed control, experimental physics, industrial control, SCADA, IOC, Channel Access, PVA, pvAccess, asyn, StreamDevice, documentation, rrm, record reference manual',
     'viewport': 'width=device-width, initial-scale=1',
     'robots': 'index, follow',
 }
