@@ -30,14 +30,11 @@ author = 'EPICS'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'hoverxref.extension',
     'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
     "sphinx_reredirects",
     # Markdown parser
     'myst_parser',
-    # Enhanced, as-you-type search
-    'sphinx_search.extension',
     'sphinx_tags',
     'sphinx_design',
 ]
