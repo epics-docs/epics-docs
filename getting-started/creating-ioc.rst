@@ -205,13 +205,13 @@ configuration, setting the Stream path and loading the database to the
 In here, you have to replace *UUUUUU* with the user name that runs
 the EPICS IOC (you?). *bbb.bbb.bbb.bbb* is the IP of the device (e.g.
 the scope) and *pppp* the port on which it listens.
-*EPICS_CAS_INTF_ADDR_LIST* can be used if there are two network
+:envvar:`EPICS_CAS_INTF_ADDR_LIST` can be used if there are two network
 interfaces (e.g. wlan and eth0).
 
 The following commands might be necessary with multiple network
 interfaces:
 
-::
+.. code-block:: bash
 
-    export EPICS_CA_ADDR_LIST=ccc.ccc.ccc.ccc << Broadcast address of the network
+    export EPICS_CA_ADDR_LIST=ccc.ccc.ccc.ccc # Broadcast address of the network
     export EPICS_CA_AUTO_ADDR_LIST=NO
