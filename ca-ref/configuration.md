@@ -440,37 +440,6 @@ repeater forcing it to listen only on a subset of network interfaces
 might be considered for a future release if there appear to be
 situations that require it.
 
-## Configuring the Time Zone
-
-::: {note}
-Starting with EPICS R3.14 all of the libraries in the EPICS base
-distribution rely on facilities built into the operating system to
-determine the correct time zone. Nevertheless, several programs commonly
-used with EPICS still use the original "tssubr" library and therefore
-they still rely on proper configuration of {envvar}`EPICS_TS_MIN_WEST`.
-:::
-
-While the CA client library does not translate between the local time
-and the time zone independent internal storage of EPICS time stamps,
-many EPICS client side applications call core EPICS libraries which
-provide these services. To set the correct time zone users must compute
-the number of positive minutes west of GMT (maximum 720 inclusive) or
-the negative number of minutes east of GMT (minimum -720 inclusive).
-This integer value is then placed in the variable {envvar}`EPICS_TS_MIN_WEST`.
-
-| Time Zone      | EPICS_TS_MIN_WEST |
-|----------------|-------------------|
-| USA Eastern    | 300               |
-| USA Central    | 360               |
-| USA Mountain   | 420               |
-| USA Pacific    | 480               |
-| Alaska         | 540               |
-| Hawaii         | 600               |
-| Japan          | -540              |
-| China          | -420              |
-| Germany        | -120              |
-| United Kingdom | 0                 |
-
 (ca-server-env-vars)=
 ## Configuring a CA Server
 

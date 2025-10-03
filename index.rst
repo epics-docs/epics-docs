@@ -137,7 +137,6 @@ You may also directly use related links to see documents which match you the mos
 
    ca-ref/introduction
    ca-ref/configuration
-   ca-ref/building-an-application
    Command-line interface <https://docs.epics-controls.org/projects/base/en/latest/ca-cli.html>
    ca-ref/troubleshooting
    ca-ref/function-call-interface-general-guidelines
