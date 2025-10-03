@@ -1,2 +1,2 @@
 -r requirements.txt
-sphinx-autobuild==2021.3.14
+sphinx-autobuild==2025.8.25
