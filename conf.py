@@ -104,12 +104,24 @@ html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
 
 html_copy_source = False
 
-# Meta tags for SEO
-html_meta = {
+# Meta tags for SEO and social sharing
+myst_html_meta = {
+    # General
     'description': 'EPICS (Experimental Physics and Industrial Control System) documentation - Learn about EPICS, the open-source software framework for building distributed control systems.',
-    'keywords': 'EPICS, control systems, experimental physics, industrial control, documentation, rrm, record reference manual',
-    'viewport': 'width=device-width, initial-scale=1',
+    'keywords': 'EPICS, control system, distributed control, experimental physics, industrial control, SCADA, IOC, Channel Access, PVA, pvAccess, asyn, StreamDevice, documentation, rrm, record reference manual',
     'robots': 'index, follow',
+    'theme-color': '#00a562', # EPICS green
+
+    # Open Graph (for Facebook, LinkedIn, etc.)
+    'og:title': 'EPICS Documentation',
+    'og:type': 'website',
+    'og:url': 'https://docs.epics-controls.org/',
+    'og:image': 'https://docs.epics-controls.org/_static/EPICS_logo.jpg', # You'll need to add a .png logo
+    'og:description': 'Official documentation for EPICS (Experimental Physics and Industrial Control System).',
+
+    # Twitter Card
+    'twitter:card': 'summary',
+    'twitter:title': 'EPICS Documentation',
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
