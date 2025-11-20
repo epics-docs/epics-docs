@@ -6,7 +6,11 @@
 
 ## UDP Name Resolution: Broadcast vs. Unicast
 
-Running multiple IOCs on one host has an annoying side effect: Clients that are using that host's IP address in their `EPICS_CA_ADDR_LIST` with `EPICS_CA_AUTO_ADDR_LIST=NO` will only reach one of the IOCs – usually the one that was started last. All clients have to use broadcasts to reach all IOCs.
+Running multiple IOCs on one host has an annoying side effect:
+Clients that are using that host's IP address
+in their {envvar}`EPICS_CA_ADDR_LIST` with `EPICS_CA_AUTO_ADDR_LIST=NO`
+will only reach one of the IOCs – usually the one that was started last.
+All clients have to use broadcasts to reach all IOCs.
 
 The same is true for CA Gateway machines that are set up in a way that makes multiple Gateway processes serve channels into the same network.
 
@@ -22,7 +26,9 @@ A simple and effective trick: the kernel will see all incoming name resolution r
 
 Note: This will not work for clients on the same host. (Adding that feature makes things a lot more complicated, and I like things to be simple.)
 
-If you need connections between IOCs on one host, I would suggest adding the broadcast address of the loopback interface (usually `127.255.255.255`) to each IOC's `EPICS_CA_ADDR_LIST` setting.
+If you need connections between IOCs on one host,
+I would suggest adding the broadcast address of the loopback interface (usually `127.255.255.255`)
+to each IOC's {envvar}`EPICS_CA_ADDR_LIST` setting.
 
 ### On Debian and Derivatives
 

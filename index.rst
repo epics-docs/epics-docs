@@ -136,6 +136,16 @@ You may also directly use related links to see documents which match you the mos
 
 .. toctree::
    :maxdepth: 1
+   :caption: Channel Access reference
+
+   ca-ref/introduction
+   ca-ref/configuration
+   Command-line interface <https://docs.epics-controls.org/projects/base/en/latest/ca-cli.html>
+   ca-ref/troubleshooting
+   ca-ref/function-call-interface-general-guidelines
+
+.. toctree::
+   :maxdepth: 1
    :caption: System administration
 
    sys-admin/configure-ca
