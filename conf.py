@@ -104,6 +104,15 @@ html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
 
 html_copy_source = False
 
+html_context = {
+    "display_github": True,
+    "github_user": "epics-docs",
+    "github_repo": "epics-docs",
+    "github_version": os.environ.get("READTHEDOCS_GIT_IDENTIFIER", "master"),
+    "conf_py_path": "/",
+    "source_suffix": [".rst", ".md"],
+}
+
 # Meta tags for SEO
 html_meta = {
     'description': 'EPICS (Experimental Physics and Industrial Control System) documentation - Learn about EPICS, the open-source software framework for building distributed control systems.',

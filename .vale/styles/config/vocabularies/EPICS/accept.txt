@@ -2,6 +2,7 @@ DLL
 Doxygen
 EPICS
 IOC
+IOCs
 PV
 Read the Docs
 reStructuredText
