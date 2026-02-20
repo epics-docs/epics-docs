@@ -93,15 +93,15 @@ You may also directly use related links to see documents which match you the mos
    :maxdepth: 1
    :caption: Application Developer's Guide
 
-   Getting Started <appdevguide/gettingStarted>
-   EPICS Overview (Introduction to EPICS) <../getting-started/EPICS_Intro>
-   Build Facility <build-system/specifications>
-   EPICS Process Database Concepts <process-database/EPICS_Process_Database_Concepts>
-   Database Locking, Scanning and Processing <appdevguide/lockScanProcess>
-   Database Definition <appdevguide/databaseDefinition>
-   IOC Initialization <appdevguide/IOCInit>
+   appdevguide/gettingStarted
+   getting-started/EPICS_Intro
+   build-system/specifications
+   process-database/EPICS_Process_Database_Concepts
+   appdevguide/lockScanProcess
+   appdevguide/databaseDefinition
+   appdevguide/IOCInit
    appdevguide/AccessSecurity
-   IOC Test Facilities <appdevguide/IOCTestFacilities>
+   appdevguide/IOCTestFacilities
    appdevguide/IOCErrorLogging
    appdevguide/deviceSupport
    appdevguide/IOCShell
@@ -130,7 +130,7 @@ You may also directly use related links to see documents which match you the mos
    :caption: PV Access details
 
    pv-access/overview
-   PV Access Protocol Specification <pv-access/protocol>
+   pv-access/protocol
    pv-access/Normative-Types-Specification
    pv-access/OverviewOfpvData
 
@@ -178,4 +178,4 @@ You may also directly use related links to see documents which match you the mos
    :caption: Training
 
    Training Material <https://epics-controls.org/resources-and-support/documents/training/>
-   community/how-to-run-an-epics-collaboration-meeting.rst
+   community/how-to-run-an-epics-collaboration-meeting
