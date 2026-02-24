@@ -55,6 +55,13 @@ standard options
 1. `record._options.queueSize`
 2. `record._options.pipeline`
 3. `record._options.ackAny`
+4. `record._options.DBE`
+    `DBE`` may be either a string or an unsigned integer.
+    Use of an integer is recommended.
+    The ``DBE_*`` options
+    (``DBE_VALUE=1``, ``DBE_ARCHIVE=2``, ``DBE_ALARM=4``).
+    ``DBE_PROPERTY`` will be ignored if given as this event is always
+    handled specially.
 
 ## Pipeline protocol option
 
