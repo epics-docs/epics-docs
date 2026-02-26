@@ -124,7 +124,7 @@ $ cd epics-docs
 
 ``` console
 $ poetry install
-$ poetry run sphinx-autobuild --re-ignore _tags/ . ./_build/html
+$ poetry run sphinx-autobuild . ./_build/html
 ```
 
 At this point,
@@ -148,12 +148,12 @@ From the pip website:
 1.  Follow the first step in the [Using poetry] section
     to locally clone the epics-docs repository.
 
-2.  Install the pip dependencies from `requirements-dev.txt`
+2.  Install the project and its dependencies from `pyproject.toml`:
 
 ``` console
-$ python -m venv venv                  # Create a virtual environment for your local build
-$ . venv/bin/activate                  # Activate it
-$ pip install -r requirements-dev.txt
+$ python -m venv .venv                  # Create a virtual environment for your local build
+$ . .venv/bin/activate                  # Activate it
+$ pip install .
 $ sphinx-autobuild . ./_build/html
 ```
 
@@ -251,39 +251,6 @@ If all is well, they will approve the changes
 and merge them into the main repo.
 After the reviewer has merged the pull request,
 Read the Docs will recompile the page and publish your changes.
-
-## Adding dependencies
-
-When adding a dependency,
-make sure to add them to both Poetry and the requirement files.
-
-For example,
-if you want to add the `sphinx-foo` extension,
-first run:
-
-``` bash
-poetry add sphinx-foo
-```
-
-This command adds that extension to both `pyproject.toml` and `poetry.lock`.
-It also fetches the latest version and pins it in `pyproject.toml`.
-
-To add that dependency to the requirement files,
-take the version pinned in `pyproject.toml`,
-and make sure to pin that same version in the requirements files.
-
-For example,
-if you see in `pyproject.toml`:
-
-``` toml
-sphinx-foo = "^1.1.2"
-```
-
-Then you must add to both `requirements.txt` and `requirements-dev.txt`:
-
-```
-sphinx-foo==1.1.2
-```
 
 ## Reviewing pull requests
 

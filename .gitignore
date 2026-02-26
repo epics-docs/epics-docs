@@ -1,5 +1,14 @@
 _build/
-_tags/
+
 .DS_Store
 *.autosave
 QtC-*
+.vscode/
+
+*.lock
+requirements*.txt
+environment.yml
+environment.yaml
+
+venv/
+.venv/
