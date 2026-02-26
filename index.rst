@@ -80,6 +80,7 @@ You may also directly use related links to see documents which match you the mos
    EPICS Process Database Concepts <process-database/EPICS_Process_Database_Concepts>
    Database Locking, Scanning and Processing <appdevguide/lockScanProcess>
    Database Definition <appdevguide/databaseDefinition>
+   appdevguide/databaseRecords
    IOC Initialization <appdevguide/IOCInit>
    appdevguide/AccessSecurity
    IOC Test Facilities <appdevguide/IOCTestFacilities>
