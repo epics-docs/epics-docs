@@ -1747,16 +1747,15 @@ When a Channel Access Client connects to a field, it typically requests
 some metadata related to that field. One case is a connection from an
 operator interface typically requests metadata that includes: display
 limits, control limits, and display information such as precision and
-engineering units. If any of the fields in a record that are included in
-this metadata change after the connection is made, the client is not
-informed and therefore this is not reflected unless the client
-disconnects and reconnects. A new flag is being added to the Channel
-Access Client to support posting a monitor to the client whenever any of
-this metadata changes. Clients can then request the metadata and reflect
-the change.
+engineering units.
 
-Stay tuned for this improvement in the record support and channel access
-clients.
+If any of the fields in a record that are included in this metadata
+changes after the connection is made, the client is not informed and
+therefore this is not reflected unless the client disconnects and
+reconnects.
+
+Alternatively a client subscription using the DBE_PROPERTY mask posts
+monitor updates to the client whenever any of this metadata changes.
 
 Client specific Filtering
 -------------------------
