@@ -122,7 +122,8 @@ message each time an entries transitions Un-acknowledged -> Free.
 A suggested default is to send an acknowledgement when the number of
 Un-acknowledged exceeds half of the total buffer capacity.
 
-TODO: describe 'record._options.ackAny' option.
+The `record._options.ackAny` option may be used to specify an acknowledgement threshold.
+It can be either a fixed value or a percentage of the total buffer capacity.
 
 ## Request Encoding (Client -> Server)
 
