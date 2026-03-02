@@ -50,20 +50,27 @@ in the serialized data addressed by bit 0.
 
 ## pvRequest options
 
-standard options
-
 1. `record._options.queueSize`
 2. `record._options.pipeline`
 3. `record._options.ackAny`
 4. `record._options.DBE`
-    `DBE` may be either a string or an unsigned integer.
-    Use of an integer is recommended.
-    The `DBE_*` options
-    (`DBE_VALUE=1`, `DBE_ARCHIVE=2`, `DBE_ALARM=4`).
-    `DBE_PROPERTY` will be ignored if given as this event is always
-    handled specially.
 
-## Pipeline protocol option
+### DataBase Event Bit Mask option
+
+Usage of the `DBE` option may be either a string or an unsigned integer, preferably an integer.
+The `DBE_*` options and their standard meanings are:
+
+- 1: `DBE_VALUE`
+  A change in the value of the field.
+- 2: `DBE_ARCHIVE`
+  Changes that should be sent to the client when the field is archived.
+- 4: `DBE_ALARM`
+  All updates that have an alarm state change.
+
+`DBE_PROPERTY` is also an option but it is ignored if given as this event is always
+handled specially.
+
+### Pipeline protocol option
 
 Usage of the pipeline protocol option requires both sides to agree
 and maintain a flow control window counter indicating the number of
@@ -85,7 +92,7 @@ Each time an update is sent by the server, and received by the client, the count
 The client may send a channelMonitorRequest with subcommand&0x80 and a 'nfree' count
 which is added to the counter.
 
-### Acknowledgement Algorithm
+#### Acknowledgement Algorithm
 
 In this way, the client can manage the rate at which the server can send update.
 
