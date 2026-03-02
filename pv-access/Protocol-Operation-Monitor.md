@@ -78,18 +78,18 @@ subscription updates which the Server is may send without receiving
 another acknowledgement from the Client.
 
 This option is exercised used if the pvRequest includes the field
-'record._options.pipeline' having a value convertible to boolean true.
+`record._options.pipeline` having a value convertible to boolean true.
 If this field is not present, or not convertible to true, then the Server
 may send subscription updates without restriction.
 
 The flow control window counter is established by the client in the initial
-channelMonitorRequest message.  If subcommand==0x08, the initial count is zero.
-If subcommand==0x88, then the initial count is provided by the 'nfree' message field.
+`channelMonitorRequest` message.  If `subcommand==0x08`, the initial count is zero.
+If `subcommand==0x88`, then the initial count is provided by the 'queueSize' message field.
 
 The Server may send a subscription update as long as the flow control counter is non-zero.
 Each time an update is sent by the server, and received by the client, the counter is decremented.
 
-The client may send a channelMonitorRequest with subcommand&0x80 and a 'nfree' count
+The client may send a channelMonitorRequest with `subcommand&0x80` and a 'queueSize' count
 which is added to the counter.
 
 #### Acknowledgement Algorithm
@@ -114,7 +114,7 @@ Transitions are:
 
 The flow control window counter should match the number of Free entries.
 
-The 'nfree' count in an acknowledgement message should never exceed the number
+The 'queueSize' count in an acknowledgement message should never exceed the number
 of Un-acknowledged entries.
 
 For reasons of efficiency, it is recommended not to send an acknowledgement
