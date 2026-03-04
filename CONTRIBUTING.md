@@ -98,18 +98,8 @@ and how do I serve it locally?"
 Being able to do this can be of interest
 to check how your contribution will render before sharing it.
 
-#### Using poetry
-
-A practical solution to build the epics-docs documentation is to use [Poetry].
-Poetry is a tool for dependency management and packaging in Python.
-It's reproducible,
-no matter what your environment is,
-and multi-platform (it works equally well on Linux, macOS and Windows).
-
-Please follow [the Poetry documentation] to install it.
-
-Once installed,
-you can setup, build, and serve the epics-docs documentation in two steps:
+[pip] comes pre-installed with most modern Python installations
+and is the simplest way to set up a local build.
 
 1.  Clone (with SSH) your epics-docs fork (see [Forking the repository] above)
     and change directory into it:
@@ -119,51 +109,39 @@ $ git clone git@github.com:your-user-name/epics-docs.git
 $ cd epics-docs
 ```
 
-2.  Install Poetry dependencies (the "setup")
-    and build + serve the epics-docs documentation:
+2.  Install the project and its dependencies from `pyproject.toml`
+    (ideally in a [virtual environment]):
 
 ``` console
-$ poetry install
-$ poetry run sphinx-autobuild . ./_build/html
+$ python -m venv .venv                  # Create a virtual environment for your local build
+$ . .venv/bin/activate                  # Activate it
+$ pip install .
+$ sphinx-autobuild . ./_build/html      # Optional step
 ```
 
 At this point,
 you can open <http://127.0.0.1:8000> in your internet browser
 and check the generated documentation by yourself.
 
-  [Poetry]: https://python-poetry.org/docs/
-  [the Poetry documentation]: https://python-poetry.org/docs/#system-requirements
-  [Forking the repository]: #forking-the-repository
-
-#### Using pip
-
-Another solution for local builds is to use [pip]
-(ideally in a [virtual environment]),
-which comes pre-installed with most modern python installations.
-From the pip website:
-
-> pip is the package installer for Python.
-> You can use it to install packages from the Python Package Index and other indexes
-
-1.  Follow the first step in the [Using poetry] section
-    to locally clone the epics-docs repository.
-
-2.  Install the project and its dependencies from `pyproject.toml`:
-
-``` console
-$ python -m venv .venv                  # Create a virtual environment for your local build
-$ . .venv/bin/activate                  # Activate it
-$ pip install .
-$ sphinx-autobuild . ./_build/html
-```
-
-At this point, same as above,
-you can open <http://127.0.0.1:8000> in your internet browser,
-and check the generated documentation by yourself.
-
   [pip]: https://pip.pypa.io/en/stable/
   [virtual environment]: https://docs.python.org/3/library/venv.html
-  [Using poetry]: #using-poetry
+  [Forking the repository]: #forking-the-repository
+
+#### Using other tools
+
+If you prefer a third-party dependency manager such as [Poetry], [uv], [Hatch], or [pipenv],
+these should all work with the `pyproject.toml` configuration.
+For example, with Poetry:
+
+``` console
+$ poetry install
+$ poetry run sphinx-autobuild . ./_build/html
+```
+
+  [Poetry]: https://python-poetry.org/docs/
+  [uv]: https://docs.astral.sh/uv/
+  [Hatch]: https://hatch.pypa.io/
+  [pipenv]: https://pipenv.pypa.io/
 
 #### Reference setup and build
 
@@ -191,8 +169,8 @@ build, and serve the epics-docs documentation,
 you can edit any `.rst` or `.md` file
 and check how sphinx will render your contribution.
 
-After running `$ poetry run sphinx-autobuild . ./_build/html`,
-like described earlier,
+After running `sphinx-autobuild . ./_build/html`
+(as described above),
 any modification will update <http://127.0.0.1:8000> automatically.
 
 ### Style guide
