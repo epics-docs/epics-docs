@@ -18,3 +18,7 @@ dependencies = [
 [tool.setuptools]
 # For pip / setuptools, don't assume we're producing a Python package
 packages = []
+
+[tool.poetry]
+# Same as for setuptools: don't assume we're producing a Python package
+package-mode = false
