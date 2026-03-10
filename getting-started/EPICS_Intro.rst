@@ -107,7 +107,7 @@ The basic attributes of EPICS are:
    control, thus the name “process variable”, or “PV”. A typical PV can
    represent any one of various attributes such as temperature or (electric)
    current. This design is typical in process control systems. The pros and
-   cons of this design are shortly discussed in the Appendix.
+   cons of this design are briefly discussed in the Appendix.
 
 IOC Software Components
 -----------------------
@@ -156,7 +156,7 @@ The database defines the functionality of the IOC: what process data it
 provides, how is the data handled and stored. The database can contain
 any number of records, each of which belongs to a specific record
 type. The record type defines the type of data that the record handles
-and a set of functions that define how the data are handled. Record
+and a set of functions that define how the data is handled. Record
 type-specific metadata, also known as “properties” is included in the
 records to configure and support the operation. For instance, an analog
 input (ai) record type supports reading in values from hardware devices
