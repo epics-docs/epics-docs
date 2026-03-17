@@ -1754,7 +1754,8 @@ changes after the connection is made, the client is not informed and
 therefore this is not reflected unless the client disconnects and
 reconnects.
 
-Alternatively a client subscription using the DBE_PROPERTY mask posts
+.. versionadded:: R3.15.0.2
+Alternatively a client subscription using the `DBE_PROPERTY` mask posts
 monitor updates to the client whenever any of this metadata changes.
 
 Client specific Filtering
