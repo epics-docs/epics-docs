@@ -180,7 +180,7 @@ Create a demo/test ioc to test ca and pva
     make
     cd iocBoot/ioctestIoc
     chmod u+x st.cmd
-    ioctestIoc> ./st.cmd
+    ./st.cmd
     #!../../bin/darwin-x86/testIoc
     < envPaths
     epicsEnvSet("IOC","ioctestIoc")
