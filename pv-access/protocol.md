@@ -80,7 +80,7 @@ transmission).
 Port number 5076 is used for UDP traffic by default.
 Port number 5075 is preferred for TCP connections, but a random port can be used.
 
-To support multiple local sockets at port 5076 to able all to receive
+To support multiple local sockets at port 5076 to enable all IOCs to receive
 unicast messages over the UDP a multicast group on local network
 interface at address 224.0.0.128, port 5076, is used. Any UDP message
 flagged as unicast received at port 5076 MUST be forwarded to the
