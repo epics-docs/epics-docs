@@ -154,6 +154,7 @@ pythonSoftIOC | Embed an EPICS IOC in a Python process | [github.com](https://gi
 p4p           | Python wrapper around PVA client and server | [github.com](https://github.com/mdavidsaver/p4p)        | [github.io](https://mdavidsaver.github.io/p4p/)                           | PVA
 pvapy         | Python interface to pvAccess | [github.com](https://github.com/epics-base/pvaPy)       | [epics.anl.gov](https://epics.anl.gov/extensions/pvaPy/production/index.html) | PVA/CA
 pyepics       | Python wrapper around libca | [github.com](https://github.com/pyepics/pyepics)        | [github.io](https://pyepics.github.io/pyepics/)                           | CA
+pvua          | Python wrapper around p4p and pyepics providing a common API | [github.com](https://github.com/slac-epics/pvua) | [github.com](https://github.com/slac-epics/pvua) | PVA/CA
 
 ### Other
 | Name | Description | Source Code | Documentation |
@@ -202,7 +203,7 @@ ParseCASW | CA beacon anomaly diagnostic tool | [epics.anl.gov](https://epics.an
 procServ | Process Server with Telnet Console | [github.com](https://github.com/ralphlange/procServ) | [github.com](https://github.com/ralphlange/procServ)
 PViewer | Python 1D and 2D viewer | [epics.anl.gov](https://epics.anl.gov/bcda/dataVis/pviewer.html) | [epics.anl.gov](https://epics.anl.gov/bcda/dataVis/pviewer.html)
 Wireshark CA | CA plug-in for Wireshark | [wireshark.org](https://www.wireshark.org/download/) | [www-linac.kek.jp](http://www-linac.kek.jp/cont/epics/wireshark/)
-
+meta-epics | Yocto recipes for EPICS and EPICS-related software | [github.com](https://github.com/pcdshub/meta-epics) | [github.com](https://github.com/pcdshub/meta-epics)
 
 ## (High Level) Application Packages
 | Name | Description | Source Code | Documentation |
