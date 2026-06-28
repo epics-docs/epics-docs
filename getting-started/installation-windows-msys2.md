@@ -1,22 +1,20 @@
-# Installation using MSYS2 and the MinGW Compilers
+# Installation using MSYS2/MinGW
 
-MSYS2 has all the required tools available through an easy-to-use
-package manager, and its bash shell looks and feels like working on Linux.
+MSYS2 has all the required tools available
+through an easy-to-use package manager,
+and its bash shell looks and feels like working on Linux.
 Most Bash commands are similar to their Linux versions.
 MSYS2 is available for Windows 7 and up only.
-The following procedure is verified on Windows 8.1 (64 bit)
-and Windows 10 (64 bit).
+The following procedure is verified on Windows 10 and 11 (64 bit).
 
-## Install tools
+## Install MSYS2 and tools
 
 MSYS2 provides a Bash shell, Autotools, revision control systems
 and other tools for building native Windows applications
 using MinGW-w64 toolchains.
 It can be installed from its official [website](https://www.msys2.org).
-Download and run the installer - "x86_64" for 64-bit,
-"i686" for 32-bit Windows.
+Download and run the installer - "x86_64" for 64-bit Windows.
 The installation procedure is well explained on the website.
-These instructions assume you are running on 64-bit Windows.
 
 The default location of the MSYS2 installation is `C:\msys64`.
 If you don't have Administrator rights,
@@ -25,19 +23,35 @@ e.g. `C:\Users\'user'\msys64` (with 'user' being your Windows
 user directory name).
 We will assume the default location in this document.
 
-Once installation is complete, you have three options available
-for starting a shell.
-The difference between these options is the preset of the environment variables
-that select the compiler toolchain to use.
-Launch the "MSYS MinGW 64-bit" option to use the MinGW 64bit toolchain,
-producing 64bit binaries that run on 64bit Windows systems.
-The "MSYS MinGW 32-bit" option will use the MinGW 32bit toolchain,
-producing 32bit binaries that will run on 32bit and 64bit Windows systems.
+MSYS2 uses a *layered* approach.
+Its *MSYS* component provides the foundation:
+a POSIX compliance layer and common shared tools:
+shells, git, make, tar, autotools, ...
+On top of it, different *compiler toolchains*
+add their specific tools: compilers, linkers, debuggers,...
 
-Again: you have a single installation of MSYS2,
-these different shells are just setups to use different compilers.
-Installation and update of your MSYS2 system only has to be done once -
-you can use any of the shell options for that.
+To help the user with that complex setup,
+each component adds its own *shell* shortcut,
+which sets the environment for using the specific toolchain.
+
+::::{important}
+**Selecting the Right Shell**
+
+Once installation is complete, you will have several options for starting
+a shell in your Start Menu (e.g., "MSYS2 MSYS", "MSYS2 MinGW 64-bit",
+"MSYS2 UCRT64", etc.).
+
+* **MSYS2 MSYS**: Use this **only** for system maintenance (like `pacman`).
+  It uses a POSIX emulation layer that you generally do **not** want
+  for EPICS.
+* **MSYS2 MinGW 64-bit**: Use this for building and running EPICS.
+  It provides the native Windows compiler toolchain.
+
+:::{warning}
+**Crucial:** Always double-check which shell you have opened.
+Mixing them up is a common cause of build failures.
+:::
+::::
 
 Update MSYS2 with following command:
 
@@ -48,13 +62,16 @@ $ pacman -Syu
 After this finishes (let it close the bash shell),
 open bash again and run the same command again to finish the updates.
 The same procedure is used for regular updates of the MSYS2 installation.
-An up-to-date system shows:
+An up-to-date system shows something like:
 
 ```bash
 $ pacman -Syu
 :: Synchronizing package databases...
+ clangarm64 is up to date
  mingw32 is up to date
  mingw64 is up to date
+ ucrt64 is up to date
+ clang64 is up to date
  msys is up to date
 :: Starting core system upgrade...
  there is nothing to do
@@ -76,14 +93,11 @@ and work for all compilers/toolchains that you may install on top on MSYS2.
 Packages that are part of a MinGW toolchain start with the prefix
 "mingw-w64-x86_64-" for the 64bit toolchain or "mingw-w64-i686-"
 for the 32bit toolchain.
-(The "w64" part identifies the host system will be different
-when using a 32bit MSYS2 environment, e.g. on a 32bit Windows host.)
 
-Install the MinGW 32bit and/or MinGW 64bit toolchains:
+Install the MinGW 64bit toolchain:
 
 ```bash
 $ pacman -S mingw-w64-x86_64-toolchain
-$ pacman -S mingw-w64-i686-toolchain
 ```
 
 Each complete toolchain needs about 900MB of disk space.
@@ -101,7 +115,6 @@ $ pacman -Q
 make 4.3-1
 perl 5.32.0-2
 mingw-w64-x86_64-...
-mingw-w64-i686-...
 ...
 ```
 
@@ -114,127 +127,90 @@ As mentioned above, you can update your complete installation
 $ pacman -Syu
 ```
 
-You should do this in regular intervals.
+You should do this regularly.
 
 ## Download and build EPICS Base
 
-Start the "MSYS MinGW 64-bit" shell and do:
+Start the **MSYS2 MinGW 64-bit** shell and do:
 
 ```bash
 $ cd $HOME
-$ wget https://epics-controls.org/download/base/base-7.0.4.1.tar.gz
-$ tar -xvf base-7.0.4.1.tar.gz
-$ cd base-R7.0.4.1
+$ wget https://epics-controls.org/download/base/base-7.0.10.tar.gz
+$ tar -xvf base-7.0.10.tar.gz
+$ cd base-7.0.10
 $ export EPICS_HOST_ARCH=windows-x64-mingw
-$ make
+$ make -j<n>
 ```
 
-When using the MinGW 32bit toolchain, the "MSYS MinGW 32-bit" shell
-must be used and EPICS_HOST ARCH must be set to "win32-x86-mingw".
+The `-j` option enables parallel make: adapt `<n>` to the number of CPU cores on your system.
 
-Note: If you are connecting to your MSYS2 system through ssh,
+:::{tip}
+If you are connecting to your MSYS2 system through ssh,
 you need to set and allow an environment variable to use the environment
 presets for the MinGW compilers.
 In the MSYS2 configuration of the ssh daemon (`/etc/ssh/sshd_config`),
-add the line
-
-```text
-AcceptEnv MSYSTEM
-```
-
+add the line `AcceptEnv MSYSTEM`,
 and on your (local) client configuration (`~/.ssh/config`) add the line
-
-```text
-SetEnv MSYSTEM=MINGW64
-```
-
-to use the MinGW 64-bit compiler chain (`MINGW32` to use a 32-bit installation).
+`SetEnv MSYSTEM=MINGW64`.
+:::
 
 During the compilation, there will probably be warnings,
 but there should be no error.
-You can choose any EPICS Base version to build, the procedure remains the same.
-
-Please refer to the chapter "Build Time" in [installation-windows](installation-windows.md)
-for ways to shorten your build.
 
 ## Quick test from MSYS2 Bash
 
-As long as you haven't added the location of your programs to the `PATH`
-environment variable (see below),
+As long as you haven't added the location of your programs
+to the `PATH` environment variable
+(see [installation-windows-env](installation-windows-env.md)),
 you will have to provide the whole path to run commands
 or `cd` into the directory they are located in
 and prefix the command with `./`.
 
-Replace 'user' with the actual Windows user folder name existing
-in your Windows installation - MSYS2 creates your home directory
-using that name.
-In the examples, we assume the default location for MSYS2 (`C:\msys64`).
-
 Run `softIoc` and, if everything is ok, you should see an EPICS prompt:
 
 ```bash
-$ cd /home/'user'/base-R7.0.4.1/bin/windows-x64-mingw
+$ cd /home/'user'/base-7.0.10/bin/windows-x64-mingw
 $ ./softIoc -x test
 Starting iocInit
+############################################################################
+## EPICS R7.0.10
+## Rev. 2026-06-25T10:56+0200
+## Rev. Date build date/time:
+############################################################################
 iocRun: All initialization complete
-dbLoadDatabase("C:\msys64\home\'user'\base-R7.0.4.1\bin\windows-x64-mingw\..\..\dbd\softIoc.dbd")
-softIoc_registerRecordDeviceDriver(pdbbase)
-iocInit()
-############################################################################
-## EPICS R7.0.4.1
-## Rev. 2020-10-21T11:57+0200
-############################################################################
 epics>
 ```
 
-You can exit with ctrl-c or by typing exit.
-
-As long as you are in the location of the EPICS Base binaries,
-you can run them by prefixing with `./`.
-Try commands like `./caput`, `./caget`, `./camonitor`, ...
+You can exit with ctrl-d or by typing exit.
 
 ## Quick test from Windows command prompt
 
-Open the Windows command prompt. Again, 'user' is the Windows user folder name.
-The MSYS2 home folders are inside the MSYS2 installation.
+Open the Windows command prompt.
 
 If you built EPICS Base with dynamic (DLL) linking,
 you need to add the location of the C++ libraries to the `PATH` variable
 for them to be found.
-(Again, assuming a 64bit MSYS2 installation with default paths
-and the MinGW 64bit toolchain.)
 
 ```batch
 >set "PATH=%PATH%C:\msys64\mingw64\bin;"
->cd C:\msys64\home\'user'\base-R7.0.4.1\bin\windows-x64-mingw
+>cd C:\msys64\home\'user'\base-7.0.10\bin\windows-x64-mingw
 >softIoc -x test
 Starting iocInit
 ############################################################################
-## EPICS R7.0.4.1
-## Rev. 2020-10-21T11:57+0200
+## EPICS R7.0.10
+## Rev. 2026-06-25T10:56+0200
+## Rev. Date build date/time:
 ############################################################################
 iocRun: All initialization complete
 epics>
 ```
 
-You can exit with ctrl-c or by typing exit.
-
-As long as you are in the location of the EPICS Base binaries,
-they will all work using their simple names.
-Try commands like `caput`, `caget`, `camonitor`, ...
-
 ## Create a demo/test IOC
 
-Although the `softIoc` binary can be used with multiple instances
-with different db files, you will need to create your own IOC at some point.
 We will create a test ioc from the existing application template
 in Base using the `makeBaseApp.pl` script.
 
-Let's create one IOC, which takes the values of 2 process variables (PVs),
-adds them and stores the result in 3rd PV.
-
-We will use `MSYS2` for building the IOC.
-Open the `MSYS2 Mingw 64-bit` shell.
+Open the **MSYS2 Mingw 64-bit** shell.
 Make sure the environment is set up correctly
 (see [installation-windows-env](installation-windows-env.md)).
 
@@ -259,19 +235,9 @@ Application name?
 ```
 
 Accept the default name and press enter.
-That should generate a skeleton for your `testioc`.
-
-You can find the full details of the application structure in the
-"Application Developer's Guide", chapter
-[Example IOC Application](https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide/GettingStarted.html#x3-60002.2).
-
-```bash
-$ ls
-configure  iocBoot  Makefile  testApp
-```
 
 Now create a `db` file which describes PVs for your `IOC`.
-Go to `testApp/Db` and create `test.db` file with following record details:
+Go to `testApp/Db` and create `test.db` file:
 
 ```text
 record(ai, "test:pv1")
@@ -291,54 +257,26 @@ record(calc,"test:add")
 }
 ```
 
-Open `Makefile` and navigate to
-
-```makefile
-#DB += xxx.db
-```
-
-Remove # and change this to `test.db`:
+In the same directory,
+open `Makefile` and change the line `#DB += xxx.db` to:
 
 ```makefile
 DB += test.db
 ```
 
-Go to back to root folder for IOC `testioc`.
-Go to `iocBoot/ioctest`.
+Go back to the `iocBoot/ioctest` folder.
 Modify the `st.cmd` startup command file.
-
-Change:
-
-```text
-#dbLoadRecords("db/xxx.db","user=XXX")
-```
-
-to:
+Change `#dbLoadRecords("db/xxx.db","user=XXX")` to:
 
 ```text
 dbLoadRecords("db/test.db","user=XXX")
 ```
 
-Save all the files and go back to the MSYS2 Bash terminal.
-Make sure the architecture is set correctly:
-
-```bash
-$ echo $EPICS_HOST_ARCH
-windows-x64-mingw
-```
-
-Change into the testioc folder and run `make`:
+Go back to the root folder `~/testioc` and run `make`:
 
 ```bash
 $ cd ~/testioc
 $ make
-```
-
-This should create all the files for the test IOC.
-
-```bash
-$ ls
-bin  configure  db  dbd  iocBoot  lib  Makefile  testApp
 ```
 
 Go to `iocBoot/ioctest`.
@@ -348,98 +286,19 @@ to full Windows paths:
 ```text
 epicsEnvSet("IOC","ioctest")
 epicsEnvSet("TOP","C:/msys64/home/'user'/testioc")
-epicsEnvSet("EPICS_BASE","C:/msys64/home/'user'/base-7.0.4.1")
+epicsEnvSet("EPICS_BASE","C:/msys64/home/'user'/base-7.0.10")
 ```
 
-**Note:** You can use Linux style forward slash characters
-in path specifications inside this file or double backslashes (`\\`).
-
-At this point, you can run the IOC from either an MSYS2 Bash shell
-or from a Windows command prompt,
-by changing into the IOC directory and running the test.exe binary
-with your startup command script as parameter.
-
-In the Windows command prompt:
-
-```batch
->cd C:\msys64\home\'user'\testioc\iocBoot\ioctest
->..\..\bin\windows-x64-mingw\test st.cmd
-```
-
-In the MSYS2 shell:
+Now run the IOC:
 
 ```bash
 $ cd ~/testioc/iocBoot/ioctest
 $ ../../bin/windows-x64-mingw/test st.cmd
 ```
 
-In both cases, the IOC should start like this:
+:::{tip}
+**Check for Success**
 
-```text
-Starting iocInit
-iocRun: All initialization complete
-#!../../bin/windows-x64-mingw/test
-< envPaths
-epicsEnvSet("IOC","ioctest")
-epicsEnvSet("TOP","C:/msys64/home/'user'/testioc")
-epicsEnvSet("EPICS_BASE","C:/msys64/home/'user'/base-R7.0.4.1")
-cd "C:/msys64/home/'user'/testioc"
-## Register all support components
-dbLoadDatabase "dbd/test.dbd"
-test_registerRecordDeviceDriver pdbbase
-Warning: IOC is booting with TOP = "C:/msys64/home/'user'/testioc"
-          but was built with TOP = "/home/'user'/testioc"
-## Load record instances
-dbLoadRecords("db/test.db","user='user'")
-cd "C:/msys64/home/'user'/testioc/iocBoot/ioctest"
-iocInit
-############################################################################
-## EPICS R7.0.4.1
-## Rev. 2020-10-21T11:57+0200
-############################################################################
-## Start any sequence programs
-#seq sncxxx,"user='user'"
-epics>
-```
-
-Check if the database `test.db` you created is loaded correctly:
-
-```text
-epics> dbl
-test:pv1
-test:pv2
-test:add
-```
-
-As you can see 3 process variable is loaded and available.
-Keep this terminal open and running.
-Test this process variable using another terminals.
-
-Open another shell for monitoring `test:add`:
-
-```bash
-$ camonitor test:add
-test:add                       2020-10-23 13:39:14.795006 100
-```
-
-That terminal will monitor the PV `test:add` continuously.
-If any value change is detected, it will be updated in this terminal.
-Keep it open to observe the behaviour.
-
-Open a third shell.
-Using caput, modify the values of `test:pv1` and `test:pv2`
-as we have done in the temperature example above.
-You will see changes of their sum in the second terminal accordingly.
-
-At this point, you have one IOC `testioc` running,
-which loaded the database `test.db` with 3 records.
-From other processes, you can connect to these records
-using Channel Access.
-If you add more process variable in `test.db`,
-you will have to `make` the `testioc` application again
-and restart the IOC to load the new version of the database.
-
-You can also create and run IOCs like this in parallel with their own databases
-and process variables.
-Just keep in mind that each record instance has to have a unique name
-for Channel Access to work properly.
+If the IOC starts correctly, you will see initialization messages
+and an `epics>` prompt. Type `dbl` to verify that your PVs are loaded.
+:::
