@@ -79,6 +79,8 @@ The complete path of the current directory **must not** contain
 any spaces or parentheses (like `C:\Program Files`).
 If your working directory path does, you use the Windows short path
 (displayed with `dir /x`) to navigate there.
+The full short path to the current directory
+can be obtained with `for %A in (".") do @echo %~sA`.
 :::
 
 4. Set the EPICS host architecture `EPICS_HOST_ARCH`

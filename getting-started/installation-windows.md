@@ -219,6 +219,8 @@ If you cannot avoid paths with spaces or parentheses,
 use the Windows short path (that can be displayed with `dir /x`)
 for all path components with those characters in any path settings
 and/or your workspace directory.
+The full short path to the current directory
+can be obtained with `for %A in (".") do @echo %~sA`.
 :::
 
 ## Put Tools in the PATH
