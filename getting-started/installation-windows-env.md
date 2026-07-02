@@ -104,7 +104,6 @@ you can also select `Edit the system environment variables`.
    are being recognised as valid commands in any location
    and work correctly.
 
-:::{tip}
 **MSYS2 Path Inheritance**
 
 By default, the MSYS2 shell does **not** inherit the parent Windows environment.
@@ -114,8 +113,12 @@ with the argument `-use-full-path`, e.g.,
 This is crucial if you want to use the variables you just set
 inside an MSYS2 terminal.
 
+:::{tip}
 You can add this argument
 in the properties of the shortcut for your MinGW64 Shell.
+
+Alternatively, you can edit the `mingw64.ini` configuration file and set
+`MSYS2_PATH_TYPE=inherit`
 :::
 
 :::{seealso}
