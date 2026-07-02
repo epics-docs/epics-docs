@@ -213,6 +213,7 @@ in Base using the `makeBaseApp.pl` script.
 Open the **MSYS2 Mingw 64-bit** shell.
 Make sure the environment is set up correctly
 (see [installation-windows-env](installation-windows-env.md)).
+Use the `-use-full-path` argument to inherit your Windows path settings.
 
 Create a new directory `testioc`:
 
@@ -281,7 +282,9 @@ $ make
 
 Go to `iocBoot/ioctest`.
 Open the `envPaths` file and change the MSYS2 relative paths
-to full Windows paths:
+to full Windows paths.
+Change any back slashes that you might have copied from Windows
+to forward slashes.
 
 ```text
 epicsEnvSet("IOC","ioctest")
