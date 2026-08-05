@@ -114,6 +114,7 @@ You may also directly use related links to see documents which match you the mos
    PV Access Protocol Specification <pv-access/protocol>
    pv-access/Normative-Types-Specification
    pv-access/OverviewOfpvData
+   pv-access/PV-Name-Resolution
 
 .. toctree::
    :maxdepth: 1
