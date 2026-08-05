@@ -72,7 +72,8 @@ Two major compilers are supported by EPICS and its build system:
 
 **Microsoft's Visual Studio compiler (MSVC)**
 : Probably the most widely used compiler for EPICS on the Windows platform.
-  The "Community Edition" is free to download and use.
+  The "Community Edition" is free to download and use
+  for open source projects.
   (You need to have Administrator rights to install it.)
   Any Visual Studio installation will need the "C++ development" parts
   for the compiler toolchain to be installed.
@@ -96,6 +97,7 @@ and 32bit output (runs on both 32bit and 64bit systems).
 
 When using C++, libraries are not compatible between those two
 compilers toolchains.
+
 When generating a binary (e.g. an IOC),
 all C++ code that is being linked must have been generated uniformly
 by either MSVC or MinGW.
@@ -103,7 +105,13 @@ by either MSVC or MinGW.
 a symbol needed for linking an executable will not be found in a library
 generated with the other compiler, because its name is different there.)
 
-If you need to link against vendor-provided binary C++ libraries,
+If the vendor provides a DLL with a C compatible interface
+then there is more chance that either compiler will be able to use it,
+but there may still be some subtleties
+depending on e.g. memory management of the exported function interface
+that result in only one of the compilers being able to work correctly with it.
+
+If you need to link against vendor-provided binary libraries,
 this will determine which compiler you need to use.
 Many hardware vendors only provide libraries
 for the Microsoft Visual Studio compiler (MSVC).

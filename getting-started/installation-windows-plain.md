@@ -48,7 +48,7 @@ variable settings.
 ## Install the compiler
 
 Download the Visual Studio Installer and install
-(the community edition is free).
+(the community edition is free to use for open source projects).
 Make sure you enable the **Desktop development with C++** workload.
 
 :::{tip}
@@ -60,7 +60,8 @@ when you need to link against vendor-provided binary libraries
 that are only distributed as `.lib` and `.dll` files
 compiled with Microsoft's Visual C++ compiler.
 
-The MSVC compilers handle libraries created by older versions.
+The MSVC compilers handle libraries created by older versions
+(back to Visual Studio 2015).
 Use the current version of Visual Studio.
 :::
 
@@ -84,7 +85,8 @@ can be obtained with `for %A in (".") do @echo %~sA`.
 :::
 
 4. Set the EPICS host architecture `EPICS_HOST_ARCH`
-   (typically `windows-x64`).
+   (typically `windows-x64` for DLL builds
+   and `windows-x64-static` for static builds).
 5. Run the `vcvarsall.bat` script of your installation
    to set the environment for your build.
 6. Run `make` (or `gmake` if using the version from Strawberry Perl).

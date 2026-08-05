@@ -68,6 +68,10 @@ You probably will have to edit `windows.bat` to adapt it to your needs
 and `call` it from any Windows command prompt
 before doing EPICS commands or builds.
 
+The EPICS build system generates a batch file called `dllPath.bat`
+that can be used to add the paths where DLLs are found
+to the `PATH` environment variable.
+
 If you use the MSYS2 bash shell, you similarly need to adapt and run
 the `unix.sh` shell script from any bash shell prompt
 before doing EPICS commands or builds.

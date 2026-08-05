@@ -192,7 +192,7 @@ you need to add the location of the C++ libraries to the `PATH` variable
 for them to be found.
 
 ```batch
->set "PATH=%PATH%C:\msys64\mingw64\bin;"
+>set "PATH=%PATH%;C:\msys64\mingw64\bin;"
 >cd C:\msys64\home\'user'\base-7.0.10\bin\windows-x64-mingw
 >softIoc -x test
 Starting iocInit
