@@ -150,7 +150,6 @@ You may also directly use related links to see documents which match you the mos
    :maxdepth: 1
    :caption: Contributing
 
-   contributing/HowToWorkWithTheEpicsRepository
    CONTRIBUTING
    Installing EPICS on Raspberry PI (External) <https://cmd-response.readthedocs.io/en/latest/epics/rpi_epics.html>
    Area Detector: Installation Guide (External) <https://areadetector.github.io/areaDetector/install_guide.html>

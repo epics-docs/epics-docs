@@ -163,7 +163,10 @@ redirects = {
         "../index.html",
 
     "software/HowToWorkWithTheEpicsRepository":
-        "../contributing/HowToWorkWithTheEpicsRepository.html",
+        "../index.html",
+
+    "contributing/HowToWorkWithTheEpicsRepository":
+        "../index.html",
 
     "access-security/specifications":
         "../appdevguide/AccessSecurity.html",
