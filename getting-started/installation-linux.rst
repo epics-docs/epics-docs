@@ -37,9 +37,9 @@ Choose the release that you want and download:
 
     mkdir $HOME/EPICS
     cd $HOME/EPICS
-    wget https://epics-controls.org/download/base/base-7.0.8.1.tar.gz
-    tar -xvf base-7.0.8.1.tar.gz
-    cd base-7.0.8.1
+    wget https://epics-controls.org/download/base/base-7.0.10.tar.gz
+    tar -xvf base-7.0.10.tar.gz
+    cd base-7.0.10
     make
 
 After compiling you should put the path into ``$HOME/.profile`` or into ``$HOME/.bashrc``
@@ -47,7 +47,7 @@ by adding the following to either one of those files:
 
 ::
 
-    export EPICS_BASE=${HOME}/EPICS/base-7.0.8.1
+    export EPICS_BASE=${HOME}/EPICS/base-7.0.10
     export EPICS_HOST_ARCH=$(${EPICS_BASE}/startup/EpicsHostArch)
     export PATH=${EPICS_BASE}/bin/${EPICS_HOST_ARCH}:${PATH}
 
