@@ -328,23 +328,43 @@ struct searchRequest {
 |           Member | Description                                                                             |
 | ---------------: | --------------------------------------------------------------------------------------- |
 | searchSequenceID | Search sequence ID (counter w/ rollover), can be used by congestion control algorithms. |
-|    replyRequired | 0x01 to force server to respond even if it does not host channel(s), 0x00 otherwise.    |
+|            flags | Bit mask.  See next table.                                                              |
 |         protocol | A set of allowed protocols to respond ("tcp", "tls"). Unrestricted if array is empty.   |
 | searchInstanceID | ID to be used to associate response with the following channel name.                    |
 |      channelName | Non-empty channel name, maximum length of 500 characters.                               |
 :::
 
+:::{table} Search request flags bit mask
+:align: center
+
+| flags Bit Location | Name          | Description |
+| -----------------: | ------------- | ----------------------------------------------------------------------- |
+| 0x01               | replyRequired | Set to request server to respond even if it does not host channel(s) |
+| 0x02               | replySrcPort  | If set, receiver ignore responsePort field in favor of sender source port.  (Version 3) |
+| 0x80               | unicast       | Set if original sender believes the message to be sent to a unicast address |
+| 0x7c               | unused        | Sender should zero, receiver should ignore |
+:::
+
 The protocol "tcp" indicates that the client would like to then continue the data communication via a plain TCP connection.
 "tls" indicates that the client can also support an SSL/TLS TCP connection.
 
-Note that the element count for protocol uses the normal size encoding, i.e. unsigned 8-bit integer 1 for one
-supported protocol.
-The element count for the channels array, however, always uses an unsigned 16 bit integer.
-This choice is based on the reference implementations which append channel names to the network buffer and
-update the count. With normal size encoding, an increment to 254 would change the count from requiring 1 byte to 3 bytes, shifting already added channel names.
+Note that the element count for protocol uses the variable length [size](Protocol-Encoding.html#sizes) encoding.
+The element count for the channels array, however, as a __special case__ uses an unsigned 16 bit integer.
 
-The response to a search request is defined as messageCommand 0x04, see
-below.
+The response to a search request is defined as `CMD_SEARCH_RESPONSE`, see below.
+
+A peer receiving a packet containing a message with the `unicast` flag set should forward this packet
+as a local multicast (send to `224.0.0.128` via. `127.0.0.1`).
+The `unicast` flag __must__ be cleared in the forwarded packet (or an infinite loop may develop).
+When the `unicast` flag is cleared, with a `CMD_ORIGIN_TAG` message should be prefixed containing
+the apparent source address.
+
+Note, the `unicast` flag is known to be erroneously set by some clients in broadcast packets.
+A one-time forwarding of an erroneously marked packet will multiply that packet by the number of peers
+which received the broadcast.
+A peer should make best effort to recognize this case and only forward packets with a unicast destination address
+regardless of the `unicast` flag.
+(see also the `IPV6_RECVPKTINFO`, `IP_PKTINFO`, `IP_ORIGDSTADDR`, and `IP_RECVIF` socket control messages)
 
 As mentioned, servers always accept CMD_SEARCH via TCP.
 The environment variable EPICS_PVA_NAME_SERVERS configures a client to use
@@ -354,6 +374,16 @@ Upon connection, the server will send the byte order and validation request mess
 After the server and client complete this exchange, the client may send CMD_SEARCH.
 If the channel is known, the server will reply with CMD_SEARCH_RESPONSE via the same
 TCP connection.
+
+
+
+When a `searchRequest` message from a __remote peer__ is received with version flag is greater than or equal to 3,
+and the `replySrcPort` bit set in `flags`,
+then the receiving node should ignore the `responsePort` field and instead use the peer source port.
+When forwarding such a message to a __local peer__, the `responsePort` field should be overwritten
+with the peer source port, and the`replySrcPort` bit should not be cleared.
+When such a message is received from a __local peer__ (as a local multicast), the `replySrcPort`
+bit, and the peer source port, should be ignored.
 
 ### CMD_SEARCH_RESPONSE (0x04)
 

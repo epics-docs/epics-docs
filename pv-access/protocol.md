@@ -49,6 +49,10 @@ After this point, the negotiated version is the lesser of the local and peer ver
 
 As a special exception, a TCP peer must be disconnected if it does not send a valid message within ``$EPICS_PVA_CONN_TMO`` seconds.
 
+### Version 3
+
+ * v3 client my set `replySrcPort` bit to `flags` byte of `CMD_SEARCH`.
+
 ### Version 2
 
  * v2 server's 'Echo' reply must include the request payload.
