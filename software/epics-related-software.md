@@ -1,9 +1,25 @@
 # EPICS Related Software
 
-This page attempts to list all EPICS-related source code and documentation outside of [EPICS Base](https://git.launchpad.net/epics-base). If you find a link is incorrect or missing, please [submit an issue](https://github.com/epics-docs/epics-docs/issues/new/choose) or pull-request with a fix on the [epics-docs](https://github.com/epics-docs/epics-docs) repository. When submitting a pull-request, be sure to be familiar with our [documentation contribution guide](../CONTRIBUTING.md).
+This page attempts to list all EPICS-related source code and documentation
+outside of [EPICS Base](https://git.launchpad.net/epics-base).
+If you find a link is incorrect or missing, please
+[submit an issue](https://github.com/epics-docs/epics-docs/issues/new/choose)
+or pull-request with a fix to the
+[epics-related-software](https://github.com/epics-docs/epics-docs/blob/master/software/epics-related-software.md)
+page of the [epics-docs](https://github.com/epics-docs/epics-docs) GitHub project.
+When submitting a pull-request, be sure to be familiar with our
+[documentation contribution guide](../CONTRIBUTING.md).
 
 ## IOC Support Modules
-These support modules are meant to be built into an IOC. See also the [epics-modules](https://github.com/epics-modules) project on github, there may be something there that has not yet been placed in this list.
+These support modules are designed to be built into an IOC.
+The [epics-modules](https://github.com/epics-modules) GitHub organization
+is the home for many IOC support modules, but there are many other places
+where collections or individual modules can be found.
+A Google search for "EPICS Support" and a manufacturer's name and model can be productive.
+
+The [Hardware Support](https://epics-controls.org/resources-and-support/modules/hardware-support/)
+page on the EPICS Controls website lists many other IOC support modules
+that don't appear here and also accepts submissions for new modules.
 
 | Name | Source Code | Documentation |
 | ---- | ----------- | ------------- |
