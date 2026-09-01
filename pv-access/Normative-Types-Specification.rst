@@ -2380,6 +2380,33 @@ nanoseconds
 userTag
    The ``userTag`` field of the timestamp associated with each channel.
 
+NTComplexTable
+~~~~~~~~~~~~~~
+
+NTComplexTable is an EPICS V4 Normative Type that aggregates an
+array of values over a time period. Its primary use case is for 
+responses from archivers, and responding to RPC calls to get historical data.
+
+::
+
+   NTComplexTable :=
+
+   structure
+       any[]       values             // The channel values
+       string[]    labels             // The channel names
+
+where:
+
+values
+   The values from each channel.
+labels
+   The labels for each channel.
+
+Each element of ``values`` is an ``any`` which contains a ``structure[]``
+of which each element gives an NTScalar representing the value of a channel
+at a particular time. 
+The ``labels`` field gives the name of each channel.
+
 Appendix B: Normative Type Identifiers
 --------------------------------------
 
