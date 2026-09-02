@@ -91,7 +91,7 @@ you can also select `Edit the system environment variables`.
 2. Select `User Variable for 'user'` option, press NEW
 3. Add EPICS BASE path here. In `Variable Name`, put `EPICS_BASE`.
    For `Variable Value`, enter the location of your EPICS Base installation,
-   e.g., `C:\msys64\home\'user'\base-R7.0.10`
+   e.g., `C:\msys64\home\'user'\base-7.0.10`
 4. Set the host architecture. In `Variable Name`, put `EPICS_HOST_ARCH`.
    For `Variable Value`, put `windows-x64-mingw` or `windows-x64`
    (depending on your selection of compilers).

@@ -67,8 +67,12 @@ Use the current version of Visual Studio.
 
 ## Download and build EPICS Base
 
-1. Download the distribution from e.g.
-   <https://epics-controls.org/download/base/base-7.0.10.tar.gz>.
+1. Pick the release you want from the
+   [EPICS Base releases page](https://github.com/epics-base/epics-base/releases)
+   and download the matching `base-<version>.tar.gz` from
+   <https://epics-controls.org/download/base/>.
+   The examples below use `7.0.10`;
+   substitute the version you downloaded.
 2. Unpack it into a work directory.
 3. Open a Windows command prompt and change into the directory
    you unpacked EPICS Base into.

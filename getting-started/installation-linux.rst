@@ -31,15 +31,19 @@ Install EPICS
 
 The recommended way to start working with EPICS is to download one of the release packages.
 The released versions of EPICS have been fully tested to work as documented.
-Choose the release that you want and download:
+Pick the release you want from the `EPICS Base releases page
+<https://github.com/epics-base/epics-base/releases>`__ and set ``EPICS_VERSION`` to it,
+so that the commands below refer to the same version throughout:
 
 ::
 
+    export EPICS_VERSION=7.0.10
+
     mkdir $HOME/EPICS
     cd $HOME/EPICS
-    wget https://epics-controls.org/download/base/base-7.0.10.tar.gz
-    tar -xvf base-7.0.10.tar.gz
-    cd base-7.0.10
+    wget https://epics-controls.org/download/base/base-${EPICS_VERSION}.tar.gz
+    tar -xvf base-${EPICS_VERSION}.tar.gz
+    cd base-${EPICS_VERSION}
     make
 
 After compiling you should put the path into ``$HOME/.profile`` or into ``$HOME/.bashrc``
@@ -50,6 +54,10 @@ by adding the following to either one of those files:
     export EPICS_BASE=${HOME}/EPICS/base-7.0.10
     export EPICS_HOST_ARCH=$(${EPICS_BASE}/startup/EpicsHostArch)
     export PATH=${EPICS_BASE}/bin/${EPICS_HOST_ARCH}:${PATH}
+
+Substitute the version you installed for ``7.0.10``.
+``EPICS_VERSION`` was only set in the shell you built in,
+so spell the directory out here.
 
 EpicsHostArch is a program provided by EPICS that returns the architecture
 of your system.

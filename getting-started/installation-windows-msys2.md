@@ -133,14 +133,22 @@ You should do this regularly.
 
 Start the **MSYS2 MinGW 64-bit** shell and do:
 
+Pick the release you want from the
+[EPICS Base releases page](https://github.com/epics-base/epics-base/releases)
+and set `EPICS_VERSION` to it:
+
 ```bash
+$ export EPICS_VERSION=7.0.10
 $ cd $HOME
-$ wget https://epics-controls.org/download/base/base-7.0.10.tar.gz
-$ tar -xvf base-7.0.10.tar.gz
-$ cd base-7.0.10
+$ wget https://epics-controls.org/download/base/base-${EPICS_VERSION}.tar.gz
+$ tar -xvf base-${EPICS_VERSION}.tar.gz
+$ cd base-${EPICS_VERSION}
 $ export EPICS_HOST_ARCH=windows-x64-mingw
 $ make -j<n>
 ```
+
+The examples further down spell out `base-7.0.10`:
+substitute the version you installed.
 
 The `-j` option enables parallel make: adapt `<n>` to the number of CPU cores on your system.
 
