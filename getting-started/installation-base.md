@@ -12,6 +12,13 @@ Released versions are published on the
 Each release provides a source tarball, `base-<version>.tar.gz`,
 and a detached GPG signature, `base-<version>.tar.gz.asc`.
 
+:::{warning}
+Download `base-<version>.tar.gz`, not the `Source code` archives
+that GitHub generates for every tag.
+Those omit the PVA submodules entirely,
+so Base will not build from them.
+:::
+
 The platform guides below fetch the same tarball
 from <https://epics-controls.org/download/base/>.
 
