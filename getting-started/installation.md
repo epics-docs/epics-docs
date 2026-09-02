@@ -29,8 +29,9 @@ the general steps are always the same:
 
 1.  Install prerequisites
 2.  Download, configure and install EPICS Base
-3.  Download, configure and install Support Modules
-4.  Create your IOC Application
+3.  Download, configure and install
+    [Support Modules](../software/epics-related-software.md)
+4.  [Create your IOC Application](creating-ioc.rst)
 
 ## Which version should I chose?
 
@@ -41,3 +42,19 @@ using the current release will make sure you have all the features
 and all the bug fixes.
 Using current versions for _all_ modules in your set of Support Modules
 minimizes issues that may show up because of incompatibilities.
+
+The
+[EPICS 7.0 Release Notes](https://docs.epics-controls.org/projects/base/en/latest/RELEASE_NOTES.html)
+list what changed in each release of EPICS Base.
+
+## Installing on your platform
+
+:::{toctree}
+:maxdepth: 2
+:titlesonly:
+
+installation-linux
+installation-windows
+installation-rtems
+os-specifics
+:::

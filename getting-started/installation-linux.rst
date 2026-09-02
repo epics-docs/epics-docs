@@ -317,3 +317,8 @@ For 64 bit installations, the path to the library may be different:
 Again, if you're not interested in support for reular expression matching at this time then you can comment out any lines referring to PCRE in the ``configure/RELEASE`` file using a ``#``. It can always be added later.
 
 Finally run ``make`` (we are in the directory ``...EPICS/support/StreamDevice``)
+
+.. toctree::
+   :maxdepth: 1
+
+   linux-packages
