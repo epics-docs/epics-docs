@@ -1,5 +1,5 @@
-Installation on Linux / MacOS
-=============================
+Linux / MacOS
+=============
 
 Scope of these instructions
 ---------------------------

@@ -1,4 +1,4 @@
-# Installation on Windows
+# Windows
 
 ## Introduction
 

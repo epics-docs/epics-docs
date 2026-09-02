@@ -1,4 +1,4 @@
-# Installation Overview
+# Installing EPICS
 
 An EPICS installation typically consists of multiple software modules.
 
