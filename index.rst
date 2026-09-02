@@ -62,6 +62,7 @@ You may also directly use related links to see documents which match you the mos
    :titlesonly:
    :caption: Installation
 
+   getting-started/installation-base
    getting-started/installation
    EPICS 7.0 Release Notes <https://docs.epics-controls.org/projects/base/en/latest/RELEASE_NOTES.html>
 

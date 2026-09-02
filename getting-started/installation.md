@@ -1,4 +1,4 @@
-# Installing EPICS
+# How EPICS installations work
 
 An EPICS installation typically consists of multiple software modules.
 
@@ -17,7 +17,7 @@ As Support Modules are shared, have a longer life cycle
 and are held more stable than the IOC Applications that use them,
 it is a good idea to keep the Support Modules and IOC Applications separate.
 
-This section will mostly cover installing EPICS Base and Support Modules.
+These pages cover installing EPICS Base and Support Modules.
 IOC Applications are too specific to be covered by general documentation.
 
 ## General workflow
@@ -28,12 +28,13 @@ While the specific instructions differ between Operating Systems on your host,
 the general steps are always the same:
 
 1.  Install prerequisites
-2.  Download, configure and install EPICS Base
+2.  Download, configure and install
+    [EPICS Base](installation-base.md)
 3.  Download, configure and install
     [Support Modules](../software/epics-related-software.md)
 4.  [Create your IOC Application](creating-ioc.rst)
 
-## Which version should I chose?
+## Which version should I choose?
 
 Please use new versions.
 
@@ -47,14 +48,35 @@ The
 [EPICS 7.0 Release Notes](https://docs.epics-controls.org/projects/base/en/latest/RELEASE_NOTES.html)
 list what changed in each release of EPICS Base.
 
-## Installing on your platform
+## Distributions and deployment frameworks
 
-:::{toctree}
-:maxdepth: 2
-:titlesonly:
+Several projects take the workflow above off your hands,
+distributing EPICS as ready-built packages or images
+rather than as a source tree you configure and compile yourself.
+They differ mainly in what they distribute and how IOCs are deployed:
 
-installation-linux
-installation-windows
-installation-rtems
-os-specifics
-:::
+*   [e3](https://epics-e3.github.io), the ESS EPICS Environment,
+    which distributes Base and Support Modules as conda packages.
+    Modules are built as dynamically loadable modules
+    that a generic IOC loads at runtime,
+    so an IOC application need not be compiled for each deployment,
+    and isolated environments let IOCs needing different sets of modules,
+    or different versions of Base, run on the same host.
+    It is not limited to ESS.
+*   [EPNix](https://epics-extensions.github.io/EPNix/),
+    which distributes EPICS software as Nix packages.
+    Application and system dependencies alike are declared explicitly,
+    so the same definition reproduces the same build
+    on another machine or at a later date.
+    It also packages tools such as procServ and Phoebus
+    for any Linux distribution, and provides NixOS service modules.
+*   [epics-containers](https://epics-containers.github.io),
+    which distributes generic IOCs as container images
+    that a configuration file turns into specific IOC instances.
+    The same image runs under Docker or Podman on a workstation
+    and under Kubernetes in production,
+    where Helm and Argo CD manage the deployment.
+
+Each still installs the same components described above.
+Which one suits you, if any,
+depends on how many IOCs you expect to manage and how you deploy them.
