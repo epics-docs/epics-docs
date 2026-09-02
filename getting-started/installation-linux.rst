@@ -331,3 +331,4 @@ Finally run ``make`` (we are in the directory ``...EPICS/support/StreamDevice``)
 
    linux-packages
    cross-compile-to-old-x86-linux
+   Installing EPICS on Raspberry PI (External) <https://cmd-response.readthedocs.io/en/latest/epics/rpi_epics.html>
