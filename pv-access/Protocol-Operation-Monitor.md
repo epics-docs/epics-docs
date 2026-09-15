@@ -50,13 +50,27 @@ in the serialized data addressed by bit 0.
 
 ## pvRequest options
 
-standard options
-
 1. `record._options.queueSize`
 2. `record._options.pipeline`
 3. `record._options.ackAny`
+4. `record._options.DBE`
 
-## Pipeline protocol option
+### DataBase Event Bit Mask option
+
+Usage of the `DBE` option may be either a string or an unsigned integer, preferably an integer.
+The `DBE_*` options and their standard meanings are:
+
+- 1: `DBE_VALUE`
+  A change in the value of the field.
+- 2: `DBE_ARCHIVE`
+  Changes that should be sent to the client when the field is archived.
+- 4: `DBE_ALARM`
+  All updates that have an alarm state change.
+
+`DBE_PROPERTY` is also an option but it is ignored if given as this event is always
+handled specially.
+
+### Pipeline protocol option
 
 Usage of the pipeline protocol option requires both sides to agree
 and maintain a flow control window counter indicating the number of
@@ -64,21 +78,21 @@ subscription updates which the Server is may send without receiving
 another acknowledgement from the Client.
 
 This option is exercised used if the pvRequest includes the field
-'record._options.pipeline' having a value convertible to boolean true.
+`record._options.pipeline` having a value convertible to boolean true.
 If this field is not present, or not convertible to true, then the Server
 may send subscription updates without restriction.
 
 The flow control window counter is established by the client in the initial
-channelMonitorRequest message.  If subcommand==0x08, the initial count is zero.
-If subcommand==0x88, then the initial count is provided by the 'nfree' message field.
+`channelMonitorRequest` message.  If `subcommand==0x08`, the initial count is zero.
+If `subcommand==0x88`, then the initial count is provided by the 'queueSize' message field.
 
 The Server may send a subscription update as long as the flow control counter is non-zero.
 Each time an update is sent by the server, and received by the client, the counter is decremented.
 
-The client may send a channelMonitorRequest with subcommand&0x80 and a 'nfree' count
+The client may send a channelMonitorRequest with `subcommand&0x80` and a 'queueSize' count
 which is added to the counter.
 
-### Acknowledgement Algorithm
+#### Acknowledgement Algorithm
 
 In this way, the client can manage the rate at which the server can send update.
 
@@ -100,7 +114,7 @@ Transitions are:
 
 The flow control window counter should match the number of Free entries.
 
-The 'nfree' count in an acknowledgement message should never exceed the number
+The 'queueSize' count in an acknowledgement message should never exceed the number
 of Un-acknowledged entries.
 
 For reasons of efficiency, it is recommended not to send an acknowledgement
@@ -108,7 +122,8 @@ message each time an entries transitions Un-acknowledged -> Free.
 A suggested default is to send an acknowledgement when the number of
 Un-acknowledged exceeds half of the total buffer capacity.
 
-TODO: describe 'record._options.ackAny' option.
+The `record._options.ackAny` option may be used to specify an acknowledgement threshold.
+It can be either a fixed value or a percentage of the total buffer capacity.
 
 ## Request Encoding (Client -> Server)
 
