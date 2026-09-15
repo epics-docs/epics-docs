@@ -58,16 +58,12 @@ Each page is labeled by the intended audience.
 You may also directly use related links to see documents which match you the most.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :titlesonly:
    :caption: Installation
 
+   getting-started/installation-base
    getting-started/installation
-   getting-started/installation-linux
-   getting-started/installation-windows.md
-   getting-started/installation-rtems
-   getting-started/creating-ioc
-   getting-started/os-specifics
-   Installing EPICS on Raspberry PI (External) <https://cmd-response.readthedocs.io/en/latest/epics/rpi_epics.html>
    EPICS 7.0 Release Notes <https://docs.epics-controls.org/projects/base/en/latest/RELEASE_NOTES.html>
 
 
@@ -98,6 +94,7 @@ You may also directly use related links to see documents which match you the mos
    Database Examples (external link) <https://github.com/epics-docs/database-examples>
    process-database/how-to-avoid-copying-arrays-with-waveformrecord
    process-database/add-new-breakpoint-table.md
+   getting-started/creating-ioc
    getting-started/HowToUseStreamDevice
    build-system/how-to-port-epics-to-a-new-os-architecture
 
@@ -139,6 +136,7 @@ You may also directly use related links to see documents which match you the mos
    sys-admin/console-logging-vme-softioc
    sys-admin/save-restore-tools.md
    build-system/posix-threads-priority-scheduling-linux
+   getting-started/epics-macosx-firewall
 
 .. toctree::
    :maxdepth: 1

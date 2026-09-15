@@ -172,7 +172,7 @@ SDDS | **ARCHIVED** The Self-Describing Data Sets analysis package | [github.com
 | ---- | ----------- | ----------- | ------------- |
 dbVerbose | Verbose database filter | [epics.anl.gov](https://epics.anl.gov/extensions/dbVerbose/index.php) | [epics.anl.gov](https://epics.anl.gov/extensions/dbVerbose/index.php)
 MSI | Macro substitution and include tool (in Base from 3.14) | [github.com](https://github.com/epics-base/epics-base) | {doc}`docs.epics-controls.org <epics-base:msi>`
-E3 | ESS EPICS Environment Build System (Not limited to ESS) | [gitlab.esss.lu.se](https://gitlab.esss.lu.se/e3/e3) | [e3.pages.esss.lu.se](http://e3.pages.esss.lu.se)
+e3 | ESS EPICS Environment: conda packages of Base and Support Modules, loaded at runtime by a generic IOC (not limited to ESS) | [epics-e3.github.io](https://epics-e3.github.io) | [epics-e3.github.io](https://epics-e3.github.io)
 EPNix | Build, package, deploy IOCs and EPICS-related software using the Nix package manager | [github.com](https://github.com/epics-extensions/EPNix/) | [github.io](https://epics-extensions.github.io/EPNix/)
 pyExpander | Python macro processing tool | [sourceforge.io](https://pyexpander.sourceforge.io/index.html) | [sourceforge.io](https://sourceforge.net/p/pyexpander/code/ci/default/tree/)
 pymsi | Python replacement for MSI |  |

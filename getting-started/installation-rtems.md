@@ -1,4 +1,4 @@
-# Installation on RTEMS 6 (Release 6.1)
+# RTEMS 6 (Release 6.1)
 
 ## RTEMS 6 (Release 6.1) Information
 

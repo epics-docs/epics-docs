@@ -1,14 +1,13 @@
-Operating System Specifics
-==========================
+vxWorks
+=======
 
-This section contains instructions for working with different host operating systems.
+vxWorks, from Wind River, is the platform EPICS IOCs were originally built on.
+
+These pages cover configuring the vxWorks and Tornado development
+environments to build and run EPICS, rather than building EPICS Base itself.
 
 .. toctree::
    :maxdepth: 1
-   :caption: Operating System Specifics
 
-   linux-packages.rst
-   cross-compile-to-old-x86-linux
-   epics-macosx-firewall
    configuring-vxworks-6_x
    vxworks5_tornado

@@ -1,5 +1,5 @@
-EPICS Dependencies on CentOS 8
-==============================
+Dependencies on CentOS 8
+========================
 
 .. contents:: Contents
 

@@ -1,7 +1,4 @@
-# Installation on Windows
-
-:::{tags} beginner
-:::
+# Windows
 
 ## Introduction
 
