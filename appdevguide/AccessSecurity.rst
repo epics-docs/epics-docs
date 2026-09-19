@@ -506,3 +506,9 @@ IOC host authentication configuration. Note that this is still based on the clie
 The "special" UAG will match CA or PVA clients with the username "someone". It will
 also match a PVA client if the client provided username is a member of the "op"
 group (supported on POSIX targets and Windows).
+
+Full ACF Language Specification
+-------------------------------
+
+For the complete formal grammar of the access configuration file, see the
+:doc:`ACFLanguageSpecification`.
