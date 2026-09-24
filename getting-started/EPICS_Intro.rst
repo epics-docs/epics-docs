@@ -108,6 +108,7 @@ The basic attributes of EPICS are:
    represent any one of various attributes such as temperature or (electric)
    current. This design is typical in process control systems. The pros and
    cons of this design are briefly discussed in the Appendix.
+   For more details see `here <https://docs.epics-controls.org/en/latest/internal/ca_protocol.html#process-variables>`_.
 
 IOC Software Components
 -----------------------
