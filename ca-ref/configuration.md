@@ -458,7 +458,7 @@ situations that require it.
 ::: {envvar} EPICS_CAS_BEACON_ADDR_LIST
 
 :Syntax: `{N.N.N.N N.N.N.N:P ...}`
-:Default: {envvar}`EPICS_CA_ADDR_LIST`
+:Default: None
 :::
 
 ::: {envvar} EPICS_CAS_BEACON_PERIOD
